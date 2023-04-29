@@ -20,8 +20,6 @@ class LoginController
 		$result = null;
 
 		if(isset($_POST['submit'])){ // Check if form was submitted
-
-			echo 'here is the login form';
 			$email = $_POST['email']; // Get input text
 			$password = $_POST['password']; // Get input text
 			$result = $user->login($email, $password);
