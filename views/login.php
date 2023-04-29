@@ -33,7 +33,7 @@
             <input name="email" type="text" placeholder="Email" required />
             <input name="password" type="password" placeholder="Password" required />
             <?php echo "<small class='warning'>$message</small>" ?>
-            <input class="btn" type="submit" name="submit">
+            <input class="btn" type="submit" name="submit" value="login">
         </form>
     </main>
 </body>
