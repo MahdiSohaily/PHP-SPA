@@ -1,0 +1,240 @@
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 360px;
+  margin-inline: auto;
+}
+
+.search-form input[type="text"] {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 2px solid lightgray;
+  text-align: center;
+  font-size: 18px;
+}
+
+.con-wrap {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  padding-block: 2rem;
+}
+
+.resposive {
+  width: 1250px;
+}
+@media screen and (max-width: 1000px) {
+  .con-wrap {
+    overflow-x: scroll;
+  }
+}
+.search-table {
+  width: 100%;
+}
+
+thead {
+  background-color: rgb(73, 158, 73);
+}
+
+th,
+td:not(td[class='big']) {
+  padding-block: 0.6rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.txt-white {
+  color: white;
+}
+
+.black {
+  background-color: rgb(8, 8, 8);
+}
+
+.blue {
+  background-color: rgb(46, 46, 192);
+  font-weight: bold;
+  color: white;
+}
+
+.fix {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weight {
+  background-color: rgb(107, 106, 106);
+  display: inline-block;
+  font-size: 12px;
+  padding: 1rem;
+}
+.link-s {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: white;
+  margin-right: 0.5rem;
+  padding: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Requset {
+  background-color: seagreen;
+}
+
+.NO-Price {
+  background-color: black; 
+}
+.NO-Mobis {
+  background-color: red; 
+}
+
+.part {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.weight {
+  background-color: rgb(231, 98, 98);
+  display: inline-block;
+  font-size: 12px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: white;
+}
+
+.input-controll {
+  display: flex;
+  justify-content: center;
+}
+
+.input-controll label {
+  padding-inline: 0.5rem;
+}
+
+.mobis {
+  background-color: rgb(190, 187, 187);
+}
+
+#error {
+  text-align: center;
+  background-color: rgb(107, 106, 106);
+  color: white;
+  font-family: Vazir, sans-serif !important;
+}
+
+th,
+.text-white {
+  color: white;
+}
+
+td.A,
+td.B,
+td.C,
+td.D,
+td.E,
+td.F,
+td.G {
+  font-weight: bold;
+}
+
+.A {
+  background-color: brown;
+}
+
+.B {
+  background-color: red;
+}
+
+.C {
+  background-color: #b68f3a;
+}
+
+.D {
+  background-color: #b63a95;
+}
+
+.E {
+  background-color: #3a86b6;
+}
+
+.F {
+  background-color: #de6ffa;
+}
+
+.G {
+  background-color: #fc8ea0;
+}
+
+td.A {
+  background-color: rgb(224, 84, 3);
+}
+
+td.B {
+  background-color: rgb(255, 145, 0);
+}
+
+td.C {
+  background-color: #d8a943;
+}
+
+td.D {
+  background-color: #e449ba;
+}
+
+td.E {
+  background-color: #47b0f1;
+}
+
+td.F {
+  background-color: #e58ffa;
+}
+
+td.G {
+  background-color: #f8b6c1;
+}
+
+.b-A,
+.b-B,
+.b-C,
+.b-D,
+.b-E,
+.b-F,
+.b-G {
+  font-weight: bold !important;
+}
+
+.part {
+  width: 250px !important;
+}
+
+.dollar {
+  width: 80px !important;
+}
+
+.social {
+  width: 20px;
+}
+
+.action {
+  width: 150px;
+}
+
+.kg {
+  width: 70px;
+}
+
+.orange {
+  background-color: orange;
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}

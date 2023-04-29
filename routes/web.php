@@ -1,36 +1,104 @@
-<?php
+<?php 
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RelationController;
-use Illuminate\Support\Facades\Route;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+// Routes system
+$routes = new RouteCollection();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+$routes->add('login', 
+    new Route(constant('URL_SUBFOLDER') . '/', 
+    array('controller' => 'LoginController', 
+    'method'=>'login'), array())
+);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+$routes->add('logout', 
+    new Route(constant('URL_SUBFOLDER') . '/logout', 
+    array('controller' => 'LoginController', 
+    'method'=>'logout'), array())
+);
 
-Route::middleware('auth')->group(function () {
-    // profile routes
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+$routes->add('homepage', 
+    new Route(constant('URL_SUBFOLDER') . '/search', 
+    array('controller' => 'PageController', 
+    'method'=>'index'), array())
+);
 
-    Route::get('/relation',[RelationController::class, 'index'])->name('relation');
-    Route::post('/relation',[RelationController::class, 'store'])->name('relation.store');
-});
+$routes->add('goods',
+    new Route(constant('URL_SUBFOLDER') . '/goods',
+    array('controller' => 'GoodController',
+    'method'=>'index'), array())
+);
 
-require __DIR__.'/auth.php';
+$routes->add('goodslist',
+    new Route(constant('URL_SUBFOLDER') . '/goodslist',
+    array('controller' => 'GoodController',
+    'method'=>'list'), array())
+);
+
+$routes->add('getpage',
+    new Route(constant('URL_SUBFOLDER') . '/getpage/{index}/{pat}',
+    array('controller' => 'GoodController',
+    'method'=>'page'), array('index' => '[0-9]+', 'pat'=> '[a-zA-Z0-9]+'))
+);
+
+$routes->add('editgood',
+    new Route(constant('URL_SUBFOLDER') . '/editgood/{id}',
+    array('controller' => 'GoodController',
+    'method'=>'edit'), array('id' => '[0-9]+'))
+);
+
+$routes->add('removegood',
+    new Route(constant('URL_SUBFOLDER') . '/removegood/{id}',
+    array('controller' => 'GoodController',
+    'method'=>'delete'), array('id' => '[0-9]+'))
+);
+
+
+$routes->add('rates',
+    new Route(constant('URL_SUBFOLDER') . '/rates',
+    array('controller' => 'RateController',
+    'method'=>'index'), array())
+);
+
+$routes->add('rateslist',
+    new Route(constant('URL_SUBFOLDER') . '/rateslist',
+    array('controller' => 'RateController',
+    'method'=>'list'), array())
+);
+
+$routes->add('editrate',
+    new Route(constant('URL_SUBFOLDER') . '/editrate/{id}',
+    array('controller' => 'RateController',
+    'method'=>'edit'), array('id' => '[0-9]+'))
+);
+
+$routes->add('removereat',
+    new Route(constant('URL_SUBFOLDER') . '/removereat/{id}',
+    array('controller' => 'RateController',
+    'method'=>'delete'), array('id' => '[0-9]+'))
+);
+
+$routes->add('product',
+    new Route(constant('URL_SUBFOLDER') . '/product/{id}',
+    array('controller' => 'ProductController',
+    'method'=>'showAction'), array('id' => '[0-9]+'))
+);
+
+$routes->add('getdata',
+    new Route(constant('URL_SUBFOLDER') .'/getdata/{key}/{mode}',
+    array('controller' => 'SearchController', 'method'=>'index'),
+    array('key' => '[a-zA-Z0-9]+','mode'=>'[0-1]'))
+);
+
+$routes->add('searchGood',
+    new Route(constant('URL_SUBFOLDER') .'/searchGood/{value}',
+    array('controller' => 'SearchController', 'method'=>'search'),
+    array('value' => '[a-zA-Z0-9]+'))
+);
+
+$routes->add('mobis',
+    new Route(constant('URL_SUBFOLDER') .'/mobis/{value}',
+    array('controller' => 'SearchController', 'method'=>'mobis'),
+    array('value' => '[a-zA-Z0-9]+'))
+);

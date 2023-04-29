@@ -1,44 +1,59 @@
-<?php
-
+<?php 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-
-class User extends Authenticatable
+class User
 {
-    use HasApiTokens, HasFactory, Notifiable;
+	protected $id;
+	protected $name;
+	protected $last_name;
+	protected $email;
+	protected $password;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    public function login($email, $password)
+    {
+        $user = $this->checkUser($email,$password);
+        if($user) {
+			return $user;
+        } else {
+            return false;
+        }
+    }
+	
+    
+    // CRUD OPERATIONS
+	public function create(array $data)
+	{
+		
+	}
+	
+	public function checkUser($email, $pass)
+	{
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "yadakinfo_price";
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+        // Create connection
+        $conn = mysqli_connect($servername, $username, $password,$dbname);
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+        $sql = "SELECT * FROM users WHERE email='$email'";
+		$user = $conn->query($sql)->fetch_assoc();
+		$password = $user['password'];
+
+        if (count($user)> 0 && $password === $pass) {
+			return $user;
+          } else {
+            return false;
+          }
+	}
+
+	public function update(int $id, array $data)
+	{
+		
+	}
+	
+	public function delete(int $id)
+	{
+		
+	}
 }
