@@ -31,11 +31,11 @@ $routes->add(
 );
 
 $routes->add(
-    'homepage',
+    'relation',
     new Route(
-        constant('URL_SUBFOLDER') . '/search',
+        constant('URL_SUBFOLDER') . '/relation',
         array(
-            'controller' => 'PageController',
+            'controller' => 'RelationController',
             'method' => 'index'
         ),
         array()

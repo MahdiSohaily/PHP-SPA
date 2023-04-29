@@ -11,7 +11,7 @@ class LoginController
 	public function login(RouteCollection $routes)
 	{
 		if(isset($_COOKIE['login-user'])) {
-			header('Location: search');
+			header('Location: relation');
 				exit;
 		} else {
 
@@ -29,7 +29,7 @@ class LoginController
 				$cookie_value = $result['email'];
 
 				setcookie($cookie_name, $cookie_value, time()+(60*60*24),'/');
-				header('Location: search');
+				header('Location: relation');
 				exit;
 			} else {
 				$message = 'Either your email or password are incorrenct!';
