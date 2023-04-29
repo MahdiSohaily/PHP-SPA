@@ -26,16 +26,16 @@
 </head>
 
 <body>
-<main class="container">
-            <h2 class="login-title">Welcome</h2>
+    <main class="container">
+        <h2 class="login-title">Welcome</h2>
 
-            <form method="post" action class="login-form" autocomplete="off">
-                <input name="email" type="text" placeholder="Email" required />
-                <input name="password" type="password" placeholder="Password" required />
-                <?php echo "<small class='warning'>$message</small>" ?>
-                <input type="submit" name="submit">
-            </form>
-        </main>
+        <form method="post" action class="login-form" autocomplete="off">
+            <input name="email" type="text" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password" required />
+            <?php echo "<small class='warning'>$message</small>" ?>
+            <input class="btn" type="submit" name="submit">
+        </form>
+    </main>
 </body>
 
 </html>

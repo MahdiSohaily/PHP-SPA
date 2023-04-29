@@ -64,7 +64,7 @@ body {
   box-shadow: 0 0 0 4px rgba(253, 242, 233, 0.5);
 }
 
-.btn--form {
+.btn {
   background-color: #f48982;
   color: #fdf2e9;
   align-self: end;
@@ -87,7 +87,7 @@ body {
   transition: all 0.3s;
 }
 
-button {
+input[type="submit"] {
   outline: 1px solid #f48982;
 }
 
