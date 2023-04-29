@@ -5,7 +5,7 @@ define('SITE_NAME', 'your-site-name');
 //App Root
 define('APP_ROOT', dirname(dirname(__FILE__)));
 define('URL_ROOT', '/');
-define('URL_SUBFOLDER', 'yadak');
+define('URL_SUBFOLDER', 'spa');
 
 //DB Params
 define('DB_HOST', 'localhost');
