@@ -68,11 +68,9 @@
         }
     }
 
-    function remove(event) {
-
+    function remove(id) {
+        const item = document.getElementById(id);
         const selected = document.getElementById('selected');
-        const remove = event.target.getAttribute("data-id");
-        alert(remove);
 
         selected.removeChild(remove);
     }
