@@ -76,3 +76,9 @@
 .remove:hover {
   background-color: #c0bbbb;
 }
+
+.add-relation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

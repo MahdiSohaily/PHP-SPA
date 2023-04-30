@@ -16,7 +16,7 @@
         </section>
     </div>
     <div class="section">
-        <form action="#" method="post">
+        <form class='add-relation' action="#" method="post">
             <input type="text" name="name" id="name" required>
             <input type="text" name="car" id="car" required>
             <input type="text" name="state" id="state" required>
