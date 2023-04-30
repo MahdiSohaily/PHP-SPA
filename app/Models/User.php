@@ -3,11 +3,6 @@ namespace App\Models;
 
 class User
 {
-	protected $id;
-	protected $name;
-	protected $last_name;
-	protected $email;
-	protected $password;
 
     public function login($email, $password)
     {
@@ -18,13 +13,6 @@ class User
             return false;
         }
     }
-	
-    
-    // CRUD OPERATIONS
-	public function create(array $data)
-	{
-		
-	}
 	
 	public function checkUser($email, $pass)
 	{
@@ -41,15 +29,5 @@ class User
           } else {
             return false;
           }
-	}
-
-	public function update(int $id, array $data)
-	{
-		
-	}
-	
-	public function delete(int $id)
-	{
-		
 	}
 }
