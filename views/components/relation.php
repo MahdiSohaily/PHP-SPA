@@ -11,30 +11,6 @@
     </div>
     <div class="section">
         <section id="selected" style="direction: rtl;">
-            <div class="matched-item">
-                <p>33کد فنی قطعه</p>
-                <i class='material-icons remove'>do_not_disturb_on</i>
-            </div>
-            <div class="matched-item">
-                <p>کد فنی قطعه</p>
-                <i class='material-icons remove'>do_not_disturb_on</i>
-            </div>
-            <div class="matched-item">
-                <p>کد فنی قطعه</p>
-                <i class='material-icons remove'>do_not_disturb_on</i>
-            </div>
-            <div class="matched-item">
-                <p>کد فنی قطعه</p>
-                <i class='material-icons remove'>do_not_disturb_on</i>
-            </div>
-            <div class="matched-item">
-                <p>کد فنی قطعه</p>
-                <i class='material-icons remove'>do_not_disturb_on</i>
-            </div>
-            <div class="matched-item">
-                <p>کد فنی قطعه</p>
-                <i class='material-icons remove'>do_not_disturb_on</i>
-            </div>
         </section>
     </div>
     <div class="section">
