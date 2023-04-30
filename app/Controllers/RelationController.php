@@ -1,0 +1,15 @@
+<?php 
+
+namespace App\Controllers;
+
+use Symfony\Component\Routing\RouteCollection;
+
+class RelationController
+{
+    // Homepage action
+	public function index(RouteCollection $routes)
+	{
+		
+		
+	}
+}
