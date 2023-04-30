@@ -47,16 +47,21 @@
 </section>
 
 <script>
-    function myFunction({
+    function myFunction(
         id,
         partnumber,
-        price,
-        wight,
-        mobis
-    }) {
+        price
+    ) {
+        const selected = document.getElementById('selected');
+        const item = `<div class='matched-item'>
+                    <i
+                    data-id='" . $id . "' class='material-icons add'>add_circle_outline</i>
+                    <p>$partnumber</p>
+                    <p>$price</p>
+                    <p>$mobis</p>
+                    </div>`;
 
-        alert(partnumber);
-
+        selected.appendChild(item);
     }
 
     function search(val) {
