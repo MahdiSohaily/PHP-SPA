@@ -5,7 +5,7 @@
         </form>
         <section id="match" style="direction: rtl;">
             <h2>اقلام مشابه</h2>
-            <div id="search-result" class="list group">
+            <div id="search-result" class="list-group">
                 <div class="matched-item">1</div>
                 <div class="matched-item">2</div>
                 <div class="matched-item">3</div>

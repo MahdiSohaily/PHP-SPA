@@ -4,8 +4,27 @@
 *:not(i) {
   font-family: Vazir, sans-serif !important;
 }
-.body {
-  background-color: #cbb2b2;
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(105, 104, 104);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #6d6c6c;
 }
 /* main section styles */
 main {
@@ -30,12 +49,12 @@ main {
 }
 
 .section {
-    padding: 1rem;
+  padding-inline: 1rem;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .serial-form {
@@ -52,5 +71,11 @@ main {
 }
 
 /* selected items style */
+
+.list-group {
+  height: 70vh;
+  background-color: seagreen;
+  overflow-y: auto;
+}
 .matched-item {
 }
