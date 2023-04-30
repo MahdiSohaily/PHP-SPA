@@ -39,7 +39,7 @@
 
         result.removeChild(remove);
 
-        const item = `<div class='matched-item'>
+        const item = `<div class='matched-item' id='` + id + `'>
                     <p>` + partnumber + `</p>
                     <p>` + price + `</p>
                     <p>` + mobis + `</p>
