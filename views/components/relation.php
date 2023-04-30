@@ -47,8 +47,16 @@
 </section>
 
 <script>
-    function myFunction(id) {
-        alert(id);
+    function myFunction({
+        id,
+        partnumber,
+        price,
+        wight,
+        mobis
+    }) {
+
+        alert(partnumber);
+
     }
 
     function search(val) {
