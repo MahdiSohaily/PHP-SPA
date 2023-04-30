@@ -29,6 +29,18 @@
                     <p>کد فنی قطعه</p>
                     <i class='material-icons add'>add_circle_outline</i>
                 </div>
+                <div class="matched-item">
+                    <p>کد فنی قطعه</p>
+                    <i class='material-icons add'>add_circle_outline</i>
+                </div>
+                <div class="matched-item">
+                    <p>کد فنی قطعه</p>
+                    <i class='material-icons add'>add_circle_outline</i>
+                </div>
+                <div class="matched-item">
+                    <p>کد فنی قطعه</p>
+                    <i class='material-icons add'>add_circle_outline</i>
+                </div>
             </div>
         </section>
     </div>

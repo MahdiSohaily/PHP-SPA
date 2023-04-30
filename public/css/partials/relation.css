@@ -41,6 +41,7 @@
   .list-group {
     height: 70vh;
     overflow-y: auto;
+    padding-inline:0.3rem ;
   }
   
   .matched-item {
