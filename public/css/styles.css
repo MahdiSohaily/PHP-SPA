@@ -5,3 +5,33 @@
 *:not(i) {
     font-family: Vazir, sans-serif !important;
 }
+
+/* main section styles */
+main {
+    padding: 1rem;
+}
+
+/* rest section styles */
+
+.relation {
+    display: flex;
+}
+
+.relation div {
+    flex-grow: 1
+}
+
+.serial-form {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.serial-input {
+    padding: 1rem;
+    width: 80%;
+    direction: rtl;
+    margin-bottom: 2rem;
+}
+
