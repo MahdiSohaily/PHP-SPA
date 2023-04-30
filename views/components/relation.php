@@ -49,11 +49,16 @@
 <script>
     function myFunction(event) {
         const id = event.target.getAttribute("data-id");
+        const remove = document.getElementById(id);
+
         const partnumber = event.target.getAttribute("data-partnumber");
         const price = event.target.getAttribute("data-price");
         const mobis = event.target.getAttribute("data-mobis");
 
+        const result = document.getElementById('s-result');
         const selected = document.getElementById('selected');
+
+        result.removeChild(remove);
 
         const item = `<div class='matched-item'>
                     <p>` + partnumber + `</p>

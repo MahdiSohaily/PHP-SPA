@@ -20,7 +20,7 @@ class Good
                 $price = $row['price'];
                 $mobis = $row['mobis'];
 
-                $templete .= "<div class='matched-item'>
+                $templete .= "<div class='matched-item' id='$id'>
                     <i onclick='myFunction(event)'  
                     data-id='" . $id . "' 
                     data-partnumber='" . $partnumber . "' 
