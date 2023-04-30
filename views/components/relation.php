@@ -27,6 +27,7 @@
 
 <script>
     let index = [];
+
     function myFunction(event) {
         const id = event.target.getAttribute("data-id");
         const remove = document.getElementById(id);
@@ -46,6 +47,14 @@
                     </div>`;
 
         selected.innerHTML += (item);
+        index.push(id);
+    }
+
+    function remove(id) {
+        const item = document.getElementById(id);
+        const selected = document.getElementById('selected');
+
+        selected.removeChild(item);
     }
 
     function search(val) {
@@ -65,12 +74,5 @@
         } else {
             resultBox.innerHTML = "";
         }
-    }
-
-    function remove(id) {
-        const item = document.getElementById(id);
-        const selected = document.getElementById('selected');
-
-        selected.removeChild(item);
     }
 </script>
