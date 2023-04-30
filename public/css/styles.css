@@ -1,0 +1,41 @@
+@import url("./partials/reset.css");
+@import url("https://v1.fontapi.ir/css/Vazir");
+
+*:not(i) {
+  font-family: Vazir, sans-serif !important;
+}
+
+/* main section styles */
+main {
+  padding: 1rem;
+}
+
+/* rest section styles */
+
+.relation {
+  display: flex;
+  flex-direction: column;
+}
+.relation > div {
+    flex: 1 1 0px;
+    border: 3px solid red;
+  }
+
+@media screen and (min-width: 768px) {
+  .relation {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.serial-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.serial-input {
+  padding: 1rem;
+  direction: rtl;
+  margin-bottom: 2rem;
+}
