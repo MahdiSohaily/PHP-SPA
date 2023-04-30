@@ -47,12 +47,14 @@
 </section>
 
 <script>
-    function myFunction(
-        id,
-        partnumber,
-        price
-    ) {
+    function myFunction(event) {
+        const id = event.target.getAttribute("data-id");
+        const partnumber = event.target.getAttribute("data-partnumber");
+        const price = event.target.getAttribute("data-price");
+        const mobis = event.target.getAttribute("data-mobis");
+
         const selected = document.getElementById('selected');
+        
         const item = `<div class='matched-item'>
                     <i
                     data-id='" . $id . "' class='material-icons add'>add_circle_outline</i>
