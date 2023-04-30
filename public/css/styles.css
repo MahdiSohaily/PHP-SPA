@@ -3,6 +3,7 @@
 
 *:not(i) {
   font-family: Vazir, sans-serif !important;
+  box-sizing: border-box;
 }
 
 /* width */
@@ -74,8 +75,34 @@ main {
 
 .list-group {
   height: 70vh;
-  background-color: seagreen;
   overflow-y: auto;
 }
+
 .matched-item {
+  height: 60px;
+  padding: 1rem;
+  border: 2px solid rgb(108, 107, 107);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 0.3rem;
+}
+
+.add,
+.remove {
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.add {
+  color: rgb(46, 198, 46);
+}
+
+.remove {
+  color: red;
+}
+
+.add:hover,
+.remove:hover {
+  background-color: #c0bbbb;
 }
