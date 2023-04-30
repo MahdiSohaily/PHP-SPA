@@ -33,10 +33,10 @@ class LoginController
 				exit;
 			} else {
 				$message = 'Either your email or password are incorrenct!';
-				require_once APP_ROOT . '/views/login.php';
+				require_once APP_ROOT . '/views/Auth/login.php';
 			}
 		} else {
-			require_once APP_ROOT . '/views/login.php';
+			require_once APP_ROOT . '/views/Auth/login.php';
 		}
 	}
 	}
