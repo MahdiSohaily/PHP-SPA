@@ -11,4 +11,4 @@ define('URL_SUBFOLDER', 'spa');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'yadak');
+define('DB_NAME', 'laravel');

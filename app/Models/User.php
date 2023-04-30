@@ -28,6 +28,7 @@ class User
 	
 	public function checkUser($email, $pass)
 	{
+		echo DB_HOST;
         $servername = "localhost";
         $username = "root";
         $password = "";
