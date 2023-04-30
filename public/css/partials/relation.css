@@ -16,6 +16,10 @@
   .section:not(:last-child) {
     border-left: 2px dotted black;
   }
+
+  .list-group {
+    height: 30vh;
+  }
 }
 
 .section {
@@ -78,12 +82,12 @@
 }
 
 .add-relation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .r-input {
-    padding: 1rem;
-    margin-bottom: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }

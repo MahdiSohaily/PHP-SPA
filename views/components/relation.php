@@ -72,6 +72,6 @@
         const item = document.getElementById(id);
         const selected = document.getElementById('selected');
 
-        selected.removeChild(remove);
+        selected.removeChild(item);
     }
 </script>
