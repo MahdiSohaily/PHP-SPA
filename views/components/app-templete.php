@@ -22,7 +22,11 @@
     ?>
     <main>
         <?php
-        require_once $body;
+        if (isset($body)) {
+            echo $body;
+        } else {
+            require_once '../Pages/relation.php';
+        }
         ?>
     </main>
 </body>
