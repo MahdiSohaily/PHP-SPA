@@ -1,8 +1,7 @@
 <section class='relation' style="direction: rtl;">
     <div class="section serial-form">
         <form class="center" method="post">
-            <input class="serial-input" type="text" name="serial" id="serial" 
-            placeholder="کد قطعه فنی را وارد کنید ..." onkeyup="search(this.value)">
+            <input class="serial-input" type="text" name="serial" id="serial" placeholder="کد قطعه فنی را وارد کنید ..." onkeyup="search(this.value)">
         </form>
         <section id="match" style="direction: rtl;">
             <div id="s-result" class="list-group">
@@ -12,8 +11,8 @@
     </div>
     <div class="section">
         <section id="selected" style="direction: rtl;">
-        <h2>موارد انتخاب شده:</h2>
-        <!-- selected items are going to be appended here -->
+            <h2>موارد انتخاب شده:</h2>
+            <!-- selected items are going to be appended here -->
         </section>
     </div>
     <div class="section">
@@ -65,8 +64,7 @@
                     console.log(error);
                 })
         } else {
-            resultBox.innerHTML =
-                "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+            resultBox.innerHTML = "";
         }
     }
 </script>
