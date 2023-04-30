@@ -5,42 +5,7 @@
         </form>
         <section id="match" style="direction: rtl;">
             <div id="s-result" class="list-group">
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
-                <div class="matched-item">
-                    <p>کد فنی قطعه</p>
-                    <i class='material-icons add'>add_circle_outline</i>
-                </div>
+                <!-- The searched data is going to be added here -->
             </div>
         </section>
     </div>
