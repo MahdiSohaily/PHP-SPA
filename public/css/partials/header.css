@@ -1,6 +1,5 @@
 nav {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
   padding: 15px 5%;
   align-items: center;
