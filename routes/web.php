@@ -42,3 +42,9 @@ $routes->add(
     )
 );
 
+$routes->add('getdata',
+    new Route(constant('URL_SUBFOLDER') .'/getdata/{pattern}',
+    array('controller' => 'RelationController', 'method'=>'search'),
+    array('pattern' => '[a-zA-Z0-9]+'))
+);
+
