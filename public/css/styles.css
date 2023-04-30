@@ -1,81 +1,8 @@
 @import url("./partials/reset.css");
+@import url("./partials/scroll.css");
+@import url("./partials/relation.css");
 @import url("https://v1.fontapi.ir/css/Vazir");
 /* main section styles */
 main {
   padding: 1rem;
-}
-
-/* rest section styles */
-
-.relation {
-  display: flex;
-  flex-direction: column;
-}
-.relation > div {
-  flex: 1 1 0px;
-}
-
-@media screen and (min-width: 768px) {
-  .relation {
-    display: flex;
-    flex-direction: row;
-  }
-}
-
-.section {
-  padding-inline: 1rem;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-}
-
-.serial-form {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.serial-input {
-  padding: 1rem;
-  direction: rtl;
-  margin-bottom: 2rem;
-  width: 80%;
-}
-
-/* selected items style */
-
-.list-group {
-  height: 70vh;
-  overflow-y: auto;
-}
-
-.matched-item {
-  height: 60px;
-  padding: 1rem;
-  border: 2px solid rgb(108, 107, 107);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-block: 0.3rem;
-}
-
-.add,
-.remove {
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.add {
-  color: rgb(46, 198, 46);
-}
-
-.remove {
-  color: red;
-}
-
-.add:hover,
-.remove:hover {
-  background-color: #c0bbbb;
 }
