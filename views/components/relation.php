@@ -11,6 +11,7 @@
     </div>
     <div class="section">
         <section id="selected" style="direction: rtl;">
+        <!-- selected items are going to be appended here -->
         </section>
     </div>
     <div class="section">
