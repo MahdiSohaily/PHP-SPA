@@ -4,7 +4,9 @@
 *:not(i) {
   font-family: Vazir, sans-serif !important;
 }
-
+.body {
+  background-color: #cbb2b2;
+}
 /* main section styles */
 main {
   padding: 1rem;
@@ -17,15 +19,23 @@ main {
   flex-direction: column;
 }
 .relation > div {
-    flex: 1 1 0px;
-    border: 3px solid red;
-  }
+  flex: 1 1 0px;
+}
 
 @media screen and (min-width: 768px) {
   .relation {
     display: flex;
     flex-direction: row;
   }
+}
+
+.section {
+    padding: 1rem;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
 }
 
 .serial-form {
@@ -38,4 +48,9 @@ main {
   padding: 1rem;
   direction: rtl;
   margin-bottom: 2rem;
+  width: 80%;
+}
+
+/* selected items style */
+.matched-item {
 }
