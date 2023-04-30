@@ -11,6 +11,7 @@
     </div>
     <div class="section">
         <section id="selected" style="direction: rtl;">
+        <h2>موارد انتخاب شده:</h2>
         <!-- selected items are going to be appended here -->
         </section>
     </div>
