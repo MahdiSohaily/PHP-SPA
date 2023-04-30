@@ -90,7 +90,7 @@ nav ul li a.active {
     display: block;
   }
 
-  #checkbox:checked  ul {
+  #checkbox:checked ~ ul {
     display: block;
   }
 }

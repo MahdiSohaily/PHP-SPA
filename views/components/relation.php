@@ -1,7 +1,8 @@
 <section class='relation' style="direction: rtl;">
     <div class="section serial-form">
-        <form class="center" action="#" method="post">
-            <input class="serial-input" type="text" name="serial" id="serial" placeholder="کد قطعه فنی را وارد کنید ..." onkeyup="search(this.value)">
+        <form class="center" method="post">
+            <input placeholder="" class="serial-input" type="text" name="serial" id="serial" 
+            placeholder="کد قطعه فنی را وارد کنید ..." onkeyup="search(this.value)">
         </form>
         <section id="match" style="direction: rtl;">
             <div id="s-result" class="list-group">
@@ -17,9 +18,10 @@
     </div>
     <div class="section">
         <form class='add-relation' action="#" method="post">
-            <input type="text" name="name" id="name" required>
-            <input type="text" name="car" id="car" required>
-            <input type="text" name="state" id="state" required>
+            <input placeholder="نام" type="text" name="name" id="name" required>
+            <input placeholder="نام خودرو" type="text" name="car" id="car" required>
+            <input placeholder="وضعیت" type="text" name="state" id="state" required>
+            <input placeholder="ثبت" type="submit" name="submit">
         </form>
     </div>
 </section>
