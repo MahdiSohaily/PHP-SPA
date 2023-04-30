@@ -1,4 +1,4 @@
-<section class='relation'>
+<section class='relation' style="direction: rtl;">
     <div class="section serial-form">
         <form class="center" action="#" method="post">
             <input class="serial-input" type="text" name="serial" id="serial" placeholder="کد قطعه فنی را وارد کنید ..." onkeyup="search(this.value)">
@@ -41,7 +41,7 @@
         const item = `<div class='matched-item'>
                     <p>` + partnumber + `</p>
                     <p>` + price + `</p>
-                    <p>` + mobis + `</p>d
+                    <p>` + mobis + `</p>
                     <i class='material-icons remove'>do_not_disturb_on</i>
                     </div>`;
 

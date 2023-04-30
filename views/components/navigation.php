@@ -1,4 +1,4 @@
-<nav>
+<nav style="direction: rtl;">
     <div class="logo">YadakShop</div>
     <input type="checkbox" id="checkbox">
     <label for="checkbox" id="icon">
