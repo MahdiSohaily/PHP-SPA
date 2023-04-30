@@ -7,7 +7,6 @@
 body {
   height: 100vh;
   background: #d7dde5;
-  font-family: "Roboto", sans-serif;
 }
 
 nav {
@@ -15,7 +14,7 @@ nav {
   justify-content: space-between;
   padding: 15px 5%;
   align-items: center;
-  background: #18283b;
+  background: #263c57;
 }
 
 .logo {
@@ -33,7 +32,7 @@ ul li {
 
 ul li a {
   text-decoration: none;
-  color: #8291a5;
+  color: #cdd1d7;
   padding: 8px 30px;
   border-radius: 7px;
   transition: all 0.3s ease;
@@ -42,7 +41,7 @@ ul li a {
 ul li a:hover,
 ul li a.active {
   color: #fff;
-  background: #0075ff;
+  background: #4293f0;
 }
 
 #icon {
@@ -80,7 +79,7 @@ ul li a.active {
     position: absolute;
     width: 100%;
     height: calc(100vh - 71px);
-    background-color: #18283b;
+    background-color: #233f61;
     left: 0;
     top: 0;
     text-align: center;
