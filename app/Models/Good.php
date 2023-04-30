@@ -21,7 +21,7 @@ class Good
                 $mobis = $row['mobis'];
 
                 $templete .= "<div class='matched-item'>
-                    <i data-id='" . $id . "' class='material-icons add'>add_circle_outline</i>
+                    <i onclick='myFunction($id)'  data-id='" . $id . "' class='material-icons add'>add_circle_outline</i>
                     <p>$partnumber</p>
                     <p>$price</p>
                     <p>$mobis</p>

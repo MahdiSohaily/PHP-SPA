@@ -13,7 +13,7 @@
         <section id="selected">
             <div class="matched-item">
                 <i class='material-icons remove'>do_not_disturb_on</i>
-                <p>کد فنی قطعه</p>
+                <p>33کد فنی قطعه</p>
             </div>
             <div class="matched-item">
                 <i class='material-icons remove'>do_not_disturb_on</i>
@@ -47,6 +47,10 @@
 </section>
 
 <script>
+    function myFunction(id) {
+        alert(id);
+    }
+
     function search(val) {
         let supermode = 0;
         const resultBox = document.getElementById('s-result')
