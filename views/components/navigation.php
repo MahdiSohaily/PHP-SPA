@@ -9,8 +9,5 @@
     <ul>
         <li><a href="#" class="active">صحفه اصلی</a></li>
         <li><a href="#">درباره ما</a></li>
-        <li><a href="#">پروژه ها</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact</a></li>
     </ul>
 </nav>
