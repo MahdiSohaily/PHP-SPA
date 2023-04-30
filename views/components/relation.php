@@ -10,30 +10,30 @@
         </section>
     </div>
     <div class="section">
-        <section id="selected">
+        <section id="selected" style="direction: rtl;">
             <div class="matched-item">
-                <i class='material-icons remove'>do_not_disturb_on</i>
                 <p>33کد فنی قطعه</p>
+                <i class='material-icons remove'>do_not_disturb_on</i>
             </div>
             <div class="matched-item">
-                <i class='material-icons remove'>do_not_disturb_on</i>
                 <p>کد فنی قطعه</p>
+                <i class='material-icons remove'>do_not_disturb_on</i>
             </div>
             <div class="matched-item">
-                <i class='material-icons remove'>do_not_disturb_on</i>
                 <p>کد فنی قطعه</p>
+                <i class='material-icons remove'>do_not_disturb_on</i>
             </div>
             <div class="matched-item">
-                <i class='material-icons remove'>do_not_disturb_on</i>
                 <p>کد فنی قطعه</p>
+                <i class='material-icons remove'>do_not_disturb_on</i>
             </div>
             <div class="matched-item">
-                <i class='material-icons remove'>do_not_disturb_on</i>
                 <p>کد فنی قطعه</p>
+                <i class='material-icons remove'>do_not_disturb_on</i>
             </div>
             <div class="matched-item">
-                <i class='material-icons remove'>do_not_disturb_on</i>
                 <p>کد فنی قطعه</p>
+                <i class='material-icons remove'>do_not_disturb_on</i>
             </div>
         </section>
     </div>
@@ -54,16 +54,15 @@
         const mobis = event.target.getAttribute("data-mobis");
 
         const selected = document.getElementById('selected');
-        
+
         const item = `<div class='matched-item'>
-                    <i
-                    data-id='" . $id . "' class='material-icons add'>add_circle_outline</i>
-                    <p>$partnumber</p>
-                    <p>$price</p>
-                    <p>$mobis</p>
+                    <p>` + partnumber + `</p>
+                    <p>` + price + `</p>
+                    <p>` + mobis + `</p>d
+                    <i class='material-icons remove'>do_not_disturb_on</i>
                     </div>`;
 
-        selected.appendChild(item);
+        selected.innerHTML += (item);
     }
 
     function search(val) {
