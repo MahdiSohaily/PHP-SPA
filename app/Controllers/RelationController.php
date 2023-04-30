@@ -19,8 +19,8 @@ class RelationController
 	{
 		if(isset($_COOKIE['login-user'])) {
 			$good = new Good();
-
 			$result = $good->search($pattern);
+			echo $result;
 		} else {
 			header('Location: /yadak');
 			exit;
