@@ -4,13 +4,8 @@ namespace App\Models;
 
 class Good
 {
-    public function search($key, $mode, $rates)
+    public function search($pattern)
     {
-        $servername = "localhost";
-        $username = "yadakcenter2";
-        $password = "vZun$2*04Bo]";
-        $dbname = "yadakcenter2_yadakinfo_price";
-
         // Create connection
         $conn = mysqli_connect($servername, $username, $password, $dbname);
 
