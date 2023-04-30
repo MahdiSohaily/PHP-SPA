@@ -1,5 +1,5 @@
 <nav style="direction: rtl;">
-    <div class="logo">YadakShop</div>
+    <div class="logo">یدک شاپ</div>
     <input type="checkbox" id="checkbox">
     <label for="checkbox" id="icon">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -7,9 +7,9 @@
         </svg>
     </label>
     <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Project</a></li>
+        <li><a href="#" class="active">صحفه اصلی</a></li>
+        <li><a href="#">درباره ما</a></li>
+        <li><a href="#">پروژه ها</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Contact</a></li>
     </ul>
