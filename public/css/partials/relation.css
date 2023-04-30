@@ -82,3 +82,8 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.r-input {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
