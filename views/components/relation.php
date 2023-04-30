@@ -43,7 +43,7 @@
                     <p>` + partnumber + `</p>
                     <p>` + price + `</p>
                     <p>` + mobis + `</p>
-                    <i class='material-icons remove'>do_not_disturb_on</i>
+                    <i class='material-icons remove' onclick='remove(` + id + `)'>do_not_disturb_on</i>
                     </div>`;
 
         selected.innerHTML += (item);
@@ -66,5 +66,14 @@
         } else {
             resultBox.innerHTML = "";
         }
+    }
+
+    function remove(event) {
+
+        const selected = document.getElementById('selected');
+        const remove = event.target.getAttribute("data-id");
+        alert(remove);
+
+        selected.removeChild(remove);
     }
 </script>
