@@ -23,7 +23,7 @@
     <main>
         <?php
         if (isset($body)) {
-            echo $body;
+            require_once $body;
         } else {
             require_once 'relation.php';
         }
