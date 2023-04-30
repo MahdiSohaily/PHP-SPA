@@ -41,8 +41,6 @@
 
         const item = `<div class='matched-item' id='` + id + `'>
                     <p>` + partnumber + `</p>
-                    <p>` + price + `</p>
-                    <p>` + mobis + `</p>
                     <i class='material-icons remove' onclick='remove(` + id + `)'>do_not_disturb_on</i>
                     </div>`;
 
