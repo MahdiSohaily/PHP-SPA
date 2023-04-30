@@ -6,14 +6,10 @@ class Good
 {
     public function search($pattern)
     {
-        // Create connection
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-        if ($mode) {
-            $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $key . "%'";
-        } else {
-            $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $key . "%'";
-        }
+
+        $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
 
         $result = $conn->query($sql);
 
