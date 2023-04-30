@@ -19,11 +19,8 @@ class RelationController
 	{
 		if(isset($_COOKIE['login-user'])) {
 			$good = new Good();
-			$rate = new Rate();
 
-			$rates = $rate->getRates();
-
-			$result = $good->search($key, $mode, $rates);
+			$result = $good->search($pattern);
 		} else {
 			header('Location: /yadak');
 			exit;
