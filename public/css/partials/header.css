@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: #d7dde5;
+  font-family: "Roboto", sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 5%;
+  align-items: center;
+  background: #18283b;
+}
+
+.logo {
+  color: #fff;
+  font-size: 22px;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  display: inline-block;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #8291a5;
+  padding: 8px 30px;
+  border-radius: 7px;
+  transition: all 0.3s ease;
+}
+
+ul li a:hover,
+ul li a.active {
+  color: #fff;
+  background: #0075ff;
+}
+
+#icon {
+  background-color: #0075ff;
+  padding: 5px 7px 3px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#icon svg {
+  color: #fff;
+  height: 28px;
+  transition: all 0.3s ease;
+}
+
+#icon:hover {
+  background: #fff;
+}
+
+#icon:hover svg {
+  color: #0075ff;
+}
+
+#checkbox,
+#icon {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  nav {
+    border-bottom: 1px solid #455468;
+  }
+
+  ul {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 71px);
+    background-color: #18283b;
+    left: 0;
+    top: 0;
+    text-align: center;
+    display: none;
+    margin-top: 71px;
+  }
+
+  ul li {
+    display: block;
+    padding: 10px 15px;
+  }
+
+  ul li a {
+    display: block;
+    padding: 10px 0;
+  }
+
+  #icon {
+    display: block;
+  }
+
+  #checkbox:checked ~ ul {
+    display: block;
+  }
+}
