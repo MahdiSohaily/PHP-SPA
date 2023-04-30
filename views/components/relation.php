@@ -55,6 +55,9 @@
         const selected = document.getElementById('selected');
 
         selected.removeChild(item);
+
+        const r_id = index.indexOf(id);
+        index.splice(r_id, 1);
     }
 
     function search(val) {
