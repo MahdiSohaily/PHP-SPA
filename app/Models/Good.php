@@ -28,8 +28,6 @@ class Good
                     data-mobis='" . $mobis . "' 
                     class='material-icons add'>add_circle_outline</i>
                     <p>$partnumber</p>
-                    <p>$price</p>
-                    <p>$mobis</p>
                 </div>";
             }
         } else {
