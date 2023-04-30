@@ -18,14 +18,14 @@
 
 <body>
     <?php
-    require_once 'header.php';
+    require_once 'navigation.php';
     ?>
     <main>
         <?php
         if (isset($body)) {
             echo $body;
         } else {
-            require_once '../Pages/relation.php';
+            require_once 'relation.php';
         }
         ?>
     </main>
