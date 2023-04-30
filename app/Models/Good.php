@@ -22,7 +22,11 @@ class Good
 
                 $templete .= "<div class='matched-item'>
                     <i onclick='myFunction(event)'  
-                    data-id='" . $id . "' class='material-icons add'>add_circle_outline</i>
+                    data-id='" . $id . "' 
+                    data-partnumber='" . $partnumber . "' 
+                    data-price='" . $price . "' 
+                    data-mobis='" . $mobis . "' 
+                    class='material-icons add'>add_circle_outline</i>
                     <p>$partnumber</p>
                     <p>$price</p>
                     <p>$mobis</p>
