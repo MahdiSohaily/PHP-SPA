@@ -26,6 +26,7 @@
 </section>
 
 <script>
+    let index = [];
     function myFunction(event) {
         const id = event.target.getAttribute("data-id");
         const remove = document.getElementById(id);
