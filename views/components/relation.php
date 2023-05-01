@@ -18,7 +18,7 @@
     <div class="section">
         <form class='add-relation' action="#" method="post">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <input list="browsers" id="myBrowser" name="myBrowser" />
+            <input class="r-input" placeholder="نام خودروی مورد نظر" list="browsers" id="myBrowser" name="myBrowser" />
             <datalist id="browsers">
                 <option value="Chrome"></option>
                 <option value="Firefox"></option>
