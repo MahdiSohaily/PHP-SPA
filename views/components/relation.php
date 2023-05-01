@@ -19,8 +19,12 @@
         <form class='add-relation' action="#" method="post">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <input class="r-input" placeholder="نام خودرو" type="text" name="car" id="car" required>
-            <input class="r-input" placeholder="وضعیت" type="text" name="state" id="state" required>
-            <input class="r-input" value="ثبت" type="submit" name="submit">
+            <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select> <input class="r-input" value="ثبت" type="submit" name="submit">
         </form>
     </div>
 </section>
