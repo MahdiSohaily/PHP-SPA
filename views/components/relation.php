@@ -31,7 +31,7 @@
                 <option value="hurr">در حد نو</option>
                 <option value="hurr">کارکرده</option>
             </select>
-            <input class="r-input" value="ثبت" type="submit" name="submit">
+            <input class="r-input bg-green" value="ثبت" type="submit" name="submit">
         </form>
     </div>
 </section>
