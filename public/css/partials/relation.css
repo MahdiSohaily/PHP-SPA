@@ -93,6 +93,10 @@
   border-radius: none;
 }
 
+::placeholder {
+  color: black;
+}
+
 .bg-green {
   background-color: seagreen;
   color: white;
