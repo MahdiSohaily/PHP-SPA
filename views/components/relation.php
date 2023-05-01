@@ -19,12 +19,13 @@
         <form class='add-relation' action="#" method="post">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <input class="r-input" placeholder="نام خودرو" type="text" name="car" id="car" required>
-            <select name="cars" id="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select> <input class="r-input" value="ثبت" type="submit" name="submit">
+            <select class="r-input">
+                <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
+                <option value="hurr">نو</option>
+                <option value="hurr">در حد نو</option>
+                <option value="hurr">کارکرده</option>
+            </select>
+            <input class="r-input" value="ثبت" type="submit" name="submit">
         </form>
     </div>
 </section>
