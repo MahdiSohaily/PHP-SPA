@@ -11,6 +11,8 @@ class RelationController
     // Homepage action
 	public function index(RouteCollection $routes)
 	{
+		$good = new Good();
+		$
 		require_once APP_ROOT . '/views/components/app-templete.php';
 		
 	}
