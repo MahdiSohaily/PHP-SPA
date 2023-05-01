@@ -14,6 +14,7 @@ class RelationController
 	{
 		$car = new Car();
 		$cars = $car->all();
+		print_r($cars);
 		require_once APP_ROOT . '/views/components/app-templete.php';
 		
 	}
