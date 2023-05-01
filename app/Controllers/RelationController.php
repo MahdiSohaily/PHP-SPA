@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Good;
+use App\Models\Car;
 use Symfony\Component\Routing\RouteCollection;
 
 class RelationController
@@ -11,8 +12,8 @@ class RelationController
     // Homepage action
 	public function index(RouteCollection $routes)
 	{
-		$good = new Good();
-		$
+		$car = new Car();
+		$cars = $car->all();
 		require_once APP_ROOT . '/views/components/app-templete.php';
 		
 	}
