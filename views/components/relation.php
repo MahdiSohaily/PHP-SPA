@@ -18,8 +18,14 @@
     <div class="section">
         <form class='add-relation' action="#" method="post">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <input class="r-input" placeholder="نام خودرو" type="text" name="car" id="car" required>
-            <select class="r-input">
+            <input list="browsers" id="myBrowser" name="myBrowser" />
+            <datalist id="browsers">
+                <option value="Chrome"></option>
+                <option value="Firefox"></option>
+                <option value="Opera"></option>
+                <option value="Safari"></option>
+                <option value="Microsoft Edge"></option>
+            </datalist> <select class="r-input">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
                 <option value="hurr">نو</option>
                 <option value="hurr">در حد نو</option>
