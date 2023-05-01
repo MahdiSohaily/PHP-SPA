@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Good
+class Car
 {
     public function all()
     {
