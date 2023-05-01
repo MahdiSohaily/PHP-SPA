@@ -10,5 +10,6 @@ class Car
 
         $sql = "SELECT * FROM cars";
         $result = $conn->query($sql)->fetch_assoc();
+        return $result;
     }
 }
