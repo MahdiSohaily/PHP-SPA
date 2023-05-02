@@ -18,7 +18,7 @@
   }
 
   .list-group {
-    height: 30vh;
+    height: 70vh;
   }
 }
 
@@ -47,7 +47,7 @@
 /* selected items style */
 
 .list-group {
-  height: 70vh;
+  height: 30vh;
   overflow-y: auto;
   padding-inline: 0.3rem;
 }
@@ -118,6 +118,5 @@
   right: 0;
   left: 0;
   padding-inline: 1rem;
-  display: flex;
-  justify-content: center;
+  background-color: white;
 }
