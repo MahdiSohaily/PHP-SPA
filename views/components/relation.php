@@ -18,19 +18,15 @@
     <div class="section">
         <form class='add-relation' action="#" method="post" onsubmit="save(event)">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <select class="r-input">
-                <option value="" disabled selected>نام خودروی مورد نظر</option>
-                <?php
-                if ($cars) {
-                    echo 'here we are';
-                    foreach ($cars as $item) {
-                        echo "<option value=" . $item['name'] . ">" . $item['name'] . "</option>";
-                    }
-                } else {
-                    echo "<option value=''>جدول خودروها در دیتابس خالی می باشد.</option>";
-                }
-                ?>
-            </select>
+            <div class="searchBox">
+                <input class="r-input" placeholder="نام خودروی مورد نظر" type="text" name="car_name" id="car_id" required>
+                <ul>
+                    <li>KIA</li>
+                    <li>206</li>
+                    <li>PEGUE</li>
+                    <li>SAMAND</li>
+                </ul>
+            </div>
             <select class="r-input">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
                 <option value="hurr">نو</option>
