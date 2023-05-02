@@ -37,9 +37,10 @@
 
 <script>
     let index = [];
-    let name='';
-    let car_id='';
-    let status='';
+    let name = '';
+    let car_id = '';
+    let status = '';
+    const container = document.getElementById('result_list');
 
     function add(event) {
         const id = event.target.getAttribute("data-id");
@@ -64,7 +65,8 @@
     }
 
     function getId(id) {
-        alert(id);
+        car_id = id;
+        container.style.display = "none";
     }
 
     function remove(id) {
@@ -102,8 +104,6 @@
     }
 
     function searchCar(value) {
-        const container = document.getElementById('result_list');
-
         if (value.length > 0) {
             container.innerHTML =
                 "<img style='width:50px; height:50px' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
