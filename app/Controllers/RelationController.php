@@ -33,7 +33,7 @@ class RelationController
 	public function getCars($pattern ,RouteCollection $routes)
 	{
 		if(isset($_COOKIE['login-user'])) {
-			$cars = new Good();
+			$cars = new Car();
 			$result = $cars->search($pattern);
 			echo $result;
 		} else {
