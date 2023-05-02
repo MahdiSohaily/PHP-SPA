@@ -67,6 +67,7 @@
     function getId(id) {
         car_id = id;
         container.style.display = "none";
+        console.log(car_id);
     }
 
     function remove(id) {
@@ -105,6 +106,7 @@
 
     function searchCar(value) {
         if (value.length > 0) {
+            container.style.display = "block";
             container.innerHTML =
                 "<img style='width:50px; height:50px' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
             axios.get('getCars/' + value)
