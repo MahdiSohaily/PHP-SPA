@@ -19,6 +19,7 @@ class RelationController
 
 	public function search($pattern, RouteCollection $routes)
 	{
+		echo $pattern;
 		if (isset($_COOKIE['login-user'])) {
 			$good = new Good();
 			$result = $good->search($pattern);

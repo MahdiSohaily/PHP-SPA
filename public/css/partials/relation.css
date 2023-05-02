@@ -105,7 +105,6 @@
 
 .searchBox {
   position: relative;
-  padding-inline: 1rem;
   display: flex;
 }
 
@@ -119,4 +118,5 @@
   right: 0;
   left: 0;
   background-color: aquamarine;
+  padding-inline: 1rem;
 }

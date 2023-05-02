@@ -95,13 +95,12 @@
     }
 
     function searchCar(value) {
-        alert(value)
         const container = document.getElementById('result_list');
 
-        if (val.length > 0) {
+        if (value.length > 0) {
             container.innerHTML =
                 "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
-            axios.get('getCars/' + val)
+            axios.get('getCars/' + value)
                 .then(response => {
                     container.innerHTML = response.data;
                 }).catch(error => {
