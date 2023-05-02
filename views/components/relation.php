@@ -117,7 +117,6 @@
 
     // A function to hundle form submition
     function send() {
-        alert('Please enter');
         const data = [index, name, car_id, status];
         console.log(data);
         axios.get('saveRelation/' + data)
