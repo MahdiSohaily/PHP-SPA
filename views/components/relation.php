@@ -19,10 +19,12 @@
         <form class='add-relation' action="#" method="post" onsubmit=" event.preventDefault(); submit()">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <select class="r-input" required>
-                <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
-                <option value="نو">نو</option>
-                <option value="در حد نو">در حد نو</option>
-                <option value="کارکرده">کارکرده</option>
+                <?php
+                if ($cars){
+                    foreach ($cars as $car){
+                        echo '<option value="'. $car['id']. '">'. $car['name']. '</option>';
+                }
+                ?>
             </select>
             <select class="r-input" onchange="getStatus(this.value)">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
