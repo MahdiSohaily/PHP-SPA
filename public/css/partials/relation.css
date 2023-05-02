@@ -119,4 +119,5 @@
   left: 0;
   padding-inline: 1rem;
   background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

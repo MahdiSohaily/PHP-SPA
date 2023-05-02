@@ -29,7 +29,7 @@ class Car
 
         if (mysqli_num_rows($result) > 0) {
             while ($r = mysqli_fetch_assoc($result)) {
-                $pattern .= "<li value='" . $r['id'] . "'>" . $r['name'] . "</li>";
+                $pattern .= "<li onclick='getId(" . $r['id'] . ")'>" . $r['name'] . "</li>";
             }
         } else {
             $pattern .= "<li value=''>موردی دریافت نشد</li>";

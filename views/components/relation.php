@@ -63,6 +63,10 @@
         index.push(id);
     }
 
+    function getId(id) {
+        alert(id);
+    }
+
     function remove(id) {
         const item = document.getElementById(id);
         const selected = document.getElementById('selected');
