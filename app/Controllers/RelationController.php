@@ -29,4 +29,16 @@ class RelationController
 			exit;
 		}
 	}
+	
+	public function getCars($pattern ,RouteCollection $routes)
+	{
+		if(isset($_COOKIE['login-user'])) {
+			$cars = new Good();
+			$result = $cars->search($pattern);
+			echo $result;
+		} else {
+			header('Location: /yadak');
+			exit;
+		}
+	}
 }
