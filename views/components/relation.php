@@ -16,7 +16,7 @@
         </section>
     </div>
     <div class="section">
-        <form class='add-relation' action="#" method="post" onsubmit=" event.preventDefault(); save()">
+        <form class='add-relation' action="#" method="post" onsubmit=" event.preventDefault(); submit()">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <div class="searchBox">
                 <input class="r-input" placeholder="نام خودروی مورد نظر" type="text" name="car_name" id="car_id" required onkeyup="searchCar(this.value)">
@@ -103,8 +103,13 @@
     }
 
     function submit() {
-        event.preventDefault();
-        alert("Please");
+        const data = [index, name, car_id, status];
+        axios.get('saveRelation/' + data)
+            .then(response => {
+                container.innerHTML = response.data;
+            }).catch(error => {
+                console.log(error);
+            })
     }
 
     function searchCar(value) {
