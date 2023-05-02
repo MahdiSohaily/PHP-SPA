@@ -32,7 +32,8 @@ class Car
                 $pattern .= "<option value='" . $r['id'] . "'>" . $r['name'] . "</option>";
             }
         } else {
-            $product_array[] = 'No results found';
+            $pattern .= "<option value=''>موردی دریافت نشد</option>";
         }
+        return $pattern;
     }
 }
