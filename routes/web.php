@@ -49,8 +49,7 @@ $routes->add('getdata',
 );
 
 $routes->add('saveRelation',
-    new Route(constant('URL_SUBFOLDER') .'/saveRelation/{data}',
-    array('controller' => 'RelationController', 'method'=>'save'),
-    array('data' => '[a-zA-Z0-9]+'))
+    new Route(constant('URL_SUBFOLDER') .'/saveRelation',
+    array('controller' => 'RelationController', 'method'=>'save'))
 );
 

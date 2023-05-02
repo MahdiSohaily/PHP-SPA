@@ -30,12 +30,11 @@ class RelationController
 		}
 	}
 	
-	public function save($data, RouteCollection $routes)
+	public function save(RouteCollection $routes)
 	{
-		echo $data .'ffffffff';
+		echo 'ff';
 		if (isset($_COOKIE['login-user'])) {
 			$cars = new Car();
-			echo $data;
 		} else {
 			header('Location: /' . URL_SUBFOLDER);
 			exit;

@@ -118,11 +118,19 @@
     // A function to hundle form submition
     function send() {
         const data = [index, name, car_id, status];
-        axios.get('saveRelation/' + data)
-            .then(response => {
-                console.log(response.data);
-            }).catch(error => {
-                console.log(error);
+
+        axios.get('saveRelation/')
+            .then(function(response) {
+                console.log(response);
             })
+            .catch(function(error) {
+                console.log(error);
+            });
+        // axios.get('saveRelation/' + 3)
+        //     .then(response => {
+        //         console.log(response.data);
+        //     }).catch(error => {
+        //         console.log(error);
+        //     })
     }
 </script>
