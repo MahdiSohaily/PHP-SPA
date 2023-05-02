@@ -19,20 +19,23 @@
         <form class='add-relation' action="#" method="post">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <input class="r-input" placeholder="نام خودروی مورد نظر" list="car_is" name="car" />
+            <?php
+               print_r($cars)
+                ?>
             <datalist id="car_is">
                 <?php
-                if (isset($cars)) {
+                echo 'we are here 1';
+                if ($cars) {
+                    echo 'here we are';
                     foreach ($cars as $item) {
                         echo "<option value=" . $item['name'] . "></option>";
                     }
+                } else {
+                    echo 'nothing selected';
                 }
                 ?>
-
-                <option value="Firefox"></option>
-                <option value="Opera"></option>
-                <option value="Safari"></option>
-                <option value="Microsoft Edge"></option>
-            </datalist> <select class="r-input">
+            </datalist> 
+            <select class="r-input">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
                 <option value="hurr">نو</option>
                 <option value="hurr">در حد نو</option>
