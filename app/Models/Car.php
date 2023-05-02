@@ -29,10 +29,10 @@ class Car
 
         if (mysqli_num_rows($result) > 0) {
             while ($r = mysqli_fetch_assoc($result)) {
-                $pattern .= "<option value='" . $r['id'] . "'>" . $r['name'] . "</option>";
+                $pattern .= "<li value='" . $r['id'] . "'>" . $r['name'] . "</li>";
             }
         } else {
-            $pattern .= "<option value=''>موردی دریافت نشد</option>";
+            $pattern .= "<li value=''>موردی دریافت نشد</li>";
         }
         return $pattern;
     }
