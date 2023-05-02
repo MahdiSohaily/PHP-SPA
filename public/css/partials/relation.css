@@ -104,10 +104,18 @@
 }
 
 .searchBox {
+  position: relative;
   padding-inline: 1rem;
   display: flex;
 }
 
 .searchBox input {
   width: 100%;
+}
+
+.result_list {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
 }

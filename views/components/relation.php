@@ -20,7 +20,7 @@
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <div class="searchBox">
                 <input class="r-input" placeholder="نام خودروی مورد نظر" type="text" name="car_name" id="car_id" required>
-                <ul>
+                <ul id="result_list">
                     <li>KIA</li>
                     <li>206</li>
                     <li>PEGUE</li>
