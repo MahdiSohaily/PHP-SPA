@@ -41,4 +41,15 @@ class RelationController
 			exit;
 		}
 	}
+	
+	public function save($data, RouteCollection $routes)
+	{
+		if (isset($_COOKIE['login-user'])) {
+			$cars = new Car();
+			echo $data;
+		} else {
+			header('Location: /' . URL_SUBFOLDER);
+			exit;
+		}
+	}
 }

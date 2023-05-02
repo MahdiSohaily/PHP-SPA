@@ -18,12 +18,12 @@
     <div class="section">
         <form class='add-relation' action="#" method="post" onsubmit=" event.preventDefault(); submit()">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <div class="searchBox">
-                <input class="r-input" placeholder="نام خودروی مورد نظر" type="text" name="car_name" id="car_id" required onkeyup="searchCar(this.value)">
-                <ul id="result_list">
-                    <!-- searched cars result will be appended here -->
-                </ul>
-            </div>
+            <select class="r-input" required>
+                <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
+                <option value="نو">نو</option>
+                <option value="در حد نو">در حد نو</option>
+                <option value="کارکرده">کارکرده</option>
+            </select>
             <select class="r-input" onchange="getStatus(this.value)">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
                 <option value="نو">نو</option>
@@ -36,6 +36,10 @@
 </section>
 
 <script>
+    $(document).ready(function() {
+        //change selectboxes to selectize mode to be searchable
+        $("select").select2();
+    });
     let index = [];
     let name = '';
     let car_id = '';
