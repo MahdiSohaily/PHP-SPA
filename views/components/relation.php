@@ -16,7 +16,7 @@
         </section>
     </div>
     <div class="section">
-        <form class='add-relation' action="#" method="post" onsubmit=" event.preventDefault(); submit()">
+        <form class='add-relation' action="#" method="post" onsubmit="return false; ">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <select class="r-input" onchange="getValue('car', this.value)" required name="car_id">
                 <?php
@@ -38,15 +38,38 @@
 </section>
 
 <script>
-    $(document).ready(function() {
-        //change selectboxes to selectize mode to be searchable
-        $("select").select2();
-    });
+
+    // All the needed variables for building relations
     let index = [];
     let name = '';
     let car_id = '';
     let status = '';
-    const container = document.getElementById('result_list');
+
+    // A function for searching goods base on serial number
+    function search(val) {
+        let supermode = 0;
+        const resultBox = document.getElementById('s-result')
+
+        if (val.length > 6) {
+            resultBox.innerHTML =
+                "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+            axios.get('getdata/' + val)
+                .then(response => {
+                    resultBox.innerHTML = response.data;
+                }).catch(error => {
+                    console.log(error);
+                })
+        } else {
+            resultBox.innerHTML = "";
+        }
+    }
+
+    // Enable search option for select elements
+    $(document).ready(function() {
+        //change selectboxes to selectize mode to be searchable
+        $("select").select2();
+    });
+
 
     function add(event) {
         const id = event.target.getAttribute("data-id");
@@ -70,6 +93,18 @@
         index.push(id);
     }
 
+    function remove(id) {
+        const item = document.getElementById(id);
+        const selected = document.getElementById('selected');
+
+        selected.removeChild(item);
+
+        const r_id = index.indexOf(id);
+        index.splice(r_id, 1);
+    }
+
+
+    // Get the selected input value to send data;
     function getValue(input, value) {
         switch (input) {
             case 'car':
@@ -81,41 +116,13 @@
         }
     }
 
-    function getStatus(value) {
-        alert(value);
-    }
-
-    function remove(id) {
-        const item = document.getElementById(id);
-        const selected = document.getElementById('selected');
-
-        selected.removeChild(item);
-
-        const r_id = index.indexOf(id);
-        index.splice(r_id, 1);
-    }
-
-    function search(val) {
-        let supermode = 0;
-        const resultBox = document.getElementById('s-result')
 
 
-        if (val.length > 6) {
-            resultBox.innerHTML =
-                "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
-            axios.get('getdata/' + val)
-                .then(response => {
-                    resultBox.innerHTML = response.data;
-                }).catch(error => {
-                    console.log(error);
-                })
-        } else {
-            resultBox.innerHTML = "";
-        }
-    }
 
     function submit() {
+        alert('Please enter')
         const data = [index, name, car_id, status];
+        console.log(data);
         axios.get('saveRelation/' + data)
             .then(response => {
                 container.innerHTML = response.data;
