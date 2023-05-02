@@ -19,12 +19,9 @@
         <form class='add-relation' action="#" method="post" onsubmit="save(event)">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <div class="searchBox">
-                <input class="r-input" placeholder="نام خودروی مورد نظر" type="text" name="car_name" id="car_id" required>
+                <input class="r-input" placeholder="نام خودروی مورد نظر" type="text" name="car_name" id="car_id" required onkeyup="searchCar(this.value)">
                 <ul id="result_list">
-                    <li>KIA</li>
-                    <li>206</li>
-                    <li>PEGUE</li>
-                    <li>SAMAND</li>
+                    <!-- searched cars result will be appended here -->
                 </ul>
             </div>
             <select class="r-input">
@@ -95,5 +92,9 @@
     function submit(event) {
         event.preventDefault();
         alert("Please");
+    }
+
+    function searchCar(value) {
+        alert(value)
     }
 </script>
