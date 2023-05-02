@@ -67,7 +67,6 @@
     function getId(id) {
         car_id = id;
         container.style.display = "none";
-        console.log(car_id);
     }
 
     function remove(id) {
