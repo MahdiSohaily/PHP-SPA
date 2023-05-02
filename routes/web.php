@@ -54,3 +54,9 @@ $routes->add('getCars',
     array('pattern' => '[a-zA-Z0-9]+'))
 );
 
+$routes->add('saveRelation',
+    new Route(constant('URL_SUBFOLDER') .'/getCars/{data}',
+    array('controller' => 'RelationController', 'method'=>'save'),
+    array('data' => '[a-zA-Z0-9]+'))
+);
+
