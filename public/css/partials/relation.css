@@ -114,7 +114,7 @@
 
 #result_list {
   position: absolute;
-  bottom: 0;
+  top: 100%;
   right: 0;
   left: 0;
   padding-inline: 1rem;
