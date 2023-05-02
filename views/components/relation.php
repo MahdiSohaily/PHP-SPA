@@ -16,22 +16,21 @@
         </section>
     </div>
     <div class="section">
-        <form class='add-relation' action="#" method="post">
+        <form class='add-relation' action="#" method="post" onsubmit="save(event)">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <input class="r-input" placeholder="نام خودروی مورد نظر" list="car_is" name="car" />
-            <datalist id="car_is">
+            <select class="r-input">
+                <option value="" disabled selected>نام خودروی مورد نظر</option>
                 <?php
-                echo 'we are here 1';
                 if ($cars) {
                     echo 'here we are';
                     foreach ($cars as $item) {
-                        echo "<option value=" . $item['name'] . "></option>";
+                        echo "<option value=" . $item['name'] . ">" . $item['name'] . "</option>";
                     }
                 } else {
-                    echo "<option value='جدول خودروها در دیتابس خالی می باشد.'></option>";
+                    echo "<option value=''>جدول خودروها در دیتابس خالی می باشد.</option>";
                 }
                 ?>
-            </datalist> 
+            </select>
             <select class="r-input">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
                 <option value="hurr">نو</option>
@@ -95,5 +94,10 @@
         } else {
             resultBox.innerHTML = "";
         }
+    }
+
+    function submit(event) {
+        event.preventDefault();
+        alert("Please");
     }
 </script>
