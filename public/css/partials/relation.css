@@ -47,7 +47,7 @@
 /* selected items style */
 
 .list-group {
-  height: 30vh;
+  height: 70vh;
   overflow-y: auto;
   padding-inline: 0.3rem;
 }
