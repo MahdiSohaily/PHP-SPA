@@ -21,7 +21,7 @@ class Good
                 $mobis = $row['mobis'];
 
                 $templete .= "<div class='matched-item' id='$id'>
-                    <i onclick='myFunction(event)'  
+                    <i onclick='add(event)'  
                     data-id='" . $id . "' 
                     data-partnumber='" . $partnumber . "' 
                     data-price='" . $price . "' 

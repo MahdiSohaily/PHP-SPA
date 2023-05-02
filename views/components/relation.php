@@ -46,7 +46,7 @@
 <script>
     let index = [];
 
-    function myFunction(event) {
+    function add(event) {
         const id = event.target.getAttribute("data-id");
         const remove = document.getElementById(id);
 
