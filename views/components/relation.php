@@ -70,7 +70,7 @@
         $("select").select2();
     });
 
-
+    // A function to add a good to the relation box
     function add(event) {
         const id = event.target.getAttribute("data-id");
         const remove = document.getElementById(id);
@@ -93,6 +93,7 @@
         index.push(id);
     }
 
+    // A function to remove added goods from relation box
     function remove(id) {
         const item = document.getElementById(id);
         const selected = document.getElementById('selected');
@@ -102,7 +103,6 @@
         const r_id = index.indexOf(id);
         index.splice(r_id, 1);
     }
-
 
     // Get the selected input value to send data;
     function getValue(input, value) {
@@ -116,9 +116,7 @@
         }
     }
 
-
-
-
+    // A function to hundle form submition
     function submit() {
         alert('Please enter')
         const data = [index, name, car_id, status];
@@ -129,22 +127,5 @@
             }).catch(error => {
                 console.log(error);
             })
-    }
-
-    function searchCar(value) {
-        if (value.length > 0) {
-            container.style.display = "block";
-            container.innerHTML =
-                "<img style='width:50px; height:50px' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
-            axios.get('getCars/' + value)
-                .then(response => {
-                    container.innerHTML = response.data;
-                }).catch(error => {
-                    console.log(error);
-                })
-        } else {
-            container.innerHTML = "";
-        }
-
     }
 </script>
