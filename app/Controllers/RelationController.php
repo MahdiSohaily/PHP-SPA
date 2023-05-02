@@ -19,9 +19,9 @@ class RelationController
 
 	public function search($pattern, RouteCollection $routes)
 	{
-		echo $pattern;
 		if (isset($_COOKIE['login-user'])) {
 			$good = new Good();
+			
 			$result = $good->search($pattern);
 			echo $result;
 		} else {
@@ -32,6 +32,7 @@ class RelationController
 	
 	public function save($data, RouteCollection $routes)
 	{
+		echo $data .'ffffffff';
 		if (isset($_COOKIE['login-user'])) {
 			$cars = new Car();
 			echo $data;

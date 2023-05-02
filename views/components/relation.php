@@ -118,7 +118,6 @@
     // A function to hundle form submition
     function send() {
         const data = [index, name, car_id, status];
-        console.log(data);
         axios.get('saveRelation/' + data)
             .then(response => {
                 container.innerHTML = response.data;
