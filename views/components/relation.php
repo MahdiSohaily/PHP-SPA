@@ -28,7 +28,7 @@
                         echo "<option value=" . $item['name'] . "></option>";
                     }
                 } else {
-                    echo 'nothing selected';
+                    echo "<option value='جدول خودروها در دیتابس خالی می باشد.'></option>";
                 }
                 ?>
             </datalist> 
