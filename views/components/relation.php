@@ -18,17 +18,16 @@
     <div class="section">
         <form class='add-relation' action="#" method="post" onsubmit=" event.preventDefault(); submit()">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <select class="r-input" required>
+            <select class="r-input" onchange="getValue('car', this.value)" required name="car_id">
                 <?php
-                if ($cars){
-                    foreach ($cars as $car){
-                        echo '<option value="'. $car['id']. '">'. $car['name']. '</option>';
+                if ($cars) {
+                    foreach ($cars as $car) {
+                        echo '<option value="' . $car['id'] . '">' . $car['name'] . '</option>';
                     }
                 }
                 ?>
             </select>
-            <select class="r-input" onchange="getStatus(this.value)">
-                <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
+            <select class="r-input" onchange="getValue('status', this.value)" required>
                 <option value="نو">نو</option>
                 <option value="در حد نو">در حد نو</option>
                 <option value="کارکرده">کارکرده</option>
@@ -71,9 +70,15 @@
         index.push(id);
     }
 
-    function getId(id) {
-        car_id = id;
-        container.style.display = "none";
+    function getValue(input, value) {
+        switch (input) {
+            case 'car':
+                car_id = value;
+                break;
+            case 'status':
+                status = value;
+                break;
+        }
     }
 
     function getStatus(value) {
