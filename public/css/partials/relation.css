@@ -101,6 +101,7 @@
   background-color: seagreen;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 .searchBox {

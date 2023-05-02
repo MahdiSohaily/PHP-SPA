@@ -16,7 +16,7 @@
         </section>
     </div>
     <div class="section">
-        <form class='add-relation' action="#" method="post" onsubmit="return false; ">
+        <form class='add-relation' action="#" method="post" onsubmit="event.preventDefault(); send()">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <select class="r-input" onchange="getValue('car', this.value)" required name="car_id">
                 <?php
@@ -38,7 +38,6 @@
 </section>
 
 <script>
-
     // All the needed variables for building relations
     let index = [];
     let name = '';
@@ -117,8 +116,8 @@
     }
 
     // A function to hundle form submition
-    function submit() {
-        alert('Please enter')
+    function send() {
+        alert('Please enter');
         const data = [index, name, car_id, status];
         console.log(data);
         axios.get('saveRelation/' + data)
