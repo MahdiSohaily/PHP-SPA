@@ -16,7 +16,7 @@
         </section>
     </div>
     <div class="section">
-        <form class='add-relation' action="#" method="post" onsubmit="save(event)">
+        <form class='add-relation' action="#" method="post" onsubmit=" event.preventDefault(); save()">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <div class="searchBox">
                 <input class="r-input" placeholder="نام خودروی مورد نظر" type="text" name="car_name" id="car_id" required onkeyup="searchCar(this.value)">
@@ -102,7 +102,7 @@
         }
     }
 
-    function submit(event) {
+    function submit() {
         event.preventDefault();
         alert("Please");
     }
