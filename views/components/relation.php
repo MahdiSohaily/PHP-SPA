@@ -37,6 +37,9 @@
 
 <script>
     let index = [];
+    let name='';
+    let car_id='';
+    let status='';
 
     function add(event) {
         const id = event.target.getAttribute("data-id");
