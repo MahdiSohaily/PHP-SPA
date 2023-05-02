@@ -114,9 +114,10 @@
 
 #result_list {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   left: 0;
-  background-color: aquamarine;
   padding-inline: 1rem;
+  display: flex;
+  justify-content: center;
 }

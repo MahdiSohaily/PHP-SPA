@@ -99,7 +99,7 @@
 
         if (value.length > 0) {
             container.innerHTML =
-                "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+                "<img style='width:50px; height:50px' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
             axios.get('getCars/' + value)
                 .then(response => {
                     container.innerHTML = response.data;
