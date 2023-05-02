@@ -19,9 +19,6 @@
         <form class='add-relation' action="#" method="post">
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <input class="r-input" placeholder="نام خودروی مورد نظر" list="car_is" name="car" />
-            <?php
-               print_r($cars)
-                ?>
             <datalist id="car_is">
                 <?php
                 echo 'we are here 1';
