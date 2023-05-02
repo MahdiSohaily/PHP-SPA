@@ -23,6 +23,7 @@
                 if ($cars){
                     foreach ($cars as $car){
                         echo '<option value="'. $car['id']. '">'. $car['name']. '</option>';
+                    }
                 }
                 ?>
             </select>
