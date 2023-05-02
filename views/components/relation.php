@@ -120,7 +120,7 @@
         const data = [index, name, car_id, status];
         axios.get('saveRelation/' + data)
             .then(response => {
-                container.innerHTML = response.data;
+                console.log(response.data);
             }).catch(error => {
                 console.log(error);
             })
