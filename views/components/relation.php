@@ -26,9 +26,9 @@
             </div>
             <select class="r-input" onchange="getStatus(this.value)">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
-                <option value="hurr">نو</option>
-                <option value="hurr">در حد نو</option>
-                <option value="hurr">کارکرده</option>
+                <option value="نو">نو</option>
+                <option value="در حد نو">در حد نو</option>
+                <option value="کارکرده">کارکرده</option>
             </select>
             <input class="r-input bg-green" value="ثبت" type="submit" name="submit">
         </form>
