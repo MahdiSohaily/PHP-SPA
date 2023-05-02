@@ -24,7 +24,7 @@
                     <!-- searched cars result will be appended here -->
                 </ul>
             </div>
-            <select class="r-input">
+            <select class="r-input" onchange="getStatus(this.value)">
                 <option value="" disabled selected> وضعیت کالای کورد نظر را انتخاب کنید</option>
                 <option value="hurr">نو</option>
                 <option value="hurr">در حد نو</option>
@@ -67,6 +67,10 @@
     function getId(id) {
         car_id = id;
         container.style.display = "none";
+    }
+
+    function getStatus(value) {
+        alert(value);
     }
 
     function remove(id) {
