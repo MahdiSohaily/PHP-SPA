@@ -17,6 +17,8 @@
     </div>
     <div class="section">
         <form class='add-relation' action="#" method="post" onsubmit="event.preventDefault(); send()">
+            <select class="r-input" name="index[]" required hidden multiple></select>
+            <input class="r-input" type="text" name="mode" value="create" hidden required>
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <select class="r-input" onchange="getValue('car', this.value)" required name="car_id">
                 <?php
@@ -119,20 +121,14 @@
     function send() {
         const data = [index, name, car_id, status];
 
-        axios({
-            method: 'post',
-            url: 'saveRelation/',
-            data: {
+        axios.post('/saveRelation', {
                 firstName: 'Finn',
                 lastName: 'Williams'
-            }
-        });
-
-        // axios.get('saveRelation/' + 3)
-        //     .then(response => {
-        //         console.log(response.data);
-        //     }).catch(error => {
-        //         console.log(error);
-        //     })
+            })
+            .then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            });
     }
 </script>
