@@ -119,13 +119,15 @@
     function send() {
         const data = [index, name, car_id, status];
 
-        axios.get('saveRelation/')
-            .then(function(response) {
-                console.log(response);
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        axios({
+            method: 'post',
+            url: 'saveRelation/',
+            data: {
+                firstName: 'Finn',
+                lastName: 'Williams'
+            }
+        });
+
         // axios.get('saveRelation/' + 3)
         //     .then(response => {
         //         console.log(response.data);
