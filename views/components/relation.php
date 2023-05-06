@@ -93,7 +93,7 @@
         selected.innerHTML += (item);
         index.push(id);
     }
-    
+
     // A function to load data a good to the relation box
     function load(event) {
         const id = event.target.getAttribute("data-id");
@@ -110,6 +110,12 @@
             axios.get('loadData/' + id)
                 .then(response => {
                     selected.innerHTML = response.data;
+                    axios.get('loadDescription/' + id)
+                        .then(response => {
+                            selected.innerHTML = response.data;
+                        }).catch(error => {
+                            console.log(error);
+                        })
                 }).catch(error => {
                     console.log(error);
                 })
