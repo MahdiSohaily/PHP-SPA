@@ -113,7 +113,6 @@
                     selected.innerHTML = response.data;
                     axios.get('loadDescription/' + id)
                         .then(response => {
-                            console.log(response.data);
                             setValue(response.data);
                         }).catch(error => {
                             console.log(error);
@@ -142,7 +141,6 @@
         const name = document.getElementById('name');
         const car_id = document.getElementById('car_id');
         const status = document.getElementById('status');
-        console.log(data.car);
 
         name.value = data.name;
         car_id.value = data.car;
