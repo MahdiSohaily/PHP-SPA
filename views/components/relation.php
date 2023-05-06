@@ -101,20 +101,19 @@
         const selected = document.getElementById('selected');
 
         result.removeChild(remove);
-        alert(id);
 
-        // if (id) {
-        //     selected.innerHTML =
-        //         "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
-        //     axios.get('loadData/' + val)
-        //         .then(response => {
-        //             selected.innerHTML = response.data;
-        //         }).catch(error => {
-        //             console.log(error);
-        //         })
-        // } else {
-        //     selected.innerHTML = "";
-        // }
+        if (id) {
+            selected.innerHTML =
+                "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+            axios.get('loadData/' + val)
+                .then(response => {
+                    selected.innerHTML = response.data;
+                }).catch(error => {
+                    console.log(error);
+                })
+        } else {
+            selected.innerHTML = "";
+        }
     }
 
     // A function to remove added goods from relation box
