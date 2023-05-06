@@ -113,7 +113,6 @@ class Good
         INNER JOIN status ON patterns.satus_id = satus.id)";
         $pattern_result = $conn->query($sql)->fetch_assoc();
 
-
         return $pattern_result;
     }
 }
