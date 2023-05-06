@@ -112,7 +112,7 @@
                     selected.innerHTML = response.data;
                     axios.get('loadDescription/' + id)
                         .then(response => {
-                            console.log(response.data);
+                            console.log(response.data.id);
                         }).catch(error => {
                             console.log(error);
                         })
@@ -146,8 +146,8 @@
                 break;
         }
     }
-
-    // A function to hundle form submition
+    
+    // A function to handle the form submission
     function send() {
         const data = [index, name, car_id, status];
 
