@@ -114,8 +114,6 @@
         } else {
             selected.innerHTML = "";
         }
-
-        index.push(id);
     }
 
     // A function to remove added goods from relation box
