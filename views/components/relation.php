@@ -113,6 +113,7 @@
                     selected.innerHTML = response.data;
                     axios.get('loadDescription/' + id)
                         .then(response => {
+                            console.log(response.data);
                             setValue(response.data);
                         }).catch(error => {
                             console.log(error);
