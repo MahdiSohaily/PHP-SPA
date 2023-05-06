@@ -60,7 +60,7 @@ class RelationController
 			$good = new Good();
 			
 			$result = $good->description($pattern);
-			echo $result;
+			return $result;
 		} else {
 			header('Location: /' . URL_SUBFOLDER);
 			exit;
