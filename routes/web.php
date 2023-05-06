@@ -61,6 +61,15 @@ $routes->add(
 );
 
 $routes->add(
+    'loadDescription',
+    new Route(
+        constant('URL_SUBFOLDER') . '/loadDescription/{pattern}',
+        array('controller' => 'RelationController', 'method' => 'description'),
+        array('pattern' => '[a-zA-Z0-9]+')
+    )
+);
+
+$routes->add(
     'saveRelation',
     new Route(
         constant('URL_SUBFOLDER') . '/saveRelation',
