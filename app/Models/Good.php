@@ -51,6 +51,7 @@ class Good
                     data-price='" . $price . "' 
                     data-mobis='" . $mobis . "' 
                     class='material-icons add'>add_circle_outline</i>
+                    
                     <i onclick='add(event)'  
                     data-id='" . $id . "' 
                     data-partnumber='" . $partnumber . "' 
