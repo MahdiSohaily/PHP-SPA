@@ -107,7 +107,7 @@ class Good
         $result = $conn->query($sql)->fetch_assoc();
         $pattern_id = $result['pattern_id'];
 
-        $patter_sql = "SELECT patterns.*, cars.name, status.name
+        $patter_sql = "SELECT patterns.*, cars.name as car, status.name as status
         FROM (( patterns
         INNER JOIN cars ON patterns.car_id  = cars.id)
         INNER JOIN status ON patterns.status_id = status.id)";
