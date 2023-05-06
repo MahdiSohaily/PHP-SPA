@@ -76,6 +76,8 @@ class Good
         $sql = "SELECT pattern_id  FROM similars WHERE nisha_id  = '" . $pattern . "%'";
         $result = $conn->query($sql);
 
+        echo $result->fetch_all();
+
         $template = '';
 
         if ($result->num_rows > 0) {
