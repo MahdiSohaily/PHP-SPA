@@ -78,7 +78,9 @@ class Good
         $pattern_id = $result['pattern_id'];
 
         $all_similars = "SELECT nisha_id FROM similars WHERE pattern_id = '" . $pattern_id . "%'";
+        $similars_result = $conn->query($all_similars)->fetch_all();
 
+        print_r($similars_result);
 
         $template = '';
 
