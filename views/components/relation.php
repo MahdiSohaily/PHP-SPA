@@ -98,16 +98,16 @@
         const selected = document.getElementById('selected');
 
         if (item_id) {
-            resultBox.innerHTML =
+            selected.innerHTML =
                 "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
             axios.get('loadData/' + val)
                 .then(response => {
-                    resultBox.innerHTML = response.data;
+                    selected.innerHTML = response.data;
                 }).catch(error => {
                     console.log(error);
                 })
         } else {
-            resultBox.innerHTML = "";
+            selected.innerHTML = "";
         }
 
         result.removeChild(remove);
