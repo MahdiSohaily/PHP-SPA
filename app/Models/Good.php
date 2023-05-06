@@ -99,4 +99,21 @@ class Good
         $conn->close();
         return $template;
     }
+
+    public function description($pattern)
+    {
+        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $sql = "SELECT pattern_id  FROM similars WHERE nisha_id  = '" . $pattern . "%'";
+        $result = $conn->query($sql)->fetch_assoc();
+        $pattern_id = $result['pattern_id'];
+
+        $patter_sql = "SELECT patterns.*, cars.name, status.name
+        FROM (( patterns
+        INNER JOIN cars ON patterns.car_id  = cars.id)
+        INNER JOIN status ON patterns.satus_id = satus.id)";
+        $pattern_result = $conn->query($sql)->fetch_assoc();
+
+
+        return $pattern_result;
+    }
 }

@@ -59,7 +59,7 @@ class RelationController
 		if (isset($_COOKIE['login-user'])) {
 			$good = new Good();
 			
-			$result = $good->load($pattern);
+			$result = $good->description($pattern);
 			echo $result;
 		} else {
 			header('Location: /' . URL_SUBFOLDER);
