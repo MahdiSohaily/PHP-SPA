@@ -42,14 +42,28 @@ $routes->add(
     )
 );
 
-$routes->add('getdata',
-    new Route(constant('URL_SUBFOLDER') .'/getdata/{pattern}',
-    array('controller' => 'RelationController', 'method'=>'search'),
-    array('pattern' => '[a-zA-Z0-9]+'))
+$routes->add(
+    'getdata',
+    new Route(
+        constant('URL_SUBFOLDER') . '/getdata/{pattern}',
+        array('controller' => 'RelationController', 'method' => 'search'),
+        array('pattern' => '[a-zA-Z0-9]+')
+    )
 );
 
-$routes->add('saveRelation',
-    new Route(constant('URL_SUBFOLDER') .'/saveRelation',
-    array('controller' => 'RelationController', 'method'=>'save'))
+$routes->add(
+    'loadData',
+    new Route(
+        constant('URL_SUBFOLDER') . '/loadData/{pattern}',
+        array('controller' => 'RelationController', 'method' => 'load'),
+        array('pattern' => '[a-zA-Z0-9]+')
+    )
 );
 
+$routes->add(
+    'saveRelation',
+    new Route(
+        constant('URL_SUBFOLDER') . '/saveRelation',
+        array('controller' => 'RelationController', 'method' => 'save')
+    )
+);
