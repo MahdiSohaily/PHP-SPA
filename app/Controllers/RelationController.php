@@ -40,4 +40,17 @@ class RelationController
 			exit;
 		}
 	}
+
+	public function load($pattern, RouteCollection $routes)
+	{
+		if (isset($_COOKIE['login-user'])) {
+			$good = new Good();
+			
+			$result = $good->load($pattern);
+			echo $result;
+		} else {
+			header('Location: /' . URL_SUBFOLDER);
+			exit;
+		}
+	}
 }
