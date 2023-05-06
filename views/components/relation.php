@@ -47,7 +47,8 @@
 
     // A function for searching goods base on serial number
     function search(val) {
-        const resultBox = document.getElementById('s-result')
+        const resultBox = document.getElementById('s-result');
+        const selected = document.getElementById('selected');
 
         if (val.length > 6) {
             resultBox.innerHTML =
@@ -60,6 +61,7 @@
                 })
         } else {
             resultBox.innerHTML = "";
+            selected.innerHTML = "";
         }
     }
 
