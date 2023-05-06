@@ -18,6 +18,8 @@
     <div class="section">
         <form class='add-relation' action="#" method="post" onsubmit="event.preventDefault(); send()">
             <input class="r-input" type="text" name="mode" value="create" hidden required>
+
+
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
             <select class="r-input" onchange="getValue('car', this.value)" required name="car_id">
                 <?php
@@ -112,7 +114,7 @@
                     selected.innerHTML = response.data;
                     axios.get('loadDescription/' + id)
                         .then(response => {
-                            console.log(response.data.id);
+                            setValue(response.data);
                         }).catch(error => {
                             console.log(error);
                         })
@@ -136,17 +138,12 @@
     }
 
     // Get the selected input value to send data;
-    function getValue(input, value) {
-        switch (input) {
-            case 'car':
-                car_id = value;
-                break;
-            case 'status':
-                status = value;
-                break;
-        }
+    function setValue(data) {
+        const name = document.getElementById('name');
+
+        name.value = data.name;
     }
-    
+
     // A function to handle the form submission
     function send() {
         const data = [index, name, car_id, status];
