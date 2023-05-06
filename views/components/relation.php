@@ -21,7 +21,7 @@
 
 
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <select class="r-input" onchange="getValue('car', this.value)" required name="car_id">
+            <select id="car_id" class="r-input" onchange="getValue('car', this.value)" required name="car_id">
                 <?php
                 if ($cars) {
                     foreach ($cars as $car) {
@@ -30,7 +30,7 @@
                 }
                 ?>
             </select>
-            <select class="r-input" onchange="getValue('status', this.value)" required>
+            <select name="status" id="status"  class="r-input" onchange="getValue('status', this.value)" required>
                 <option value="نو">نو</option>
                 <option value="در حد نو">در حد نو</option>
                 <option value="کارکرده">کارکرده</option>
@@ -139,9 +139,13 @@
 
     // Get the selected input value to send data;
     function setValue(data) {
-        const name = document.getElementById('name');
+        const name = document.getElementById('name'); 
+        const car_id = document.getElementById('car_id');
+        const status = document.getElementById('status');
 
         name.value = data.name;
+        car_id.value = data.name;
+        status.value = data.status;A
     }
 
     // A function to handle the form submission
