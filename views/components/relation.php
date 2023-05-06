@@ -95,14 +95,20 @@
     // A function to load data a good to the relation box
     function load(event) {
         const item_id = event.target.getAttribute("data-id");
-        const remove = document.getElementById(id);
-
-        const partnumber = event.target.getAttribute("data-partnumber");
-        const price = event.target.getAttribute("data-price");
-        const mobis = event.target.getAttribute("data-mobis");
-
-        const result = document.getElementById('s-result');
         const selected = document.getElementById('selected');
+
+        if (item_id) {
+            resultBox.innerHTML =
+                "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+            axios.get('loadData/' + val)
+                .then(response => {
+                    resultBox.innerHTML = response.data;
+                }).catch(error => {
+                    console.log(error);
+                })
+        } else {
+            resultBox.innerHTML = "";
+        }
 
         result.removeChild(remove);
 
