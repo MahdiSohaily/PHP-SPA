@@ -74,19 +74,14 @@ class Good
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         $sql = "SELECT pattern_id  FROM similars WHERE nisha_id  = '" . $pattern . "%'";
-        $result = $conn->query($sql);
+        $result = $conn->query($sql)->fetch_assoc();
+        $pattern_id = $result['pattern_id'];
 
-        echo $result->fetch_all();
+        $all_similars = "SELECT nisha_id FROM similars WHERE pattern_id = '" . $pattern_id . "%'";
+
 
         $template = '';
 
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-            }
-        } else {
-            $template = "<div class='matched-item'> <p>کد مشابه برای الگوی وارد شده دریافت نشد.</p> </div>";
-        }
         $conn->close();
         return $template;
     }
