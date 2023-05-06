@@ -56,7 +56,7 @@ $routes->add(
     new Route(
         constant('URL_SUBFOLDER') . '/loadData/{pattern}',
         array('controller' => 'RelationController', 'method' => 'load'),
-        array('pattern' => '[a-zA-Z0-9]+')
+        array('pattern' => '[0-9]+')
     )
 );
 
@@ -65,7 +65,7 @@ $routes->add(
     new Route(
         constant('URL_SUBFOLDER') . '/loadDescription/{pattern}',
         array('controller' => 'RelationController', 'method' => 'description'),
-        array('pattern' => '[a-zA-Z0-9]+')
+        array('pattern' => '[0-9]+')
     )
 );
 
