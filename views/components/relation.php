@@ -19,9 +19,8 @@
         <form class='add-relation' action="#" method="post" onsubmit="event.preventDefault(); send()">
             <input class="r-input" type="text" name="mode" value="create" hidden required>
 
-
             <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-            <select id="car_id" class="r-input" onchange="getValue('car', this.value)" required name="car_id">
+            <select id="car_id" class="r-input" name="car_id" required>
                 <?php
                 if ($cars) {
                     foreach ($cars as $car) {
@@ -30,7 +29,7 @@
                 }
                 ?>
             </select>
-            <select name="status" id="status"  class="r-input" onchange="getValue('status', this.value)" required>
+            <select name="status" id="status" class="r-input" required>
                 <option value="نو">نو</option>
                 <option value="در حد نو">در حد نو</option>
                 <option value="کارکرده">کارکرده</option>
@@ -139,13 +138,14 @@
 
     // Get the selected input value to send data;
     function setValue(data) {
-        const name = document.getElementById('name'); 
+        const name = document.getElementById('name');
         const car_id = document.getElementById('car_id');
         const status = document.getElementById('status');
+        console.log(data.car);
 
         name.value = data.name;
-        car_id.value = data.name;
-        status.value = data.status;A
+        car_id.value = data.car;
+        status.value = data.status;
     }
 
     // A function to handle the form submission
