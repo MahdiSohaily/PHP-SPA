@@ -115,14 +115,6 @@
             selected.innerHTML = "";
         }
 
-        result.removeChild(remove);
-
-        const item = `<div class='matched-item' id='` + id + `'>
-                    <p>` + partnumber + `</p>
-                    <i class='material-icons remove' onclick='remove(` + id + `)'>do_not_disturb_on</i>
-                    </div>`;
-
-        selected.innerHTML += (item);
         index.push(id);
     }
 
