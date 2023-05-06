@@ -47,7 +47,6 @@
 
     // A function for searching goods base on serial number
     function search(val) {
-        let supermode = 0;
         const resultBox = document.getElementById('s-result')
 
         if (val.length > 6) {
@@ -73,6 +72,29 @@
     // A function to add a good to the relation box
     function add(event) {
         const id = event.target.getAttribute("data-id");
+        const remove = document.getElementById(id);
+
+        const partnumber = event.target.getAttribute("data-partnumber");
+        const price = event.target.getAttribute("data-price");
+        const mobis = event.target.getAttribute("data-mobis");
+
+        const result = document.getElementById('s-result');
+        const selected = document.getElementById('selected');
+
+        result.removeChild(remove);
+
+        const item = `<div class='matched-item' id='` + id + `'>
+                    <p>` + partnumber + `</p>
+                    <i class='material-icons remove' onclick='remove(` + id + `)'>do_not_disturb_on</i>
+                    </div>`;
+
+        selected.innerHTML += (item);
+        index.push(id);
+    }
+    
+    // A function to load data a good to the relation box
+    function load(event) {
+        const item_id = event.target.getAttribute("data-id");
         const remove = document.getElementById(id);
 
         const partnumber = event.target.getAttribute("data-partnumber");
