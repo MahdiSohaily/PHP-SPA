@@ -45,13 +45,6 @@ class Good
 
                 if (in_array($id, $similar_ids)) {
                     $template .= "<div class='matched-item' id='$id'>
-                    <i onclick='add(event)'  
-                    data-id='" . $id . "' 
-                    data-partnumber='" . $partnumber . "' 
-                    data-price='" . $price . "' 
-                    data-mobis='" . $mobis . "' 
-                    class='material-icons add'>add_circle_outline</i>
-
                     <i onclick='load(event)'  
                     data-id='" . $id . "'  
                     class='material-icons add'>filter_drama</i>
