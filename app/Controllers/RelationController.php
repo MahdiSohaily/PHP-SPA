@@ -21,7 +21,7 @@ class RelationController
 	{
 		if (isset($_COOKIE['login-user'])) {
 			$good = new Good();
-			
+
 			$result = $good->search($pattern);
 			echo $result;
 		} else {
@@ -29,7 +29,7 @@ class RelationController
 			exit;
 		}
 	}
-	
+
 	public function save(RouteCollection $routes)
 	{
 		echo 'ff';
@@ -45,7 +45,7 @@ class RelationController
 	{
 		if (isset($_COOKIE['login-user'])) {
 			$good = new Good();
-			
+
 			$result = $good->load($pattern);
 			echo $result;
 		} else {
@@ -53,14 +53,14 @@ class RelationController
 			exit;
 		}
 	}
-	
+
 	public function description($pattern, RouteCollection $routes)
 	{
 		if (isset($_COOKIE['login-user'])) {
 			$good = new Good();
-			
+
 			$result = $good->description($pattern);
-			return $result;
+			return json_encode($result);
 		} else {
 			header('Location: /' . URL_SUBFOLDER);
 			exit;

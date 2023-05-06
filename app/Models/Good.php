@@ -111,7 +111,7 @@ class Good
         FROM (( patterns
         INNER JOIN cars ON patterns.car_id  = cars.id)
         INNER JOIN status ON patterns.status_id = status.id)";
-        $pattern_result = $conn->query($sql)->fetch_assoc();
+        $pattern_result = $conn->query($patter_sql)->fetch_assoc();
 
         return $pattern_result;
     }
