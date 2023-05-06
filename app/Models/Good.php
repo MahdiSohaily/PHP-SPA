@@ -78,11 +78,23 @@ class Good
         $pattern_id = $result['pattern_id'];
 
         $all_similars = "SELECT nisha_id FROM similars WHERE pattern_id = '" . $pattern_id . "%'";
-        $similars_result = $conn->query($all_similars)->fetch_all();
-
-        print_r($similars_result);
+        $similars_result = $conn->query($all_similars);
 
         $template = '';
+
+        if ($similars_result->num_rows > 0) {
+            while ($row = $similars_result->fetch_assoc()) {
+                $item_id = $row['nisha_id'];
+
+                $good_sql = "SELECT * FROM nisha WHERE id = '" . $item_id . "%'";
+                $good_result = $conn->query($good_sql)->fetch_assoc();
+
+                $template .= "<div class='matched-item' id='" . $good_result['id'] . "'>
+                    <p>" . $good_result['partnumber'] . " </p>
+                    <i class='material-icons remove' onclick='remove(" . $good_result['id'] . ")'>do_not_disturb_on</i>
+                    </div>";
+            }
+        }
 
         $conn->close();
         return $template;
