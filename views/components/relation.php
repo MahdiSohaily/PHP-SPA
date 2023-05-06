@@ -102,7 +102,6 @@
 
         result.removeChild(remove);
 
-
         if (id) {
             selected.innerHTML =
                 "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
