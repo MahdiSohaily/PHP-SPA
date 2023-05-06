@@ -24,15 +24,15 @@
                 <?php
                 if ($cars) {
                     foreach ($cars as $car) {
-                        echo '<option value="' . $car['id'] . '">' . $car['name'] . '</option>';
+                        echo '<option id="c-' . $car['id'] . '" value="' . $car['id'] . '">' . $car['name'] . '</option>';
                     }
                 }
                 ?>
             </select>
             <select name="status" id="status" class="r-input" required>
-                <option value="نو">نو</option>
-                <option value="در حد نو">در حد نو</option>
-                <option value="کارکرده">کارکرده</option>
+                <option value="1">نو</option>
+                <option value="2">در حد نو</option>
+                <option value="5">کارکرده</option>
             </select>
             <input class="r-input bg-green" value="ثبت" type="submit" name="submit">
         </form>
@@ -143,8 +143,14 @@
         const status = document.getElementById('status');
 
         name.value = data.name;
+        $('#car_id').val(data.name);
+        $('#car_id').select2().trigger('change');
         car_id.value = data.car;
+        $('#status').val(data.name);
+        $('#status').select2().trigger('change');
         status.value = data.status;
+
+        
     }
 
     // A function to handle the form submission
