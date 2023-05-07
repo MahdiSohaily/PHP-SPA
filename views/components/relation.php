@@ -58,7 +58,7 @@
                 <form class='add-relation' action="#" method="post">
                     <input class="r-input" type="text" name="mode" value="create" hidden required>
                     <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
-                    <select class="r-input" id="car_id"  name="car_id" required>
+                    <select class="r-input" id="car_id" name="car_id" required>
                         <?php
                         if ($cars) {
                             foreach ($cars as $car) {
@@ -150,11 +150,11 @@
             result.removeChild(remove);
 
             if (id) {
-                selected.innerHTML =
+                selected.innerHTML +=
                     "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
                 axios.get('loadData/' + id)
                     .then(response => {
-                        selected.innerHTML = response.data;
+                        setData(response.data);
                         axios.get('loadDescription/' + id)
                             .then(response => {
                                 setValue(response.data);
@@ -164,8 +164,17 @@
                     }).catch(error => {
                         console.log(error);
                     })
-            } else {
-                selected.innerHTML = "";
+            }
+        }
+
+        // a function to set data
+        function setData(items) {
+            const selected = document.getElementById('selected');
+            for (item of items) {
+                selected.innerHTML += `<div class='matched-item' id='` + item['id'] + `'>
+                    <p>` + item['partnumber'] + ` </p>
+                    <i class='material-icons remove' onclick='remove(` + item['id'] + `)'>do_not_disturb_on</i>
+                    </div>`;
             }
         }
 
