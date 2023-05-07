@@ -14,7 +14,7 @@ class RelationController
 	{
 		$instance = new Car();
 		$cars = $instance->all();
-		require_once APP_ROOT . '/views/components/app-templete.php';
+		require_once APP_ROOT . '/views/components/relation.php';
 	}
 
 	public function search($pattern, RouteCollection $routes)
