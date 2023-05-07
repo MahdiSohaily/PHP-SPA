@@ -135,8 +135,7 @@
             const relation_form = $('#relation-form');
 
             const input = ` <input id='c-` + id + `' type='checkbox' name='value[]' value='` + id + `' hidden>`;
-
-
+            relation_form.innerHTML += input;
         }
 
         // A function to load data a good to the relation box
