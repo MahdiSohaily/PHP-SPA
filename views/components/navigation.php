@@ -86,6 +86,135 @@
             </div>
         </section>
     </main>
+    <script>
+        // All the needed variables for building relations
+        let index = [];
+        let name = '';
+        let car_id = '';
+        let status = '';
+
+        // A function for searching goods base on serial number
+        function search(val) {
+            const resultBox = document.getElementById('s-result');
+            const selected = document.getElementById('selected');
+
+            if (val.length > 6) {
+                resultBox.innerHTML =
+                    "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+                axios.get('getdata/' + val)
+                    .then(response => {
+                        resultBox.innerHTML = response.data;
+                    }).catch(error => {
+                        console.log(error);
+                    })
+            } else {
+                resultBox.innerHTML = "";
+                selected.innerHTML = "";
+            }
+        }
+
+        // Enable search option for select elements
+        $(document).ready(function() {
+            //change select boxes to select mode to be searchable
+            $("select").select2();
+        });
+
+        // A function to add a good to the relation box
+        function add(event) {
+            const id = event.target.getAttribute("data-id");
+            const remove = document.getElementById(id);
+
+            const partnumber = event.target.getAttribute("data-partnumber");
+            const price = event.target.getAttribute("data-price");
+            const mobis = event.target.getAttribute("data-mobis");
+
+            const result = document.getElementById('s-result');
+            const selected = document.getElementById('selected');
+
+            result.removeChild(remove);
+
+            const item = `<div class='matched-item' id='` + id + `'>
+                    <p>` + partnumber + `</p>
+                    <i class='material-icons remove' onclick='remove(` + id + `)'>do_not_disturb_on</i>
+                    </div>`;
+
+            selected.innerHTML += (item);
+            index.push(id);
+        }
+
+        // A function to load data a good to the relation box
+        function load(event) {
+            const id = event.target.getAttribute("data-id");
+            const remove = document.getElementById(id);
+
+            const result = document.getElementById('s-result');
+            const selected = document.getElementById('selected');
+
+            result.removeChild(remove);
+
+            if (id) {
+                selected.innerHTML =
+                    "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+                axios.get('loadData/' + id)
+                    .then(response => {
+                        selected.innerHTML = response.data;
+                        axios.get('loadDescription/' + id)
+                            .then(response => {
+                                setValue(response.data);
+                            }).catch(error => {
+                                console.log(error);
+                            })
+                    }).catch(error => {
+                        console.log(error);
+                    })
+            } else {
+                selected.innerHTML = "";
+            }
+        }
+
+        // A function to remove added goods from relation box
+        function remove(id) {
+            const item = document.getElementById(id);
+            const selected = document.getElementById('selected');
+
+            selected.removeChild(item);
+
+            const r_id = index.indexOf(id);
+            index.splice(r_id, 1);
+        }
+
+        // Get the selected input value to send data;
+        function setValue(data) {
+            const name = document.getElementById('name');
+            const car_id = document.getElementById('car_id');
+            const status = document.getElementById('status');
+
+            name.value = data.name;
+            $('#car_id').val(data.name);
+            $('#car_id').select2().trigger('change');
+            car_id.value = data.car;
+            $('#status').val(data.name);
+            $('#status').select2().trigger('change');
+            status.value = data.status;
+
+
+        }
+
+        // A function to handle the form submission
+        function send() {
+            const data = [index, name, car_id, status];
+
+            axios.post('/saveRelation', {
+                    firstName: 'Finn',
+                    lastName: 'Williams'
+                })
+                .then((response) => {
+                    console.log(response);
+                }, (error) => {
+                    console.log(error);
+                });
+        }
+    </script>
 </body>
 
 </html>
