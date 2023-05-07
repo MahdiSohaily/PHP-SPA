@@ -63,7 +63,7 @@
                 </section>
             </div>
             <div class="section">
-                <form class='add-relation' action="#" method="post" onsubmit="event.preventDefault(); send()">
+                <form class='add-relation' action="#" method="post">
                     <input class="r-input" type="text" name="mode" value="create" hidden required>
 
                     <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
@@ -81,7 +81,7 @@
                         <option value="2">در حد نو</option>
                         <option value="5">کارکرده</option>
                     </select>
-                    <input class="r-input bg-green" value="ثبت" type="submit" name="submit">
+                    <input class="r-input bg-green btn" value="ثبت" type="submit" name="submit">
                 </form>
             </div>
         </section>
