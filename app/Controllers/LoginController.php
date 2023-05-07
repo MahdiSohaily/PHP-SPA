@@ -32,7 +32,7 @@ class LoginController
 				header('Location: relation');
 				exit;
 			} else {
-				$message = 'Either your email or password are incorrenct!';
+				$message = 'Either your email or password are incorrect!';
 				require_once APP_ROOT . '/views/Auth/login.php';
 			}
 		} else {
