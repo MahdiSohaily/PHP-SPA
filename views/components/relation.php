@@ -55,9 +55,8 @@
                 </section>
             </div>
             <div class="section">
-                <form class='add-relation' action="#" method="post">
+                <form id="relation-form" class='add-relation' action="#" method="post">
                     <input class="r-input" type="text" name="mode" value="create" hidden required>
-
                     <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
                     <select id="car_id" class="r-input" name="car_id" required>
                         <?php
@@ -131,7 +130,13 @@
                     </div>`;
 
             selected.innerHTML += (item);
-            index.push(id);
+
+
+            const relation_form = $('#relation-form');
+
+            const input = ` <input id='c-` + id + `' type='checkbox' name='value[]' value='` + id + `' hidden>`;
+
+
         }
 
         // A function to load data a good to the relation box
