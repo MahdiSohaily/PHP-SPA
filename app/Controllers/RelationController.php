@@ -58,7 +58,7 @@ class RelationController
 			$good = new Good();
 
 			$result = $good->load($pattern);
-			echo $result;
+			echo json_encode($result);
 		} else {
 			header('Location: /' . URL_SUBFOLDER);
 			exit;
