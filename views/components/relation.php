@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="This is a simple CMS for tracing goods based on thier serail or part number.">
+    <meta name="description" content="This is a simple CMS for tracing goods based on their serial or part number.">
     <meta name="author" content="Mahdi Rezaei">
     <link rel="shortcut icon" href="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/YadakShop.png">
     <title>
