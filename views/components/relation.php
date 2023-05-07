@@ -8,15 +8,7 @@
     <meta name="description" content="This is a simple CMS for tracing goods based on their serial or part number.">
     <meta name="author" content="Mahdi Rezaei">
     <link rel="shortcut icon" href="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/YadakShop.png">
-    <title>
-        <?php
-        if (isset($title)) {
-            echo $title;
-        } else {
-            echo 'Yadak shop';
-        }
-        ?>
-    </title>
+    <title>Yadak Shop</title>
 
     <!-- css -->
     <link rel="stylesheet" href="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/css/styles.css?v=2.3">
