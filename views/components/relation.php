@@ -173,7 +173,7 @@
             const relation_form = document.getElementById('relation-form');
 
             selected.innerHTML = '';
-            
+
             for (item of items) {
                 selected.innerHTML += `<div class='matched-item' id='` + item.id + `'>
                     <p>` + item.partnumber + ` </p>
@@ -192,11 +192,8 @@
             const relation_form = document.getElementById('relation-form');
             const remove_checkbox = document.getElementById('c-' + id);
 
-            selected.removeChild(item);
-            relation_form.removeChild(remove_checkbox);
-
-            const r_id = index.indexOf(id);
-            index.splice(r_id, 1);
+            item.remove();
+            remove_checkbox.remove();
         }
 
         // Get the selected input value to send data;
