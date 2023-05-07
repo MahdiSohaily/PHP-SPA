@@ -12,7 +12,6 @@ class RelationController
 	// Homepage action
 	public function index(RouteCollection $routes)
 	{
-		echo($_POST['status']);
 		$instance = new Car();
 		$cars = $instance->all();
 		require_once APP_ROOT . '/views/components/relation.php';
