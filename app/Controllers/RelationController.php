@@ -13,10 +13,13 @@ class RelationController
 	public function index(RouteCollection $routes)
 	{
 		if (isset($_COOKIE['login-user'])) {
-			$instance = new Car();
-			$cars = $instance->all();
+
+			// check if the form is submitted
 			if (isset($_POST['submit'])) {
 			}
+
+			$instance = new Car();
+			$cars = $instance->all();
 			require_once APP_ROOT . '/views/components/relation.php';
 		} else {
 			header('Location: /' . URL_SUBFOLDER);
