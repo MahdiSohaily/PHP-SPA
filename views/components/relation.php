@@ -55,7 +55,7 @@
                 </section>
             </div>
             <div class="section">
-                <form id="relation-form" class='add-relation' action="#" method="post">
+                <form class='add-relation' action="#" method="post">
                     <input class="r-input" type="text" name="mode" value="create" hidden required>
                     <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
                     <select id="car_id" class="r-input" name="car_id" required>
@@ -72,6 +72,7 @@
                         <option value="2">در حد نو</option>
                         <option value="5">کارکرده</option>
                     </select>
+                    <div id="relation-form"></div>
                     <input class="r-input bg-green btn" value="ثبت" type="submit" name="submit">
                 </form>
             </div>
