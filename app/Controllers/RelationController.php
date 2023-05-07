@@ -16,7 +16,7 @@ class RelationController
 
 			// check if the form is submitted
 			if (isset($_POST['submit'])) {
-				print_r($_POST);
+				print_r($_POST['value']);
 			}
 
 			$instance = new Car();

@@ -135,7 +135,7 @@
 
             const relation_form = document.getElementById('relation-form');
 
-            const input = ` <input id='c-` + id + `' type='checkbox' name='value[]' value='` + id + `' hidden>`;
+            const input = ` <input id='c-` + id + `' type='checkbox' name='value[]' value='` + id + `' hidden checked>`;
             relation_form.innerHTML += input;
         }
 
