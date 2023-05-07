@@ -62,7 +62,7 @@
                         <?php
                         if ($cars) {
                             foreach ($cars as $car) {
-                                echo '<option id="c-' . $car['id'] . '" value="' . $car['id'] . '">' . $car['name'] . '</option>';
+                                echo '<option id="x-' . $car['id'] . '" value="' . $car['id'] . '">' . $car['name'] . '</option>';
                             }
                         }
                         ?>
@@ -125,7 +125,7 @@
 
             result.removeChild(remove);
 
-            const item = `<div class='matched-item' id='` + id + `'>
+            const item = `<div class='matched-item' id='m-` + id + `'>
                     <p>` + partnumber + `</p>
                     <i class='material-icons remove' onclick='remove(` + id + `)'>do_not_disturb_on</i>
                     </div>`;
@@ -175,7 +175,7 @@
             selected.innerHTML = '';
 
             for (item of items) {
-                selected.innerHTML += `<div class='matched-item' id='` + item.id + `'>
+                selected.innerHTML += `<div class='matched-item' id='m-` + item.id + `'>
                     <p>` + item.partnumber + ` </p>
                     <i class='material-icons remove' onclick='remove(` + item.id + `)'>do_not_disturb_on</i>
                     </div>`;
@@ -186,14 +186,11 @@
 
         // A function to remove added goods from relation box
         function remove(id) {
-            const item = document.getElementById(id);
-            const selected = document.getElementById('selected');
-
-            const relation_form = document.getElementById('relation-form');
+            const item = document.getElementById('m-' + id);
             const remove_checkbox = document.getElementById('c-' + id);
 
-            item.remove();
             remove_checkbox.remove();
+            item.remove();
         }
 
         // Get the selected input value to send data;
