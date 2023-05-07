@@ -172,11 +172,12 @@
             const selected = document.getElementById('selected');
             const relation_form = document.getElementById('relation-form');
             for (item of items) {
-                selected.innerHTML += `<div class='matched-item' id='` + item['id'] + `'>
-                    <p>` + item['partnumber'] + ` </p>
-                    <i class='material-icons remove' onclick='remove(` + item['id'] + `)'>do_not_disturb_on</i>
+                selected.innerHTML += `<div class='matched-item' id='` + item.id + `'>
+                    <p>` + item.partnumber + ` </p>
+                    <i class='material-icons remove' onclick='remove(` + item.id + `)'>do_not_disturb_on</i>
                     </div>`;
 
+                console.log(item);
                 const input = ` <input id='c-` + id + `' type='checkbox' name='value[]' value='` + id + `' hidden checked>`;
                 relation_form.innerHTML += input;
             }
