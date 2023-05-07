@@ -12,9 +12,16 @@ class RelationController
 	// Homepage action
 	public function index(RouteCollection $routes)
 	{
-		$instance = new Car();
-		$cars = $instance->all();
-		require_once APP_ROOT . '/views/components/relation.php';
+		if (isset($_COOKIE['login-user'])) {
+			$instance = new Car();
+			$cars = $instance->all();
+			if (isset($_POST['submit'])) {
+			}
+			require_once APP_ROOT . '/views/components/relation.php';
+		} else {
+			header('Location: /' . URL_SUBFOLDER);
+			exit;
+		}
 	}
 
 	public function search($pattern, RouteCollection $routes)
