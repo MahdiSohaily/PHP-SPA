@@ -150,7 +150,7 @@
             result.removeChild(remove);
 
             if (id) {
-                selected.innerHTML +=
+                selected.innerHTML =
                     "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
                 axios.get('loadData/' + id)
                     .then(response => {
@@ -170,11 +170,15 @@
         // a function to set data
         function setData(items) {
             const selected = document.getElementById('selected');
+            const relation_form = document.getElementById('relation-form');
             for (item of items) {
                 selected.innerHTML += `<div class='matched-item' id='` + item['id'] + `'>
                     <p>` + item['partnumber'] + ` </p>
                     <i class='material-icons remove' onclick='remove(` + item['id'] + `)'>do_not_disturb_on</i>
                     </div>`;
+
+                const input = ` <input id='c-` + id + `' type='checkbox' name='value[]' value='` + id + `' hidden checked>`;
+                relation_form.innerHTML += input;
             }
         }
 
