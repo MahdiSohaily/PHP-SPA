@@ -129,8 +129,20 @@ class Good
         $car_id = $data['car_id'];
         $status = $data['status'];
         $value = $data['value'];
-        
-        // $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $sql = "INSERT INTO patterns (name, serial, car_id, status_id)
+                VALUES ('$name', 'Doe', 'john@example.com')";
+
+        if ($conn->query($sql) === TRUE) {
+            $last_id = $conn->insert_id;
+            echo "New record created successfully. Last inserted ID is: " . $last_id;
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+
+        // 
 
         // $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
         // $result = $conn->query($sql);
