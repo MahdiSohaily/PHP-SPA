@@ -143,7 +143,6 @@ class Good
                 $last_id = $conn->insert_id;
 
                 foreach ($values as $value) {
-                    echo $value;
                     $value_sql = "INSERT INTO similars (pattern_id, nisha_id )
                                 VALUES ('$last_id', '$value')";
 
@@ -159,12 +158,6 @@ class Good
             $conn->rollback();
             throw $e; // but the error must be handled anyway
         }
-
-
-        // 
-
-        // $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
-        // $result = $conn->query($sql);
     }
 
     public function update($data)
