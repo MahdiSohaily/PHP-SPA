@@ -66,16 +66,17 @@ function add(event) {
 }
 
 // A function to load data a good to the relation box
-function load(event) {
+function load(event, pattern_id) {
+  alert(pattern_id);
   const id = event.target.getAttribute("data-id");
   const remove = document.getElementById(id);
 
   const result = document.getElementById("s-result");
   const selected = document.getElementById("selected");
 
-  const mode = document.getElementById('mode');
-  mode.value = 'update';
-  alert(mode.value)
+  const mode = document.getElementById("mode");
+  mode.value = "update";
+  alert(mode.value);
 
   result.removeChild(remove);
 
