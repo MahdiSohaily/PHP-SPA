@@ -20,6 +20,7 @@
     <script src="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/js/jquery.js"></script>
     <script src="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/js/axios.js"></script>
     <script src="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/js/select.js"></script>
+    <script src="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/js/scripts.js"></script>
 </head>
 
 <body>
