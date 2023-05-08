@@ -24,9 +24,17 @@ class RelationController
 					$result = $good->create($_POST);
 
 					if ($result) {
-						$message = '<p class="message success">New record saved!</p>';
+						$message = '<p id="mydiv" class="message success">New record saved!</p>
+						<script>setTimeout(function() {
+							$("#mydiv").fadeOut().empty();
+						  }, 2000);
+						  </script>';
 					} else {
-						$message = '<p class="message error">An error ocurred while new record insertion !</p>';
+						$message = '<p d="mydiv" class="message error">An error ocurred while new record insertion !</p>
+						<script>setTimeout(function() {
+							$("#mydiv").fadeOut().empty();
+						  }, 2000);
+						  </script>';
 					}
 				} else {
 					$result = $good->update($_POST);
