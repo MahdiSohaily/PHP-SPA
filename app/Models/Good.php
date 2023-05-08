@@ -143,7 +143,7 @@ class Good
                 $last_id = $conn->insert_id;
 
                 foreach ($values as $value) {
-                    $sql = "INSERT INTO patterns (name, serial, car_id, status_id)
+                    $sql = "INSERT INTO similars (pattern_id, nisha_id )
                 VALUES ('$name', '$serialNumber', '$car_id',' $status')";
                 }
             } else {
