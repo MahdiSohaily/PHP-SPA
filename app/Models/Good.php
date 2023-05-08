@@ -121,4 +121,8 @@ class Good
 
         return $pattern_result;
     }
+
+    public function create($data) {
+
+    }
 }
