@@ -148,10 +148,8 @@ class Good
 
                     $conn->query($value_sql);
                 }
-                return true;
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
-                return false;
             }
             $conn->commit();
         } catch (\Throwable $e) {
