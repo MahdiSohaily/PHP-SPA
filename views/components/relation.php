@@ -75,6 +75,7 @@
                         <option value="5">کارکرده</option>
                     </select>
                     <div id="relation-form"></div>
+                    <?php if ($message) echo $message ?>
                     <input class="r-input bg-green btn" value="ثبت" type="submit" name="submit">
                 </form>
             </div>

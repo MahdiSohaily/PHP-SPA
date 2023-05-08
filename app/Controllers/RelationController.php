@@ -12,11 +12,12 @@ class RelationController
 	// Homepage action
 	public function index(RouteCollection $routes)
 	{
+		$message = 'You have an error!';
 		if (isset($_COOKIE['login-user'])) {
 
 			// check if the form is submitted
 			if (isset($_POST['submit'])) {
-				print_r($_POST['serialNumber']);
+				
 			}
 
 			$instance = new Car();
