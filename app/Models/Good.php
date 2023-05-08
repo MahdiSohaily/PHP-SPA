@@ -6,6 +6,7 @@ class Good
 {
     public function search($pattern)
     {
+
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
@@ -22,16 +23,17 @@ class Good
             }
         }
 
-        $similar = "SELECT nisha_id FROM similars WHERE pattern_id IN (1,2)";
+        $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (1,2)";
         $similar_result = $conn->query($similar);
         $similar_ids = [];
 
         if ($similar_result->num_rows > 0) {
             while ($row = $similar_result->fetch_assoc()) {
-                array_push($similar_ids, $row['nisha_id']);
+                array_push($similar_ids, ['nisha_id' => $row['nisha_id'], 'pattern_id' => $row['pattern_id']]);
             }
         }
 
+        print_r($similar_ids[0]['nisha_id']);
 
         $template = '';
 
@@ -43,11 +45,19 @@ class Good
                 $price = $row['price'];
                 $mobis = $row['mobis'];
 
-                if (in_array($id, $similar_ids)) {
+                $get_nisha = null;
+
+                foreach ($similar_ids as $item) {
+                    if ($item['nisha_id'] == $id) {
+                        $get_nisha = $item['pattern_id'];
+                    }
+                }
+
+                if ($get_nisha) {
                     $template .= "<div class='matched-item' id='$id'>
                     <i onclick='load(event)'  
                     data-id='" . $id . "'  
-                    class='material-icons add'>filter_drama</i>
+                    class='material-icons load'>filter_drama</i>
                     <p>$partnumber</p>
                 </div>";
                 } else {

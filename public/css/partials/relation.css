@@ -72,6 +72,10 @@
   color: rgb(46, 198, 46);
 }
 
+.load {
+  color: rgb(80, 177, 247);
+}
+
 .remove {
   color: red;
 }
