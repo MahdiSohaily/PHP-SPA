@@ -82,10 +82,10 @@
     </main>
     <script>
         // Enable search option for select elements
-        $(document).ready(function() {
-            //change select boxes to select mode to be searchable
-            $("select").select2();
-        });
+        // $(document).ready(function() {
+        //     //change select boxes to select mode to be searchable
+        //     $("select").select2();
+        // });
 
         // A function for searching goods base on serial number
         function search(val) {
@@ -96,7 +96,7 @@
             if (val.length > 6) {
                 serialNumber.value = val;
                 resultBox.innerHTML =
-                    "<img id='loading' src='/spa/public/img/loading.gif' alt=''>";
+                    "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
                 axios
                     .get("getData/" + val)
                     .then((response) => {
@@ -165,7 +165,7 @@
 
             if (id) {
                 selected.innerHTML =
-                    "<img id='loading' src='/spa/public/img/loading.gif' alt=''>";
+                    "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
                 axios
                     .get("loadData/" + id)
                     .then((response) => {
