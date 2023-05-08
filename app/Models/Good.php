@@ -144,7 +144,7 @@ class Good
 
                 foreach ($values as $value) {
                     $sql = "INSERT INTO similars (pattern_id, nisha_id )
-                VALUES ('$name', '$serialNumber', '$car_id',' $status')";
+                VALUES ('$last_id', '$value')";
                 }
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
