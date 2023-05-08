@@ -170,8 +170,5 @@ class Good
         $value = $data['value'];
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-        $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
-        $result = $conn->query($sql);
     }
 }
