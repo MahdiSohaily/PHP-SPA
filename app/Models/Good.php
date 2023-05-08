@@ -152,12 +152,14 @@ class Good
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
             $conn->commit();
+            return true;
         } catch (\Throwable $e) {
             // An exception has been thrown
             // We must rollback the transaction
             $conn->rollback();
             throw $e; // but the error must be handled anyway
         }
+        return false;
     }
 
     public function update($data)
