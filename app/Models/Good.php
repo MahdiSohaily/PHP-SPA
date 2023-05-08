@@ -124,10 +124,16 @@ class Good
 
     public function create($data)
     {
-        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $serialNumber = $data['serialNumber'];
+        $mode = $data['mode'];
+        $car_id = $data['car_id'];
+        $status = $data['status'];
+        $value = $data['value'];
+        
+        // $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-        $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
-        $result = $conn->query($sql);
+        // $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
+        // $result = $conn->query($sql);
     }
 
     public function update($data)
