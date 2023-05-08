@@ -76,7 +76,7 @@ function load(event, pattern_id) {
   const selected = document.getElementById("selected");
 
   const mode = document.getElementById("mode");
-  mode.value = "update";
+  mode.value = "update-" + pattern_id;
 
   result.removeChild(remove);
 
