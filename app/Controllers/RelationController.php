@@ -17,7 +17,20 @@ class RelationController
 
 			// check if the form is submitted
 			if (isset($_POST['submit'])) {
-				
+				$mode = $_POST['mode'];
+				$serialNumber = $_POST['serialNumber'];
+				$name = $_POST['name'];
+				$car = $_POST['car_id'];
+				$status = $_POST['status'];
+				$value = $_POST['value'];
+
+				if ($mode === 'create') {
+					echo 'create mode';
+					print_r($_POST);
+				} else {
+					echo 'update mode';
+					print_r($_POST);
+				}
 			}
 
 			$instance = new Car();
