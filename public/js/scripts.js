@@ -73,7 +73,7 @@ function load(event) {
   const result = document.getElementById("s-result");
   const selected = document.getElementById("selected");
 
-  const mode = document.getElementById('#mode');
+  const mode = document.getElementById('mode');
   mode.value = 'update';
   alert(mode.value)
 

@@ -79,7 +79,7 @@
             </div>
         </section>
     </main>
-    <script>
+    <!-- <script>
         // Enable search option for select elements
         $(document).ready(function() {
             //change select boxes to select mode to be searchable
@@ -254,7 +254,7 @@
                     }
                 );
         }
-    </script>
+    </script> -->
 </body>
 
 </html>
