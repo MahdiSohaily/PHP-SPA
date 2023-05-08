@@ -168,10 +168,39 @@ class Good
         $mode = $data['mode'];
         $car_id = $data['car_id'];
         $status = $data['status'];
-        $value = $data['value'];
+        $values = $data['value'];
 
         $mode = explode(" ", $mode);
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $sql = "UPDATE patterns SET name = '$name', serial = '$serialNumber', 
+                car_id ='$car_id', status_id = '$status'
+                WHERE id ='$mode[1]'";
+
+        try {
+            // First of all, let's begin a transaction
+            $conn->begin_transaction();
+
+            if ($conn->query($sql) === TRUE) {
+                $last_id = $conn->insert_id;
+
+                foreach ($values as $value) {
+                    $value_sql = "INSERT INTO similars (pattern_id, nisha_id )
+                                VALUES ('$last_id', '$value')";
+
+                    $conn->query($value_sql);
+                }
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            $conn->commit();
+            return true;
+        } catch (\Throwable $e) {
+            // An exception has been thrown
+            // We must rollback the transaction
+            $conn->rollback();
+            throw $e; // but the error must be handled anyway
+        }
+        return false;
     }
 }
