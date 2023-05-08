@@ -182,14 +182,10 @@ class Good
             $conn->begin_transaction();
 
             if ($conn->query($sql) === TRUE) {
-                $last_id = $conn->insert_id;
+                $get_existed = "SELECT nisha_id  FROM similars WHERE pattern_id= '$mode[1]'";
+                $existed = $conn->query($get_existed)->fetch_all();
 
-                foreach ($values as $value) {
-                    $value_sql = "INSERT INTO similars (pattern_id, nisha_id )
-                                VALUES ('$last_id', '$value')";
-
-                    $conn->query($value_sql);
-                }
+                print_r($existed);
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
