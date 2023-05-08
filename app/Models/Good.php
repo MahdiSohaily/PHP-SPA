@@ -126,7 +126,6 @@ class Good
     {
         $serialNumber = $data['serialNumber'];
         $name = $data['name'];
-        $mode = $data['mode'];
         $car_id = $data['car_id'];
         $status = $data['status'];
         $values = $data['value'];
