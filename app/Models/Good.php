@@ -33,8 +33,6 @@ class Good
             }
         }
 
-        print_r($similar_ids[0]['nisha_id']);
-
         $template = '';
 
         if ($result->num_rows > 0) {
