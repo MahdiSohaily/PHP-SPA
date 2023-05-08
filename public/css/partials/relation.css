@@ -63,7 +63,8 @@
 }
 
 .add,
-.remove {
+.remove,
+.load {
   cursor: pointer;
   border-radius: 50%;
 }
