@@ -129,7 +129,7 @@ class Good
         $mode = $data['mode'];
         $car_id = $data['car_id'];
         $status = $data['status'];
-        $value = $data['value'];
+        $values = $data['value'];
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $sql = "INSERT INTO patterns (name, serial, car_id, status_id)
@@ -141,7 +141,11 @@ class Good
 
             if ($conn->query($sql) === TRUE) {
                 $last_id = $conn->insert_id;
-                
+
+                foreach ($values as $value) {
+                    $sql = "INSERT INTO patterns (name, serial, car_id, status_id)
+                VALUES ('$name', '$serialNumber', '$car_id',' $status')";
+                }
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
