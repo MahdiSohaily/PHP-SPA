@@ -56,7 +56,7 @@
             </div>
             <div class="section">
                 <form class='add-relation' action="#" method="post">
-                    <input class="r-input" type="text" name="mode" value="create" hidden required>
+                    <input class="r-input" type="text" id="mode" name="mode" value="create" hidden required>
                     <input class="r-input" placeholder="نام" type="text" name="name" id="name" required>
                     <select class="r-input" id="car_id" name="car_id" required>
                         <?php
@@ -79,7 +79,7 @@
         </section>
     </main>
     <script>
-        
+
     </script>
 </body>
 
