@@ -132,3 +132,15 @@
 #result_list li {
   cursor: pointer;
 }
+
+.message {
+  text-align: center;
+}
+
+.error {
+  color: orange;
+}
+
+.success {
+  color: seagreen;
+}

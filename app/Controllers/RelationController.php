@@ -12,7 +12,7 @@ class RelationController
 	// Homepage action
 	public function index(RouteCollection $routes)
 	{
-		$message = 'You have an error!';
+		$message = '';
 		if (isset($_COOKIE['login-user'])) {
 
 			// check if the form is submitted
@@ -22,6 +22,12 @@ class RelationController
 				$mode = $_POST['mode'];
 				if ($mode === 'create') {
 					$result = $good->create($_POST);
+
+					if ($result) {
+						$message = '<p class="message success">New record saved!</p>';
+					} else {
+						$message = '<p class="message error">An error ocurred while new record insertion !</p>';
+					}
 				} else {
 					$result = $good->update($_POST);
 				}
