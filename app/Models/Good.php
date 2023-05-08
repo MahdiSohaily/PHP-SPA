@@ -122,7 +122,11 @@ class Good
         return $pattern_result;
     }
 
-    public function create($data) {
+    public function create($data)
+    {
+        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
+        $sql = "SELECT * FROM nisha WHERE partnumber LIKE '" . $pattern . "%'";
+        $result = $conn->query($sql);
     }
 }
