@@ -13,7 +13,7 @@ function search(val) {
   if (val.length > 6) {
     serialNumber.value = val;
     resultBox.innerHTML =
-      "<img id='loading' src='/public/img/loading.gif' alt=''>";
+      "<img id='loading' src='/spa/public/img/loading.gif' alt=''>";
     axios
       .get("getData/" + val)
       .then((response) => {
@@ -82,7 +82,7 @@ function load(event, pattern_id) {
 
   if (id) {
     selected.innerHTML =
-      "<img id='loading' src='/public/img/loading.gif' alt=''>";
+      "<img id='loading' src='/spa/public/img/loading.gif' alt=''>";
     axios
       .get("loadData/" + id)
       .then((response) => {

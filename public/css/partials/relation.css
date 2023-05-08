@@ -81,7 +81,8 @@
 }
 
 .add:hover,
-.remove:hover {
+.remove:hover,
+.load:hover {
   background-color: #c0bbbb;
 }
 
