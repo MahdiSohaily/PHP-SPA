@@ -143,8 +143,11 @@ class Good
                 $last_id = $conn->insert_id;
 
                 foreach ($values as $value) {
-                    $sql = "INSERT INTO similars (pattern_id, nisha_id )
-                VALUES ('$last_id', '$value')";
+                    echo $value;
+                    $value_sql = "INSERT INTO similars (pattern_id, nisha_id )
+                                VALUES ('$last_id', '$value')";
+
+                    $conn->query($value_sql);
                 }
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
