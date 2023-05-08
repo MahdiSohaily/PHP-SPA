@@ -23,8 +23,7 @@ class RelationController
 				if ($mode === 'create') {
 					$result = $good->create($_POST);
 				} else {
-					echo 'update mode';
-					print_r($_POST);
+					$result = $good->update($_POST);
 				}
 			}
 
