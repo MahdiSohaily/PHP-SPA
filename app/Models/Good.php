@@ -53,7 +53,7 @@ class Good
 
                 if ($get_nisha) {
                     $template .= "<div class='matched-item' id='$id'>
-                    <i onclick='load(event)'  
+                    <i onclick='load(event,$get_nisha)'  
                     data-id='" . $id . "'  
                     class='material-icons load'>filter_drama</i>
                     <p>$partnumber</p>
