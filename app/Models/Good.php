@@ -135,6 +135,24 @@ class Good
         $sql = "INSERT INTO patterns (name, serial, car_id, status_id)
                 VALUES ('$name', '$serialNumber', '$car_id',' $status')";
 
+        try {
+            // First of all, let's begin a transaction
+            $conn->begin_transaction();
+
+            // A set of queries; if one fails, an exception should be thrown
+            $conn->query('first query');
+            $conn->query('second query');
+            $conn->query('third query');
+
+            // If we arrive here, it means that no exception was thrown
+            // i.e. no query has failed, and we can commit the transaction
+            $conn->commit();
+        } catch (\Throwable $e) {
+            // An exception has been thrown
+            // We must rollback the transaction
+            $conn->rollback();
+            throw $e; // but the error must be handled anyway
+        }
         if ($conn->query($sql) === TRUE) {
             $last_id = $conn->insert_id;
             echo "New record created successfully. Last inserted ID is: " . $last_id;
