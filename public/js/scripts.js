@@ -1,3 +1,9 @@
+// Enable search option for select elements
+$(document).ready(function () {
+  //change select boxes to select mode to be searchable
+  $("select").select2();
+});
+
 // A function for searching goods base on serial number
 function search(val) {
   const resultBox = document.getElementById("s-result");
@@ -19,12 +25,6 @@ function search(val) {
     selected.innerHTML = "";
   }
 }
-
-// Enable search option for select elements
-$(document).ready(function () {
-  //change select boxes to select mode to be searchable
-  $("select").select2();
-});
 
 // A function to add a good to the relation box
 function add(event) {
