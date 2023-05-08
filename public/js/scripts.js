@@ -15,7 +15,7 @@ function search(val) {
     resultBox.innerHTML =
       "<img id='loading' src='/public/img/loading.gif' alt=''>";
     axios
-      .get("getdata/" + val)
+      .get("getData/" + val)
       .then((response) => {
         resultBox.innerHTML = response.data;
       })
