@@ -81,7 +81,7 @@
             </div>
         </section>
     </main>
-    <!-- <script>
+    <script>
         // Enable search option for select elements
         $(document).ready(function() {
             //change select boxes to select mode to be searchable
@@ -92,12 +92,14 @@
         function search(val) {
             const resultBox = document.getElementById("s-result");
             const selected = document.getElementById("selected");
+            const serialNumber = document.getElementById("serialNumber");
 
             if (val.length > 6) {
+                serialNumber.value = val;
                 resultBox.innerHTML =
-                    "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+                    "<img id='loading' src='/spa/public/img/loading.gif' alt=''>";
                 axios
-                    .get("getdata/" + val)
+                    .get("getData/" + val)
                     .then((response) => {
                         resultBox.innerHTML = response.data;
                     })
@@ -150,22 +152,21 @@
         }
 
         // A function to load data a good to the relation box
-        function load(event) {
+        function load(event, pattern_id) {
             const id = event.target.getAttribute("data-id");
             const remove = document.getElementById(id);
 
             const result = document.getElementById("s-result");
             const selected = document.getElementById("selected");
 
-            const mode = document.getElementById('#mode');
-            mode.value = 'update';
-            alert(mode.value)
+            const mode = document.getElementById("mode");
+            mode.value = "update-" + pattern_id;
 
             result.removeChild(remove);
 
             if (id) {
                 selected.innerHTML =
-                    "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
+                    "<img id='loading' src='/spa/public/img/loading.gif' alt=''>";
                 axios
                     .get("loadData/" + id)
                     .then((response) => {
@@ -256,7 +257,7 @@
                     }
                 );
         }
-    </script> -->
+    </script>
 </body>
 
 </html>
