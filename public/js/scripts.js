@@ -8,8 +8,10 @@ $(document).ready(function () {
 function search(val) {
   const resultBox = document.getElementById("s-result");
   const selected = document.getElementById("selected");
+  const serialNumber = document.getElementById("serialNumber");
 
   if (val.length > 6) {
+    serialNumber.value = val;
     resultBox.innerHTML =
       "<img id='loading' src='<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/img/loading.gif' alt=''>";
     axios
