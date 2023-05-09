@@ -191,24 +191,5 @@ class Good
         } else {
             echo "Error updating record: " . $conn->error;
         }
-        try {
-
-            // First of all, let's begin a transaction
-            $conn->begin_transaction();
-
-            $get_existed = "SELECT nisha_id  FROM similars WHERE pattern_id = 1";
-            $existed = $conn->query($get_existed);
-
-            print_r($existed);
-
-            $conn->commit();
-            return true;
-        } catch (\Throwable $e) {
-            // An exception has been thrown
-            // We must rollback the transaction
-            $conn->rollback();
-            throw $e; // but the error must be handled anyway
-        }
-        return false;
     }
 }
