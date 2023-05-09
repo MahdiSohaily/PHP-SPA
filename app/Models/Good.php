@@ -24,6 +24,7 @@ class Good
         }
 
         $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (" . join(",", $pattern_ids) . ")";
+        echo $similar;
         $similar_result = $conn->query($similar);
         $similar_ids = [];
 
