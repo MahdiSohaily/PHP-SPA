@@ -225,20 +225,17 @@ class Good
                 }
             }
 
-            foreach ($values as $value) {
-                if (!in_array($value, $existing)) {
-                    $similar_sql = "INSERT INTO similars (pattern_id, nisha_id ) VALUES ('$mode[1]', '$value')";
-                    $conn->query($similar_sql);
-                }
-            }
-
             foreach ($existing as $item) {
                 if (!in_array($item, $values)) {
                     $similar_del = "DELETE FROM similars WHERE nisha_id = '$item'";
                     $conn->query($similar_del);
                 }
             }
-            return true;
+
+            $similar_del = "DELETE FROM patterns WHERE id = '$item'";
+            if ($conn->query($similar_del) === TRUE)
+                return true;
+            return false;
         }
     }
 }
