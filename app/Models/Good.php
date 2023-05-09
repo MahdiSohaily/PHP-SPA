@@ -191,7 +191,7 @@ class Good
 
             foreach ($values as $value) {
                 if (!in_array($value, $existing)) {
-                    $similar_sql = "INSERT INTO similars (pattern_id, nisha_id ) VALUES ('$$mode[1], $value')";
+                    $similar_sql = "INSERT INTO similars (pattern_id, nisha_id ) VALUES ('$mode[1]', '$value')";
                     $conn->query($similar_sql);
                 }
             }
