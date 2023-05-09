@@ -173,19 +173,47 @@ class Good
         $car_id = $data['car_id'];
         $status = $data['status'];
         $values = [];
-
-        if (array_key_exists("value", $data)) {
-            $values = $data['value'];
-        }
-
         $mode = explode("-", $mode);
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        $sql = "UPDATE patterns SET name = '$name', serial = '$serialNumber', 
-                car_id ='$car_id', status_id = '$status'
-                WHERE id ='$mode[1]'";
 
-        if ($conn->query($sql) === TRUE) {
+        if (array_key_exists("value", $data)) {
+            $values = $data['value'];
+            $sql = "UPDATE patterns SET name = '$name', serial = '$serialNumber', 
+                    car_id ='$car_id', status_id = '$status'
+                    WHERE id ='$mode[1]'";
+
+            if ($conn->query($sql) === TRUE) {
+                $get_existed = "SELECT nisha_id FROM similars WHERE pattern_id = '$mode[1]'";
+                $existing_result = $conn->query($get_existed);
+
+                $existing = [];
+
+                if ($existing_result->num_rows > 0) {
+                    while ($row = $existing_result->fetch_assoc()) {
+                        array_push($existing, $row['nisha_id']);
+                    }
+                }
+
+                foreach ($values as $value) {
+                    if (!in_array($value, $existing)) {
+                        $similar_sql = "INSERT INTO similars (pattern_id, nisha_id ) VALUES ('$mode[1]', '$value')";
+                        $conn->query($similar_sql);
+                    }
+                }
+
+                foreach ($existing as $item) {
+                    if (!in_array($item, $values)) {
+                        $similar_del = "DELETE FROM similars WHERE nisha_id = '$item'";
+                        $conn->query($similar_del);
+                    }
+                }
+                return true;
+            } else {
+                echo "Error updating record: " . $conn->error;
+                return false;
+            }
+        } else {
             $get_existed = "SELECT nisha_id FROM similars WHERE pattern_id = '$mode[1]'";
             $existing_result = $conn->query($get_existed);
 
@@ -211,9 +239,6 @@ class Good
                 }
             }
             return true;
-        } else {
-            echo "Error updating record: " . $conn->error;
-            return false;
         }
     }
 }
