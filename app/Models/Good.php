@@ -232,7 +232,7 @@ class Good
                 }
             }
 
-            $similar_del = "DELETE FROM patterns WHERE id = '$item'";
+            $similar_del = "DELETE FROM patterns WHERE id = '$mode[1]'";
             if ($conn->query($similar_del) === TRUE)
                 return true;
             return false;
