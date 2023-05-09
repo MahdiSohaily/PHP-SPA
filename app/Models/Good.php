@@ -167,9 +167,9 @@ class Good
         $mode = explode("-", $mode);
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        $sql = "UPDATE patterns SET name = 'gg', serial = 'gg', 
-                car_id ='1', status_id = '1'
-                WHERE id ='1'";
+        $sql = "UPDATE patterns SET name = '$name', serial = '$serialNumber', 
+                car_id ='$car_id', status_id = '$status'
+                WHERE id ='$mode[1]'";
 
         if ($conn->query($sql) === TRUE) {
             echo "Record updated successfully";
