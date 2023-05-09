@@ -23,8 +23,12 @@ class Good
             }
         }
 
-        $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (" . join(",", $pattern_ids) . ")";
-        $similar_result = $conn->query($similar);
+        $similar_result = [];
+
+        if ($pattern_ids) {
+            $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (" . join(",", $pattern_ids) . ")";
+            $similar_result = $conn->query($similar);
+        }
         $similar_ids = [];
 
         if ($similar_result->num_rows > 0) {
@@ -196,8 +200,10 @@ class Good
                     $conn->query($similar_del);
                 }
             }
+            return true;
         } else {
             echo "Error updating record: " . $conn->error;
+            return false;
         }
     }
 }
