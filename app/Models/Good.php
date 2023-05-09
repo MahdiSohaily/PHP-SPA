@@ -192,8 +192,8 @@ class Good
 
             foreach ($existing as $item) {
                 if (!in_array($item, $values)) {
-                    $similar_sql = "INSERT INTO similars (pattern_id, nisha_id ) VALUES ('$$mode[1], $value')";
-                    $conn->query($similar_sql);
+                    $similar_del = "DELETE FROM similars WHERE nisha_id = '$item'";
+                    $conn->query($similar_del);
                 }
             }
         } else {
