@@ -134,7 +134,7 @@ class Good
         $name = $data['name'];
         $car_id = $data['car_id'];
         $status = $data['status'];
-        $values = $data['value'];
+        $$values = ($data['value']) ? $data['value'] : [];
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         $sql = "INSERT INTO patterns (name, serial, car_id, status_id)
@@ -168,7 +168,7 @@ class Good
         $mode = $data['mode'];
         $car_id = $data['car_id'];
         $status = $data['status'];
-        $values = $data['value'];
+        $values = ($data['value']) ? $data['value'] : [];
 
         $mode = explode("-", $mode);
 
