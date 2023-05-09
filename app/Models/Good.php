@@ -173,6 +173,15 @@ class Good
 
         if ($conn->query($sql) === TRUE) {
             $get_existed = "SELECT nisha_id FROM similars WHERE pattern_id = '$mode[1]'";
+            $existing_result = $conn->query($get_existed);
+
+            $existing = [];
+
+            if ($existing_result->num_rows > 0) {
+                while ($row = $existing_result->fetch_assoc()) {
+                    array_push($existing, $row['nisha_id']);
+                }
+            }
         } else {
             echo "Error updating record: " . $conn->error;
         }
