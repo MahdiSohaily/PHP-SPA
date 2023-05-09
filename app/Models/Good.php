@@ -182,6 +182,12 @@ class Good
                     array_push($existing, $row['nisha_id']);
                 }
             }
+
+            foreach($values as $value) {
+                if(in_array())
+            }
+
+
         } else {
             echo "Error updating record: " . $conn->error;
         }
