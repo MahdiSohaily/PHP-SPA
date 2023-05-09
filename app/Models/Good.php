@@ -23,7 +23,7 @@ class Good
             }
         }
 
-        $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (1,2)";
+        $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (" . join(",", $pattern_ids) . ")";
         $similar_result = $conn->query($similar);
         $similar_ids = [];
 
@@ -135,8 +135,6 @@ class Good
                 VALUES ('$name', '$serialNumber', '$car_id',' $status')";
 
         try {
-            // First of all, let's begin a transaction
-            $conn->begin_transaction();
 
             if ($conn->query($sql) === TRUE) {
                 $last_id = $conn->insert_id;
@@ -150,12 +148,8 @@ class Good
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-            $conn->commit();
             return true;
         } catch (\Throwable $e) {
-            // An exception has been thrown
-            // We must rollback the transaction
-            $conn->rollback();
             throw $e; // but the error must be handled anyway
         }
         return false;
@@ -170,25 +164,28 @@ class Good
         $status = $data['status'];
         $values = $data['value'];
 
-        $mode = explode(" ", $mode);
+        $mode = explode("-", $mode);
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        $sql = "UPDATE patterns SET name = '$name', serial = '$serialNumber', 
-                car_id ='$car_id', status_id = '$status'
-                WHERE id ='$mode[1]'";
+        $sql = "UPDATE patterns SET name = 'gg', serial = 'gg', 
+                car_id ='1', status_id = '1'
+                WHERE id ='1'";
 
+        if ($conn->query($sql) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
         try {
+
             // First of all, let's begin a transaction
             $conn->begin_transaction();
 
-            if ($conn->query($sql) === TRUE) {
-                $get_existed = "SELECT nisha_id  FROM similars WHERE pattern_id= '$mode[1]'";
-                $existed = $conn->query($get_existed)->fetch_all();
+            $get_existed = "SELECT nisha_id  FROM similars WHERE pattern_id = 1";
+            $existed = $conn->query($get_existed);
 
-                print_r($existed);
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+            print_r($existed);
+
             $conn->commit();
             return true;
         } catch (\Throwable $e) {

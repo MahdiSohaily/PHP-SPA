@@ -37,6 +37,7 @@ class RelationController
 						  </script>';
 					}
 				} else {
+					echo 'HERE WE ARE';
 					$result = $good->update($_POST);
 				}
 			}
