@@ -23,12 +23,14 @@ class Good
             }
         }
 
-        $similar_result = [];
+
+        $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (1)";
 
         if ($pattern_ids) {
             $similar = "SELECT nisha_id, pattern_id FROM similars WHERE pattern_id IN (" . join(",", $pattern_ids) . ")";
-            $similar_result = $conn->query($similar);
         }
+        $similar_result = $conn->query($similar);
+
         $similar_ids = [];
 
         if ($similar_result->num_rows > 0) {
