@@ -49,9 +49,11 @@
                 </section>
             </div>
             <div class="section">
-                <section id="selected" style="direction: rtl;">
+                <section style="direction: rtl;">
                     <h2>موارد انتخاب شده:</h2>
-                    <!-- selected items are going to be appended here -->
+                    <div id="selected">
+                        <!-- selected items are going to be appended here -->
+                    </div>
                 </section>
             </div>
             <div class="section">
