@@ -126,7 +126,6 @@
                     });
             } else {
                 resultBox.innerHTML = "";
-                selected.innerHTML = "";
             }
         }
 
@@ -256,7 +255,6 @@
             }
         }
 
-
         // Get the selected input value to send data;
         function setValue(data) {
             const name = document.getElementById("name");
@@ -265,10 +263,8 @@
 
             name.value = data.name;
             $("#car_id").val(data.name);
-            $("#car_id").select2().trigger("change");
             car_id.value = data.car;
             $("#status").val(data.name);
-            $("#status").select2().trigger("change");
             status.value = data.status;
         }
 
