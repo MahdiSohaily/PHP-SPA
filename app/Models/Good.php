@@ -137,7 +137,7 @@ class Good
         $values = [];
 
         if (array_key_exists("value", $data)) {
-            $values = $data['value'];
+            $values = array_unique($data['value']);
         }
 
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -178,7 +178,7 @@ class Good
         $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         if (array_key_exists("value", $data)) {
-            $values = $data['value'];
+            $values = array_unique($data['value']);
             $sql = "UPDATE patterns SET name = '$name', serial = '$serialNumber', 
                     car_id ='$car_id', status_id = '$status'
                     WHERE id ='$mode[1]'";
