@@ -20,6 +20,20 @@
     <script src="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/js/jquery.js"></script>
     <script src="<?php echo URL_ROOT . URL_SUBFOLDER ?>/public/js/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        .banner {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .del-btn {
+            border: none;
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,10 +64,14 @@
             </div>
             <div class="section">
                 <section style="direction: rtl;">
-                    <h2>موارد انتخاب شده:</h2>
+                    <div class="banner">
+                        <h2>موارد انتخاب شده:</h2>
+                        <button class="del-btn" onclick="deleteAll()">حذف همه</button>
+                    </div>
                     <div id="selected">
                         <!-- selected items are going to be appended here -->
                     </div>
+
                 </section>
             </div>
             <div class="section">
@@ -92,7 +110,6 @@
         // A function for searching goods base on serial number
         function search(val) {
             const resultBox = document.getElementById("s-result");
-            const selected = document.getElementById("selected");
             const serialNumber = document.getElementById("serialNumber");
 
             if (val.length > 6) {
@@ -224,6 +241,21 @@
             remove_checkbox.remove();
             item.remove();
         }
+
+        function deleteAll() {
+            const parent = document.getElementById('relation-form');
+            const selected = document.getElementById('selected');
+
+            removeAllChildNodes(parent);
+            removeAllChildNodes(selected);
+        }
+
+        function removeAllChildNodes(parent) {
+            while (parent.firstChild) {
+                parent.removeChild(parent.firstChild);
+            }
+        }
+
 
         // Get the selected input value to send data;
         function setValue(data) {
