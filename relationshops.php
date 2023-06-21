@@ -268,13 +268,15 @@ $status = $conn->query($status_sql);
     // A function to create the relationship
     function createRelation() {
 
+        // Accessing the form fields to get thier value for an ajax store operation
         const relation_name = document.getElementById('relation_name').value;
         const mode = document.getElementById('mode').value;
         const price = document.getElementById('price').value;
         const cars = getSelectedItems('cars');
         const status = document.getElementById('status').value;
-        var params = new URLSearchParams();
 
+        // Defining a params instance to be attached to the axios request
+        const params = new URLSearchParams();
         params.append('store_relation', 'store_relation');
         params.append('relation_name', relation_name);
         params.append('price', price);
@@ -288,18 +290,20 @@ $status = $conn->query($status_sql);
         params.append('serial', serial);
 
 
-        if (selected_goods.length == 0) {
+        if (selected_goods.length > 0) {
+            axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+                .then(function(response) {
+                    resultBox.innerHTML = response.data;
+                    // console.log(response.data);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        } else {
             error_message.classList.remove('hidden');
         }
 
-        // axios.post("./app/Controllers/RelationshipAjaxController.php", params)
-        //     .then(function(response) {
-        //         resultBox.innerHTML = response.data;
-        //         // console.log(response.data);
-        //     })
-        //     .catch(function(error) {
-        //         console.log(error);
-        //     });
+
     }
 </script>
 <?php
