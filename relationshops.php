@@ -53,6 +53,9 @@ $status = $conn->query($status_sql);
         <p id="select_box_error" class="px-3 tiny-text text-red-500 hidden">
             لیست اجناس انتخاب شده برای افزودن به رابطه خالی بوده نمیتواند!
         </p>
+        <p id="duplicate_relation" class="px-3 tiny-text text-red-500 hidden">
+            شما همزمان نمی توانید ۲ رابطه را بارگذاری نمایید.(شما میتوانید با حذف همه رابطه جدید را وارد نمایید)
+        </p>
         <div id="selected_box" class="p-3">
             <!-- selected items are going to be added here -->
         </div>
@@ -155,6 +158,7 @@ $status = $conn->query($status_sql);
     const selected_box = document.getElementById('selected_box');
     const resultBox = document.getElementById("search_result");
     const error_message = document.getElementById('select_box_error');
+    const duplicate_relation = document.getElementById('duplicate_relation');
     const form_success = document.getElementById('form_success');
     const form_error = document.getElementById('form_error');
 
@@ -163,6 +167,7 @@ $status = $conn->query($status_sql);
         serial = pattern;
         if (pattern.length > 6) {
             error_message.classList.add('hidden');
+            duplicate_relation.classList.add('hidden');
             pattern = pattern.replace(/\s/g, "");
             pattern = pattern.replace(/-/g, "");
             pattern = pattern.replace(/_/g, "");
@@ -191,6 +196,7 @@ $status = $conn->query($status_sql);
 
     // A function to add a good to the relation box
     function add(element) {
+        duplicate_relation.classList.add('hidden');
         const id = element.getAttribute("data-id");
         const partNumber = element.getAttribute("data-partnumber");
         selected_goods.push({
@@ -223,6 +229,7 @@ $status = $conn->query($status_sql);
         selected_goods = [];
         relation_active = false;
         displaySelectedGoods();
+        duplicate_relation.classList.add('hidden');
     }
 
     // A function to display the selected goods in the relation box
@@ -256,7 +263,7 @@ $status = $conn->query($status_sql);
 
     // A function to create the relationship
     function createRelation() {
-
+        duplicate_relation.classList.add('hidden');
         // Accessing the form fields to get thier value for an ajax store operation
         const relation_name = document.getElementById('relation_name').value;
         const mode = document.getElementById('mode').value;
@@ -308,26 +315,26 @@ $status = $conn->query($status_sql);
 
     // A function to load all the relationships for the selected relationship
     function load(element) {
+
         const pattern = element.getAttribute("data-pattern");
         if (!relation_active) {
+            duplicate_relation.classList.add('hidden');
             relation_active = true;
             pattern_id = pattern;
-            axios
-                .post(route("relations.load"), {
-                    pattern,
-                })
-                .then(function(response) {
-                    push_data(response.data);
-                    form._method = "PUT";
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-            load_pattern_ifo(form.pattern_id);
+            // axios
+            //     .post(route("relations.load"), {
+            //         pattern,
+            //     })
+            //     .then(function(response) {
+            //         push_data(response.data);
+            //         form._method = "PUT";
+            //     })
+            //     .catch(function(error) {
+            //         console.log(error);
+            //     });
+            // load_pattern_ifo(form.pattern_id);
         } else {
-            alert(
-                "شما همزمان نمی توانید ۲ رابطه را بارگذاری نمایید.(شما میتوانید با حذف همه رابطه جدید را وارد نمایید)"
-            );
+            duplicate_relation.classList.remove('hidden');
         }
     }
 </script>

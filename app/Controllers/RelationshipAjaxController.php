@@ -48,7 +48,7 @@ if (isset($_POST['search_goods_for_relation'])) {
                 if ($item['pattern']) {
 ?>
                     <div class="w-full flex justify-between items-center shadow-md hover:shadow-lg 
-                rounded-md px-4 py-3 mb-2 border-1 border-gray-300" id="search-<?php echo  $item['id'] ?>">
+                        rounded-md px-4 py-3 mb-2 border-1 border-gray-300" id="search-<?php echo  $item['id'] ?>">
                         <p class=' text-sm font-semibold text-gray-600'><?php echo $item['partNumber'] ?></p>
                         <i data-id="<?php echo $item['id'] ?>" data-pattern="<?php echo $item['pattern'] ?>" data-partNumber="<?php echo $item['partNumber'] ?>" class='material-icons add text-blue-600 cursor-pointer rounded-circle hover:bg-gray-200' onclick="load(this)">cloud_download
                         </i>
