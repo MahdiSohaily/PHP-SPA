@@ -90,33 +90,35 @@ if (isset($_POST['store_relation'])) {
     $selected_goods = $_POST['selected_goods'];
     $serial = $_POST['serial'];
 
-    $selected_index = extract_id($request->input('values'));
+    $selected_index = extract_id($selected_goods);
 
-    try {
-        $selectedCars = $request->input('car_id');
-        // create the pattern record
-        $pattern = new Pattern();
-        $pattern->name = $request->input('name');
-        $pattern->price = $request->input('price');
-        $pattern->serial = $request->input('serial');
-        $pattern->status_id = $request->input('status_id');
-        $pattern->save();
+    print_r($se)
 
-        $id = $pattern->id;
+    // try {
+    //     $selectedCars = $request->input('car_id');
+    //     // create the pattern record
+    //     $pattern = new Pattern();
+    //     $pattern->name = $request->input('name');
+    //     $pattern->price = $request->input('price');
+    //     $pattern->serial = $request->input('serial');
+    //     $pattern->status_id = $request->input('status_id');
+    //     $pattern->save();
 
-        foreach ($selected_index as $value) {
-            $similar = new Similar();
-            $similar->pattern_id = $id;
-            $similar->nisha_id  = $value;
-            $similar->save();
-        }
+    //     $id = $pattern->id;
 
-        foreach ($selectedCars as $car) {
-            DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
-        }
-    } catch (\Throwable $th) {
-        throw $th;
-    }
+    //     foreach ($selected_index as $value) {
+    //         $similar = new Similar();
+    //         $similar->pattern_id = $id;
+    //         $similar->nisha_id  = $value;
+    //         $similar->save();
+    //     }
+
+    //     foreach ($selectedCars as $car) {
+    //         DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
+    //     }
+    // } catch (\Throwable $th) {
+    //     throw $th;
+    // }
 }
 
 
