@@ -29,7 +29,7 @@ $rates = $conn->query($sql);
                 <i class="material-icons text-green-600">beenhere</i>
                 اجناس انتخاب شده
             </h2>
-            <button class="flex items-center border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm" @click="clearAll">
+            <button class="flex items-center border-none bg-red-500 hover:bg-red-600 text-white rounded-lg px-4 py-2 text-sm" onclick="clearAll()">
                 <i class="px-2 material-icons hover:cursor-pointer">delete</i>
                 حذف همه
             </button>
@@ -163,15 +163,22 @@ $rates = $conn->query($sql);
         }
     }
 
-    const remove_selected = (id) => {
+    // A function to remove an specific item from selected items list
+    function remove_selected(id) {
         selected_goods = selected_goods.filter((item) => {
             return item.id != id;
         });
         displaySelectedGoods();
     };
 
-    // A function to display the selected goods in the relation box
+    //A function to clear all selected items
+    function clearAll() {
+        selected_goods = [];
+        relation_active = false;
+        displaySelectedGoods();
+    }
 
+    // A function to display the selected goods in the relation box
     function displaySelectedGoods() {
         let template = '';
         for (const good of selected_goods) {
