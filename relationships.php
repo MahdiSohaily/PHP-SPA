@@ -70,7 +70,7 @@ $status = $conn->query($status_sql);
         </div>
 
         <p class="px-3 py-1 mb-4 text-gray-500 text-sm leading-relaxed">
-            برای ثبت رایطه در سیستم فورم ذیل را با دقت پر نمایید.
+            برای ثبت رابطه در سیستم فورم ذیل را با دقت پر نمایید.
         </p>
 
         <div class="hidden sm:block">
@@ -328,10 +328,8 @@ $status = $conn->query($status_sql);
 
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
-
                     selected_goods = [...selected_goods, ...response.data];
                     displaySelectedGoods();
-                    console.log(response.data);
                 })
                 .catch(function(error) {
 
