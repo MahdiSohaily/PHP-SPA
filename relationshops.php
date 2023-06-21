@@ -177,7 +177,7 @@ $rates = $conn->query($sql);
     // A function to display the selected goods in the relation box
 
     function displaySelectedGoods() {
-        let template = null;
+        let template = '';
         for (const good of selected_goods) {
             template += `
             <div class="w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300">
