@@ -116,7 +116,7 @@ $rates = $conn->query($sql);
 </div>
 <script>
     let result = null;
-
+    selected_goods = [];
     const search = (val) => {
         let pattern = val;
         let superMode = 0;
@@ -149,11 +149,21 @@ $rates = $conn->query($sql);
         }
     };
 
-    $(document).ready(() => {
-        $(document).on("click", ".add_element", add);
-        $(document).on("click", ".load_element", load);
-    });
-    
+    // $(document).ready(() => {
+    //     $(document).on("click", ".add_element", add);
+    //     // $(document).on("click", ".load_element", load);
+    // });
+
+    // A function to add a good to the relation box
+    const add = (element) => {
+        const id = element.getAttribute("data-id");
+        const partNumber = element.getAttribute("data-partnumber");
+        selected_goods.push({
+            id: id,
+            partNumber: partNumber
+        });
+        console.log(selected_goods);
+    };
 </script>
 <?php
 require_once('./views/Layouts/footer.php');

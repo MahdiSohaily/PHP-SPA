@@ -23,7 +23,7 @@ if (isset($_POST['search_goods_for_relation'])) {
     $similar_ids = [];
 
     if (mysqli_num_rows($similar) > 0) {
-        while ($item = mysqli_fetch_assoc($result)) {
+        while ($item = mysqli_fetch_assoc($similar)) {
             array_push($similar_ids, ['pattern_id' => $item['pattern_id'], 'nisha_id' => $item['nisha_id']]);
         }
     }
@@ -52,13 +52,13 @@ if (isset($_POST['search_goods_for_relation'])) {
                     <p class=' text-sm font-semibold text-gray-600'><?php echo $item['partNumber'] ?></p>
                     <i data-id="<?php echo $item['id'] ?>" data-pattern="<?php echo $item['pattern'] ?>" data-partNumber="<?php echo $item['partNumber'] ?>" class=' load_element material-icons add text-blue-600 cursor-pointer rounded-circle hover:bg-gray-200'>cloud_download
                     </i>
-                </div>;
+                </div>
             <?php
             } else {
             ?>
                 <div class='w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300' id="search-<?php echo $item['id'] ?>">
                     <p class=' text-sm font-semibold text-gray-600'><?php echo $item['partNumber'] ?></p>
-                    <i data-id="<?php echo $item['id'] ?>" data-partNumber="<?php echo $item['partNumber'] ?>" class=' add_element material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200'>add_circle_outline
+                    <i data-id="<?php echo $item['id'] ?>" data-partNumber="<?php echo $item['partNumber'] ?>" class="add_element material-icons add text-green-600 cursor-pointer rounded-circle hover:bg-gray-200" onclick="add(this)">add_circle_outline
                     </i>
                 </div>
             <?php
