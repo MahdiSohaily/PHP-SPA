@@ -117,11 +117,11 @@ $rates = $conn->query($sql);
 <script>
     let result = null;
     selected_goods = [];
-    const search = (val) => {
-        let pattern = val;
-        let superMode = 0;
-        const resultBox = document.getElementById("search_result");
+    const selected_box = document.getElementById('selected_box');
+    const resultBox = document.getElementById("search_result");
 
+    // search for goods to define their relationship
+    function search(pattern) {
         if (pattern.length > 6) {
             pattern = pattern.replace(/\s/g, "");
             pattern = pattern.replace(/-/g, "");
@@ -149,21 +149,43 @@ $rates = $conn->query($sql);
         }
     };
 
-    // $(document).ready(() => {
-    //     $(document).on("click", ".add_element", add);
-    //     // $(document).on("click", ".load_element", load);
-    // });
-
     // A function to add a good to the relation box
-    const add = (element) => {
+    function add(element) {
         const id = element.getAttribute("data-id");
         const partNumber = element.getAttribute("data-partnumber");
         selected_goods.push({
             id: id,
             partNumber: partNumber
         });
-        console.log(selected_goods);
+        remove(id);
+        displaySelectedGoods();
     };
+
+    // A function to remove added goods from relation box
+    function remove(id) {
+        const item = document.getElementById("search-" + id);
+        if (item) {
+            item.remove();
+        }
+    }
+
+    // A function to display the selected goods in the relation box
+
+    function displaySelectedGoods() {
+        let template = null;
+        for (const good of selected_goods) {
+            template += `
+            <div class="w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300">
+                <p class="text-sm font-semibold text-gray-600">
+                    ` + good.partNumber + `
+                </p>
+                    <i data-id="item.id" :data-partNumber="item.partNumber" @click="remove_selected"
+                            class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200">do_not_disturb_on
+                    </i>
+                </div>
+            `;
+        }
+    }
 </script>
 <?php
 require_once('./views/Layouts/footer.php');
