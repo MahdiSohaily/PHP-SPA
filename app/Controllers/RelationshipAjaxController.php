@@ -107,7 +107,8 @@ if (isset($_POST['store_relation'])) {
             }
 
             foreach ($selectedCars as $car) {
-                DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
+                $car_sql = "INSERT INTO patterncars (pattern_id, car_id) VALUES ('" . $last_id . "', '" . $car . "')";
+                $conn->query($car_sql);
             }
         } else {
             $errors = "ذخیره سازی اطلاعات ناموفق بود";

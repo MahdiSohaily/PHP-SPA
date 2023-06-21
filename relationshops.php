@@ -137,24 +137,6 @@ $status = $conn->query($status_sql);
             </button>
         </div>
         </form>
-        <FormRelation @submitted="createRelation">
-            <template #form>
-
-
-                <InputError :message="form.errors.values" class="mt-2" />
-            </template>
-
-            <template #actions>
-                <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                    ذخیره سازی موفقانه صورت گرفت.
-                </ActionMessage>
-
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    <i class="px-2 material-icons hover:cursor-pointer">save</i>
-                    ذخیره سازی
-                </PrimaryButton>
-            </template>
-        </FormRelation>
     </div>
 </div>
 </div>
