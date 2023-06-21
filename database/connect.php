@@ -1,11 +1,11 @@
 <?php
-$servername = "https://yadak.center";
-$username = "yadakcenter2";
-$password = "vZun$2*04Bo]";
-$dbname = "yadakcenter2_yadakinfo_price";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "shop";
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password,$dbname);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check connection
 if (!$conn) {
