@@ -145,14 +145,13 @@ if (isset($_POST['load_pattern_ifo'])) {
         while ($item = mysqli_fetch_assoc($result)) {
             array_push($cars_id, $item['car_id']);
         }
-        print_r(json_encode($final_result));
     }
 
     $pattern_sql = "SELECT * FROM patterns WHERE id='" . $pattern . "'";
     $pattern_result = mysqli_query($conn, $pattern_sql);
 
     $pattern_info =  mysqli_fetch_assoc($pattern_result);
-    
+
     print_r(json_encode(['pattern' => $pattern_info, 'cars' => $cars_id]));
 }
 

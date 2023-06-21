@@ -357,10 +357,8 @@ $status = $conn->query($status_sql);
 
         axios.post("./app/Controllers/RelationshipAjaxController.php", params)
             .then(function(response) {
-                form.name = response.data.pattern.name;
-                form.price = response.data.pattern.price;
-                form.car_id = response.data.cars;
-                form.status_id = response.data.pattern.status_id;
+                const pattern_info = (response.data.pattern);
+                const pattern_info_cars = (response.data.cars);
             })
             .catch(function(error) {
                 console.log(error);
