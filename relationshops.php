@@ -321,6 +321,19 @@ $status = $conn->query($status_sql);
             duplicate_relation.classList.add('hidden');
             relation_active = true;
             pattern_id = pattern;
+
+            const params = new URLSearchParams();
+            params.append('load_relation', 'load_relation');
+            params.append('pattern', pattern_id);
+
+            axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+                .then(function(response) {
+                    
+                })
+                .catch(function(error) {
+
+                });
+
             // axios
             //     .post(route("relations.load"), {
             //         pattern,

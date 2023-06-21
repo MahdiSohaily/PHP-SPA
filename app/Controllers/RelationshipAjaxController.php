@@ -115,6 +115,32 @@ if (isset($_POST['store_relation'])) {
     }
 }
 
+if (isset($_POST['load_relation'])) {
+    $pattern = $_POST('pattern');
+
+    $similar_sql = "SELECT nisha_id FROM similars WHERE pattern_id='" . $created_at . "')";
+    $result = mysqli_query($conn, $similar_sql);
+
+    $final_result = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($item = mysqli_fetch_assoc($result)) {
+            $nisha_sql = "SELECT id, partnumber FROM yadakshop1402.nisha WHERE id='" . $value['nisha_id'] . "')";
+            $result = mysqli_query($conn, $nisha_sql);
+        }
+    }
+
+
+
+
+    foreach ($result as $key => $value) {
+
+
+        array_push($final_result, ['id' =>  $item->id, 'partNumber' => $item->partnumber, 'pattern' => $value->nisha_id]);
+    }
+
+    return $final_result;
+}
+
 function extract_id($array)
 {
     $selected_index = [];
@@ -124,6 +150,7 @@ function extract_id($array)
     $selected_index = array_unique($selected_index);
     return $selected_index;
 }
+
 
 function toBeAdded($existing, $newComer)
 {
