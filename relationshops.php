@@ -282,11 +282,21 @@ $status = $conn->query($status_sql);
         if (selected_goods.length > 0) {
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
-                    // resultBox.innerHTML = response.data;
                     console.log(response.data);
+                    if (response.data == 'true') {
+                        form_success.classList.remove('hidden');
+                        setTimeout(() => {
+                            form_success.classList.add('hidden');
+                        }, 1000)
+                    } else {
+                        form_error.classList.remove('hidden');
+                        setTimeout(() => {
+                            form_error.classList.add('hidden');
+                        }, 1000)
+                    }
                 })
                 .catch(function(error) {
-                    console.log(error);
+
                 });
         } else {
             error_message.classList.remove('hidden');

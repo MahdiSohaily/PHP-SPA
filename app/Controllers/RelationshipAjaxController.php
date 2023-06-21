@@ -91,31 +91,27 @@ if (isset($_POST['store_relation'])) {
 
     $selected_index = extract_id($selected_goods);
 
-    try {
-        $selectedCars = $cars;
-        $created_at = time();
-        // create the pattern record
-        $pattern_sql = "INSERT INTO patterns (name, price, serial, status_id, created_at)
+    $selectedCars = $cars;
+    $created_at = date('d-m-y h:i:s');
+    // create the pattern record
+    $pattern_sql = "INSERT INTO patterns (name, price, serial, status_id, created_at)
         VALUES ('" . $relation_name . "', '" . $price . "', '" . $serial . "', '" . $status . "', '" . $created_at . "')";
 
-        if ($conn->query($pattern_sql) === TRUE) {
-            $last_id = $conn->insert_id;
+    if ($conn->query($pattern_sql) === TRUE) {
+        $last_id = $conn->insert_id;
 
-            foreach ($selected_index as $value) {
-                $similar_sql = "INSERT INTO similars (pattern_id, nisha_id) VALUES ('" . $last_id . "', '" . $value . "')";
-                $conn->query($similar_sql);
-            }
-
-            foreach ($selectedCars as $car) {
-                $car_sql = "INSERT INTO patterncars (pattern_id, car_id) VALUES ('" . $last_id . "', '" . $car . "')";
-                $conn->query($car_sql);
-            }
-            return true;
-        } else {
-            return false;
+        foreach ($selected_index as $value) {
+            $similar_sql = "INSERT INTO similars (pattern_id, nisha_id) VALUES ('" . $last_id . "', '" . $value . "')";
+            $conn->query($similar_sql);
         }
-    } catch (\Throwable $th) {
-        throw $th;
+
+        foreach ($selectedCars as $car) {
+            $car_sql = "INSERT INTO patterncars (pattern_id, car_id) VALUES ('" . $last_id . "', '" . $car . "')";
+            $conn->query($car_sql);
+        }
+        echo 'true';
+    } else {
+        echo 'false';
     }
 }
 
