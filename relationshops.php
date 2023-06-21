@@ -171,7 +171,7 @@ $rates = $conn->query($sql);
     }
 
     function remove_selected() {
-
+        alert('click');
     }
 
     // A function to display the selected goods in the relation box
