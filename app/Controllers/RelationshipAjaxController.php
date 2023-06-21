@@ -134,6 +134,28 @@ if (isset($_POST['load_relation'])) {
     }
 }
 
+if (isset($_POST['load_pattern_ifo'])) {
+
+    $pattern = $_POST['pattern'];
+    $car_sql = "SELECT car_id FROM patterncars WHERE pattern_id='" . $pattern . "'";
+    $result = mysqli_query($conn, $car_sql);
+
+    $cars_id = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($item = mysqli_fetch_assoc($result)) {
+            array_push($cars_id, $item['car_id']);
+        }
+        print_r(json_encode($final_result));
+    }
+
+    $pattern_sql = "SELECT * FROM patterns WHERE id='" . $pattern . "'";
+    $pattern_result = mysqli_query($conn, $pattern_sql);
+
+    $pattern_info =  mysqli_fetch_assoc($pattern_result);
+    
+    print_r(json_encode(['pattern' => $pattern_info, 'cars' => $cars_id]));
+}
+
 function extract_id($array)
 {
     $selected_index = [];
@@ -143,7 +165,6 @@ function extract_id($array)
     $selected_index = array_unique($selected_index);
     return $selected_index;
 }
-
 
 function toBeAdded($existing, $newComer)
 {

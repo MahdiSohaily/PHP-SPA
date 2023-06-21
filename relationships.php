@@ -352,7 +352,7 @@ $status = $conn->query($status_sql);
 
     const load_pattern_ifo = (id) => {
         const params = new URLSearchParams();
-        params.append('load_relation', 'load_relation');
+        params.append('load_pattern_ifo', 'load_pattern_ifo');
         params.append('pattern', pattern_id);
 
         axios.post("./app/Controllers/RelationshipAjaxController.php", params)
