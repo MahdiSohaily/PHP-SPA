@@ -280,21 +280,21 @@ $status = $conn->query($status_sql);
         params.append('store_relation', 'store_relation');
         params.append('relation_name', relation_name);
         params.append('price', price);
-        params.append('cars', cars);
+        params.append('cars', JSON.stringify(cars));
         params.append('status', status);
 
         // Side effects data
         params.append('mode', mode);
         params.append('pattern_id', pattern_id);
-        params.append('selected_goods', selected_goods);
+        params.append('selected_goods', JSON.stringify(selected_goods));
         params.append('serial', serial);
 
 
         if (selected_goods.length > 0) {
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
-                    resultBox.innerHTML = response.data;
-                    // console.log(response.data);
+                    // resultBox.innerHTML = response.data;
+                    console.log(response.data);
                 })
                 .catch(function(error) {
                     console.log(error);
