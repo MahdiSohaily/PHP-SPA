@@ -125,20 +125,12 @@ if (isset($_POST['load_relation'])) {
     if (mysqli_num_rows($result) > 0) {
         while ($item = mysqli_fetch_assoc($result)) {
             $nisha_sql = "SELECT id, partnumber FROM yadakshop1402.nisha WHERE id='" . $value['nisha_id'] . "')";
-            $result = mysqli_query($conn, $nisha_sql);
+            $nisha = mysqli_query($conn, $nisha_sql);
+            $data = mysqli_fetch_assoc($nisha);
+            array_push($final_result, ['id' =>  $item['id'], 'partNumber' => $item['partnumber'], 'pattern' => $data[0]['nisha_id']]);
         }
     }
-
-
-
-
-    foreach ($result as $key => $value) {
-
-
-        array_push($final_result, ['id' =>  $item->id, 'partNumber' => $item->partnumber, 'pattern' => $value->nisha_id]);
-    }
-
-    return $final_result;
+    print_r($final_result);
 }
 
 function extract_id($array)
