@@ -42,6 +42,7 @@ $status = $conn->query($status_sql);
             </button>
         </div>
         <p class="px-3 mb-4 text-gray-500 text-sm leading-relaxed">
+            <span class="text-red-500">*</span>
             لیست اجناس انتخاب شده برای افزودن به رابطه!
         </p>
         <div class="hidden sm:block">
@@ -49,7 +50,9 @@ $status = $conn->query($status_sql);
                 <div class="border-t border-gray-200"></div>
             </div>
         </div>
-
+        <p id="select_box_error" class="px-3 tiny-text text-red-500 hidden">
+            لیست اجناس انتخاب شده برای افزودن به رابطه خالی بوده نمیتواند!
+        </p>
         <div id="selected_box" class="p-3">
             <!-- selected items are going to be added here -->
         </div>
@@ -75,22 +78,22 @@ $status = $conn->query($status_sql);
 
         <div class="p-3">
             <form action="" method="post" onsubmit="event.preventDefault();createRelation()">
-                <input id="mode" type="text" name="form" value="create" hidden>
-                <div class="col-span-12 sm:col-span-4 mb-5">
+                <input id="mode" type="text" name="operation" value="create" hidden>
+                <div class="col-span-12 sm:col-span-4 mb-3">
                     <label class="block font-medium text-sm text-gray-700">
                         اسم رابطه
                     </label>
                     <input name="relation_name" value="" class="border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" required id="relation_name" type="text" />
                     <p class="mt-2"></p>
                 </div>
-                <div class="col-span-12 sm:col-span-4 mb-5">
+                <div class="col-span-12 sm:col-span-4 mb-3">
                     <label class="block font-medium text-sm text-gray-700">
                         قیمت
                     </label>
                     <input name="price" value="" class="ltr border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
                     <p class="mt-2"></p>
                 </div>
-                <div class="col-span-12 sm:col-span-4 mb-5">
+                <div class="col-span-12 sm:col-span-4 mb-3">
                     <label for="cars">
                         خودرو های مرتبط
                     </label>
@@ -107,7 +110,7 @@ $status = $conn->query($status_sql);
                         } ?>
                     </select>
                 </div>
-                <div class="col-span-12 sm:col-span-4 mb-5">
+                <div class="col-span-12 sm:col-span-4 mb-3">
                     <label for="cars">
                         وضعیت
                     </label>
@@ -156,15 +159,21 @@ $status = $conn->query($status_sql);
 </div>
 </div>
 <script>
-    let result = null;
+    let serial = null;
+    let pattern_id = null;
     selected_goods = [];
     let relation_active = false;
+
+
     const selected_box = document.getElementById('selected_box');
     const resultBox = document.getElementById("search_result");
+    const error_message = document.getElementById('select_box_error');
 
     // search for goods to define their relationship
     function search(pattern) {
+        serial = pattern;
         if (pattern.length > 6) {
+            error_message.classList.add('hidden');
             pattern = pattern.replace(/\s/g, "");
             pattern = pattern.replace(/-/g, "");
             pattern = pattern.replace(/_/g, "");
@@ -199,6 +208,7 @@ $status = $conn->query($status_sql);
             id: id,
             partNumber: partNumber
         });
+        error_message.classList.add('hidden');
         remove(id);
         displaySelectedGoods();
     };
@@ -244,21 +254,52 @@ $status = $conn->query($status_sql);
         selected_box.innerHTML = template;
     }
 
+    function getSelectedItems(id) {
+        let selected = [];
+        for (var option of document.getElementById(id).options) {
+            if (option.selected) {
+                selected.push(option.value);
+            }
+        }
+
+        return selected;
+    }
+
     // A function to create the relationship
     function createRelation() {
-        var params = new URLSearchParams();
-        params.append('search_goods_for_relation', 'search_goods_for_relation');
-        params.append('selected_goods', selected_goods);
-        params.append('pattern', pattern);
 
-        axios.post("./app/Controllers/RelationshipAjaxController.php", params)
-            .then(function(response) {
-                resultBox.innerHTML = response.data;
-                // console.log(response.data);
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        const relation_name = document.getElementById('relation_name').value;
+        const mode = document.getElementById('mode').value;
+        const price = document.getElementById('price').value;
+        const cars = getSelectedItems('cars');
+        const status = document.getElementById('status').value;
+        var params = new URLSearchParams();
+
+        params.append('store_relation', 'store_relation');
+        params.append('relation_name', relation_name);
+        params.append('price', price);
+        params.append('cars', cars);
+        params.append('status', status);
+
+        // Side effects data
+        params.append('mode', mode);
+        params.append('pattern_id', pattern_id);
+        params.append('selected_goods', selected_goods);
+        params.append('serial', serial);
+
+
+        if (selected_goods.length == 0) {
+            error_message.classList.remove('hidden');
+        }
+
+        // axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+        //     .then(function(response) {
+        //         resultBox.innerHTML = response.data;
+        //         // console.log(response.data);
+        //     })
+        //     .catch(function(error) {
+        //         console.log(error);
+        //     });
     }
 </script>
 <?php

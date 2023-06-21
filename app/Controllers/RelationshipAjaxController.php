@@ -78,4 +78,6 @@ if (isset($_POST['search_goods_for_relation'])) {
 
     }
 }
-?>
+
+if (isset($_POST['store_relation'])) {
+}
