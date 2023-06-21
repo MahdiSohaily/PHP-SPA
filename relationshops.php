@@ -304,6 +304,32 @@ $status = $conn->query($status_sql);
 
 
     }
+
+
+    // A function to load all the relationships for the selected relationship
+    function load(element) {
+        const pattern = element.getAttribute("data-pattern");
+        if (!relation_active) {
+            relation_active = true;
+            pattern_id = pattern;
+            axios
+                .post(route("relations.load"), {
+                    pattern,
+                })
+                .then(function(response) {
+                    push_data(response.data);
+                    form._method = "PUT";
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+            load_pattern_ifo(form.pattern_id);
+        } else {
+            alert(
+                "شما همزمان نمی توانید ۲ رابطه را بارگذاری نمایید.(شما میتوانید با حذف همه رابطه جدید را وارد نمایید)"
+            );
+        }
+    }
 </script>
 <?php
 require_once('./views/Layouts/footer.php');
