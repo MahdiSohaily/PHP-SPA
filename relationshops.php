@@ -129,10 +129,12 @@ $status = $conn->query($status_sql);
                     </select>
                 </div>
         </div>
-        <p id="select_box_error" class="px-3 tiny-text text-green-500 hidden">
+        <p id="form_success" class="px-3 tiny-text text-green-500 hidden">
             رابطه جدید اجناس موفقانه در پایگاه داده ثبت شد!
         </p>
-
+        <p id="form_error" class="px-3 tiny-text text-red-500 hidden">
+            ذخیره سازی اطلاعات ناموفق بود!
+        </p>
         <div class="flex items-center justify-end px-4 py-3  text-right sm:px-6">
             <button type="type" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                 <i class="px-2 material-icons hover:cursor-pointer">save</i>
@@ -153,6 +155,8 @@ $status = $conn->query($status_sql);
     const selected_box = document.getElementById('selected_box');
     const resultBox = document.getElementById("search_result");
     const error_message = document.getElementById('select_box_error');
+    const form_success = document.getElementById('form_success');
+    const form_error = document.getElementById('form_error');
 
     // search for goods to define their relationship
     function search(pattern) {

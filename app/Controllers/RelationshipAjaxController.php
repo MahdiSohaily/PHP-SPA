@@ -110,8 +110,9 @@ if (isset($_POST['store_relation'])) {
                 $car_sql = "INSERT INTO patterncars (pattern_id, car_id) VALUES ('" . $last_id . "', '" . $car . "')";
                 $conn->query($car_sql);
             }
+            return true;
         } else {
-            $errors = "ذخیره سازی اطلاعات ناموفق بود";
+            return false;
         }
     } catch (\Throwable $th) {
         throw $th;
