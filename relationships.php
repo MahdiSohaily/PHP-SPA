@@ -351,6 +351,14 @@ $status = $conn->query($status_sql);
     };
 
     const load_pattern_ifo = (id) => {
+
+        // Accessing the form fields to get thier value for an ajax store operation
+        const relation_name = document.getElementById('relation_name');
+        const mode = document.getElementById('mode');
+        const price = document.getElementById('price');
+        const cars = getSelectedItems('cars');
+        const status = document.getElementById('status');
+
         const params = new URLSearchParams();
         params.append('load_pattern_ifo', 'load_pattern_ifo');
         params.append('pattern', pattern_id);
@@ -359,11 +367,29 @@ $status = $conn->query($status_sql);
             .then(function(response) {
                 const pattern_info = (response.data.pattern);
                 const pattern_info_cars = (response.data.cars);
+
+                console.log(pattern_info_cars);
+
+                relation_name.value = pattern_info.name;
+                mode.value = 'update';
+                price.value = pattern_info.price;
+
+                setSelectedItems('cars', pattern_info_cars);
+                setSelectedItems('status', pattern_info.status_id);
+
             })
             .catch(function(error) {
                 console.log(error);
             });
     };
+
+    function setSelectedItems(id, cars) {
+        for (var option of document.getElementById(id).options) {
+            if (cars.includes(option.value)) {
+                option.selected = true;
+            }
+        }
+    }
 </script>
 <?php
 require_once('./views/Layouts/footer.php');
