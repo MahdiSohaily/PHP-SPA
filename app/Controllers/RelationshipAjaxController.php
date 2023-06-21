@@ -80,4 +80,73 @@ if (isset($_POST['search_goods_for_relation'])) {
 }
 
 if (isset($_POST['store_relation'])) {
+
+    $relation_name = $_POST['relation_name'];
+    $price = $_POST['price'];
+    $cars = $_POST['cars'];
+    $status = $_POST['status'];
+    $mode = $_POST['mode'];
+    $pattern_id = $_POST['pattern_id'];
+    $selected_goods = $_POST['selected_goods'];
+    $serial = $_POST['serial'];
+
+    $selected_index = extract_id($request->input('values'));
+
+    try {
+        $selectedCars = $request->input('car_id');
+        // create the pattern record
+        $pattern = new Pattern();
+        $pattern->name = $request->input('name');
+        $pattern->price = $request->input('price');
+        $pattern->serial = $request->input('serial');
+        $pattern->status_id = $request->input('status_id');
+        $pattern->save();
+
+        $id = $pattern->id;
+
+        foreach ($selected_index as $value) {
+            $similar = new Similar();
+            $similar->pattern_id = $id;
+            $similar->nisha_id  = $value;
+            $similar->save();
+        }
+
+        foreach ($selectedCars as $car) {
+            DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
+        }
+    } catch (\Throwable $th) {
+        throw $th;
+    }
+}
+
+
+function extract_id($array)
+{
+    $selected_index = [];
+    foreach ($array as $value) {
+        array_push($selected_index, $value['id']);
+    }
+    $selected_index = array_unique($selected_index);
+    return $selected_index;
+}
+
+function toBeAdded($existing, $newComer)
+{
+    $result = [];
+    foreach ($newComer as $item) {
+        if (!in_array($item, $existing)) {
+            array_push($result, $item);
+        }
+    }
+    return $result;
+}
+function toBeDeleted($existing, $newComer)
+{
+    $result = [];
+    foreach ($existing as $item) {
+        if (!in_array($item, $newComer)) {
+            array_push($result, $item);
+        }
+    }
+    return $result;
 }
