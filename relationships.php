@@ -234,6 +234,7 @@ $status = $conn->query($status_sql);
 
     // A function to display the selected goods in the relation box
     function displaySelectedGoods() {
+        console.log(selected_goods);
         let template = '';
         for (const good of selected_goods) {
             template += `
@@ -328,29 +329,43 @@ $status = $conn->query($status_sql);
 
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
-                    selected_goods = [...selected_goods, ...response.data];
+                    push_data(response.data);
                     displaySelectedGoods();
+                    load_pattern_ifo(pattern_id);
                 })
                 .catch(function(error) {
 
                 });
-
-            // axios
-            //     .post(route("relations.load"), {
-            //         pattern,
-            //     })
-            //     .then(function(response) {
-            //         push_data(response.data);
-            //         form._method = "PUT";
-            //     })
-            //     .catch(function(error) {
-            //         console.log(error);
-            //     });
-            // load_pattern_ifo(form.pattern_id);
         } else {
             duplicate_relation.classList.remove('hidden');
         }
     }
+    const push_data = (data) => {
+        for (const item of data) {
+            remove(item.id);
+            selected_goods.push({
+                id: item.id,
+                partNumber: item.partNumber
+            });
+        }
+    };
+
+    const load_pattern_ifo = (id) => {
+        const params = new URLSearchParams();
+        params.append('load_relation', 'load_relation');
+        params.append('pattern', pattern_id);
+
+        axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+            .then(function(response) {
+                form.name = response.data.pattern.name;
+                form.price = response.data.pattern.price;
+                form.car_id = response.data.cars;
+                form.status_id = response.data.pattern.status_id;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    };
 </script>
 <?php
 require_once('./views/Layouts/footer.php');
