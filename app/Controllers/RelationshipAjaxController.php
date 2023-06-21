@@ -91,35 +91,31 @@ if (isset($_POST['store_relation'])) {
 
     $selected_index = extract_id($selected_goods);
 
-    print_r($selected_index);
-
     try {
         $selectedCars = $cars;
+        $created_at = time();
         // create the pattern record
-        $pattern = new Pattern();
-        $pattern->name = $request->input('name');
-        $pattern->price = $request->input('price');
-        $pattern->serial = $request->input('serial');
-        $pattern->status_id = $request->input('status_id');
-        $pattern->save();
+        $pattern_sql = "INSERT INTO patterns (name, price, serial, status_id, created_at)
+        VALUES ('" . $relation_name . "', '" . $price . "', '" . $serial . "', '" . $status . "', '" . $created_at . "')";
 
-        $id = $pattern->id;
+        if ($conn->query($pattern_sql) === TRUE) {
+            $last_id = $conn->insert_id;
 
-        foreach ($selected_index as $value) {
-            $similar = new Similar();
-            $similar->pattern_id = $id;
-            $similar->nisha_id  = $value;
-            $similar->save();
-        }
+            foreach ($selected_index as $value) {
+                $similar_sql = "INSERT INTO similars (pattern_id, nisha_id) VALUES ('" . $last_id . "', '" . $value . "')";
+                $conn->query($similar_sql);
+            }
 
-        foreach ($selectedCars as $car) {
-            DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
+            foreach ($selectedCars as $car) {
+                DB::insert('insert into patterncars (pattern_id , car_id ) values (?, ?)', [$id, $car]);
+            }
+        } else {
+            $errors = "ذخیره سازی اطلاعات ناموفق بود";
         }
     } catch (\Throwable $th) {
         throw $th;
     }
 }
-
 
 function extract_id($array)
 {
