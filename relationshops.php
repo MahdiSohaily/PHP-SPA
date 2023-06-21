@@ -117,6 +117,7 @@ $rates = $conn->query($sql);
 <script>
     let result = null;
     selected_goods = [];
+    let relation_active = false;
     const selected_box = document.getElementById('selected_box');
     const resultBox = document.getElementById("search_result");
 
@@ -169,6 +170,10 @@ $rates = $conn->query($sql);
         }
     }
 
+    function remove_selected() {
+
+    }
+
     // A function to display the selected goods in the relation box
 
     function displaySelectedGoods() {
@@ -179,12 +184,13 @@ $rates = $conn->query($sql);
                 <p class="text-sm font-semibold text-gray-600">
                     ` + good.partNumber + `
                 </p>
-                    <i data-id="item.id" :data-partNumber="item.partNumber" @click="remove_selected"
+                    <i data-id="` + good.id + `" data-partNumber="` + good.partNumber + `" onclick="remove_selected()"
                             class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200">do_not_disturb_on
                     </i>
                 </div>
             `;
         }
+        selected_box.innerHTML = template;
     }
 </script>
 <?php
