@@ -328,6 +328,9 @@ $status = $conn->query($status_sql);
 
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
+
+                    selected_goods = [...selected_goods, ...response.data];
+                    displaySelectedGoods();
                     console.log(response.data);
                 })
                 .catch(function(error) {

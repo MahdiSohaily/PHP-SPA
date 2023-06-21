@@ -116,21 +116,22 @@ if (isset($_POST['store_relation'])) {
 }
 
 if (isset($_POST['load_relation'])) {
-    $pattern = $_POST('pattern');
-
-    $similar_sql = "SELECT nisha_id FROM similars WHERE pattern_id='" . $created_at . "')";
+    $pattern = $_POST['pattern'];
+    $similar_sql = "SELECT nisha_id FROM similars WHERE pattern_id='" . $pattern . "'";
     $result = mysqli_query($conn, $similar_sql);
 
     $final_result = [];
     if (mysqli_num_rows($result) > 0) {
         while ($item = mysqli_fetch_assoc($result)) {
-            $nisha_sql = "SELECT id, partnumber FROM yadakshop1402.nisha WHERE id='" . $value['nisha_id'] . "')";
+            $nisha_sql = "SELECT id, partnumber FROM yadakshop1402.nisha WHERE id='" . $item['nisha_id'] . "'";
             $nisha = mysqli_query($conn, $nisha_sql);
             $data = mysqli_fetch_assoc($nisha);
-            array_push($final_result, ['id' =>  $item['id'], 'partNumber' => $item['partnumber'], 'pattern' => $data[0]['nisha_id']]);
+
+            array_push($final_result, ['id' =>  $data['id'], 'partNumber' => $data['partnumber'], 'pattern' => $item['nisha_id']]);
         }
+
+        print_r(json_encode($final_result));
     }
-    print_r($final_result);
 }
 
 function extract_id($array)
