@@ -41,13 +41,6 @@ $rates = $conn->query($sql);
 
         <div id="selected_box" class="p-3">
             <!-- selected items are going to be added here -->
-            <div v-if="form.values.length > 0" v-for="item in form.values" class="w-full flex justify-between items-center shadow-md hover:shadow-lg rounded-md px-4 py-3 mb-2 border-1 border-gray-300">
-                <p class="text-sm font-semibold text-gray-600">
-                    {{ item.partNumber }}
-                </p>
-                <i :data-id="item.id" :data-partNumber="item.partNumber" @click="remove_selected" class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200">do_not_disturb_on
-                </i>
-            </div>
         </div>
     </div>
 
@@ -170,9 +163,12 @@ $rates = $conn->query($sql);
         }
     }
 
-    function remove_selected() {
-        alert('click');
-    }
+    const remove_selected = (id) => {
+        selected_goods = selected_goods.filter((item) => {
+            return item.id != id;
+        });
+        displaySelectedGoods();
+    };
 
     // A function to display the selected goods in the relation box
 
@@ -184,7 +180,7 @@ $rates = $conn->query($sql);
                 <p class="text-sm font-semibold text-gray-600">
                     ` + good.partNumber + `
                 </p>
-                    <i data-id="` + good.id + `" data-partNumber="` + good.partNumber + `" onclick="remove_selected()"
+                    <i data-id="` + good.id + `" data-partNumber="` + good.partNumber + `" onclick="remove_selected(` + good.id + `)"
                             class="material-icons add text-red-600 cursor-pointer rounded-circle hover:bg-gray-200">do_not_disturb_on
                     </i>
                 </div>
