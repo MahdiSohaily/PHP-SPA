@@ -75,32 +75,31 @@ $status = $conn->query($status_sql);
 
         <div class="p-3">
             <form action="" method="post" onsubmit="event.preventDefault();createRelation()">
-
-                <input type="text" name="form" value="update" hidden>
+                <input id="mode" type="text" name="form" value="create" hidden>
                 <div class="col-span-12 sm:col-span-4 mb-5">
                     <label class="block font-medium text-sm text-gray-700">
                         اسم رابطه
                     </label>
-                    <input name="relation_name" value="" class="border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" required id="serial" type="text" />
+                    <input name="relation_name" value="" class="border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" required id="relation_name" type="text" />
                     <p class="mt-2"></p>
                 </div>
                 <div class="col-span-12 sm:col-span-4 mb-5">
                     <label class="block font-medium text-sm text-gray-700">
                         قیمت
                     </label>
-                    <input name="price" value="" class="ltr border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="serial" type="text" />
+                    <input name="price" value="" class="ltr border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
                     <p class="mt-2"></p>
                 </div>
                 <div class="col-span-12 sm:col-span-4 mb-5">
                     <label for="cars">
                         خودرو های مرتبط
                     </label>
-                    <select type="cars" multiple class="p-2 border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" autocomplete="username" v-model="form.car_id" id="cars">
+                    <select type="cars" multiple class="p-2 border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="cars">
                         <?php
                         if (mysqli_num_rows($cars) > 0) {
                             while ($item = mysqli_fetch_assoc($cars)) {
                         ?>
-                                <option v-for="item in cars" value="<?php echo $item['id'] ?>" class="text-sm">
+                                <option value="<?php echo $item['id'] ?>" class="text-sm">
                                     <?php echo $item['name'] ?>
                                 </option>
 
@@ -112,7 +111,7 @@ $status = $conn->query($status_sql);
                     <label for="cars">
                         وضعیت
                     </label>
-                    <select type="status" class="border-1 p-2 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" autocomplete="username" v-model="form.status_id" id="status">
+                    <select type="status" class="border-1 p-2 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="status">
                         <option value="" class="text-sm">وضعیت مورد نظر خود برای رابطه را انتخاب کنید!</option>
                         <?php
                         if (mysqli_num_rows($status) > 0) {
@@ -247,7 +246,19 @@ $status = $conn->query($status_sql);
 
     // A function to create the relationship
     function createRelation() {
+        var params = new URLSearchParams();
+        params.append('search_goods_for_relation', 'search_goods_for_relation');
+        params.append('selected_goods', selected_goods);
+        params.append('pattern', pattern);
 
+        axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+            .then(function(response) {
+                resultBox.innerHTML = response.data;
+                // console.log(response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     }
 </script>
 <?php
