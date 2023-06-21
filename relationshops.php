@@ -328,7 +328,7 @@ $status = $conn->query($status_sql);
 
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
-                    
+                    console.log(response.data);
                 })
                 .catch(function(error) {
 
