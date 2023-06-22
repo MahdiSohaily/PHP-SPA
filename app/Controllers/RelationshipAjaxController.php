@@ -134,19 +134,22 @@ if (isset($_POST['store_relation'])) {
                 }
             }
 
-            $db_cars = DB::table('patterncars')->select('car_id')->where('pattern_id', $pattern_id)->get();
+            $cars_sql = "SELECT car_id  FROM patterncars WHERE pattern_id ='" . $pattern_id . "'";
+            $all_cars = $conn->query($cars_sql);
 
             $current_cars = [];
-            foreach ($db_cars as $item) {
-                array_push($current_cars, $item->car_id);
+            if (mysqli_num_rows($all_cars) > 0) {
+                while ($item = mysqli_fetch_assoc($all_cars)) {
+                    array_push($current_cars, $item['car_id']);
+                }
             }
 
-            $toAdd = $this->toBeAdded($current, $selected_index);
-            $toDelete = $this->toBeDeleted($current, $selected_index);
+            $toAdd = toBeAdded($current, $selected_index);
+            $toDelete = toBeDeleted($current, $selected_index);
 
-            $selectedCars = $request->input('car_id');
-            $carsToAdd = $this->toBeAdded($current_cars, $selectedCars);
-            $carsToDelete = $this->toBeDeleted($current_cars, $selectedCars);
+            $selectedCars =  $cars;
+            $carsToAdd = toBeAdded($current_cars, $selectedCars);
+            $carsToDelete = toBeDeleted($current_cars, $selectedCars);
 
             try {
                 // create the pattern record
