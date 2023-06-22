@@ -5,54 +5,32 @@ require_once('./views/Layouts/header.php');
 $sql = "SELECT * FROM rates ORDER BY amount ASC";
 $rates = $conn->query($sql);
 ?>
-<div class="py-12">
-    <div class="max-w-full mx-auto sm:px-6 lg:px-8">
-        <div>
-            <div class="p-6 lg:p-8 flex justify-center">
-                <input type="text" name="serial" id="serial" class="rounded-md py-3 text-center w-96 border-2 bg-gray-100" min="0" max="30" onkeyup="search(this.value)" placeholder="... کد فنی قطعه را وارد کنید" />
+<div class="rtl max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
+    <FormRelation @submitted="LoadPrice">
+        <template #form>
+            <!-- Name -->
+            <div class="pb-2">
+                <InputLabel for="customer" value="مشتری" />
+                <TextInput id="customer" v-model="form.customer" type="number" class="mt-1 block w-full" autocomplete="customer" />
+                <InputError :message="form.errors.customer" class="mt-2" />
             </div>
-            <div class="flex justify-center items-center pb-6">
-                <label for="mode" class="px-2">جستجوی پیشرفته</label>
-                <input type="checkbox" name="super" id="mode" class="rounded-md " />
+            <div class="pb-2">
+                <InputLabel for="code" value="کدهای مدنظر" />
+                <textarea rows="7" id="code" v-model="form.code" type="text" class="ltr mt-1 shadow-sm block w-full rounded-md border-gray-300" placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید">
+                                    </textarea>
+                <InputError :message="form.errors.code" class="mt-2" />
             </div>
-            <div class="bg-gray-100 bg-opacity-25">
-                <div class="max-w-7xl overflow-x-auto mx-auto">
-                    <table class="min-w-full text-left text-sm font-light">
-                        <thead class="font-medium dark:border-neutral-500">
-                            <tr class="bg-green-700">
-                                <th scope="col" class="px-3 py-3 bg-black text-white w-52 text-center">
-                                    شماره فنی
-                                </th>
-                                <th scope="col" class="px-3 py-3 text-white w-20">
-                                    دلار پایه
-                                </th>
-                                <th scope="col" class="px-3 py-3 text-white border-black border-r-2">
-                                    +10%
-                                </th>
-                                <?php
-                                if ($rates->num_rows > 0) {
-                                    // output data of each row
-                                    while ($rate = $rates->fetch_assoc()) {
-                                        echo "<th class='" . $rate['status'] . " px-3 py-3 text-white text-center ' scope='col'>" . $rate['amount'] . "</th>";
-                                    }
-                                }
-                                ?>
-                                <th scope="col" class="px-3 py-3 text-white w-32 text-center">
-                                    عملیات
-                                </th>
-                                <th scope="col" class="px-3 py-3 text-white">
-                                    وزن
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="results">
+        </template>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+        <template #actions>
+            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                Saved.
+            </ActionMessage>
+
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                جستجو </PrimaryButton>
+        </template>
+    </FormRelation>
 </div>
 <script>
 </script>
