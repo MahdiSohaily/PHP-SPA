@@ -150,42 +150,41 @@ if (isset($_POST['store_relation'])) {
             $selectedCars =  $cars;
             $carsToAdd = toBeAdded($current_cars, $selectedCars);
             $carsToDelete = toBeDeleted($current_cars, $selectedCars);
+            $created_at = $created_at = date('d-m-y h:i:s');
 
-            try {
-                $created_at = $created_at = date('d-m-y h:i:s');
-
-                $update_pattern_sql = "UPDATE patterns SET name= '" . $relation_name . "' , price = '" . $price . "',
+            $update_pattern_sql = "UPDATE patterns SET name= '" . $relation_name . "', price = '" . $price . "',
                 serial = '" . $serial . "' , status_id =  '" . $status . "', created_at = '" . $created_at . "' WHERE id = '$pattern_id'";
-                $conn->query($update_pattern_sql);
+            $conn->query($update_pattern_sql);
 
-                if (count($toAdd) > 0) {
-                    foreach ($toAdd as $value) {
-                        $similar_sql = "INSERT INTO similars (pattern_id, nisha_id) VALUES ('" . $pattern_id . "', '" . $value . "')";
-                        $conn->query($similar_sql);
-                    }
+            if (count($toAdd) > 0) {
+                foreach ($toAdd as $value) {
+                    $similar_sql = "INSERT INTO similars (pattern_id, nisha_id) VALUES ('" . $pattern_id . "', '" . $value . "')";
+                    $conn->query($similar_sql);
                 }
-                if (count($toDelete)) {
-                    foreach ($toDelete as $value) {
-                        $delete_similar_sql = "DELETE FROM similars WHERE nisha_id= '" . $value . "'";
-                        $conn->query($delete_similar_sql);
-                    }
-                }
-
-                if (count($carsToAdd) > 0) {
-                    foreach ($carsToAdd as $value) {
-                        $cars_sql = "INSERT INTO patterncars (pattern_id, car_id) VALUES ('" . $pattern_id . "', '" . $value . "')";
-                        $conn->query($similar_sql);
-                    }
-                }
-                if (count($carsToDelete)) {
-                    foreach ($carsToDelete as $value) {
-                        $delete_cars_sql = "DELETE FROM patterncars WHERE car_id= '" . $value . "'";
-                        $conn->query($delete_cars_sql);
-                    }
-                }
-            } catch (\Throwable $th) {
-                throw $th;
             }
+            if (count($toDelete)) {
+                foreach ($toDelete as $value) {
+                    $delete_similar_sql = "DELETE FROM similars WHERE nisha_id= '" . $value . "'";
+                    $conn->query($delete_similar_sql);
+                }
+            }
+
+            if (count($carsToAdd) > 0) {
+                foreach ($carsToAdd as $value) {
+                    $cars_sql = "INSERT INTO patterncars (pattern_id, car_id) VALUES ('" . $pattern_id . "', '" . $value . "')";
+                    $conn->query($cars_sql);
+                }
+            }
+            if (count($carsToDelete)) {
+                foreach ($carsToDelete as $value) {
+                    $delete_cars_sql = "DELETE FROM patterncars WHERE car_id= '" . $value . "'";
+                    $conn->query($delete_cars_sql);
+                }
+            }
+
+            echo 'true';
+        } else {
+            echo 'false';
         }
     }
 }

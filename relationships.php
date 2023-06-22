@@ -291,7 +291,6 @@ $status = $conn->query($status_sql);
         if (selected_goods.length > 0) {
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
-                    console.log(response.data);
                     if (response.data == 'true') {
                         form_success.classList.remove('hidden');
                         setTimeout(() => {
