@@ -1,9 +1,5 @@
 <?php
-require_once './config/config.php';
-require_once './database/connect.php';
 require_once('./views/Layouts/header.php');
-$sql = "SELECT * FROM rates ORDER BY amount ASC";
-$rates = $conn->query($sql);
 ?>
 <div class="rtl max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
 
