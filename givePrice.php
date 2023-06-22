@@ -7,7 +7,7 @@ $rates = $conn->query($sql);
 ?>
 <div class="rtl max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
 
-    <form action="" method="post">
+    <form action="showPriceReports.php" method="post">
         <div class="">
             <input type="text" name="form" value="update" hidden>
             <div class="col-span-6 sm:col-span-4">
