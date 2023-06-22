@@ -449,3 +449,8 @@ select[data-multi-select-plugin] {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10000;
 }
+
+::placeholder {
+  font-size: 13px;
+  text-align: right;
+}

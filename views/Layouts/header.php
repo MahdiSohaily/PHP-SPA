@@ -52,7 +52,7 @@ require_once './database/connect.php';
                         <i class="px-2 material-icons hover:cursor-pointer">sync</i>
                         تعریف رابطه اجناس
                     </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="route('price.give')">
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../../givePrice.php">
                         <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
                         قیمت دهی
                     </a>
