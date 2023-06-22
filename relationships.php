@@ -149,12 +149,13 @@ $status = $conn->query($status_sql);
 </div>
 </div>
 <script>
+    // Container Global Variables
     let serial = null;
     let pattern_id = null;
     selected_goods = [];
     let relation_active = false;
 
-
+    //Global Elements Container 
     const selected_box = document.getElementById('selected_box');
     const resultBox = document.getElementById("search_result");
     const error_message = document.getElementById('select_box_error');
@@ -184,7 +185,6 @@ $status = $conn->query($status_sql);
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
                     resultBox.innerHTML = response.data;
-                    // console.log(response.data);
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -234,7 +234,6 @@ $status = $conn->query($status_sql);
 
     // A function to display the selected goods in the relation box
     function displaySelectedGoods() {
-        console.log(selected_goods);
         let template = '';
         for (const good of selected_goods) {
             template += `
@@ -251,6 +250,8 @@ $status = $conn->query($status_sql);
         selected_box.innerHTML = template;
     }
 
+    // this function is used to get all the selected items using Javascript and push them into an array
+    // and prepare them for sending to the server
     function getSelectedItems(id) {
         let selected = [];
         for (var option of document.getElementById(id).options) {
@@ -290,7 +291,6 @@ $status = $conn->query($status_sql);
         if (selected_goods.length > 0) {
             axios.post("./app/Controllers/RelationshipAjaxController.php", params)
                 .then(function(response) {
-                    console.log(response.data);
                     if (response.data == 'true') {
                         form_success.classList.remove('hidden');
                         setTimeout(() => {
@@ -312,7 +312,6 @@ $status = $conn->query($status_sql);
 
 
     }
-
 
     // A function to load all the relationships for the selected relationship
     function load(element) {
@@ -340,6 +339,8 @@ $status = $conn->query($status_sql);
             duplicate_relation.classList.remove('hidden');
         }
     }
+
+    //This function helps to add all relations of a relationship into the selected items list
     const push_data = (data) => {
         for (const item of data) {
             remove(item.id);
@@ -350,6 +351,7 @@ $status = $conn->query($status_sql);
         }
     };
 
+    // This function is used to load an existing relationship information and fill out form fields with information
     const load_pattern_ifo = (id) => {
 
         // Accessing the form fields to get thier value for an ajax store operation
@@ -368,8 +370,6 @@ $status = $conn->query($status_sql);
                 const pattern_info = (response.data.pattern);
                 const pattern_info_cars = (response.data.cars);
 
-                console.log(pattern_info_cars);
-
                 relation_name.value = pattern_info.name;
                 mode.value = 'update';
                 price.value = pattern_info.price;
@@ -383,6 +383,7 @@ $status = $conn->query($status_sql);
             });
     };
 
+    // This function helps to set the selected items from select elements when we load a predefined relationship
     function setSelectedItems(id, cars) {
         for (var option of document.getElementById(id).options) {
             if (cars.includes(option.value)) {
