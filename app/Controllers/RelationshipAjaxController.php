@@ -88,7 +88,7 @@ if (isset($_POST['store_relation'])) {
     $pattern_id = $_POST['pattern_id'];
     $selected_goods = json_decode($_POST['selected_goods']);
     $serial = $_POST['serial'];
-    
+
     if ($mode === 'create') {
         $selected_index = extract_id($selected_goods);
 
@@ -117,7 +117,74 @@ if (isset($_POST['store_relation'])) {
     }
 
     if ($mode === 'update') {
-        echo 'me are in the update mode';
+
+        $pattern_sql = "SELECT *  FROM patterns WHERE id ='" . $pattern_id . "'";
+        $is_exist = $conn->query($pattern_sql);
+
+        if ($is_exist) {
+            $similar_sql = "SELECT nisha_id  FROM similars WHERE pattern_id ='" . $pattern_id . "'";
+            $all_simillers = $conn->query($similar_sql);
+
+            $selected_index = extract_id($selected_goods);
+
+            $current = [];
+            if (mysqli_num_rows($all_simillers) > 0) {
+                while ($item = mysqli_fetch_assoc($all_simillers)) {
+                    array_push($current, $item['nisha_id']);
+                }
+            }
+
+            $db_cars = DB::table('patterncars')->select('car_id')->where('pattern_id', $pattern_id)->get();
+
+            $current_cars = [];
+            foreach ($db_cars as $item) {
+                array_push($current_cars, $item->car_id);
+            }
+
+            $toAdd = $this->toBeAdded($current, $selected_index);
+            $toDelete = $this->toBeDeleted($current, $selected_index);
+
+            $selectedCars = $request->input('car_id');
+            $carsToAdd = $this->toBeAdded($current_cars, $selectedCars);
+            $carsToDelete = $this->toBeDeleted($current_cars, $selectedCars);
+
+            try {
+                // create the pattern record
+                $pattern = Pattern::find($pattern_id);
+                $pattern->name = $request->input('name');
+                $pattern->price = $request->input('price');
+                $pattern->serial = $request->input('serial');
+                $pattern->status_id = $request->input('status_id');
+                $pattern->created_at = Carbon::now();
+                $pattern->save();
+                if (count($toAdd) > 0) {
+                    foreach ($toAdd as $value) {
+                        $similar = new Similar();
+                        $similar->pattern_id = $pattern_id;
+                        $similar->nisha_id  = $value;
+                        $similar->save();
+                    }
+                }
+                if (count($toDelete)) {
+                    foreach ($toDelete as $value) {
+                        DB::table('similars')->where('nisha_id', $value)->delete();
+                    }
+                }
+
+                if (count($carsToAdd) > 0) {
+                    foreach ($carsToAdd as $value) {
+                        DB::insert('insert into patterncars (pattern_id , car_id) values (?, ?)', [$pattern_id, $value]);
+                    }
+                }
+                if (count($carsToDelete)) {
+                    foreach ($carsToDelete as $value) {
+                        DB::table('patterncars')->where('car_id', $value)->delete();
+                    }
+                }
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
     }
 }
 
