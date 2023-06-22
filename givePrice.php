@@ -4,6 +4,7 @@ require_once('./views/Layouts/header.php');
 <div class="rtl max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
 
     <form action="showPriceReports.php" method="post">
+        <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
         <div class="">
             <div class="col-span-6 sm:col-span-4">
                 <label for="customer" class="block font-medium text-sm text-gray-700">
