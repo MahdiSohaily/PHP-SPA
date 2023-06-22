@@ -181,7 +181,6 @@ if (isset($_POST['store_relation'])) {
                     $conn->query($delete_cars_sql);
                 }
             }
-
             echo 'true';
         } else {
             echo 'false';
