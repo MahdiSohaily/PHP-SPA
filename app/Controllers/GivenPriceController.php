@@ -26,10 +26,17 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
         'existing' => [],
     ];
 
-
     $explodedCodes = array_map(function ($code) {
-        return preg_replace('/[^a-z0-9]/i', '', $code);;
+        if (strlen($code) > 0) {
+            return  preg_replace('/[^a-z0-9]/i', '', $code);
+        }
     }, $explodedCodes);
+
+    $explodedCodes = array_filter($explodedCodes, function ($code) {
+        if (strlen($code) > 0) {
+            return  $code;
+        }
+    });
 
 
     foreach ($explodedCodes as $code) {
@@ -206,16 +213,18 @@ function relations($conn, $id)
         $sql = "SELECT * FROM yadakshop1402.nisha WHERE id = '" . $id . "'";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
-            $relations = mysqli_fetch_assoc($result);
+            $relations[0] = mysqli_fetch_assoc($result);
         }
     }
+
 
     $existing = [];
     $stockinfo = [];
     $sortedGoods = [];
     foreach ($relations as $relation) {
-        $existing[$relation['partnumber']] = exist($conn, $relation['id'])['final'];
-        $stockinfo[$relation['partnumber']] = exist($conn, $relation['id'])['stockInfo'];
+        $data = exist($conn, $relation['id']);
+        $existing[$relation['partnumber']] =  $data['final'];
+        $stockinfo[$relation['partnumber']] =  $data['stockInfo'];
         $sortedGoods[$relation['partnumber']] = $relation;
     }
 
