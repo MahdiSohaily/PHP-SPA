@@ -254,7 +254,7 @@ function givenPrice($conn, $code, $relation_exist = null)
     }
 
 
-    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber = '" . $code . "' ORDER BY created_at DESC LIMIT 7";
+    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber LIKE '" . $code . "%' ORDER BY created_at DESC LIMIT 7";
     $result = mysqli_query($conn, $sql);
 
 
@@ -278,8 +278,7 @@ function givenPrice($conn, $code, $relation_exist = null)
 
 function estelam($conn, $code)
 {
-
-    $sql = "SELECT * FROM callcenter.estelam INNER JOIN yadakshop1402.seller ON seller.id = estelam.seller WHERE codename = '" . $code . "' ORDER BY time DESC LIMIT 7";
+    $sql = "SELECT * FROM callcenter.estelam INNER JOIN yadakshop1402.seller ON seller.id = estelam.seller WHERE codename LIKE '" . $code . "%' ORDER BY time DESC LIMIT 7";
     $result = mysqli_query($conn, $sql);
 
 
