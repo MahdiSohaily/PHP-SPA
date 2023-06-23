@@ -13,7 +13,7 @@ if (isset($_POST['givenPrice'])) {
         $isValidCustomer = true;
 
         $completeCode = $code;
-        $finalResult = setup_loading($conn, $customer, $completeCode, $notification_id);
+        $finalResult = (setup_loading($conn, $customer, $completeCode, $notification_id));
     }
 }
 
@@ -95,9 +95,7 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
         }
     }
 
-    return json_encode($data);
-
-    [
+    return ([
         'explodedCodes' => $explodedCodes,
         'not_exist' => $results_arry['not_exist'],
         'existing' => $data,
@@ -105,25 +103,10 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
         'completeCode' => $completeCode,
         'notification' => $notification,
         'rates' => getSelectedRates($conn)
-    ];
+    ]);
 
     // return Inertia::render('Price/Partials/Load', );
 }
-
-// function validateRequest($all_data)
-// {
-//     Validator::make($all_data, [
-//         'customer' => 'required|exists:callcenter.customer,id',
-//         'code' => 'required|string',
-
-//     ], [
-//         'required' => "وارد کردن :attribute الزامی می باشد.",
-//         'exists' => ":attribute وارد شده در سیستم موجود نیست."
-//     ], [
-//         'customer' => 'مشتری',
-//         'code' => 'کد'
-//     ])->validate();
-// }
 
 function getSelectedRates($conn)
 {
@@ -446,49 +429,6 @@ function getMax($array)
 //     }
 
 //     return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
-// }
-
-
-
-// function test($id = '277776', $brand = 'GEN')
-// {
-//     $brand_id = DB::table('brand')->select('id')->where('brand.name', '=', $brand)
-//         ->first();
-
-//     $result =
-//         DB::table('qtybank')
-//         ->select('qtybank.id', 'qtybank.qty', 'seller.name')
-//         ->join('seller', 'qtybank.seller', '=', 'seller.id')
-//         ->where('codeid', $id)
-//         ->where('brand', $brand_id->id)
-//         ->get();
-
-//     $existing_record = [];
-//     $customers = [];
-//     foreach ($result as $key => $item) {
-//         $out = $this->out($item->id) ? (int) $this->out($item->id)->qty : 0;
-//         $item->qty = (int)($item->qty) - $out;
-
-//         array_push($existing_record, $item);
-//         array_push($customers, $item->name);
-//     }
-
-//     $customers = array_unique($customers);
-
-//     $final_result = [];
-
-//     foreach ($customers as $customer) {
-//         $total = 0;
-//         foreach ($existing_record as $record) {
-//             if ($customer === $record->name) {
-//                 $total += $record->qty;
-//             }
-//         }
-
-//         $final_result[$customer] = $total;
-//     }
-
-//     return $final_result;
 // }
 
 // function getCustomerName(Request $request)
