@@ -82,13 +82,13 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
                     if (!in_array($relation_exist, $relation_id)) {
                         array_push($relation_id, $relation_exist);
                         $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
-                        $data[$code][$item['partnumber']]['relation'] = relations($item['id']);
+                        $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
                         // $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber, $relation_exist);
                         // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
                     }
                 } else {
                     $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
-                    $data[$code][$item['partnumber']]['relation'] = relations($item['id']);
+                    $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
                     // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
                     // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
                 }
@@ -190,29 +190,42 @@ function info($conn, $id)
     return $info ? ['relationInfo' => $info, 'cars' => $cars] : false;
 }
 
-function relations($id)
+function relations($conn, $id)
 {
-    $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
-    $relations = false;
+    $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '" . $id . "'";
+    $result = mysqli_query($conn, $sql);
+
+    $isInRelation = null;
+    if (mysqli_num_rows($result) > 0) {
+        $isInRelation = mysqli_fetch_assoc($result);
+    }
+
+    $relations = [];
 
     if ($isInRelation) {
 
-        $relations = DB::table('yadakshop1402.nisha')
-            ->join('similars', 'nisha.id', '=', 'similars.nisha_id')
-            ->select('yadakshop1402.nisha.*')
-            ->where('similars.pattern_id', $isInRelation->pattern_id)
-            ->get();
+        $sql = "SELECT yadakshop1402.nisha.* FROM yadakshop1402.nisha INNER JOIN similars ON similars.nisha_id = nisha.id WHERE similars.pattern_id = '" . $isInRelation['pattern_id'] . "'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while ($info = mysqli_fetch_assoc($result)) {
+                array_push($relations, $info);
+            }
+        }
     } else {
-        $relations = DB::table('yadakshop1402.nisha')->where('id', $id)->get();
+        $sql = "SELECT * FROM yadakshop1402.nisha WHERE id = '" . $id . "'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $relations = mysqli_fetch_assoc($result);
+        }
     }
 
     $existing = [];
     $stockinfo = [];
     $sortedGoods = [];
     foreach ($relations as $relation) {
-        $existing[$relation->partnumber] = $this->exist($relation->id)['final'];
-        $stockinfo[$relation->partnumber] = $this->exist($relation->id)['stockInfo'];
-        $sortedGoods[$relation->partnumber] = $relation;
+        $existing[$relation['partnumber']] = exist($relation['id'])['final'];
+        $stockinfo[$relation['partnumber']] = exist($relation['id'])['stockInfo'];
+        $sortedGoods[$relation['partnumber']] = $relation;
     }
 
     arsort($existing);
@@ -317,42 +330,42 @@ function relations($id)
 //     return $final_result;
 // }
 
-// function exist($id)
-// {
-//     $result =
-//         DB::table('yadakshop1402.qtybank')
-//         ->join('yadakshop1402.brand', 'brand.id', '=', 'qtybank.brand')
-//         ->select('yadakshop1402.qtybank.id', 'codeid', 'brand.name', 'qty')
-//         ->where('codeid', $id)
-//         ->get();
-//     $brands = [];
-//     $amount = [];
-//     $stockInfo = [];
+function exist($id)
+{
+    $result =
+        DB::table('yadakshop1402.qtybank')
+        ->join('yadakshop1402.brand', 'brand.id', '=', 'qtybank.brand')
+        ->select('yadakshop1402.qtybank.id', 'codeid', 'brand.name', 'qty')
+        ->where('codeid', $id)
+        ->get();
+    $brands = [];
+    $amount = [];
+    $stockInfo = [];
 
-//     foreach ($result as $key => $value) {
-//         $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
-//         $value->qty = (int)($value->qty) - $out;
+    foreach ($result as $key => $value) {
+        $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
+        $value->qty = (int)($value->qty) - $out;
 
-//         array_push($brands, $value->name);
-//     }
-//     $brands = array_unique($brands);
+        array_push($brands, $value->name);
+    }
+    $brands = array_unique($brands);
 
-//     foreach ($brands as $key => $value) {
-//         $item = $value;
-//         $total = 0;
-//         foreach ($result as $key => $value) {
-//             if ($item == $value->name) {
-//                 $total += $value->qty;
-//             }
-//             $stockInfo[$value->name] =  $this->stockInfo($id, $value->name);
-//         }
+    foreach ($brands as $key => $value) {
+        $item = $value;
+        $total = 0;
+        foreach ($result as $key => $value) {
+            if ($item == $value->name) {
+                $total += $value->qty;
+            }
+            $stockInfo[$value->name] =  $this->stockInfo($id, $value->name);
+        }
 
-//         array_push($amount, $total);
-//     }
-//     $final = array_combine($brands, $amount);
-//     arsort($final);
-//     return ['stockInfo' => $stockInfo, 'final' => $final];
-// }
+        array_push($amount, $total);
+    }
+    $final = array_combine($brands, $amount);
+    arsort($final);
+    return ['stockInfo' => $stockInfo, 'final' => $final];
+}
 
 // function store(Request $request)
 // {
