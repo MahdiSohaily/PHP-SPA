@@ -83,14 +83,13 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
                         array_push($relation_id, $relation_exist);
                         $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
                         $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
-                        // $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber, $relation_exist);
-                        // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
+                        $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, $item['partnumber'], $relation_exist);
+                        $data[$code][$item['partnumber']]['estelam'] =  estelam($conn, $item['partnumber']);
                     }
                 } else {
                     $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
                     $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
-                    // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
-                    // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
+                    $data[$code][$item['partnumber']]['estelam'] = estelam($conn, $item['partnumber']);
                 }
             }
         }
@@ -239,48 +238,64 @@ function relations($conn, $id)
     return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stockInfo' => $stockinfo];
 }
 
-// function givenPrice($code, $relation_exist = null)
-// {
-//     $ordared_price = null;
-//     if ($relation_exist) {
-//         $ordared_price = DB::table('patterns')
-//             ->select('patterns.price', 'patterns.created_at')
-//             ->where('id', $relation_exist)->first();
-//         $ordared_price->ordered = true;
-//     }
-
-//     $givenPrices = DB::table('prices')
-//         ->join('callcenter.customer', 'customer.id', '=', 'prices.customer_id')
-//         ->where('partnumber', 'like', "$code%")
-//         ->orderBy('created_at', 'desc')
-//         ->limit(7)->get();
+function givenPrice($conn, $code, $relation_exist = null)
+{
+    $ordared_price = [];
 
 
-//     $unsortedData = [...$givenPrices, $ordared_price];
-//     if ($relation_exist) {
-//         usort($unsortedData, function ($a, $b) {
-//             return $a->created_at < $b->created_at;
-//         });
-//     }
-//     $final_data = $relation_exist ? $unsortedData : $givenPrices;
+    if ($relation_exist) {
+        $out_sql = "SELECT patterns.price, patterns.created_at FROM patterns WHERE id = '" . $relation_exist . "'";
+        $out_result = mysqli_query($conn, $out_sql);
 
-//     return  $final_data;
-// }
+        if (mysqli_num_rows($out_result) > 0) {
+            $ordared_price = mysqli_fetch_assoc($out_result);
+        }
+        $ordared_price['ordered'] = true;
+    }
 
-// function estelam($code)
-// {
-//     $estelam = DB::table('callcenter.estelam')
-//         ->join('yadakshop1402.seller', 'seller.id', '=', 'estelam.seller')
-//         ->where('codename', 'like', "$code%")
-//         ->orderBy('time', 'desc')
-//         ->limit(7)->get();
 
-//     return $estelam;
-// }
+    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber = '" . $code . "' ORDER BY created_at DESC LIMIT 7";
+    $result = mysqli_query($conn, $sql);
+
+
+    $givenPrices = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($item = mysqli_fetch_assoc($result)) {
+            array_push($givenPrices, $item);
+        }
+    }
+
+    $unsortedData = [...$givenPrices, $ordared_price];
+    if ($relation_exist) {
+        usort($unsortedData, function ($a, $b) {
+            return $a['created_at'] < $b['created_at'];
+        });
+    }
+    $final_data = $relation_exist ? $unsortedData : $givenPrices;
+
+    return  $final_data;
+}
+
+function estelam($conn, $code)
+{
+
+    $sql = "SELECT * FROM callcenter.estelam INNER JOIN yadakshop1402.seller ON seller.id = estelam.seller WHERE codename = '" . $code . "' ORDER BY time DESC LIMIT 7";
+    $result = mysqli_query($conn, $sql);
+
+
+    $estelam = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($item = mysqli_fetch_assoc($result)) {
+            array_push($estelam, $item);
+        }
+    }
+
+    return $estelam;
+}
 
 function out($conn, $id)
 {
-    $out_sql = "SELECT qty FROM yadakshop1402.nisha WHERE qtyid = '" . $id . "'";
+    $out_sql = "SELECT qty FROM yadakshop1402.exitrecord WHERE qtyid = '" . $id . "'";
     $out_result = mysqli_query($conn, $out_sql);
 
     $result = null;
@@ -293,7 +308,7 @@ function out($conn, $id)
 function stockInfo($conn, $id, $brand)
 {
 
-    $stockInfo_sql = "SELECT id FROM yadakshop1402.nisha WHERE brand.name = '" . $brand . "'";
+    $stockInfo_sql = "SELECT id FROM yadakshop1402.brand WHERE brand.name = '" . $brand . "'";
     $out_result = mysqli_query($conn, $stockInfo_sql);
 
     $brand_id = null;
@@ -301,7 +316,7 @@ function stockInfo($conn, $id, $brand)
         $brand_id = mysqli_fetch_assoc($out_result);
     }
 
-    $qtybank_sql = "SELECT qtybank.id, qtybank.qty, seller.name FROM yadakshop1402.qtybank INNER JOIN yadakshop1402.seller ON qtybank.seller = seller.id WHERE codeid = '" . $$id . "' AND brand= '" . $brand_id['id'] . "'";
+    $qtybank_sql = "SELECT qtybank.id, qtybank.qty, seller.name FROM yadakshop1402.qtybank INNER JOIN yadakshop1402.seller ON qtybank.seller = seller.id WHERE codeid = '" . $id . "' AND brand= '" . $brand_id['id'] . "'";
     $qtybank_data = mysqli_query($conn, $qtybank_sql);
 
     $result = [];
@@ -332,8 +347,8 @@ function stockInfo($conn, $id, $brand)
     foreach ($customers as $customer) {
         $total = 0;
         foreach ($existing_record as $record) {
-            if ($customer === $record->name) {
-                $total += $record->qty;
+            if ($customer === $record['name']) {
+                $total += $record['qty'];
             }
         }
 
@@ -364,9 +379,9 @@ function exist($conn, $id)
     foreach ($result as $key => $value) {
         $out_data = out($conn, $value['id']);
         $out =  $out_data ? (int) $out_data['qty'] : 0;
-        $value->qty = (int)($value['qty']) - $out;
+        $value['qty'] = (int)($value['qty']) - $out;
 
-        array_push($brands, $value->name);
+        array_push($brands, $value['name']);
     }
     $brands = array_unique($brands);
 
