@@ -293,34 +293,36 @@ function out($conn, $id)
 function stockInfo($conn, $id, $brand)
 {
 
-    $out_sql = "SELECT id FROM yadakshop1402.nisha WHERE brand.name = '" . $brand . "'";
-    $out_result = mysqli_query($conn, $out_sql);
+    $stockInfo_sql = "SELECT id FROM yadakshop1402.nisha WHERE brand.name = '" . $brand . "'";
+    $out_result = mysqli_query($conn, $stockInfo_sql);
 
     $brand_id = null;
     if (mysqli_num_rows($out_result) > 0) {
-        $result = mysqli_fetch_assoc($out_result);
+        $brand_id = mysqli_fetch_assoc($out_result);
     }
-    return $result;
 
-    $brand_id = DB::table('yadakshop1402.brand')->select('id')->where('brand.name', '=', $brand)
-        ->first();
+    $qtybank_sql = "SELECT qtybank.id, qtybank.qty, seller.name FROM yadakshop1402.qtybank INNER JOIN yadakshop1402.seller ON qtybank.seller = seller.id WHERE codeid = '" . $$id . "' AND brand= '" . $brand_id['id'] . "'";
+    $qtybank_data = mysqli_query($conn, $qtybank_sql);
 
-    $result =
-        DB::table('yadakshop1402.qtybank')
-        ->select('qtybank.id', 'qtybank.qty', 'seller.name')
-        ->join('yadakshop1402.seller', 'qtybank.seller', '=', 'seller.id')
-        ->where('codeid', $id)
-        ->where('brand', $brand_id->id)
-        ->get();
+    $result = [];
+
+    if (mysqli_num_rows($qtybank_data) > 0) {
+        while ($item = mysqli_fetch_assoc($qtybank_data)) {
+            array_push($result, $item);
+        }
+    }
 
     $existing_record = [];
     $customers = [];
     foreach ($result as $key => $item) {
-        $out = $this->out($item->id) ? (int) $this->out($item->id)->qty : 0;
-        $item->qty = (int)($item->qty) - $out;
+
+        $out_data = out($conn, $item['id']);
+        $out =  $out_data ? (int) $out_data['qty'] : 0;
+
+        $item['qty'] = (int)($item['qty']) - $out;
 
         array_push($existing_record, $item);
-        array_push($customers, $item->name);
+        array_push($customers, $item['name']);
     }
 
     $customers = array_unique($customers);
