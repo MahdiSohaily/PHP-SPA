@@ -401,6 +401,15 @@ function exist($conn, $id)
     return ['stockInfo' => $stockInfo, 'final' => $final];
 }
 
+function getMax($array)
+{
+    $max = 0;
+    foreach ($array as $k => $v) {
+        $max = $max < $v ? $v : $max;
+    }
+    return $max;
+}
+
 // function store(Request $request)
 // {
 //     Validator::make($request->all(), [
@@ -430,14 +439,7 @@ function exist($conn, $id)
 //     return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
 // }
 
-function getMax($array)
-{
-    $max = 0;
-    foreach ($array as $k => $v) {
-        $max = $max < $v ? $v : $max;
-    }
-    return $max;
-}
+
 
 // function test($id = '277776', $brand = 'GEN')
 // {
