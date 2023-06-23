@@ -152,22 +152,52 @@ if ($isValidCustomer) {
                                                                     foreach ($rates as $rate) {
                                                                     ?>
                                                                         <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-green-700' ?>" v-for="rate in rates" @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
-
-                                                                            {{ (props.relation.goods[key].price, rate.amount)}}
+                                                                            <?php echo round(
+                                                                                round(($relation['goods'][$key]['price'] * 110) / 243.5) *
+                                                                                    $rate['amount'] *
+                                                                                    1.2 *
+                                                                                    1.2 *
+                                                                                    1.3
+                                                                            ) ?>
                                                                         </td>
                                                                     <?php } ?>
                                                                 </tr>
-                                                                <tr class="bg-neutral-400" v-if="props.relation.goods[key].mobis > 0 && props.relation.goods[key].mobis !== '-'">
-                                                                    <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
-                                                                        {{calculateMobies(props.relation.goods[key].price, rate.amount)}}
-                                                                    </td>
-                                                                </tr>
+                                                                <?php
+                                                                if ($relation['goods'][$key]['mobis'] > 0 &&  $relation['goods'][$key]['mobis'] !== '-') {
+                                                                ?>
+                                                                    <tr class="bg-neutral-400" v-if="">
+                                                                        <?php
+                                                                        foreach ($rates as $rate) {
+                                                                        ?>
+                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
+                                                                                <?php echo round(
+                                                                                    round(($relation['goods'][$key]['price'] * 110) / 243.5) *
+                                                                                        $rate['amount'] *
+                                                                                        1.25 *
+                                                                                        1.3
+                                                                                ) ?>
 
-                                                                <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
-                                                                    <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
-                                                                        {{calculateMobies(props.relation.goods[key].price, rate.amount)}}
-                                                                    </td>
-                                                                </tr>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                    </tr>
+                                                                <?php }
+
+                                                                if ($relation['goods'][$key]['korea'] > 0) {
+                                                                ?>
+                                                                    <tr class="bg-amber-600">
+                                                                        <?php
+                                                                        foreach ($rates as $rate) {
+                                                                        ?>
+                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
+                                                                                <?php echo round(
+                                                                                    round(($relation['goods'][$key]['price'] * 110) / 243.5) *
+                                                                                        $rate['amount'] *
+                                                                                        1.25 *
+                                                                                        1.3
+                                                                                ) ?> </td>
+                                                                        <?php } ?>
+                                                                    </tr>
+                                                                <?php } ?>
                                                             </tbody>
                                                         </table>
                                                     </td>
