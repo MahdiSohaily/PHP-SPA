@@ -24,22 +24,14 @@ if ($isValidCustomer) {
                 <div class="accordion__content overflow-hidden bg-grey-lighter">
                     <?php
                     $code = $code;
-
                     $existing_code = $existing[$code];
-                    foreach ($existing_code as $index => $item) {
-                        $existing = $existing;
-                        $code = $code;
-                        $index = $index;
+
+                    foreach ($existing[$code] as $index => $item) {
                         $information = $existing[$code][$index]['information'];
                         $partNumber = $index;
-                        $rates = $rates;
-                        $relation = $existing[$code][$index]['relation'];
+                        //$existing[$code][$index]['relation']['goods'] = $existing[$code][$index]['relation']['goods'];
                         $exist = $existing[$code][$index]['relation']['existing'];
-                        $notification = $notification;
-                        $givenPrice = array_key_exists("givenPrice", $existing[$code][$index]) ? $existing[$code][$index]['givenPrice'] : [];
-                        $customer = $customer;
-                        $completeCode = $completeCode;
-
+                        $givenPrice = array_key_exists("givenPrice", $existing[$code][$index]) ? $existing[$code][$index]['givenPrice'] : null;
                     ?>
                         <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
 
@@ -90,13 +82,13 @@ if ($isValidCustomer) {
                                         </thead>
                                         <tbody>
                                             <?php
-                                            foreach ($relation['sorted'] as $key => $element) {
+                                            foreach ($existing[$code][$index]['relation']['sorted'] as $key => $element) {
 
                                             ?>
                                                 <tr class="relative" v-for="element, key of props.relation.sorted">
                                                     <td class=" px-1">
                                                         <p class="text-center bold bg-gray-600 text-white px-2 py-3">
-                                                            <?php echo $relation['goods'][$key]['partnumber'] ?>
+                                                            <?php echo$existing[$code][$index]['relation']['goods'][$key]['partnumber'] ?>
                                                         </p>
 
                                                     </td>
@@ -105,13 +97,13 @@ if ($isValidCustomer) {
                                                             <thead class="font-medium">
                                                                 <tr>
                                                                     <?php
-                                                                    foreach ($relation['existing'][$key] as $index => $goodAmount) {
+                                                                    foreach ($existing[$code][$index]['relation']['existing'][$key] as $index => $goodAmount) {
                                                                     ?>
                                                                         <th scope="col" class="<?php echo $index == 'GEN' || $index == 'MOB' ? $index : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $key ?>" data-brand="<?php echo $index ?>" onmouseover="seekExist" onmouseleave="closeSeekExist">
                                                                             <?php echo $index ?>
                                                                             <div class="custome-tooltip" id="<?php echo $key + '-' + $index ?>">
                                                                                 <?php
-                                                                                foreach ($relation['stockInfo'][$key][$index] as $iterator => $item) {
+                                                                                foreach ($existing[$code][$index]['relation']['goods']['stockInfo'][$key][$index] as $iterator => $item) {
                                                                                 ?>
                                                                                     <div>
                                                                                         <p v-if="item > 0"> <?php echo $iterator . ':' . $item ?></p>
@@ -124,7 +116,7 @@ if ($isValidCustomer) {
                                                             </thead>
                                                             <tbody>
                                                                 <tr class="py-3">
-                                                                    <?php foreach ($relation['existing'][$key] as $index => $goodAmount) { ?>
+                                                                    <?php foreach ($existing[$code][$index]['relation']['existing'][$key] as $index => $goodAmount) { ?>
                                                                         <td class="<?php echo $index == 'GEN' || $index == 'MOB' ? $index : 'brand-default' ?> whitespace-nowrap text-white px-3 py-2 text-center">
                                                                             <?php echo $goodAmount ?>
                                                                         </td>
@@ -151,9 +143,9 @@ if ($isValidCustomer) {
                                                                     <?php
                                                                     foreach ($rates as $rate) {
                                                                     ?>
-                                                                        <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-green-700' ?>" v-for="rate in rates" @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
+                                                                        <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" v-for="rate in rates" @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
                                                                             <?php echo round(
-                                                                                round(($relation['goods'][$key]['price'] * 110) / 243.5) *
+                                                                                round(($existing[$code][$index]['relation']['goods']['goods'][$key]['price'] * 110) / 243.5) *
                                                                                     $rate['amount'] *
                                                                                     1.2 *
                                                                                     1.2 *
@@ -163,7 +155,7 @@ if ($isValidCustomer) {
                                                                     <?php } ?>
                                                                 </tr>
                                                                 <?php
-                                                                if ($relation['goods'][$key]['mobis'] > 0 &&  $relation['goods'][$key]['mobis'] !== '-') {
+                                                                if ($existing[$code][$index]['relation'][$key]['mobis'] > 0 && $existing[$code][$index]['relation']['goods']['goods'][$key]['mobis'] !== '-') {
                                                                 ?>
                                                                     <tr class="bg-neutral-400" v-if="">
                                                                         <?php
@@ -171,7 +163,7 @@ if ($isValidCustomer) {
                                                                         ?>
                                                                             <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
                                                                                 <?php echo round(
-                                                                                    round(($relation['goods'][$key]['price'] * 110) / 243.5) *
+                                                                                    round(($existing[$code][$index]['relation']['goods']['goods'][$key]['price'] * 110) / 243.5) *
                                                                                         $rate['amount'] *
                                                                                         1.25 *
                                                                                         1.3
@@ -182,7 +174,7 @@ if ($isValidCustomer) {
                                                                     </tr>
                                                                 <?php }
 
-                                                                if ($relation['goods'][$key]['korea'] > 0) {
+                                                                if ($existing[$code][$index]['relation']['goods']['goods'][$key]['korea'] > 0) {
                                                                 ?>
                                                                     <tr class="bg-amber-600">
                                                                         <?php
@@ -190,7 +182,7 @@ if ($isValidCustomer) {
                                                                         ?>
                                                                             <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
                                                                                 <?php echo round(
-                                                                                    round(($relation['goods'][$key]['price'] * 110) / 243.5) *
+                                                                                    round(($existing[$code][$index]['relation']['goods']['goods'][$key]['price'] * 110) / 243.5) *
                                                                                         $rate['amount'] *
                                                                                         1.25 *
                                                                                         1.3
@@ -207,33 +199,6 @@ if ($isValidCustomer) {
                                     </table>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </div>
                     <?php } ?>
                 </div>

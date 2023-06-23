@@ -118,7 +118,7 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
 function getSelectedRates($conn)
 {
 
-    $sql = "SELECT amount, status FROM rates WHERE selected = '1'";
+    $sql = "SELECT amount, status FROM rates WHERE selected = '1' ORDER BY amount ASC";
     $result = mysqli_query($conn, $sql);
 
     $rates = [];
