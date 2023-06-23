@@ -223,15 +223,15 @@ function relations($conn, $id)
     $stockinfo = [];
     $sortedGoods = [];
     foreach ($relations as $relation) {
-        $existing[$relation['partnumber']] = exist($relation['id'])['final'];
-        $stockinfo[$relation['partnumber']] = exist($relation['id'])['stockInfo'];
+        $existing[$relation['partnumber']] = exist($conn, $relation['id'])['final'];
+        $stockinfo[$relation['partnumber']] = exist($conn, $relation['id'])['stockInfo'];
         $sortedGoods[$relation['partnumber']] = $relation;
     }
 
     arsort($existing);
     $sorted = [];
     foreach ($existing as $key => $value) {
-        $sorted[$key] = $this->getMax($value);
+        $sorted[$key] = getMax($value);
     }
 
     arsort($sorted);
@@ -278,73 +278,91 @@ function relations($conn, $id)
 //     return $estelam;
 // }
 
-// function out($id)
-// {
-//     $result =
-//         DB::table('yadakshop1402.exitrecord')
-//         ->select('qty')
-//         ->where('qtyid', $id)
-//         ->first();
-//     return $result;
-// }
-
-// function stockInfo($id, $brand)
-// {
-
-//     $brand_id = DB::table('yadakshop1402.brand')->select('id')->where('brand.name', '=', $brand)
-//         ->first();
-
-//     $result =
-//         DB::table('yadakshop1402.qtybank')
-//         ->select('qtybank.id', 'qtybank.qty', 'seller.name')
-//         ->join('yadakshop1402.seller', 'qtybank.seller', '=', 'seller.id')
-//         ->where('codeid', $id)
-//         ->where('brand', $brand_id->id)
-//         ->get();
-
-//     $existing_record = [];
-//     $customers = [];
-//     foreach ($result as $key => $item) {
-//         $out = $this->out($item->id) ? (int) $this->out($item->id)->qty : 0;
-//         $item->qty = (int)($item->qty) - $out;
-
-//         array_push($existing_record, $item);
-//         array_push($customers, $item->name);
-//     }
-
-//     $customers = array_unique($customers);
-
-//     $final_result = [];
-
-//     foreach ($customers as $customer) {
-//         $total = 0;
-//         foreach ($existing_record as $record) {
-//             if ($customer === $record->name) {
-//                 $total += $record->qty;
-//             }
-//         }
-
-//         $final_result[$customer] = $total;
-//     }
-
-//     return $final_result;
-// }
-
-function exist($id)
+function out($conn, $id)
 {
+    $out_sql = "SELECT qty FROM yadakshop1402.nisha WHERE qtyid = '" . $id . "'";
+    $out_result = mysqli_query($conn, $out_sql);
+
+    $result = null;
+    if (mysqli_num_rows($out_result) > 0) {
+        $result = mysqli_fetch_assoc($out_result);
+    }
+    return $result;
+}
+
+function stockInfo($conn, $id, $brand)
+{
+
+    $out_sql = "SELECT id FROM yadakshop1402.nisha WHERE brand.name = '" . $brand . "'";
+    $out_result = mysqli_query($conn, $out_sql);
+
+    $brand_id = null;
+    if (mysqli_num_rows($out_result) > 0) {
+        $result = mysqli_fetch_assoc($out_result);
+    }
+    return $result;
+
+    $brand_id = DB::table('yadakshop1402.brand')->select('id')->where('brand.name', '=', $brand)
+        ->first();
+
     $result =
         DB::table('yadakshop1402.qtybank')
-        ->join('yadakshop1402.brand', 'brand.id', '=', 'qtybank.brand')
-        ->select('yadakshop1402.qtybank.id', 'codeid', 'brand.name', 'qty')
+        ->select('qtybank.id', 'qtybank.qty', 'seller.name')
+        ->join('yadakshop1402.seller', 'qtybank.seller', '=', 'seller.id')
         ->where('codeid', $id)
+        ->where('brand', $brand_id->id)
         ->get();
+
+    $existing_record = [];
+    $customers = [];
+    foreach ($result as $key => $item) {
+        $out = $this->out($item->id) ? (int) $this->out($item->id)->qty : 0;
+        $item->qty = (int)($item->qty) - $out;
+
+        array_push($existing_record, $item);
+        array_push($customers, $item->name);
+    }
+
+    $customers = array_unique($customers);
+
+    $final_result = [];
+
+    foreach ($customers as $customer) {
+        $total = 0;
+        foreach ($existing_record as $record) {
+            if ($customer === $record->name) {
+                $total += $record->qty;
+            }
+        }
+
+        $final_result[$customer] = $total;
+    }
+
+    return $final_result;
+}
+
+function exist($conn, $id)
+{
+
+    $data_sql = "SELECT yadakshop1402.qtybank.id, codeid, brand.name, qty FROM yadakshop1402.qtybank INNER JOIN yadakshop1402.brand ON brand.id = qtybank.brand WHERE codeid = '" . $id . "'";
+    $data_result = mysqli_query($conn, $data_sql);
+
+
+    $result = [];
+    if (mysqli_num_rows($data_result) > 0) {
+        while ($item = mysqli_fetch_assoc($data_result)) {
+            array_push($result, $item);
+        }
+    }
+
     $brands = [];
     $amount = [];
     $stockInfo = [];
 
     foreach ($result as $key => $value) {
-        $out = $this->out($value->id) ? (int) $this->out($value->id)->qty : 0;
-        $value->qty = (int)($value->qty) - $out;
+        $out_data = out($conn, $value['id']);
+        $out =  $out_data ? (int) $out_data['qty'] : 0;
+        $value->qty = (int)($value['qty']) - $out;
 
         array_push($brands, $value->name);
     }
@@ -354,10 +372,10 @@ function exist($id)
         $item = $value;
         $total = 0;
         foreach ($result as $key => $value) {
-            if ($item == $value->name) {
-                $total += $value->qty;
+            if ($item == $value['name']) {
+                $total += $value['qty'];
             }
-            $stockInfo[$value->name] =  $this->stockInfo($id, $value->name);
+            $stockInfo[$value['name']] =  stockInfo($conn, $id, $value['name']);
         }
 
         array_push($amount, $total);
@@ -396,14 +414,14 @@ function exist($id)
 //     return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
 // }
 
-// function getMax($array)
-// {
-//     $max = 0;
-//     foreach ($array as $k => $v) {
-//         $max = $max < $v ? $v : $max;
-//     }
-//     return $max;
-// }
+function getMax($array)
+{
+    $max = 0;
+    foreach ($array as $k => $v) {
+        $max = $max < $v ? $v : $max;
+    }
+    return $max;
+}
 
 // function test($id = '277776', $brand = 'GEN')
 // {
