@@ -4,7 +4,7 @@ require_once('./views/Layouts/header.php');
 require_once('./app/Controllers/GivenPriceController.php');
 
 if ($isValidCustomer) {
-    echo 'customer is a valid customer';
+    print_r($finalResult);
 } else {
     echo 'Customer is not valid';
 }

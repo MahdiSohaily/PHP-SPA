@@ -12,6 +12,7 @@ if (isset($_POST['givenPrice'])) {
     if (mysqli_num_rows($result) > 0) {
         $isValidCustomer = true;
 
+        $completeCode = $code;
         $finalResult = setup_loading($conn, $customer, $completeCode, $notification_id);
     }
 }
@@ -69,35 +70,33 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
         }
     }
 
-    return $existing_code;
-
     $data = [];
     $relation_id = [];
 
-    // foreach ($explodedCodes as $code) {
-    //     if (!in_array($code, $results_arry['not_exist'])) {
-    //         $data[$code] = [];
-    //         foreach ($existing_code[$code] as $item) {
-    //             $relation_exist = $this->isInRelation($item->id);
-    //             if ($relation_exist) {
-    //                 if (!in_array($relation_exist, $relation_id)) {
-    //                     array_push($relation_id, $relation_exist);
-    //                     $data[$code][$item->partnumber]['information'] = $this->info($item->id);
-    //                     $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-    //                     $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber, $relation_exist);
-    //                     $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
-    //                 }
-    //             } else {
-    //                 $data[$code][$item->partnumber]['information'] = $this->info($item->id);
-    //                 $data[$code][$item->partnumber]['relation'] = $this->relations($item->id);
-    //                 $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
-    //                 $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
-    //             }
-    //         }
-    //     }
-    // }
+    foreach ($explodedCodes as $code) {
+        if (!in_array($code, $results_arry['not_exist'])) {
+            $data[$code] = [];
+            foreach ($existing_code[$code] as $item) {
+                $relation_exist = isInRelation($conn, $item['id']);
+                if ($relation_exist) {
+                    if (!in_array($relation_exist, $relation_id)) {
+                        array_push($relation_id, $relation_exist);
+                        $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
+                        $data[$code][$item['partnumber']]['relation'] = relations($item['id']);
+                        // $data[$code][$item->partnumber]['givenPrice'] = $this->givenPrice($item->partnumber, $relation_exist);
+                        // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
+                    }
+                } else {
+                    $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
+                    $data[$code][$item['partnumber']]['relation'] = relations($item['id']);
+                    // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
+                    // $data[$code][$item->partnumber]['estelam'] = $this->estelam($item->partnumber);
+                }
+            }
+        }
+    }
 
-    // // return $data;
+    return json_encode($data);
 
     // return Inertia::render('Price/Partials/Load', [
     //     'explodedCodes' => $explodedCodes,
@@ -134,79 +133,98 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
 //     return $rates;
 // }
 
-// function isInRelation($id)
-// {
-//     $relation_id = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)
-//         ->first();
-//     if ($relation_id) {
-//         return $relation_id->pattern_id;
-//     }
-//     return false;
-// }
+function isInRelation($conn, $id)
+{
+    $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '$id'";
+    $result = mysqli_query($conn, $sql);
 
-// function info($id)
-// {
-//     $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
-//     $info = false;
-//     $cars = null;
-//     if ($isInRelation) {
-//         $info = DB::table('patterns')
-//             ->where('patterns.id', $isInRelation->pattern_id)
-//             ->first();
+    if (mysqli_num_rows($result) > 0) {
+        while ($item = mysqli_fetch_assoc($result)) {
+            return $item['pattern_id'];
+        }
+    }
+    return false;
+}
 
-//         if ($info->status_id) {
-//             $info = DB::table('patterns')
-//                 ->join('status', 'status.id', '=', 'patterns.status_id')
-//                 ->select('patterns.*', 'status.name AS  status_name')
-//                 ->where('patterns.id', $isInRelation->pattern_id)
-//                 ->first();
-//         }
+function info($conn, $id)
+{
+    $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '" . $id . "'";
+    $result = mysqli_query($conn, $sql);
 
-//         $cars = DB::table('patterncars')
-//             ->join('cars', 'cars.id', '=', 'patterncars.car_id')
-//             ->select('cars.name')
-//             ->where('patterncars.pattern_id', $isInRelation->pattern_id)
-//             ->get();
-//     }
+    $isInRelation = null;
+    if (mysqli_num_rows($result) > 0) {
+        $isInRelation = mysqli_fetch_assoc($result);
+    }
 
-//     return $info ? ['relationInfo' => $info, 'cars' => $cars] : false;
-// }
 
-// function relations($id)
-// {
-//     $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
-//     $relations = false;
+    $info = false;
+    $cars = [];
+    if ($isInRelation) {
 
-//     if ($isInRelation) {
+        $sql = "SELECT * FROM patterns WHERE id = '" . $isInRelation['pattern_id'] . "'";
+        $result = mysqli_query($conn, $sql);
 
-//         $relations = DB::table('yadakshop1402.nisha')
-//             ->join('similars', 'nisha.id', '=', 'similars.nisha_id')
-//             ->select('yadakshop1402.nisha.*')
-//             ->where('similars.pattern_id', $isInRelation->pattern_id)
-//             ->get();
-//     } else {
-//         $relations = DB::table('yadakshop1402.nisha')->where('id', $id)->get();
-//     }
+        $info = null;
+        if (mysqli_num_rows($result) > 0) {
+            $info = mysqli_fetch_assoc($result);
+        }
 
-//     $existing = [];
-//     $stockinfo = [];
-//     $sortedGoods = [];
-//     foreach ($relations as $relation) {
-//         $existing[$relation->partnumber] = $this->exist($relation->id)['final'];
-//         $stockinfo[$relation->partnumber] = $this->exist($relation->id)['stockInfo'];
-//         $sortedGoods[$relation->partnumber] = $relation;
-//     }
+        if ($info['status_id'] !== 0) {
+            $sql = "SELECT patterns.*, status.name AS  status_name FROM patterns INNER JOIN status ON status.id = patterns.status_id WHERE patterns.id = '" . $isInRelation['pattern_id'] . "'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                $info = mysqli_fetch_assoc($result);
+            }
+        }
 
-//     arsort($existing);
-//     $sorted = [];
-//     foreach ($existing as $key => $value) {
-//         $sorted[$key] = $this->getMax($value);
-//     }
+        $sql = "SELECT cars.name FROM patterncars INNER JOIN cars ON cars.id = patterncars.car_id WHERE patterncars.pattern_id = '" . $isInRelation['pattern_id'] . "'";
+        $result = mysqli_query($conn, $sql);
 
-//     arsort($sorted);
+        if (mysqli_num_rows($result) > 0) {
+            while ($item = mysqli_fetch_assoc($result)) {
+                array_push($cars, $item['name']);
+            }
+        }
+    }
 
-//     return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stockInfo' => $stockinfo];
-// }
+    return $info ? ['relationInfo' => $info, 'cars' => $cars] : false;
+}
+
+function relations($id)
+{
+    $isInRelation = DB::table('similars')->select('pattern_id')->where('nisha_id', $id)->first();
+    $relations = false;
+
+    if ($isInRelation) {
+
+        $relations = DB::table('yadakshop1402.nisha')
+            ->join('similars', 'nisha.id', '=', 'similars.nisha_id')
+            ->select('yadakshop1402.nisha.*')
+            ->where('similars.pattern_id', $isInRelation->pattern_id)
+            ->get();
+    } else {
+        $relations = DB::table('yadakshop1402.nisha')->where('id', $id)->get();
+    }
+
+    $existing = [];
+    $stockinfo = [];
+    $sortedGoods = [];
+    foreach ($relations as $relation) {
+        $existing[$relation->partnumber] = $this->exist($relation->id)['final'];
+        $stockinfo[$relation->partnumber] = $this->exist($relation->id)['stockInfo'];
+        $sortedGoods[$relation->partnumber] = $relation;
+    }
+
+    arsort($existing);
+    $sorted = [];
+    foreach ($existing as $key => $value) {
+        $sorted[$key] = $this->getMax($value);
+    }
+
+    arsort($sorted);
+
+    return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stockInfo' => $stockinfo];
+}
 
 // function givenPrice($code, $relation_exist = null)
 // {
