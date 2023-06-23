@@ -97,15 +97,17 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
 
     return json_encode($data);
 
-    // return Inertia::render('Price/Partials/Load', [
-    //     'explodedCodes' => $explodedCodes,
-    //     'not_exist' => $results_arry['not_exist'],
-    //     'existing' => $data,
-    //     'customer' => $customer,
-    //     'completeCode' => $completeCode,
-    //     'notification' => $notification,
-    //     'rates' => $this->getSelectedRates()
-    // ]);
+    [
+        'explodedCodes' => $explodedCodes,
+        'not_exist' => $results_arry['not_exist'],
+        'existing' => $data,
+        'customer' => $customer,
+        'completeCode' => $completeCode,
+        'notification' => $notification,
+        'rates' => getSelectedRates($conn)
+    ];
+
+    // return Inertia::render('Price/Partials/Load', );
 }
 
 // function validateRequest($all_data)
@@ -123,14 +125,21 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
 //     ])->validate();
 // }
 
-// function getSelectedRates()
-// {
-//     $rates = DB::table('rates')
-//         ->select('amount', 'status')
-//         ->where('selected', '1')
-//         ->get();
-//     return $rates;
-// }
+function getSelectedRates($conn)
+{
+
+    $sql = "SELECT amount, status FROM rates WHERE selected = '1'";
+    $result = mysqli_query($conn, $sql);
+
+    $rates = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($item = mysqli_fetch_assoc($result)) {
+            array_push($rates, $item);
+        }
+    }
+
+    return $rates;
+}
 
 function isInRelation($conn, $id)
 {
