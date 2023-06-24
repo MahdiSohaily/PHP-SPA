@@ -229,7 +229,7 @@ if ($isValidCustomer) {
                                             ?>
                                                 <?php foreach ($givenPrice as $price) { ?>
                                                     <?php if ($price['price']) { ?>
-                                                        <tr class="min-w-full mb-1 hover:cursor-pointer <?php echo array_key_exists("ordered", $price) ? 'bg-red-400' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
+                                                        <tr class="min-w-full mb-1  <?php echo array_key_exists("ordered", $price) ? 'bg-red-400 hover:cursor-pointer' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
 
                                                             <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                                                                 <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
@@ -243,26 +243,67 @@ if ($isValidCustomer) {
                                                                 ?>
                                                             </td>
                                                         </tr>
-                                                        <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
+                                                        <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
                                                             <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
-                                                                <div class="rtl flex items-center w-full">
-                                                                    <i class="px-1 material-icons tiny-text <?php array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
-                                                                    {{ arrangeTime(price.created_at) }}
+                                                                <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
+                                                                    <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
+                                                                    <?php
+                                                                    $now = strtotime(date('Y-m-d h:i:sa'));
+                                                                    $create = strtotime(date($price['created_at']));
+
+                                                                    $diff = $now - $create;
+
+                                                                    $msec = $diff;
+                                                                    $dd = floor($msec / 1000 / 60 / 60 / 24);
+                                                                    $msec -= $dd * 1000 * 60 * 60 * 24;
+                                                                    $hh = floor($msec / 1000 / 60 / 60);
+                                                                    $msec -= $hh * 1000 * 60 * 60;
+
+                                                                    $mm = floor($msec / 1000 / 60);
+                                                                    $msec -= $mm * 1000 * 60;
+
+                                                                    $ss = floor($msec / 1000);
+                                                                    $msec -= $ss * 1000;
+
+                                                                    $text = " ";
+
+                                                                    if ($dd) {
+                                                                        $text .= " $ddروز و ";
+                                                                    }
+
+                                                                    if ($hh) {
+                                                                        $text .= "$hh ساعت ";
+                                                                    }
+
+                                                                    if (!$hh && $mm) {
+                                                                        $text .= "$mm دقیقه ";
+                                                                    }
+
+                                                                    if (!$mm && !$hh) {
+                                                                        $text .= "$ss ثانیه ";
+                                                                    }
+
+                                                                    echo "$text قبل";
+                                                                    ?>
                                                                 </div>
                                                             </td>
                                                         </tr>
 
+                                                    <?php } else { ?>
+                                                        <tr class="min-w-full mb-4 border-b-2 border-white">
+                                                            <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300 text-white">
+                                                                موردی برای نمایش وجود ندارد!!
+                                                            </td>
+                                                        </tr>
                                                     <?php } ?>
 
                                                 <?php } ?>
                                             <?php } else { ?>
-                                                <template v-else>
-                                                    <tr class="min-w-full mb-4 border-b-2 border-white">
-                                                        <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                                            موردی برای نمایش وجود ندارد!!
-                                                        </td>
-                                                    </tr>
-                                                </template>
+                                                <tr class="min-w-full mb-4 border-b-2 border-white">
+                                                    <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
+                                                        موردی برای نمایش وجود ندارد!!
+                                                    </td>
+                                                </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
