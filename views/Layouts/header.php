@@ -25,6 +25,66 @@ require_once './database/connect.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <style>
+        .custome-tooltip {
+            position: absolute;
+            display: none;
+            bottom: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: seagreen;
+            width: 200px;
+            z-index: 100000;
+        }
+
+        .custom-table td {
+            vertical-align: super;
+        }
+    </style>
+    <script>
+        const seekExist = (e) => {
+            const element = e;
+            if (element.hasAttribute("data-key")) {
+                const partNumber = element.getAttribute('data-key');
+                const brand = element.getAttribute('data-brand');
+
+                const target = document.getElementById(partNumber + '-' + brand)
+                target.style.display = 'block';
+            }
+        }
+
+        const closeSeekExist = (e) => {
+            const element = e;
+            if (element.hasAttribute("data-key")) {
+                const partNumber = element.getAttribute('data-key');
+                const brand = element.getAttribute('data-brand');
+
+                const target = document.getElementById(partNumber + '-' + brand)
+                target.style.display = 'none';
+            }
+
+        }
+
+        const calculateMobies = (price, rate) => {
+            return Math.round(
+                Math.round((price * 110) / 243.5) *
+                rate *
+                1.25 *
+                1.3
+            )
+        }
+
+        const calculateRegular = (price, rate) => {
+
+            return Math.round(
+                Math.round((price * 110) / 243.5) *
+                rate *
+                1.2 *
+                1.2 *
+                1.3
+            )
+        }
+    </script>
 </head>
 
 <body class="font-sans antialiased">

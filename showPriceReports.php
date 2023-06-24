@@ -12,26 +12,25 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
-
 ?>
         <div class="accordion mt-12">
             <?php
             foreach ($explodedCodes as $code_index => $code) {
             ?>
-                <input type="checkbox" checked="true" name="panel" id="<?php echo $code_index ?>" class="hidden">
-                <label for="<?php echo $code_index ?>" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
+                <input type="checkbox" checked="true" name="panel" id="<?php echo $code ?>" class="hidden">
+                <label for="<?php echo $code ?>" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
                     <?php echo $code ?>
                 </label>
                 <div class="accordion__content overflow-hidden bg-grey-lighter">
                     <?php
-                    $code = $code;
-                    $existing_code = $existing[$code];
-
-                    foreach ($existing_code as $index => $item) {
+                    foreach ($existing[$code] as $index => $item) {
                         $partNumber = $index;
                         $information = $item['information'];
                         $relation = $item['relation'];
+                        $goods =  $relation['goods'];
                         $exist =  $relation['existing'];
+                        $sorted =  $relation['sorted'];
+                        $stockInfo =  $relation['stockInfo'];
                         $givenPrice = array_key_exists("givenPrice", $item) ? $item['givenPrice'] : [];
                         $customer = $customer;
                         $completeCode = $completeCode;
@@ -43,10 +42,10 @@ if ($isValidCustomer) {
                             <div class="bg-white rounded-lg">
                                 <div id="search_result" class="rtl p-3">
                                     <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
-                                        <?php echo $partNumber; ?>
+                                        <?php echo $index; ?>
                                     </p>
                                     <?php if ($information) { ?>
-                                        <div v-if="relationInfo">
+                                        <div>
                                             <p class="my-2">قطعه: <?php echo $information['relationInfo']['name'] ?></p>
                                             <p class="my-2">وضعیت: <?php echo array_key_exists("status_name", $information['relationInfo']) ? $information['relationInfo']['status_name'] : '' ?></p>
                                             <ul>
@@ -86,73 +85,118 @@ if ($isValidCustomer) {
                                         </thead>
                                         <tbody>
                                             <?php
-                                            foreach ($relation['sorted'] as $key => $element) {
+                                            foreach ($sorted as $index => $element) {
                                             ?>
                                                 <tr class="relative">
                                                     <td class=" px-1">
                                                         <p class="text-center bold bg-gray-600 text-white px-2 py-3">
-                                                            <?php echo $relation['goods'][$key]['partnumber'] ?>
+                                                            <?php echo $goods[$index]['partnumber'] ?>
                                                         </p>
                                                     </td>
                                                     <td class="px-1 pt-2">
                                                         <table class="min-w-full text-sm font-light p-2">
                                                             <thead class="font-medium">
                                                                 <tr>
-                                                                    <!-- <?php foreach ($relation['existing'][$key] as $index => $goodAmount) { ?>
-                                                                        <th scope="col" class="<?php echo $index == 'GEN' || $index == 'MOB' ? $index : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $key ?>" data-brand="<?php echo $index ?>" onmouseover="seekExist" onmouseleave="closeSeekExist">
-                                                                            <?php echo $index ?>
-                                                                            <div class="custome-tooltip" id="<?php echo $key + '-' + $index ?>">
-                                                                                <?php foreach ($relation['stockInfo'][$key][$index] as $iterator => $item) {?>
-                                                                                <div>
-                                                                                    <?php if($item > 0) {?>
-                                                                                    <p > {{ iterator }} : {{ item }}</p>
-                                                                                    <?php } ?>
-                                                                                </div>
-                                                                                <?php } ?>
+                                                                    <?php foreach ($exist[$index] as $brand => $amount) {
+                                                                    ?>
+                                                                        <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
+                                                                            <?php echo $brand ?>
+                                                                            <div class="custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
+                                                                                <?php
+                                                                                foreach ($stockInfo[$index][$brand] as $iterator => $item) {
+                                                                                ?>
+                                                                                    <div>
+                                                                                        <p v-if="item > 0"><?php echo $iterator . ' : ' . $item ?></p>
+                                                                                    </div>
+                                                                                <?php
+                                                                                }
+                                                                                ?>
                                                                             </div>
                                                                         </th>
-                                                                    <?php } ?> -->
+                                                                    <?php } ?>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr class="py-3">
-                                                                    <td :class="index == 'GEN' || index == 'MOB' ? index : 'brand-default'" class="whitespace-nowrap text-white px-3 py-2 text-center" v-for="goodAmount, index in  props.relation.existing[key]">
-                                                                        {{ goodAmount }}
-                                                                    </td>
+                                                                    <?php foreach ($exist[$index] as $brand => $amount) {
+                                                                    ?>
+                                                                        <td class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> whitespace-nowrap text-white px-3 py-2 text-center">
+                                                                            <?php echo $amount ?>
+                                                                        </td>
+                                                                    <?php } ?>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
                                                     </td>
+
+
                                                     <td class="px-1 pt-2">
                                                         <table class="min-w-full text-left text-sm font-light">
                                                             <thead class="font-medium">
                                                                 <tr>
-                                                                    <th v-for="rate in rates" scope="col" class="text-gray-800 text-center py-2" :class="rate.status !== 'N' ? rate.status : 'bg-green-700'">
-                                                                        {{ rate.amount }}
-                                                                    </th>
+                                                                    <?php
+                                                                    foreach ($rates as $rate) {
+                                                                    ?>
+                                                                        <th v-for="rate in rates" scope="col" class="text-gray-800 text-center py-2 <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-green-700' ?>">
+                                                                            <?php echo $rate['amount'] ?>
+                                                                        </th>
+                                                                    <?php } ?>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr class="py-3">
-                                                                    <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer" :class="rate.status !== 'N' ? rate.status : 'bg-gray-100'" v-for="rate in rates" @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
+                                                                    <?php
+                                                                    foreach ($rates as $rate) {
+                                                                    ?>
+                                                                        <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
+                                                                            <?php
+                                                                            $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
 
-                                                                        {{calculateRegular(props.relation.goods[key].price, rate.amount)}}
-                                                                    </td>
+                                                                            echo round(
+                                                                                $avgPrice * $rate['amount'] * 1.2 * 1.2 * 1.3
+                                                                            ) ?>
+                                                                        </td>
+                                                                    <?php } ?>
                                                                 </tr>
-                                                                <tr class="bg-neutral-400" v-if="props.relation.goods[key].mobis > 0 && props.relation.goods[key].mobis !== '-'">
-                                                                    <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
-                                                                        {{calculateMobies(props.relation.goods[key].price, rate.amount)}}
-                                                                    </td>
-                                                                </tr>
+                                                                <?php if ($goods[$index]['mobis'] > 0 && $goods[$index]['mobis'] !== '-') { ?>
+                                                                    <tr class="bg-neutral-400">
+                                                                        <?php
+                                                                        foreach ($rates as $rate) {
+                                                                        ?>
+                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
+                                                                                <?php
+                                                                                echo round(
+                                                                                    round(($goods[$index]['price'] * 110) / 243.5) *
+                                                                                        $rate['amount'] *
+                                                                                        1.25 *
+                                                                                        1.3
+                                                                                ) ?>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                                <?php if ($goods[$index]['korea'] > 0 && $goods[$index]['mobis'] !== '-') { ?>
+                                                                    <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
+                                                                        <?php
+                                                                        foreach ($rates as $rate) {
+                                                                        ?>
+                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
 
-                                                                <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
-                                                                    <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
-                                                                        {{(props.relation.goods[key].price, rate.amount)}}
-                                                                    </td>
-                                                                </tr>
+                                                                                <?php
+                                                                                $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
+
+                                                                                echo round(
+                                                                                    $avgPrice * $rate['amount'] * 1.25 * 1.3
+                                                                                ) ?>
+                                                                            </td>
+                                                                        <?php } ?>
+                                                                    </tr>
+                                                                <?php } ?>
                                                             </tbody>
                                                         </table>
                                                     </td>
+
+
                                                 </tr>
                                             <?php }
                                             ?>
@@ -160,6 +204,90 @@ if ($isValidCustomer) {
                                     </table>
                                 </div>
                             </div>
+
+
+                            <!-- Given Price section -->
+
+                            <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
+                                <div id="search_result" class="p-3">
+                                    <table class=" min-w-full text-sm font-light">
+                                        <thead>
+                                            <tr class="min-w-full bg-green-600">
+                                                <td class="text-white bold py-2 px-2 w-28">قیمت</td>
+                                                <td class="text-white bold py-2 px-2 rtl">مشتری</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template v-if="givenPrice[0] !== null">
+                                                <template v-for="price in givenPrice">
+                                                    <?php foreach ($givenPrice as $price) { ?>
+                                                        <template v-if="price.price">
+                                                            <tr class="min-w-full mb-1 hover:cursor-pointer <?php echo $price['ordered'] ? 'bg-red-400' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
+
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 <?php echo $price['ordered'] && 'text-white' ?>">
+                                                                <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
+                                                                </td>
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo $price['ordered'] && 'text-white' ?>">
+                                                                    <?php echo $price['ordered'] === null ?'قیمت دستوری' : $price['name']  ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 <?php echo $price['ordered'] ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
+                                                                <td class="<?php $price['ordered'] && 'text-white'?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
+                                                                    <div class="rtl flex items-center w-full">
+                                                                        <i class="px-1 material-icons tiny-text <?php $price['ordered'] ? 'text-white' : 'text-gray-800'?>">access_time</i>
+                                                                        {{ arrangeTime(price.created_at) }}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    <?php } ?>
+                                                </template>
+                                            </template>
+                                            <template v-else>
+                                                <tr class="min-w-full mb-4 border-b-2 border-white">
+                                                    <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
+                                                        موردی برای نمایش وجود ندارد!!
+                                                    </td>
+                                                </tr>
+                                            </template>
+
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    <FormRelation class="rtl" @submitted="savePrice()">
+                                        <template #form>
+                                            <div class="pb-2">
+                                                <InputLabel for="price" value="قیمت" />
+                                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full ltr" autocomplete="price" />
+                                                <InputError :message="form.errors.price" class="mt-2" />
+                                            </div>
+
+                                        </template>
+
+                                        <template #actions>
+                                            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                                ثبت
+                                            </PrimaryButton>
+                                            <PrimaryButton @click="$emit('setPrice', 'نداریم')" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                                نداریم !!!
+                                            </PrimaryButton>
+                                            <a @click="askPrice" class="hover:cursor-pointer inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                ارسال به نیایش
+                                            </a>
+                                            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                                عملیات موفقانه صورت گرفت.
+                                            </ActionMessage>
+                                            <ActionMessage :on="asked" class="mr-3">
+                                                عملیات موفقانه صورت گرفت.
+                                            </ActionMessage>
+                                        </template>
+                                    </FormRelation>
+                                </div>
+                            </div>
+
+
+
+
 
 
 
