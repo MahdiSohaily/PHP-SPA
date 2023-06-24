@@ -17,6 +17,14 @@ if (isset($_POST['givenPrice'])) {
     }
 }
 
+
+if (isset($_POST['store_price'])) {
+    $partnumber = $_POST['partnumber'];
+    $price = $_POST['price'];
+    $customer_id = $_POST['customer'];
+    store($partnumber, $price, $customer_id);
+}
+
 function setup_loading($conn, $customer, $completeCode, $notification = null)
 {
     $explodedCodes = explode("\n", $completeCode);
@@ -410,22 +418,12 @@ function getMax($array)
     return $max;
 }
 
-function store(Request $request)
+function store($partnumber, $price, $customer_id)
 {
-    Validator::make($request->all(), [
-        'partnumber' => 'required|string|exists:yadakshop.nisha,partnumber'
-
-    ], [
-        'required' => "The :attribute field can't be empty.",
-    ])->validate();
-
-
-    $notification = $request->input('notification');
-
     DB::table('prices')->insert([
-        'partnumber' => $request->input('partnumber'),
-        'price' => $request->input('price'),
-        'customer_id' => $request->input('customer'),
+        'partnumber' => $partnumber,
+        'price' => $price,
+        'customer_id' => $customer,
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
     ]);

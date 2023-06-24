@@ -305,8 +305,9 @@ if ($isValidCustomer) {
                                     </table>
                                     <br>
                                     <form action="" method="post">
-
-                                        <input type="text" name="form" value="update" hidden>
+                                        <input type="text" name="store_price" value="store_price" hidden>
+                                        <input type="text" name="partNumber" value="<?php echo $index ?>" hidden>
+                                        <input type="text" name="customer_id" value="<?php echo $customer ?>" hidden>
                                         <div class="rtl col-span-6 sm:col-span-4">
                                             <label for="price" class="block font-medium text-sm text-gray-700">
                                                 قیمت
