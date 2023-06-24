@@ -410,34 +410,34 @@ function getMax($array)
     return $max;
 }
 
-// function store(Request $request)
-// {
-//     Validator::make($request->all(), [
-//         'partnumber' => 'required|string|exists:yadakshop.nisha,partnumber'
+function store(Request $request)
+{
+    Validator::make($request->all(), [
+        'partnumber' => 'required|string|exists:yadakshop.nisha,partnumber'
 
-//     ], [
-//         'required' => "The :attribute field can't be empty.",
-//     ])->validate();
+    ], [
+        'required' => "The :attribute field can't be empty.",
+    ])->validate();
 
 
-//     $notification = $request->input('notification');
+    $notification = $request->input('notification');
 
-//     DB::table('prices')->insert([
-//         'partnumber' => $request->input('partnumber'),
-//         'price' => $request->input('price'),
-//         'customer_id' => $request->input('customer'),
-//         'created_at' => Carbon::now(),
-//         'updated_at' => Carbon::now(),
-//     ]);
+    DB::table('prices')->insert([
+        'partnumber' => $request->input('partnumber'),
+        'price' => $request->input('price'),
+        'customer_id' => $request->input('customer'),
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+    ]);
 
-//     if ($notification) {
-//         DB::table('ask_price')
-//             ->where('id', $notification)
-//             ->update(['status' => 'done', 'notify' => 'received', 'price' => $request->input('price')]);
-//     }
+    if ($notification) {
+        DB::table('ask_price')
+            ->where('id', $notification)
+            ->update(['status' => 'done', 'notify' => 'received', 'price' => $request->input('price')]);
+    }
 
-//     return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
-// }
+    return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
+}
 
 // function getCustomerName(Request $request)
 // {

@@ -12,7 +12,6 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
-
 ?>
         <div class="accordion mt-12">
             <?php
@@ -65,8 +64,6 @@ if ($isValidCustomer) {
 
                                 </div>
                             </div>
-
-
 
                             <!-- ENd the code info section -->
                             <div class="bg-white rounded-lg col-span-5 overflow-auto">
@@ -213,9 +210,7 @@ if ($isValidCustomer) {
                                 </div>
                             </div>
 
-
                             <!-- Given Price section -->
-
                             <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
                                 <div id="search_result" class="p-3">
                                     <table class=" min-w-full text-sm font-light">
