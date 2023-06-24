@@ -12,6 +12,9 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
+
+        print_r(json_encode($finalResult));
+
 ?>
         <div class="accordion mt-12">
             <?php
@@ -106,7 +109,9 @@ if ($isValidCustomer) {
                                                                                 foreach ($stockInfo[$index][$brand] as $iterator => $item) {
                                                                                 ?>
                                                                                     <div>
-                                                                                        <p v-if="item > 0"><?php echo $iterator . ' : ' . $item ?></p>
+                                                                                        <?php if ($item !== 0) { ?>
+                                                                                            <p ><?php echo $iterator . ' : ' . $item ?></p>
+                                                                                        <?php } ?>
                                                                                     </div>
                                                                                 <?php
                                                                                 }
@@ -119,9 +124,13 @@ if ($isValidCustomer) {
                                                             <tbody>
                                                                 <tr class="py-3">
                                                                     <?php foreach ($exist[$index] as $brand => $amount) {
-                                                                    ?>
+                                                                        $total = 0;
+                                                                        foreach ($stockInfo[$index][$brand] as $iterator => $item) {
+                                                                            $total += $item;
+                                                                        } ?>
                                                                         <td class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> whitespace-nowrap text-white px-3 py-2 text-center">
-                                                                            <?php echo $amount ?>
+                                                                            <?php echo $total;
+                                                                            ?>
                                                                         </td>
                                                                     <?php } ?>
                                                                 </tr>
@@ -225,16 +234,16 @@ if ($isValidCustomer) {
                                                             <tr class="min-w-full mb-1 hover:cursor-pointer <?php echo $price['ordered'] ? 'bg-red-400' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
 
                                                                 <td scope="col" class="text-gray-800 px-2 py-1 <?php echo $price['ordered'] && 'text-white' ?>">
-                                                                <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
+                                                                    <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                                                                 </td>
                                                                 <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo $price['ordered'] && 'text-white' ?>">
-                                                                    <?php echo $price['ordered'] === null ?'قیمت دستوری' : $price['name']  ?>
+                                                                    <?php echo $price['ordered'] === null ? 'قیمت دستوری' : $price['name']  ?>
                                                                 </td>
                                                             </tr>
                                                             <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 <?php echo $price['ordered'] ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
-                                                                <td class="<?php $price['ordered'] && 'text-white'?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
+                                                                <td class="<?php $price['ordered'] && 'text-white' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
                                                                     <div class="rtl flex items-center w-full">
-                                                                        <i class="px-1 material-icons tiny-text <?php $price['ordered'] ? 'text-white' : 'text-gray-800'?>">access_time</i>
+                                                                        <i class="px-1 material-icons tiny-text <?php $price['ordered'] ? 'text-white' : 'text-gray-800' ?>">access_time</i>
                                                                         {{ arrangeTime(price.created_at) }}
                                                                     </div>
                                                                 </td>
