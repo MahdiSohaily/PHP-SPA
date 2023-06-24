@@ -33,6 +33,7 @@ if ($isValidCustomer) {
                         $sorted =  $relation['sorted'];
                         $stockInfo =  $relation['stockInfo'];
                         $givenPrice =  $item['givenPrice'];
+                        $estelam = $item['estelam'];
                         $customer = $customer;
                         $completeCode = $completeCode;
 
@@ -42,7 +43,7 @@ if ($isValidCustomer) {
                             <!-- Start the code info section -->
                             <div class="bg-white rounded-lg">
                                 <div id="search_result" class="rtl p-3">
-                                    <p class="text-center bg-gray-600 text-white p-2 my-3 rounded-md">
+                                    <p class="text-center text-sm bg-gray-600 text-white p-2 my-3 rounded-md">
                                         <?php echo $index; ?>
                                     </p>
                                     <?php if ($information) { ?>
@@ -292,7 +293,7 @@ if ($isValidCustomer) {
                                                     <?php } else { ?>
                                                         <tr class="min-w-full mb-4 border-b-2 border-white">
                                                             <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300 text-white">
-                                                                موردی برای نمایش وجود ندارد!!
+                                                                !! موردی برای نمایش وجود ندارد
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -301,52 +302,123 @@ if ($isValidCustomer) {
                                             <?php } else { ?>
                                                 <tr class="min-w-full mb-4 border-b-2 border-white">
                                                     <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                                        موردی برای نمایش وجود ندارد!!
+                                                        !! موردی برای نمایش وجود ندارد
                                                     </td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
                                     <br>
-                                    <FormRelation class="rtl" @submitted="savePrice()">
-                                        <template #form>
-                                            <div class="pb-2">
-                                                <InputLabel for="price" value="قیمت" />
-                                                <TextInput id="price" v-model="form.price" type="text" class="mt-1 block w-full ltr" autocomplete="price" />
-                                                <InputError :message="form.errors.price" class="mt-2" />
-                                            </div>
+                                    <form action="" method="post">
 
-                                        </template>
+                                        <input type="text" name="form" value="update" hidden>
+                                        <div class="rtl col-span-6 sm:col-span-4">
+                                            <label for="price" class="block font-medium text-sm text-gray-700">
+                                                قیمت
+                                            </label>
+                                            <input name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
+                                            <p class="mt-2"></p>
+                                        </div>
 
-                                        <template #actions>
-                                            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+
+                                        <div class="rtl">
+                                            <button type="type" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ثبت
-                                            </PrimaryButton>
-                                            <PrimaryButton @click="$emit('setPrice', 'نداریم')" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                            </button>
+                                            <button type="type" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 نداریم !!!
-                                            </PrimaryButton>
-                                            <a @click="askPrice" class="hover:cursor-pointer inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            </button>
+                                            <button type="type" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ارسال به نیایش
-                                            </a>
-                                            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                                                عملیات موفقانه صورت گرفت.
-                                            </ActionMessage>
-                                            <ActionMessage :on="asked" class="mr-3">
-                                                عملیات موفقانه صورت گرفت.
-                                            </ActionMessage>
-                                        </template>
-                                    </FormRelation>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
 
+                            <!-- END GIVEN PRICE SECTION -->
+                            <div class="bg-white rounded-lg shadow-md col-span-2">
+                                <div class="p-3">
+                                    <table class=" min-w-full text-sm font-light">
+                                        <thead>
+                                            <tr class="min-w-full bg-green-600">
+                                                <td class="text-white bold py-2 px-2 w-28">قیمت</td>
+                                                <td class="text-white bold py-2 px-2 rtl">مشتری</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (count($estelam) > 0) {
 
+                                                foreach ($estelam as $price) {
+                                                    if ($price['price']) { ?>
+                                                        <tr class="min-w-full mb-1 hover:cursor-pointer bg-indigo-200" data-price="<?php echo $price['price'] ?>">
 
+                                                            <td scope="col" class="text-gray-800 px-2 py-1">
+                                                                <?php echo $price['price'] === null ? 'ندارد' : $price['price'] ?>
+                                                            </td>
+                                                            <td scope="col" class="text-gray-800 px-2 py-1 rtl">
+                                                                <?php echo $price['name']  ?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 bg-indigo-300" data-price="<?php echo $price['price'] ?>">
+                                                            <td colspan="3" scope="col" class="text-gray-800 px-2 tiny-text ">
+                                                                <div class="rtl flex items-center w-full">
+                                                                    <i class="px-1 material-icons tiny-text ">access_time</i>
+                                                                    <?php
+                                                                    $now = strtotime(date('Y-m-d h:i:sa'));
+                                                                    $create = strtotime(date($price['time']));
 
+                                                                    $diff = $now - $create;
 
+                                                                    $msec = $diff;
+                                                                    $dd = floor($msec / 1000 / 60 / 60 / 24);
+                                                                    $msec -= $dd * 1000 * 60 * 60 * 24;
+                                                                    $hh = floor($msec / 1000 / 60 / 60);
+                                                                    $msec -= $hh * 1000 * 60 * 60;
 
+                                                                    $mm = floor($msec / 1000 / 60);
+                                                                    $msec -= $mm * 1000 * 60;
 
+                                                                    $ss = floor($msec / 1000);
+                                                                    $msec -= $ss * 1000;
 
+                                                                    $text = " ";
 
+                                                                    if ($dd) {
+                                                                        $text .= " $ddروز و ";
+                                                                    }
+
+                                                                    if ($hh) {
+                                                                        $text .= "$hh ساعت ";
+                                                                    }
+
+                                                                    if (!$hh && $mm) {
+                                                                        $text .= "$mm دقیقه ";
+                                                                    }
+
+                                                                    if (!$mm && !$hh) {
+                                                                        $text .= "$ss ثانیه ";
+                                                                    }
+
+                                                                    echo "$text قبل";
+                                                                    ?>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                <?php }
+                                                }
+                                            } else { ?>
+                                                <tr class="min-w-full mb-4 border-b-2 border-white">
+                                                    <td colspan="3" scope="col" class="text-white py-2 text-center bg-indigo-300">
+                                                        !! موردی برای نمایش وجود ندارد
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>
