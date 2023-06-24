@@ -13,8 +13,6 @@ if ($isValidCustomer) {
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
 
-        print_r(json_encode($finalResult));
-
 ?>
         <div class="accordion mt-12">
             <?php
@@ -34,7 +32,7 @@ if ($isValidCustomer) {
                         $exist =  $relation['existing'];
                         $sorted =  $relation['sorted'];
                         $stockInfo =  $relation['stockInfo'];
-                        $givenPrice = array_key_exists("givenPrice", $item) ? $item['givenPrice'] : [];
+                        $givenPrice =  $item['givenPrice'];
                         $customer = $customer;
                         $completeCode = $completeCode;
 
@@ -110,7 +108,7 @@ if ($isValidCustomer) {
                                                                                 ?>
                                                                                     <div>
                                                                                         <?php if ($item !== 0) { ?>
-                                                                                            <p ><?php echo $iterator . ' : ' . $item ?></p>
+                                                                                            <p><?php echo $iterator . ' : ' . $item ?></p>
                                                                                         <?php } ?>
                                                                                     </div>
                                                                                 <?php
@@ -227,39 +225,45 @@ if ($isValidCustomer) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <template v-if="givenPrice[0] !== null">
-                                                <template v-for="price in givenPrice">
-                                                    <?php foreach ($givenPrice as $price) { ?>
-                                                        <template v-if="price.price">
-                                                            <tr class="min-w-full mb-1 hover:cursor-pointer <?php echo $price['ordered'] ? 'bg-red-400' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
+                                            <?php if ($givenPrice[0] !== null) {
+                                            ?>
+                                                <?php foreach ($givenPrice as $price) { ?>
+                                                    <?php if ($price['price']) { ?>
+                                                        <tr class="min-w-full mb-1 hover:cursor-pointer <?php echo array_key_exists("ordered", $price) ? 'bg-red-400' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
 
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 <?php echo $price['ordered'] && 'text-white' ?>">
-                                                                    <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
-                                                                </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo $price['ordered'] && 'text-white' ?>">
-                                                                    <?php echo $price['ordered'] === null ? 'قیمت دستوری' : $price['name']  ?>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 <?php echo $price['ordered'] ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
-                                                                <td class="<?php $price['ordered'] && 'text-white' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
-                                                                    <div class="rtl flex items-center w-full">
-                                                                        <i class="px-1 material-icons tiny-text <?php $price['ordered'] ? 'text-white' : 'text-gray-800' ?>">access_time</i>
-                                                                        {{ arrangeTime(price.created_at) }}
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </template>
+                                                            <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
+                                                                <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
+                                                            </td>
+                                                            <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                                                                <?php if (array_key_exists("ordered", $price)) {
+                                                                    echo 'قیمت دستوری';
+                                                                } else {
+                                                                    echo $price['name'];
+                                                                }
+                                                                ?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
+                                                            <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
+                                                                <div class="rtl flex items-center w-full">
+                                                                    <i class="px-1 material-icons tiny-text <?php array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
+                                                                    {{ arrangeTime(price.created_at) }}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
                                                     <?php } ?>
-                                                </template>
-                                            </template>
-                                            <template v-else>
-                                                <tr class="min-w-full mb-4 border-b-2 border-white">
-                                                    <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                                        موردی برای نمایش وجود ندارد!!
-                                                    </td>
-                                                </tr>
-                                            </template>
 
+                                                <?php } ?>
+                                            <?php } else { ?>
+                                                <template v-else>
+                                                    <tr class="min-w-full mb-4 border-b-2 border-white">
+                                                        <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
+                                                            موردی برای نمایش وجود ندارد!!
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                     <br>
