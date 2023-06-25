@@ -45,9 +45,9 @@ date_default_timezone_set("Asia/Tehran");
         .custome-alert {
             color: white !important;
             position: fixed;
-            bottom: 0;
+            bottom: -100px;
             right: 50%;
-            transform: translateX(-50%);
+            transform: translateX(50%);
             transition: all 1s ease;
             padding: 10px;
         }

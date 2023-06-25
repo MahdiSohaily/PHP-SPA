@@ -31,7 +31,7 @@ if ($isValidCustomer) {
                         $exist =  $relation['existing'];
                         $sorted =  $relation['sorted'];
                         $stockInfo =  $relation['stockInfo'];
-                        $givenPrice =  $item['givenPrice'];
+                        $givenPrice =  array_key_exists("givenPrice", $item) ? $item['givenPrice'] : [];
                         $estelam = $item['estelam'];
                         $customer = $customer;
                         $completeCode = $completeCode;
@@ -221,7 +221,7 @@ if ($isValidCustomer) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if ($givenPrice[0] !== null) {
+                                            <?php if ($givenPrice !== null) {
                                             ?>
                                                 <?php foreach ($givenPrice as $price) { ?>
                                                     <?php if ($price['price']) { ?>
@@ -314,7 +314,7 @@ if ($isValidCustomer) {
                                             <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 نداریم !!!
                                             </button>
-                                            <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button onclick="askPrice(this)" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ارسال به نیایش
                                             </button>
                                         </div>
@@ -442,15 +442,15 @@ if ($isValidCustomer) {
                     .then(function(response) {
                         console.log(response.data);
                         if (response.data == true) {
-                            form_success.classList.remove('hidden');
+                            form_success.style.bottom = '10px';
                             setTimeout(() => {
-                                form_success.classList.add('hidden');
+                                form_success.style.bottom = '-300px';
                                 location.reload();
                             }, 2000)
                         } else {
-                            form_error.classList.remove('hidden');
+                            form_error.style.bottom = '10px';
                             setTimeout(() => {
-                                form_error.classList.add('hidden');
+                                form_error.style.bottom = '-300px';
                                 location.reload();
                             }, 2000)
                         }
