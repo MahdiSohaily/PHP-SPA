@@ -244,39 +244,33 @@ if ($isValidCustomer) {
                                                                 <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
                                                                     <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
                                                                     <?php
-                                                                    $now = strtotime(date('Y-m-d h:i:sa'));
-                                                                    $create = strtotime(date($price['created_at']));
+                                                                    $create = date($price['created_at']);
 
-                                                                    $diff = $now - $create;
 
-                                                                    $msec = $diff;
-                                                                    $dd = floor($msec / 1000 / 60 / 60 / 24);
-                                                                    $msec -= $dd * 1000 * 60 * 60 * 24;
-                                                                    $hh = floor($msec / 1000 / 60 / 60);
-                                                                    $msec -= $hh * 1000 * 60 * 60;
+                                                                    $now = new DateTime(); // current date time
+                                                                    $date_time = new DateTime($create); // date time from string
+                                                                    $interval = $now->diff($date_time); // difference between two date times
+                                                                    $days = $interval->format('%a'); // difference in days
+                                                                    $hours = $interval->format('%h'); // difference in hours
+                                                                    $minutes = $interval->format('%i'); // difference in minutes
+                                                                    $seconds = $interval->format('%s'); // difference in seconds
 
-                                                                    $mm = floor($msec / 1000 / 60);
-                                                                    $msec -= $mm * 1000 * 60;
+                                                                    $text = '';
 
-                                                                    $ss = floor($msec / 1000);
-                                                                    $msec -= $ss * 1000;
-
-                                                                    $text = " ";
-
-                                                                    if ($dd) {
-                                                                        $text .= " $dd روز و ";
+                                                                    if ($days) {
+                                                                        $text .= " $days روز و ";
                                                                     }
 
-                                                                    if ($hh) {
-                                                                        $text .= "$hh ساعت ";
+                                                                    if ($hours) {
+                                                                        $text .= "$hours ساعت ";
                                                                     }
 
-                                                                    if (!$hh && $mm) {
-                                                                        $text .= "$mm دقیقه ";
+                                                                    if ($minutes) {
+                                                                        $text .= "$minutes دقیقه ";
                                                                     }
 
-                                                                    if (!$mm && !$hh) {
-                                                                        $text .= "$ss ثانیه ";
+                                                                    if ($seconds) {
+                                                                        $text .= "$seconds ثانیه ";
                                                                     }
 
                                                                     echo "$text قبل";
@@ -304,34 +298,34 @@ if ($isValidCustomer) {
                                         </tbody>
                                     </table>
                                     <br>
-                                    <form action="" method="post" onsubmit="event.preventDefault();createRelation()">
+                                    <form action="" method="post" onsubmit="event.preventDefault()">
 
                                         <?php
                                         date_default_timezone_set("Asia/Tehran"); ?>
-                                        <input type="text" id="store_price" name="store_price" value="store_price" >
-                                        <input type="text" id="partNumber" name="partNumber" value="<?php echo $partNumber ?>" >
-                                        <input type="text" id="customer_id" name="customer_id" value="<?php echo $customer ?>" >
+                                        <input type="text" hidden id="<? echo $partNumber ?>-store_price" name="store_price" value="store_price">
+                                        <input type="text" hidden id="<? echo $partNumber ?>-partNumber" name="partNumber" value="<?php echo $partNumber ?>">
+                                        <input type="text" hidden id="customer_id" name="customer_id" value="<?php echo $customer ?>">
                                         <div class="rtl col-span-6 sm:col-span-4">
-                                            <label for="price" class="block font-medium text-sm text-gray-700">
+                                            <label class="block font-medium text-sm text-gray-700">
                                                 قیمت
                                             </label>
-                                            <input id="price" name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
+                                            <input required onkeyup="update_price(this)" name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
                                             <p class="mt-2"></p>
                                         </div>
 
 
                                         <div class="rtl">
-                                            <button type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ثبت
                                             </button>
-                                            <button type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 نداریم !!!
                                             </button>
-                                            <button type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ارسال به نیایش
                                             </button>
                                             <p id="form_success" class="px-3 tiny-text text-green-500 hidden">
-                                                   موفقانه در پایگاه داده ثبت شد!
+                                                موفقانه در پایگاه داده ثبت شد!
                                             </p>
                                             <p id="form_error" class="px-3 tiny-text text-red-500 hidden">
                                                 ذخیره سازی اطلاعات ناموفق بود!
@@ -370,39 +364,32 @@ if ($isValidCustomer) {
                                                                 <div class="rtl flex items-center w-full">
                                                                     <i class="px-1 material-icons tiny-text ">access_time</i>
                                                                     <?php
-                                                                    $now = strtotime(date('Y-m-d h:i:sa'));
-                                                                    $create = strtotime(date($price['time']));
+                                                                    $create = date($price['time']);
 
-                                                                    $diff = $now - $create;
+                                                                    $now = new DateTime(); // current date time
+                                                                    $date_time = new DateTime($create); // date time from string
+                                                                    $interval = $now->diff($date_time); // difference between two date times
+                                                                    $days = $interval->format('%a'); // difference in days
+                                                                    $hours = $interval->format('%h'); // difference in hours
+                                                                    $minutes = $interval->format('%i'); // difference in minutes
+                                                                    $seconds = $interval->format('%s'); // difference in seconds
 
-                                                                    $msec = $diff;
-                                                                    $dd = floor($msec / 1000 / 60 / 60 / 24);
-                                                                    $msec -= $dd * 1000 * 60 * 60 * 24;
-                                                                    $hh = floor($msec / 1000 / 60 / 60);
-                                                                    $msec -= $hh * 1000 * 60 * 60;
+                                                                    $text = '';
 
-                                                                    $mm = floor($msec / 1000 / 60);
-                                                                    $msec -= $mm * 1000 * 60;
-
-                                                                    $ss = floor($msec / 1000);
-                                                                    $msec -= $ss * 1000;
-
-                                                                    $text = " ";
-
-                                                                    if ($dd) {
-                                                                        $text .= " $ddروز و ";
+                                                                    if ($days) {
+                                                                        $text .= " $days روز و ";
                                                                     }
 
-                                                                    if ($hh) {
-                                                                        $text .= "$hh ساعت ";
+                                                                    if ($hours) {
+                                                                        $text .= "$hours ساعت ";
                                                                     }
 
-                                                                    if (!$hh && $mm) {
-                                                                        $text .= "$mm دقیقه ";
+                                                                    if ($minutes) {
+                                                                        $text .= "$minutes دقیقه ";
                                                                     }
 
-                                                                    if (!$mm && !$hh) {
-                                                                        $text .= "$ss ثانیه ";
+                                                                    if ($seconds) {
+                                                                        $text .= "$seconds ثانیه ";
                                                                     }
 
                                                                     echo "$text قبل";
@@ -434,18 +421,21 @@ if ($isValidCustomer) {
         <script>
             const form_success = document.getElementById('form_success');
             const form_error = document.getElementById('form_error');
+            let price = null;
+
+            function update_price(element) {
+                price = element.value;
+            }
 
             // A function to create the relationship
-            function createRelation() {
+            function createRelation(e) {
                 // Accessing the form fields to get thier value for an ajax store operation
-                const store_price = document.getElementById('store_price').value;
-                const partNumber = document.getElementById('partNumber').value;
+                const partNumber = e.getAttribute('data-part');
                 const customer_id = document.getElementById('customer_id').value;
-                const price = document.getElementById('price').value;
 
                 // Defining a params instance to be attached to the axios request
                 const params = new URLSearchParams();
-                params.append('store_price', store_price);
+                params.append('store_price', 'store_price');
                 params.append('partNumber', partNumber);
                 params.append('customer_id', customer_id);
                 params.append('price', price);
