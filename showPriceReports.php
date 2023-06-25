@@ -264,7 +264,7 @@ if ($isValidCustomer) {
                                                                     $text = " ";
 
                                                                     if ($dd) {
-                                                                        $text .= " $ddروز و ";
+                                                                        $text .= " $dd روز و ";
                                                                     }
 
                                                                     if ($hh) {
@@ -304,29 +304,38 @@ if ($isValidCustomer) {
                                         </tbody>
                                     </table>
                                     <br>
-                                    <form action="" method="post">
-                                        <input type="text" name="store_price" value="store_price" hidden>
-                                        <input type="text" name="partNumber" value="<?php echo $index ?>" hidden>
-                                        <input type="text" name="customer_id" value="<?php echo $customer ?>" hidden>
+                                    <form action="" method="post" onsubmit="event.preventDefault();createRelation()">
+
+                                        <?php
+                                        date_default_timezone_set("Asia/Tehran"); ?>
+                                        <input type="text" id="store_price" name="store_price" value="store_price" >
+                                        <input type="text" id="partNumber" name="partNumber" value="<?php echo $partNumber ?>" >
+                                        <input type="text" id="customer_id" name="customer_id" value="<?php echo $customer ?>" >
                                         <div class="rtl col-span-6 sm:col-span-4">
                                             <label for="price" class="block font-medium text-sm text-gray-700">
                                                 قیمت
                                             </label>
-                                            <input name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
+                                            <input id="price" name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
                                             <p class="mt-2"></p>
                                         </div>
 
 
                                         <div class="rtl">
-                                            <button type="type" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ثبت
                                             </button>
-                                            <button type="type" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 نداریم !!!
                                             </button>
-                                            <button type="type" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ارسال به نیایش
                                             </button>
+                                            <p id="form_success" class="px-3 tiny-text text-green-500 hidden">
+                                                   موفقانه در پایگاه داده ثبت شد!
+                                            </p>
+                                            <p id="form_error" class="px-3 tiny-text text-red-500 hidden">
+                                                ذخیره سازی اطلاعات ناموفق بود!
+                                            </p>
                                         </div>
                                     </form>
                                 </div>
@@ -422,10 +431,52 @@ if ($isValidCustomer) {
             }
             ?>
         </div>
+        <script>
+            const form_success = document.getElementById('form_success');
+            const form_error = document.getElementById('form_error');
+
+            // A function to create the relationship
+            function createRelation() {
+                // Accessing the form fields to get thier value for an ajax store operation
+                const store_price = document.getElementById('store_price').value;
+                const partNumber = document.getElementById('partNumber').value;
+                const customer_id = document.getElementById('customer_id').value;
+                const price = document.getElementById('price').value;
+
+                // Defining a params instance to be attached to the axios request
+                const params = new URLSearchParams();
+                params.append('store_price', store_price);
+                params.append('partNumber', partNumber);
+                params.append('customer_id', customer_id);
+                params.append('price', price);
+
+                axios.post("./app/Controllers/GivenPriceAjax.php", params)
+                    .then(function(response) {
+                        console.log(response.data);
+                        if (response.data == true) {
+                            form_success.classList.remove('hidden');
+                            setTimeout(() => {
+                                form_success.classList.add('hidden');
+                                location.reload();
+                            }, 2000)
+                        } else {
+                            form_error.classList.remove('hidden');
+                            setTimeout(() => {
+                                form_error.classList.add('hidden');
+                                location.reload();
+                            }, 2000)
+                        }
+                    })
+                    .catch(function(error) {
+
+                    });
+            }
+        </script>
 <?php
     }
 } else {
     echo 'Customer is not valid';
 }
+
 
 require_once('./views/Layouts/footer.php');

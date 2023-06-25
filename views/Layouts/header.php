@@ -1,6 +1,7 @@
 <?php
 require_once './config/config.php';
 require_once './database/connect.php';
+date_default_timezone_set("Asia/Tehran");
 ?>
 <!DOCTYPE html>
 <html lang="fe">

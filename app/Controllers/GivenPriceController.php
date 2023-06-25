@@ -17,14 +17,6 @@ if (isset($_POST['givenPrice'])) {
     }
 }
 
-
-if (isset($_POST['store_price'])) {
-    $partnumber = $_POST['partnumber'];
-    $price = $_POST['price'];
-    $customer_id = $_POST['customer'];
-    store($partnumber, $price, $customer_id);
-}
-
 function setup_loading($conn, $customer, $completeCode, $notification = null)
 {
     $explodedCodes = explode("\n", $completeCode);
@@ -261,8 +253,7 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-
-    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber LIKE '" . $code . "%' ORDER BY created_at DESC LIMIT 7";
+    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber LIKE '" . $code . "' ORDER BY created_at ASC LIMIT 7";
     $result = mysqli_query($conn, $sql);
 
 
@@ -418,24 +409,7 @@ function getMax($array)
     return $max;
 }
 
-function store($partnumber, $price, $customer_id)
-{
-    DB::table('prices')->insert([
-        'partnumber' => $partnumber,
-        'price' => $price,
-        'customer_id' => $customer,
-        'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now(),
-    ]);
 
-    if ($notification) {
-        DB::table('ask_price')
-            ->where('id', $notification)
-            ->update(['status' => 'done', 'notify' => 'received', 'price' => $request->input('price')]);
-    }
-
-    return $this->setup_loading($request->input('customer'), $request->input('completeCode'));
-}
 
 // function getCustomerName(Request $request)
 // {
