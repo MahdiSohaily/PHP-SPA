@@ -31,11 +31,10 @@ if ($isValidCustomer) {
                         $exist =  $relation['existing'];
                         $sorted =  $relation['sorted'];
                         $stockInfo =  $relation['stockInfo'];
-                        $givenPrice =  array_key_exists("givenPrice", $item) ? $item['givenPrice'] : [];
+                        $givenPrice =  $item['givenPrice'];
                         $estelam = $item['estelam'];
                         $customer = $customer;
                         $completeCode = $completeCode;
-
                     ?>
                         <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2">
 
@@ -50,9 +49,12 @@ if ($isValidCustomer) {
                                             <p class="my-2">قطعه: <?php echo $information['relationInfo']['name'] ?></p>
                                             <p class="my-2">وضعیت: <?php echo array_key_exists("status_name", $information['relationInfo']) ? $information['relationInfo']['status_name'] : '' ?></p>
                                             <ul>
-                                                <!-- <li class="" v-for="elem in relationCars">
-                                                {{ elem.name }}
-                                            </li> -->
+                                            <?php foreach($information['cars'] as $item){
+                                                ?>
+                                                <li class="" v-for="elem in relationCars">
+                                               <?php echo $item?>
+                                            </li>
+                                            <?php }?>
                                             </ul>
                                         </div>
                                     <?php } else {

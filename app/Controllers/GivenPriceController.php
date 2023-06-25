@@ -96,6 +96,7 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
                 } else {
                     $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
                     $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
+                    $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, $item['partnumber']);
                     $data[$code][$item['partnumber']]['estelam'] = estelam($conn, $item['partnumber']);
                 }
             }
