@@ -18,3 +18,19 @@ function store($conn, $partnumber, $price, $customer_id)
         echo 'true';
     }
 }
+
+
+function askPrice(Request $request)
+{
+    $customer = $request->input('customer');
+    $partNumber = $request->input('partNumber');
+
+    DB::table('ask_price')->insert([
+        'customer_id' => $customer,
+        'user_id' => Auth::user()->id,
+        'code' =>  $partNumber,
+        'status' =>  'pending',
+        'notify' =>  'send',
+        'created_at' => Carbon::now(),
+    ]);
+}

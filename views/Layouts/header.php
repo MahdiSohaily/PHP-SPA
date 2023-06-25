@@ -41,6 +41,24 @@ date_default_timezone_set("Asia/Tehran");
         .custom-table td {
             vertical-align: super;
         }
+
+        .custome-alert {
+            color: white !important;
+            position: fixed;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(-50%);
+            transition: all 1s ease;
+            padding: 10px;
+        }
+
+        .custome-alert.success {
+            background-color: green;
+        }
+
+        .custome-alert.error {
+            background-color: red;
+        }
     </style>
     <script>
         const seekExist = (e) => {

@@ -302,7 +302,7 @@ if ($isValidCustomer) {
                                             <label class="block font-medium text-sm text-gray-700">
                                                 قیمت
                                             </label>
-                                            <input required onkeyup="update_price(this)" name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
+                                            <input onkeyup="update_price(this)" name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
                                             <p class="mt-2"></p>
                                         </div>
 
@@ -311,18 +311,12 @@ if ($isValidCustomer) {
                                             <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ثبت
                                             </button>
-                                            <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 نداریم !!!
                                             </button>
                                             <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ارسال به نیایش
                                             </button>
-                                            <p id="form_success" class="px-3 tiny-text text-green-500 hidden">
-                                                موفقانه در پایگاه داده ثبت شد!
-                                            </p>
-                                            <p id="form_error" class="px-3 tiny-text text-red-500 hidden">
-                                                ذخیره سازی اطلاعات ناموفق بود!
-                                            </p>
                                         </div>
                                     </form>
                                 </div>
@@ -410,6 +404,12 @@ if ($isValidCustomer) {
             <?php
             }
             ?>
+            <p id="form_success" class="custome-alert success px-3 tiny-text">
+                ! موفقانه در پایگاه داده ثبت شد
+            </p>
+            <p id="form_error" class=" custome-alert error px-3 tiny-text">
+                ! ذخیره سازی اطلاعات ناموفق بود
+            </p>
         </div>
         <script>
             const form_success = document.getElementById('form_success');
@@ -418,6 +418,11 @@ if ($isValidCustomer) {
 
             function update_price(element) {
                 price = element.value;
+            }
+
+            function donotHave(element) {
+                price = 'نداریم';
+                createRelation(element);
             }
 
             // A function to create the relationship
