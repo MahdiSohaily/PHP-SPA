@@ -13,10 +13,10 @@ if (isset($_POST['askPrice'])) {
     $partnumber = $_POST['partNumber'];
     $customer_id = $_POST['customer_id'];
     $user_id = $_POST['user_id'];
-    $price = $_POST['price'];
-    $created_at = $_POST['created_at'];
+    date_default_timezone_set("Asia/Tehran");
+    $created_at = date("Y-m-d H:i:s");
 
-    askPrice($conn, $partnumber, $customer_id, $user_id, $price, $created_at);
+    askPrice($conn, $partnumber, $customer_id, $user_id, $created_at);
 }
 
 function store($conn, $partnumber, $price, $customer_id)
@@ -32,7 +32,7 @@ function store($conn, $partnumber, $price, $customer_id)
 }
 
 
-function askPrice($conn, $partnumber, $customer_id, $user_id, $price, $created_at)
+function askPrice($conn, $partnumber, $customer_id, $user_id, $created_at)
 {
     $pattern_sql = "INSERT INTO ask_price (customer_id, user_id, code, status, notify, created_at)
             VALUES ('" . $customer_id . "', '" . $user_id . "', '" . $partnumber . "', 'pending', 'send' , '" . $created_at . "')";

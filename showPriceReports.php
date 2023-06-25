@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once './database/connect.php';
 require_once('./views/Layouts/header.php');
 require_once('./app/Controllers/GivenPriceController.php');
@@ -316,7 +317,7 @@ if ($isValidCustomer) {
                                             <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 نداریم !!!
                                             </button>
-                                            <button onclick="askPrice(this)" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                            <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>"  data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                 ارسال به نیایش
                                             </button>
                                         </div>
@@ -428,8 +429,10 @@ if ($isValidCustomer) {
             }
 
             function askPrice(element) {
+                console.log('sdd');
                 // Accessing the form fields to get thier value for an ajax store operation
-                const partNumber = e.getAttribute('data-part');
+                const partNumber = element.getAttribute('data-part');
+                const user_id = element.getAttribute('data-user');
                 const customer_id = document.getElementById('customer_id').value;
 
 
@@ -437,8 +440,7 @@ if ($isValidCustomer) {
                 params.append('askPrice', 'askPrice');
                 params.append('partNumber', partNumber);
                 params.append('customer_id', customer_id);
-                params.append('user_id', $_SESSION['user_id']);
-                params.append('created_at', date('Y-m-d H:i:s'));
+                params.append('user_id', user_id);
 
                 axios.post("./app/Controllers/GivenPriceAjax.php", params)
                     .then(function(response) {
