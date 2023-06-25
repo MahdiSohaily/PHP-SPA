@@ -4,6 +4,7 @@ $finalResult = null;
 
 if (isset($_POST['givenPrice'])) {
     $customer = $_POST['customer'];
+    $user = $_POST['user'];
     $code = $_POST['code'];
     $notification_id = $_POST['code'] ? $_POST['code'] : null;
 
