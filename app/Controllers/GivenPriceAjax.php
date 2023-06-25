@@ -7,6 +7,18 @@ if (isset($_POST['store_price'])) {
     store($conn, $partnumber, $price, $customer_id);
 }
 
+
+
+if (isset($_POST['askPrice'])) {
+    $partnumber = $_POST['partNumber'];
+    $customer_id = $_POST['customer_id'];
+    $user_id = $_POST['user_id'];
+    $price = $_POST['price'];
+    $created_at = $_POST['created_at'];
+
+    askPrice($conn, $partnumber, $customer_id, $user_id, $price, $created_at);
+}
+
 function store($conn, $partnumber, $price, $customer_id)
 {
     date_default_timezone_set("Asia/Tehran");
@@ -20,17 +32,12 @@ function store($conn, $partnumber, $price, $customer_id)
 }
 
 
-function askPrice(Request $request)
+function askPrice($conn, $partnumber, $customer_id, $user_id, $price, $created_at)
 {
-    $customer = $request->input('customer');
-    $partNumber = $request->input('partNumber');
+    $pattern_sql = "INSERT INTO ask_price (customer_id, user_id, code, status, notify, created_at)
+            VALUES ('" . $customer_id . "', '" . $user_id . "', '" . $partnumber . "', 'pending', 'send' , '" . $created_at . "')";
 
-    DB::table('ask_price')->insert([
-        'customer_id' => $customer,
-        'user_id' => Auth::user()->id,
-        'code' =>  $partNumber,
-        'status' =>  'pending',
-        'notify' =>  'send',
-        'created_at' => Carbon::now(),
-    ]);
+    if ($conn->query($pattern_sql) === TRUE) {
+        echo 'true';
+    }
 }

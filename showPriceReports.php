@@ -49,12 +49,12 @@ if ($isValidCustomer) {
                                             <p class="my-2">قطعه: <?php echo $information['relationInfo']['name'] ?></p>
                                             <p class="my-2">وضعیت: <?php echo array_key_exists("status_name", $information['relationInfo']) ? $information['relationInfo']['status_name'] : '' ?></p>
                                             <ul>
-                                            <?php foreach($information['cars'] as $item){
+                                                <?php foreach ($information['cars'] as $item) {
                                                 ?>
-                                                <li class="" v-for="elem in relationCars">
-                                               <?php echo $item?>
-                                            </li>
-                                            <?php }?>
+                                                    <li class="" v-for="elem in relationCars">
+                                                        <?php echo $item ?>
+                                                    </li>
+                                                <?php } ?>
                                             </ul>
                                         </div>
                                     <?php } else {
@@ -425,6 +425,42 @@ if ($isValidCustomer) {
             function donotHave(element) {
                 price = 'نداریم';
                 createRelation(element);
+            }
+
+            function askPrice(element) {
+                // Accessing the form fields to get thier value for an ajax store operation
+                const partNumber = e.getAttribute('data-part');
+                const customer_id = document.getElementById('customer_id').value;
+
+
+                const params = new URLSearchParams();
+                params.append('askPrice', 'askPrice');
+                params.append('partNumber', partNumber);
+                params.append('customer_id', customer_id);
+                params.append('user_id', $_SESSION['user_id']);
+                params.append('created_at', date('Y-m-d H:i:s'));
+
+                axios.post("./app/Controllers/GivenPriceAjax.php", params)
+                    .then(function(response) {
+                        console.log(response.data);
+                        if (response.data == true) {
+                            form_success.style.bottom = '10px';
+                            setTimeout(() => {
+                                form_success.style.bottom = '-300px';
+                                location.reload();
+                            }, 2000)
+                        } else {
+                            form_error.style.bottom = '10px';
+                            setTimeout(() => {
+                                form_error.style.bottom = '-300px';
+                                location.reload();
+                            }, 2000)
+                        }
+                    })
+                    .catch(function(error) {
+
+                    });
+
             }
 
             // A function to create the relationship

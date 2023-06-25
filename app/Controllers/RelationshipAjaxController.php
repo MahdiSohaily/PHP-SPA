@@ -93,7 +93,7 @@ if (isset($_POST['store_relation'])) {
         $selected_index = extract_id($selected_goods);
 
         $selectedCars = $cars;
-        $created_at = date('d-m-y h:i:s');
+        $created_at = date('Y-m-d H:i:s');
         // create the pattern record
         $pattern_sql = "INSERT INTO patterns (name, price, serial, status_id, created_at)
             VALUES ('" . $relation_name . "', '" . $price . "', '" . $serial . "', '" . $status . "', '" . $created_at . "')";
@@ -150,7 +150,7 @@ if (isset($_POST['store_relation'])) {
             $selectedCars =  $cars;
             $carsToAdd = toBeAdded($current_cars, $selectedCars);
             $carsToDelete = toBeDeleted($current_cars, $selectedCars);
-            $created_at = $created_at = date('d-m-y h:i:s');
+            $created_at = $created_at = date('Y-m-d H:i:s');
 
             $update_pattern_sql = "UPDATE patterns SET name= '" . $relation_name . "', price = '" . $price . "',
                 serial = '" . $serial . "' , status_id =  '" . $status . "', created_at = '" . $created_at . "' WHERE id = '$pattern_id'";
