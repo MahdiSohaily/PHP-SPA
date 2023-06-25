@@ -295,8 +295,8 @@ if ($isValidCustomer) {
 
                                         <?php
                                         date_default_timezone_set("Asia/Tehran"); ?>
-                                        <input type="text" hidden id="<? echo $partNumber ?>-store_price" name="store_price" value="store_price">
-                                        <input type="text" hidden id="<? echo $partNumber ?>-partNumber" name="partNumber" value="<?php echo $partNumber ?>">
+                                        <input type="text" hidden name="store_price" value="store_price">
+                                        <input type="text" hidden name="partNumber" value="<?php echo $partNumber ?>">
                                         <input type="text" hidden id="customer_id" name="customer_id" value="<?php echo $customer ?>">
                                         <div class="rtl col-span-6 sm:col-span-4">
                                             <label class="block font-medium text-sm text-gray-700">
