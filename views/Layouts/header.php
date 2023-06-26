@@ -2,8 +2,7 @@
 require_once './config/config.php';
 require_once './database/connect.php';
 date_default_timezone_set("Asia/Tehran");
-$_SESSION["user_id"] = $_POST['user'];
-echo $_SESSION['user_id'];
+$_SESSION["user_id"] = !empty($_SESSION["user_id"]) ? $_SESSION["user_id"] : 1;
 ?>
 <!DOCTYPE html>
 <html lang="fe">
@@ -85,19 +84,19 @@ echo $_SESSION['user_id'];
             }
 
         }
-        setInterval(() => {
-            axios
-                .post("../../app/Controllers/notificationController.php")
-                .then(function(response) {
-                    console.log('here response');
-                    if (response.data > 0) {
-                        hasNotification.value = true;
-                    }
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }, 30000);
+        // setInterval(() => {
+        //     axios
+        //         .post("../../app/Controllers/notificationController.php")
+        //         .then(function(response) {
+        //             console.log('here response');
+        //             if (response.data > 0) {
+        //                 hasNotification.value = true;
+        //             }
+        //         })
+        //         .catch(function(error) {
+        //             console.log(error);
+        //         });
+        // }, 30000);
     </script>
 </head>
 
@@ -145,13 +144,13 @@ echo $_SESSION['user_id'];
             </nav>
             <!-- Page Content -->
             <main>
-                <div class="flex justify-between">
+                <div class="flex">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
 
-                    <Link v-if="hasNotification" :href="route('notification.get')">
-                    <i class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
-                    </Link>
-                    <Link v-else :href="route('notification.get')">
-                    <i class="p-2 material-icons hover:cursor-pointer text-indigo-500">notifications</i>
-                    </Link>
+                    <a v-if="hasNotification" :href="route('notification.get')">
+                        <i class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
+                    </a>
+                    <a v-else :href="route('notification.get')">
+                        <i class="p-2 material-icons hover:cursor-pointer text-indigo-500">notifications</i>
+                    </a>
                 </div>
