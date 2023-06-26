@@ -1,68 +1,78 @@
 <?php
 require_once('./views/Layouts/header.php');
+require_once('./database/connect.php');
 require_once('./app/Controllers/notificationController.php');
 ?>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 bg-gray-100 bg-opacity-25 mt-20 rtl ">
-    <div v-if="admin" class="max-w-7xl mb-5">
-        <h1 class="text-2xl py-3 rtl" v-if="adminNotification">قیمت های پرسیده شده</h1>
-        <table class="rtl min-w-full text-left text-sm font-light">
-            <thead class="font-medium dark:border-neutral-500">
-                <tr class="bg-green-700">
-                    <th scope="col" class="px-3 py-3 text-white text-center">
-                        شماره فنی
-                    </th>
-                    <th scope="col" class="px-3 py-3 text-white text-center">
-                        مشتری
-                    </th>
-                    <th scope="col" class="px-3 py-3 text-white text-center">
-                        کاربر ارسال کننده
-                    </th>
-                    <th scope="col" class="px-3 py-3 text-white text-center">
-                        وضعیت
-                    </th>
-                    <th scope="col" class="px-3 py-3 text-white text-center w-24">
-                        عملیات
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="results">
-                <tr v-if="adminNotification.length > 0" v-for="item in adminNotification" class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.code }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.customer_name }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.user_name }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.status === 'pending' ? 'در حال انتظار' : 'بررسی شده' }}
+    <?php if ($notifications['admin']) { ?>
+        <div class="max-w-7xl mb-5">
+            <h1 class="text-2xl py-3 rtl" v-if="adminNotification">قیمت های پرسیده شده</h1>
+            <table class="rtl min-w-full text-left text-sm font-light">
+                <thead class="font-medium dark:border-neutral-500">
+                    <tr class="bg-green-700">
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            شماره فنی
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            مشتری
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            کاربر ارسال کننده
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            وضعیت
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center w-24">
+                            عملیات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="results">
+                    <?php if (count($notifications['adminNotification']) > 0) {
 
-                    </td>
+                        foreach ($notifications['adminNotification'] as $notification) {
+                    ?>
+                            <tr class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
+                                <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                    <?php echo $notification['code'] ?>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                    <?php echo $notification['customer_name'] ?>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                    <?php echo $notification['user_name'] ?>
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                    <?php echo $notification['status'] === 'pending' ? 'در حال انتظار' : 'بررسی شده' ?>
 
-                    <td class="whitespace-nowrap w-24">
-                        <div class="flex justify-center gap-1 items-center px-2">
-                            <a>
-                                <i @click="travelTO(item.id, item.code, item.customer_id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
-                            </a>
-                            <a>
-                                <i @click="weDontHave(item.id, item.code, item.customer_id)" class="bold material-icons text-red-500 hover:text-red-700 hover:cursor-pointer">close</i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
-                    <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
-                        <i class="material-icons text-red-500">mood_bad</i>
-                        <br />
-                        !متاسفانه چیزی برای نمایش در پایگاه داده
-                        موجود نیست
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                                </td>
+
+                                <td class="whitespace-nowrap w-24">
+                                    <div class="flex justify-center gap-1 items-center px-2">
+                                        <a>
+                                            <i onclick="travelTO(item.id, item.code, item.customer_id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
+                                        </a>
+                                        <a>
+                                            <i onclick="weDontHave(this)" data-id="<?php echo $notification['id'] ?>" data-code="<?php echo $notification['code'] ?>" data-customer="<?php echo $notification['customer_id'] ?>" class="bold material-icons text-red-500 hover:text-red-700 hover:cursor-pointer">close</i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php }
+                    } else { ?>
+                        <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
+                            <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
+                                <i class="material-icons text-red-500">mood_bad</i>
+                                <br />
+                                !متاسفانه چیزی برای نمایش در پایگاه داده
+                                موجود نیست
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    <?php } ?>
     <div class="max-w-7xl ">
         <h1 class="text-2xl py-3 rtl">جواب های دریافتی</h1>
         <table class="rtl min-w-full text-left text-sm font-light">
@@ -85,38 +95,43 @@ require_once('./app/Controllers/notificationController.php');
                 </tr>
             </thead>
             <tbody id="results">
-                <tr v-if="answeredNotifications.length > 0" v-for="item in answeredNotifications" class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.code }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.customer_name }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.user_name }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.price }}
+                <?php if (count($notifications['answeredNotifications']) > 0) {
+                    foreach ($notifications['answeredNotifications'] as $notification) { ?>
+                        <tr class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['code'] ?>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['customer_name'] ?>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['user_name'] ?>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['price'] ?>
 
-                    </td>
+                            </td>
 
-                    <td class="whitespace-nowrap w-24">
-                        <div class="flex justify-center gap-1 items-center px-2">
-                            <a>
-                                <i @click="markUsRead(item.id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
-                            </a>
+                            <td class="whitespace-nowrap w-24">
+                                <div class="flex justify-center gap-1 items-center px-2">
+                                    <a>
+                                        <i @click="markUsRead(item.id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
+                                    </a>
 
-                        </div>
-                    </td>
-                </tr>
-                <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
-                    <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
-                        <i class="material-icons text-red-500">mood_bad</i>
-                        <br />
-                        !متاسفانه چیزی برای نمایش در پایگاه داده
-                        موجود نیست
-                    </td>
-                </tr>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php }
+                } else { ?>
+                    <tr class="transition duration-300 ease-in-out bg-neutral-200">
+                        <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
+                            <i class="material-icons text-red-500">mood_bad</i>
+                            <br />
+                            !متاسفانه چیزی برای نمایش در پایگاه داده
+                            موجود نیست
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -142,38 +157,43 @@ require_once('./app/Controllers/notificationController.php');
                 </tr>
             </thead>
             <tbody id="results">
-                <tr v-if="previousNotifications.length > 0" v-for="item in previousNotifications" class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.code }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.customer_name }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.user_name }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                        {{ item.price }}
+                <?php if (count($notifications['previousNotifications']) > 0) {
+                    foreach ($notifications['previousNotifications'] as $notification) { ?>
+                        <tr class="transition duration-300 ease-in-out bg-neutral-200 hover:bg-neutral-100">
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['code'] ?>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['customer_name'] ?>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['user_name'] ?>
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
+                                <?php echo $notification['price'] ?>
 
-                    </td>
+                            </td>
 
-                    <td class="whitespace-nowrap w-24">
-                        <div class="flex justify-center gap-1 items-center px-2">
-                            <a>
-                                <i @click="markUsRead(item.id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
-                            </a>
+                            <td class="whitespace-nowrap w-24">
+                                <div class="flex justify-center gap-1 items-center px-2">
+                                    <a>
+                                        <i @click="markUsRead(item.id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
+                                    </a>
 
-                        </div>
-                    </td>
-                </tr>
-                <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
-                    <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
-                        <i class="material-icons text-red-500">mood_bad</i>
-                        <br />
-                        !متاسفانه چیزی برای نمایش در پایگاه داده
-                        موجود نیست
-                    </td>
-                </tr>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php }
+                } else { ?>
+                    <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
+                        <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
+                            <i class="material-icons text-red-500">mood_bad</i>
+                            <br />
+                            !متاسفانه چیزی برای نمایش در پایگاه داده
+                            موجود نیست
+                        </td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
@@ -181,43 +201,39 @@ require_once('./app/Controllers/notificationController.php');
 <script>
     let result = null;
 
-    const search = (val) => {
-        let pattern = val;
-        let superMode = 0;
-        const resultBox = document.getElementById("results");
+    function weDontHave(element) {
+        const id = element.getAttribute('data-id');
+        const code = element.getAttribute('data-code');
+        const customer = element.getAttribute('data-customer');
 
-        if (document.getElementById("mode").checked) {
-            superMode = 1;
-        }
+        // Defining a params instance to be attached to the axios request
+        const params = new URLSearchParams();
+        params.append('weDontHave', 'weDontHave');
+        params.append('id', id);
+        params.append('code', code);
+        params.append('customer', customer);
 
-        if (
-            (pattern.length > 4 && superMode == 1) ||
-            (pattern.length > 6 && superMode == 0)
-        ) {
-            pattern = pattern.replace(/\s/g, "");
-            pattern = pattern.replace(/-/g, "");
-            pattern = pattern.replace(/_/g, "");
+        axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+            .then(function(response) {
+                if (response.data == true) {
+                    form_success.classList.remove('hidden');
+                    setTimeout(() => {
+                        form_success.classList.add('hidden');
+                        location.reload();
+                    }, 2000)
+                } else {
+                    form_error.classList.remove('hidden');
+                    setTimeout(() => {
+                        form_error.classList.add('hidden');
+                        location.reload();
+                    }, 2000)
+                }
+            })
+            .catch(function(error) {
 
-            resultBox.innerHTML = `<tr class=''>
-                <td colspan='14' class='py-10 text-center'> 
-                    <img class=' block w-10 mx-auto h-auto' src='./public/img/loading.png' alt='loading'>
-                    </td>
-            </tr>`;
-            var params = new URLSearchParams();
-            params.append('pattern', pattern);
-            params.append('superMode', superMode);
+            });
 
-            axios.post("./app/Controllers/SearchController.php", params)
-                .then(function(response) {
-                    resultBox.innerHTML = response.data;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        } else {
-            resultBox.innerHTML = "";
-        }
-    };
+    }
 </script>
 <?php
 require_once('./views/Layouts/footer.php');

@@ -42,3 +42,33 @@ function index($conn, $id)
 
     return count([...$hasNotification, ...$adminNotification]);
 }
+
+
+if (isset($_POST['weDontHave'])) {
+
+    $id = $_SESSION['id'];
+    $code = $_SESSION['code'];
+    $customer = $_SESSION['customer'];
+
+    echo clearNotification($conn, $id, $code, $customer);
+}
+
+function clearNotification($conn, $id, $code, $customer)
+{
+
+    if ($id) {
+        DB::table('ask_price')
+            ->where('id', $id)
+            ->update(['status' => 'done', 'notify' => 'received', 'price' => 'نداریم']);
+    }
+
+    if ($customer) {
+        $created_at = date("Y-m-d H:i:s");
+        $pattern_sql = "INSERT INTO prices (partnumber, price, customer_id, created_at, updated_at)
+            VALUES ('" . $code . "', 'نداریم', '" .  $customer . "','" . $created_at . "','" . $created_at . "')";
+
+        if ($conn->query($pattern_sql) === TRUE) {
+            echo 'true';
+        }
+    }
+}

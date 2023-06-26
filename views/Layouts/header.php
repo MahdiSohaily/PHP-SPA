@@ -173,7 +173,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
                         const params = new URLSearchParams();
                         params.append('check_notification', 'check_notification');
                         axios
-                            .post("./app/Controllers/notificationController.php", params)
+                            .post("./app/Controllers/notificationAjaxController.php", params)
                             .then(function(response) {
                                 console.log(response.data);
                                 if (response.data > 0) {
