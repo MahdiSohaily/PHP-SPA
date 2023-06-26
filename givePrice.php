@@ -5,6 +5,7 @@ require_once('./views/Layouts/header.php');
 
     <form action="showPriceReports.php" method="post">
         <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
+        <input type="text" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
         <div class="">
             <div class="col-span-6 sm:col-span-4">
                 <label for="customer" class="block font-medium text-sm text-gray-700">

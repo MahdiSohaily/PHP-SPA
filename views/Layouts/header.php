@@ -1,8 +1,9 @@
 <?php
+session_start();
 require_once './config/config.php';
 require_once './database/connect.php';
 date_default_timezone_set("Asia/Tehran");
-$_SESSION["user_id"] = !empty($_SESSION["user_id"]) ? $_SESSION["user_id"] : 1;
+$_SESSION["user_id"] = $_SESSION["id"];
 ?>
 <!DOCTYPE html>
 <html lang="fe">
@@ -119,7 +120,7 @@ $_SESSION["user_id"] = !empty($_SESSION["user_id"]) ? $_SESSION["user_id"] : 1;
             <nav id="nav" ref="nav" class="main-nav bg-white shadow-lg flex flex-col justify-between">
                 <i id="close" onclick="toggleNav()" class="material-icons absolute m-3 left-0 hover:cursor-pointer">close</i>
                 <ul class="rtl flex flex-col pt-5">
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="/report">
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./index.php">
                         <i class="px-2 material-icons hover:cursor-pointer">search</i>
                         جستجوی اجناس
                     </a>
