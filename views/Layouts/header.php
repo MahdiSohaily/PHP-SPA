@@ -2,6 +2,7 @@
 require_once './config/config.php';
 require_once './database/connect.php';
 date_default_timezone_set("Asia/Tehran");
+echo $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="fe">
@@ -87,6 +88,7 @@ date_default_timezone_set("Asia/Tehran");
             axios
                 .post("../../app/Controllers/notificationController.php")
                 .then(function(response) {
+                    console.log('here response');
                     if (response.data > 0) {
                         hasNotification.value = true;
                     }
