@@ -44,10 +44,9 @@ function index($conn, $id)
 }
 
 if (isset($_POST['weDontHave'])) {
-    $id = $_SESSION['id'];
-    $code = $_SESSION['code'];
-    $customer = $_SESSION['customer'];
-
+    $id = $_POST['id'];
+    $code = $_POST['code'];
+    $customer = $_POST['customer'];
     echo clearNotification($conn, $id, $code, $customer);
 }
 

@@ -6,7 +6,7 @@ if (isset($_POST['givenPrice'], $_POST['user'])) {
     $customer = $_POST['customer'];
     $_SESSION["user_id"] = $_POST['user'];
     $code = $_POST['code'];
-    $notification_id = $_POST['code'] ? $_POST['code'] : null;
+    $notification_id = $_POST['notification'] ? $_POST['notification'] : null;
 
     $customer_sql = "SELECT * FROM callcenter.customer WHERE id = '" . $customer . "%'";
     $result = mysqli_query($conn, $customer_sql);

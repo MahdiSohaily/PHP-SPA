@@ -49,9 +49,16 @@ require_once('./app/Controllers/notificationController.php');
 
                                 <td class="whitespace-nowrap w-24">
                                     <div class="flex justify-center gap-1 items-center px-2">
-                                        <a>
-                                            <i onclick="travelTO(item.id, item.code, item.customer_id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
-                                        </a>
+
+                                        <form action="showPriceReports.php" method="post">
+                                            <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
+                                            <input type="text" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
+                                            <input name="customer" value="<?php echo $notification['customer_id'] ?>" type="number" hidden />
+                                            <input name="code" value="<?php echo $notification['code'] ?>" type="number" hidden />
+                                            <button type="submit">
+                                                <i class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
+                                            </button>
+                                        </form>
                                         <a>
                                             <i onclick="weDontHave(this)" data-id="<?php echo $notification['id'] ?>" data-code="<?php echo $notification['code'] ?>" data-customer="<?php echo $notification['customer_id'] ?>" class="bold material-icons text-red-500 hover:text-red-700 hover:cursor-pointer">close</i>
                                         </a>
@@ -213,9 +220,9 @@ require_once('./app/Controllers/notificationController.php');
         params.append('code', code);
         params.append('customer', customer);
 
-        axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+        axios.post("./app/Controllers/notificationAjaxController.php", params)
             .then(function(response) {
-                console.log(response.data);
+                location.reload();
             })
             .catch(function(error) {
 
