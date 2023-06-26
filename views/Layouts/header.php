@@ -60,6 +60,29 @@ $_SESSION["user_id"] = !empty($_SESSION["user_id"]) ? $_SESSION["user_id"] : 1;
         .custome-alert.error {
             background-color: red;
         }
+
+        .notify {
+            position: relative;
+            animation-name: wave;
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+            color: red;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: rotate(-20deg);
+            }
+
+            50% {
+                transform: rotate(20deg);
+            }
+
+            100% {
+                transform: rotate(-20deg);
+            }
+
+        }
     </style>
     <script>
         const seekExist = (e) => {
@@ -84,19 +107,6 @@ $_SESSION["user_id"] = !empty($_SESSION["user_id"]) ? $_SESSION["user_id"] : 1;
             }
 
         }
-        // setInterval(() => {
-        //     axios
-        //         .post("../../app/Controllers/notificationController.php")
-        //         .then(function(response) {
-        //             console.log('here response');
-        //             if (response.data > 0) {
-        //                 hasNotification.value = true;
-        //             }
-        //         })
-        //         .catch(function(error) {
-        //             console.log(error);
-        //         });
-        // }, 30000);
     </script>
 </head>
 
@@ -147,10 +157,34 @@ $_SESSION["user_id"] = !empty($_SESSION["user_id"]) ? $_SESSION["user_id"] : 1;
                 <div class="flex">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
 
-                    <a v-if="hasNotification" :href="route('notification.get')">
+                    <a id="active" class="hidden" href="./notification.php">
                         <i class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
                     </a>
-                    <a v-else :href="route('notification.get')">
+                    <a id="deactive" class="" href="./notification.php">
                         <i class="p-2 material-icons hover:cursor-pointer text-indigo-500">notifications</i>
                     </a>
                 </div>
+                <script>
+                    const active = document.getElementById('active');
+                    const deactive = document.getElementById('deactive');
+
+                    setInterval(() => {
+                        const params = new URLSearchParams();
+                        params.append('check_notification', 'check_notification');
+                        axios
+                            .post("./app/Controllers/notificationController.php", params)
+                            .then(function(response) {
+                                console.log(response.data);
+                                if (response.data > 0) {
+                                    active.classList.remove('hidden');
+                                    deactive.classList.add('hidden');
+                                } else {
+                                    deactive.classList.remove('hidden');
+                                    active.classList.add('hidden');
+                                }
+                            })
+                            .catch(function(error) {
+                                console.log(error);
+                            });
+                    }, 30000);
+                </script>
