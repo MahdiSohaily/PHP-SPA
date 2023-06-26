@@ -1,9 +1,6 @@
 <?php
-require_once './config/config.php';
-require_once './database/connect.php';
 require_once('./views/Layouts/header.php');
-$sql = "SELECT * FROM rates ORDER BY amount ASC";
-$rates = $conn->query($sql);
+require_once('./app/Controllers/notificationController.php');
 ?>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 bg-gray-100 bg-opacity-25 mt-20 rtl ">
     <div v-if="admin" class="max-w-7xl mb-5">
