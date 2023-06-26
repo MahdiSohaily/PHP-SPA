@@ -477,6 +477,7 @@ if ($isValidCustomer) {
                 params.append('store_price', 'store_price');
                 params.append('partNumber', partNumber);
                 params.append('customer_id', customer_id);
+                params.append('notification_id', notification_id);
                 params.append('price', price);
 
                 axios.post("./app/Controllers/GivenPriceAjax.php", params)
