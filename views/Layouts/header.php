@@ -2,6 +2,8 @@
 require_once './config/config.php';
 require_once './database/connect.php';
 date_default_timezone_set("Asia/Tehran");
+$_SESSION["user_id"] = $_POST['user'];
+echo $_SESSION['user_id'];
 ?>
 <!DOCTYPE html>
 <html lang="fe">
