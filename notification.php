@@ -17,7 +17,7 @@ require_once('./app/Controllers/notificationController.php');
                             مشتری
                         </th>
                         <th scope="col" class="px-3 py-3 text-white text-center">
-                            کاربر ارسال کننده
+                            کاربر
                         </th>
                         <th scope="col" class="px-3 py-3 text-white text-center">
                             وضعیت
@@ -85,7 +85,7 @@ require_once('./app/Controllers/notificationController.php');
                         مشتری
                     </th>
                     <th scope="col" class="px-3 py-3 text-white text-center">
-                        کاربر ارسال کننده
+                        کاربر
                     </th>
                     <th scope="col" class="px-3 py-3 text-white text-center">
                         قیمت داده شده </th>
@@ -147,7 +147,7 @@ require_once('./app/Controllers/notificationController.php');
                         مشتری
                     </th>
                     <th scope="col" class="px-3 py-3 text-white text-center">
-                        کاربر ارسال کننده
+                        کاربر
                     </th>
                     <th scope="col" class="px-3 py-3 text-white text-center">
                         قیمت داده شده </th>
@@ -215,19 +215,7 @@ require_once('./app/Controllers/notificationController.php');
 
         axios.post("./app/Controllers/RelationshipAjaxController.php", params)
             .then(function(response) {
-                if (response.data == true) {
-                    form_success.classList.remove('hidden');
-                    setTimeout(() => {
-                        form_success.classList.add('hidden');
-                        location.reload();
-                    }, 2000)
-                } else {
-                    form_error.classList.remove('hidden');
-                    setTimeout(() => {
-                        form_error.classList.add('hidden');
-                        location.reload();
-                    }, 2000)
-                }
+                console.log(response.data);
             })
             .catch(function(error) {
 

@@ -43,9 +43,7 @@ function index($conn, $id)
     return count([...$hasNotification, ...$adminNotification]);
 }
 
-
 if (isset($_POST['weDontHave'])) {
-
     $id = $_SESSION['id'];
     $code = $_SESSION['code'];
     $customer = $_SESSION['customer'];
