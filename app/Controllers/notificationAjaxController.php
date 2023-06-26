@@ -57,9 +57,10 @@ function clearNotification($conn, $id, $code, $customer)
 {
 
     if ($id) {
-        DB::table('ask_price')
-            ->where('id', $id)
-            ->update(['status' => 'done', 'notify' => 'received', 'price' => 'نداریم']);
+        $sql = "UPDATE ask_price SET status= 'done' , notify = 'received',
+             price = 'نداریم'";
+
+        $conn->query($sql);
     }
 
     if ($customer) {
@@ -68,7 +69,7 @@ function clearNotification($conn, $id, $code, $customer)
             VALUES ('" . $code . "', 'نداریم', '" .  $customer . "','" . $created_at . "','" . $created_at . "')";
 
         if ($conn->query($pattern_sql) === TRUE) {
-            echo 'true';
+            return 'true';
         }
     }
 }
