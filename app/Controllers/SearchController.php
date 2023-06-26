@@ -66,13 +66,13 @@ if (isset($_POST['pattern'])) {
                 <td class='whitespace-nowrap w-24'>
                     <div class='flex justify-center gap-1 items-center px-2'>
                         <a target='_blank' href='https://www.google.com/search?tbm=isch&q=<?php echo $partNumber ?>'>
-                            <img class='w-5 h-auto' src='../../public/img/google.png' alt='google'>
+                            <img class='w-5 h-auto' src='./public/img/google.png' alt='google'>
                         </a>
                         <a msg=' <?php echo $partNumber ?>'>
-                            <img class='w-5 h-auto' src='../../public/img/tel.png' alt='part'>
+                            <img class='w-5 h-auto' src='./public/img/tel.png' alt='part'>
                         </a>
                         <a target='_blank' href='https://partsouq.com/en/search/all?q=<?php echo $partNumber ?>'>
-                            <img class='w-5 h-auto' src='../../public/img/part.png' alt='part'>
+                            <img class='w-5 h-auto' src='./public/img/part.png' alt='part'>
                         </a>
                     </div>
                 </td>

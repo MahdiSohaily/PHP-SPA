@@ -2,7 +2,7 @@
 $isValidCustomer = false;
 $finalResult = null;
 
-if (isset($_POST['givenPrice'])) {
+if (isset($_POST['givenPrice'], $_POST['user'])) {
     $customer = $_POST['customer'];
     $_SESSION["user_id"] = $_POST['user'];
     $code = $_POST['code'];
