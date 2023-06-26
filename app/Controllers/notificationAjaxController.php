@@ -71,3 +71,17 @@ function clearNotification($conn, $id, $code, $customer)
         }
     }
 }
+
+if (isset($_POST['markUsRead'])) {
+    $id = $_POST['id'];
+    echo readNotification($conn, $id);
+}
+
+function readNotification($conn, $id)
+{
+    $sql = "UPDATE ask_price SET status= 'done' , notify = 'done',
+             status = 'done' 
+             WHERE id = '$id'";
+
+    $conn->query($sql);
+}

@@ -124,7 +124,7 @@ require_once('./app/Controllers/notificationController.php');
                             <td class="whitespace-nowrap w-24">
                                 <div class="flex justify-center gap-1 items-center px-2">
                                     <a>
-                                        <i @click="markUsRead(item.id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
+                                        <i onclick="markUsRead(this)" data-id="<?php echo $notification['id'] ?>" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
                                     </a>
 
                                 </div>
@@ -160,9 +160,6 @@ require_once('./app/Controllers/notificationController.php');
                     </th>
                     <th scope="col" class="px-3 py-3 text-white text-center">
                         قیمت داده شده </th>
-                    <th scope="col" class="px-3 py-3 text-white text-center w-24">
-                        عملیات
-                    </th>
                 </tr>
             </thead>
             <tbody id="results">
@@ -182,20 +179,11 @@ require_once('./app/Controllers/notificationController.php');
                                 <?php echo $notification['price'] ?>
 
                             </td>
-
-                            <td class="whitespace-nowrap w-24">
-                                <div class="flex justify-center gap-1 items-center px-2">
-                                    <a>
-                                        <i @click="markUsRead(item.id)" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
-                                    </a>
-
-                                </div>
-                            </td>
                         </tr>
                     <?php }
                 } else { ?>
                     <tr v-else class="transition duration-300 ease-in-out bg-neutral-200">
-                        <td colspan="14" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
+                        <td colspan="13" class="whitespace-nowrap px-3 py-3 text-center text-red-500 font-bold">
                             <i class="material-icons text-red-500">mood_bad</i>
                             <br />
                             !متاسفانه چیزی برای نمایش در پایگاه داده
@@ -230,6 +218,20 @@ require_once('./app/Controllers/notificationController.php');
 
             });
 
+    }
+
+    function markUsRead(element) {
+        const id = element.getAttribute('data-id');
+        const params = new URLSearchParams();
+        params.append('markUsRead', 'markUsRead');
+        params.append('id', id);
+        axios.post("./app/Controllers/notificationAjaxController.php", params)
+            .then(function(response) {
+                location.reload();
+            })
+            .catch(function(error) {
+
+            });
     }
 </script>
 <?php
