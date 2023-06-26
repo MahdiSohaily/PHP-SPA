@@ -4,8 +4,8 @@ $finalResult = null;
 
 if (isset($_POST['givenPrice'], $_POST['user'])) {
     $customer = $_POST['customer'];
-    $_SESSION["user_id"] = $_POST['user'];
     $code = $_POST['code'];
+    $_SESSION["user_id"] = $_POST['user'];
     $notification_id = $_POST['notification'] ? $_POST['notification'] : null;
 
     $customer_sql = "SELECT * FROM callcenter.customer WHERE id = '" . $customer . "%'";

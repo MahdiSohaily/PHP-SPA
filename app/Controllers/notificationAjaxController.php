@@ -55,7 +55,8 @@ function clearNotification($conn, $id, $code, $customer)
 
     if ($id) {
         $sql = "UPDATE ask_price SET status= 'done' , notify = 'received',
-             price = 'نداریم'";
+             price = 'نداریم' 
+             WHERE id = '$id'";
 
         $conn->query($sql);
     }

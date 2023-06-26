@@ -300,6 +300,7 @@ if ($isValidCustomer) {
                                         <input type="text" hidden name="store_price" value="store_price">
                                         <input type="text" hidden name="partNumber" value="<?php echo $partNumber ?>">
                                         <input type="text" hidden id="customer_id" name="customer_id" value="<?php echo $customer ?>">
+                                        <input type="text" hidden id="notification_id" name="notification_id" value="<?php echo $notification_id ?>">
                                         <div class="rtl col-span-6 sm:col-span-4">
                                             <label class="block font-medium text-sm text-gray-700">
                                                 قیمت
@@ -469,6 +470,7 @@ if ($isValidCustomer) {
                 // Accessing the form fields to get thier value for an ajax store operation
                 const partNumber = e.getAttribute('data-part');
                 const customer_id = document.getElementById('customer_id').value;
+                const notification_id = document.getElementById('notification_id').value;
 
                 // Defining a params instance to be attached to the axios request
                 const params = new URLSearchParams();
