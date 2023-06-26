@@ -83,26 +83,18 @@ date_default_timezone_set("Asia/Tehran");
             }
 
         }
-
-        const calculateMobies = (price, rate) => {
-            return Math.round(
-                Math.round((price * 110) / 243.5) *
-                rate *
-                1.25 *
-                1.3
-            )
-        }
-
-        const calculateRegular = (price, rate) => {
-
-            return Math.round(
-                Math.round((price * 110) / 243.5) *
-                rate *
-                1.2 *
-                1.2 *
-                1.3
-            )
-        }
+        setInterval(() => {
+            axios
+                .post("../../app/Controllers/notificationController.php")
+                .then(function(response) {
+                    if (response.data > 0) {
+                        hasNotification.value = true;
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }, 30000);
     </script>
 </head>
 
