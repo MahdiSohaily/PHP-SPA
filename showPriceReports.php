@@ -12,6 +12,8 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
+
+        print_r(json_encode($finalResult));
 ?>
         <div class="accordion mt-12">
             <?php
@@ -219,7 +221,7 @@ if ($isValidCustomer) {
                                             <?php if ($givenPrice !== null) {
                                             ?>
                                                 <?php foreach ($givenPrice as $price) { ?>
-                                                    <?php if ($price['price']) { ?>
+                                                    <?php if ($price['price'] !== null) { ?>
                                                         <tr class="min-w-full mb-1  <?php echo array_key_exists("ordered", $price) ? 'bg-red-400 hover:cursor-pointer' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
 
                                                             <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
@@ -229,7 +231,7 @@ if ($isValidCustomer) {
                                                                 <?php if (array_key_exists("ordered", $price)) {
                                                                     echo 'قیمت دستوری';
                                                                 } else {
-                                                                    echo $price['name'];
+                                                                    echo $price['name'] . ' ' . $price['family'];
                                                                 }
                                                                 ?>
                                                             </td>
@@ -274,6 +276,12 @@ if ($isValidCustomer) {
                                                             </td>
                                                         </tr>
 
+                                                    <?php } else { ?>
+                                                        <tr class="min-w-full mb-4 border-b-2 border-white">
+                                                            <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
+                                                                !! موردی برای نمایش وجود ندارد
+                                                            </td>
+                                                        </tr>
                                                 <?php }
                                                 } ?>
                                             <?php } else { ?>
