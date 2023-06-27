@@ -288,7 +288,6 @@ function estelam($conn, $code)
 {
     $code = strtolower($code);
     $sql = "SELECT * FROM callcenter.estelam INNER JOIN yadakshop1402.seller ON seller.id = estelam.seller WHERE codename LIKE '" . $code . "%' ORDER BY time ASC LIMIT 7;";
-    echo $sql;
     $result = mysqli_query($conn, $sql);
 
 
@@ -419,40 +418,3 @@ function getMax($array)
     }
     return $max;
 }
-
-
-
-// function getCustomerName(Request $request)
-// {
-//     $id = $request->input('id');
-
-//     $customer = DB::table('callcenter.customer')
-//         ->select('name')
-//         ->where('id', $id)
-//         ->first();
-//     return $customer->name;
-// }
-
-// function askPrice(Request $request)
-// {
-//     $customer = $request->input('customer');
-//     $partNumber = $request->input('partNumber');
-
-//     DB::table('ask_price')->insert([
-//         'customer_id' => $customer,
-//         'user_id' => Auth::user()->id,
-//         'code' =>  $partNumber,
-//         'status' =>  'pending',
-//         'notify' =>  'send',
-//         'created_at' => Carbon::now(),
-//     ]);
-// }
-
-// function pricesetup(Request $request)
-// {
-
-//     $customer = $request->input('customer');
-//     $completeCode = $request->input('code');
-
-//     return $this->setup_loading($customer, $completeCode);
-// }
