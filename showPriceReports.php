@@ -412,10 +412,12 @@ if ($isValidCustomer) {
             const form_error = document.getElementById('form_error');
             let price = null;
 
+            // A function to update the global price while typing in the input feild
             function update_price(element) {
                 price = element.value;
             }
 
+            // A function to set the price to we don't have
             function donotHave(element) {
                 price = 'نداریم';
                 part = element.getAttribute('data-part');
@@ -425,12 +427,12 @@ if ($isValidCustomer) {
                 createRelation(element);
             }
 
+            // A function to send a request in order to ask the price for specific code
             function askPrice(element) {
                 // Accessing the form fields to get thier value for an ajax store operation
                 const partNumber = element.getAttribute('data-part');
                 const user_id = element.getAttribute('data-user');
                 const customer_id = document.getElementById('customer_id').value;
-
 
                 const params = new URLSearchParams();
                 params.append('askPrice', 'askPrice');
@@ -457,7 +459,6 @@ if ($isValidCustomer) {
                     .catch(function(error) {
 
                     });
-
             }
 
             // A function to create the relationship
@@ -496,6 +497,7 @@ if ($isValidCustomer) {
                     });
             }
 
+            // A function to set the price while cliking on the prices table
             function setPrice(element) {
                 newPrice = element.getAttribute('data-price');
                 part = element.getAttribute('data-part');
@@ -503,7 +505,6 @@ if ($isValidCustomer) {
                 input.value = newPrice;
 
                 price = newPrice;
-
             }
         </script>
 <?php
