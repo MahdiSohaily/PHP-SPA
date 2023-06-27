@@ -242,6 +242,7 @@ function relations($conn, $id)
 
 function givenPrice($conn, $code, $relation_exist = null)
 {
+    $code = strtolower($code);
     $ordared_price = [];
 
 
@@ -285,7 +286,9 @@ function givenPrice($conn, $code, $relation_exist = null)
 
 function estelam($conn, $code)
 {
-    $sql = "SELECT * FROM callcenter.estelam INNER JOIN yadakshop1402.seller ON seller.id = estelam.seller WHERE codename LIKE '" . $code . "%' ORDER BY time DESC LIMIT 7";
+    $code = strtolower($code);
+    $sql = "SELECT * FROM callcenter.estelam INNER JOIN yadakshop1402.seller ON seller.id = estelam.seller WHERE codename LIKE '" . $code . "%' ORDER BY time ASC LIMIT 7;";
+    echo $sql;
     $result = mysqli_query($conn, $sql);
 
 
