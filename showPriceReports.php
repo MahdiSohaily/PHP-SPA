@@ -418,11 +418,14 @@ if ($isValidCustomer) {
 
             function donotHave(element) {
                 price = 'نداریم';
+                part = element.getAttribute('data-part');
+                const input = document.getElementById(part + '-price');
+                input.value = price;
+
                 createRelation(element);
             }
 
             function askPrice(element) {
-                console.log('sdd');
                 // Accessing the form fields to get thier value for an ajax store operation
                 const partNumber = element.getAttribute('data-part');
                 const user_id = element.getAttribute('data-user');
@@ -437,7 +440,6 @@ if ($isValidCustomer) {
 
                 axios.post("./app/Controllers/GivenPriceAjax.php", params)
                     .then(function(response) {
-                        console.log(response.data);
                         if (response.data == true) {
                             form_success.style.bottom = '10px';
                             setTimeout(() => {
@@ -475,7 +477,6 @@ if ($isValidCustomer) {
 
                 axios.post("./app/Controllers/GivenPriceAjax.php", params)
                     .then(function(response) {
-                        console.log(response.data);
                         if (response.data == true) {
                             form_success.style.bottom = '10px';
                             setTimeout(() => {
