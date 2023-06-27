@@ -154,14 +154,11 @@ if ($isValidCustomer) {
                                                                 <tr class="py-3">
                                                                     <?php
                                                                     foreach ($rates as $rate) {
+                                                                        $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
+                                                                        $finalPrice = round($avgPrice * $rate['amount'] * 1.2 * 1.2 * 1.3);
                                                                     ?>
-                                                                        <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" @click="$emit('setPrice', calculateRegular(props.relation.goods[key].price, rate.amount))">
-                                                                            <?php
-                                                                            $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
-
-                                                                            echo round(
-                                                                                $avgPrice * $rate['amount'] * 1.2 * 1.2 * 1.3
-                                                                            ) ?>
+                                                                        <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+                                                                            <?php echo $finalPrice ?>
                                                                         </td>
                                                                     <?php } ?>
                                                                 </tr>
@@ -169,15 +166,13 @@ if ($isValidCustomer) {
                                                                     <tr class="bg-neutral-400">
                                                                         <?php
                                                                         foreach ($rates as $rate) {
+                                                                            $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
+                                                                            $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
+
                                                                         ?>
-                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
-                                                                                <?php
-                                                                                echo round(
-                                                                                    round(($goods[$index]['price'] * 110) / 243.5) *
-                                                                                        $rate['amount'] *
-                                                                                        1.25 *
-                                                                                        1.3
-                                                                                ) ?>
+                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+
+                                                                                <?php echo  $finalPrice ?>
                                                                             </td>
                                                                         <?php } ?>
                                                                     </tr>
@@ -186,15 +181,13 @@ if ($isValidCustomer) {
                                                                     <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
                                                                         <?php
                                                                         foreach ($rates as $rate) {
+                                                                            $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
+                                                                            $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
+
                                                                         ?>
-                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" v-for="rate in rates" @click="$emit('setPrice', calculateMobies(props.relation.goods[key].price, rate.amount))">
+                                                                            <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
 
-                                                                                <?php
-                                                                                $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
-
-                                                                                echo round(
-                                                                                    $avgPrice * $rate['amount'] * 1.25 * 1.3
-                                                                                ) ?>
+                                                                                <?php echo  $finalPrice ?>
                                                                             </td>
                                                                         <?php } ?>
                                                                     </tr>
@@ -305,7 +298,7 @@ if ($isValidCustomer) {
                                             <label class="block font-medium text-sm text-gray-700">
                                                 قیمت
                                             </label>
-                                            <input onkeyup="update_price(this)" name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
+                                            <input onkeyup="update_price(this)" name="price" class="ltr mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="<?php echo $partNumber ?>-price" type="text" />
                                             <p class="mt-2"></p>
                                         </div>
 
@@ -500,6 +493,16 @@ if ($isValidCustomer) {
                     .catch(function(error) {
 
                     });
+            }
+
+            function setPrice(element) {
+                newPrice = element.getAttribute('data-price');
+                part = element.getAttribute('data-part');
+                const input = document.getElementById(part + '-price');
+                input.value = newPrice;
+
+                price = newPrice;
+
             }
         </script>
 <?php
