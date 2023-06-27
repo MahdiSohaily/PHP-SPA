@@ -266,7 +266,13 @@ function givenPrice($conn, $code, $relation_exist = null)
         }
     }
 
-    $unsortedData = [...$givenPrices, $ordared_price];
+    $unsortedData = [];
+    foreach ($givenPrices as $item) {
+        array_push($unsortedData, $item);
+    }
+
+    array_push($unsortedData, $ordared_price);
+
     if ($relation_exist) {
         usort($unsortedData, function ($a, $b) {
             return $a['created_at'] < $b['created_at'];
