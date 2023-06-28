@@ -159,12 +159,15 @@ $_SESSION["user_id"] = $_SESSION["id"];
                 <div class="flex">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
 
-                    <a id="active" class="hidden" href="./notification.php">
-                        <i class="p-2 material-icons hover:cursor-pointer notify ">notifications_active</i>
-                    </a>
-                    <a id="deactive" class="" href="./notification.php">
-                        <i class="p-2 material-icons hover:cursor-pointer text-indigo-500">notifications</i>
-                    </a>
+                    <div class=" flex items-top p-2">
+                        <a id="active" class="hidden" href="./notification.php">
+                            <i class="material-icons hover:cursor-pointer notify ">notifications_active</i>
+                        </a>
+                        <a id="deactive" class="" href="./notification.php">
+                            <i class="material-icons hover:cursor-pointer text-indigo-500">notifications</i>
+                        </a>
+                        <p class="px-2"> <?php echo $_SESSION['username'] ?></p>
+                    </div>
                 </div>
                 <script>
                     const active = document.getElementById('active');
