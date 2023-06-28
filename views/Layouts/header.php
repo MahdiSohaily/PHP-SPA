@@ -144,12 +144,6 @@ $_SESSION["user_id"] = $_SESSION["id"];
                     </a>
                 </ul>
                 <!-- Authentication -->
-                <!-- <form @submit.prevent="logout">
-                    <button type="submit" class="rtl inline-flex items-end py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 w-full hover:text-white focus:outline-none transition duration-150 ease-in-out">
-                        <i class="px-2 material-icons hover:cursor-pointer">power_settings_new</i>
-                        خروج از حساب
-                    </button>
-                </form> -->
                 <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../../1402/logout.php">
                     <i class="px-2 material-icons hover:cursor-pointer">power_settings_new</i>
                     حساب کاربری
