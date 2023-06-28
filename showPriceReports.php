@@ -273,7 +273,7 @@ if ($isValidCustomer) {
                                                 <td class="text-white bold py-2 px-2 rtl">مشتری</td>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="price-<?php echo $partNumber ?>">
                                             <?php if ($givenPrice !== null) {
                                             ?>
                                                 <?php foreach ($givenPrice as $price) { ?>
@@ -512,18 +512,15 @@ if ($isValidCustomer) {
                             form_success.style.bottom = '10px';
                             setTimeout(() => {
                                 form_success.style.bottom = '-300px';
-                                location.reload();
                             }, 2000)
                         } else {
                             form_error.style.bottom = '10px';
                             setTimeout(() => {
                                 form_error.style.bottom = '-300px';
-                                location.reload();
                             }, 2000)
                         }
                     })
                     .catch(function(error) {
-
                     });
             }
 
@@ -533,6 +530,8 @@ if ($isValidCustomer) {
                 const partNumber = e.getAttribute('data-part');
                 const customer_id = document.getElementById('customer_id').value;
                 const notification_id = document.getElementById('notification_id').value;
+
+                const resultBox = document.getElementById('price-' + partNumber);
 
                 // Defining a params instance to be attached to the axios request
                 const params = new URLSearchParams();
@@ -544,11 +543,11 @@ if ($isValidCustomer) {
 
                 axios.post("./app/Controllers/GivenPriceAjax.php", params)
                     .then(function(response) {
-                        if (response.data == true) {
+                        if (response.data) {
                             form_success.style.bottom = '10px';
                             setTimeout(() => {
                                 form_success.style.bottom = '-300px';
-                                location.reload();
+                                resultBox.innerHTML = (response.data);
                             }, 2000)
                         } else {
                             form_error.style.bottom = '10px';
