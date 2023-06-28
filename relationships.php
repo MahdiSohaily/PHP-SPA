@@ -208,9 +208,11 @@ $status = $conn->query($status_sql);
         if (pattern.length > 6) {
             error_message.classList.add('hidden');
             duplicate_relation.classList.add('hidden');
-            pattern = pattern.replace(/\s/g, "");
+            pattern = pattern.replace(/[^a-zA-Z0-9\s]/g, "");
             pattern = pattern.replace(/-/g, "");
             pattern = pattern.replace(/_/g, "");
+
+            console.log(pattern.length);
 
             resultBox.innerHTML = `<tr class=''>
                                         <div class='w-full h-96 flex justify-center items-center'>
@@ -221,13 +223,17 @@ $status = $conn->query($status_sql);
             params.append('search_goods_for_relation', 'search_goods_for_relation');
             params.append('pattern', pattern);
 
-            axios.post("./app/Controllers/RelationshipAjaxController.php", params)
-                .then(function(response) {
-                    resultBox.innerHTML = response.data;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            if (pattern.length > 6) {
+                axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+                    .then(function(response) {
+                        resultBox.innerHTML = response.data;
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            } else {
+                resultBox.innerHTML = "کد فنی وارد شده فقد اعتبار است";
+            }
         } else {
             resultBox.innerHTML = "";
         }
