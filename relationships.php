@@ -433,7 +433,7 @@ $status = $conn->query($status_sql);
         // `data.text` is the text that is displayed for the data object
         if (data.text.indexOf(params.term) > -1) {
             var modifiedData = $.extend({}, data, true);
-            modifiedData.text += ' (matched)';
+            modifiedData.text += ' (مورد مشابه)';
 
             // You can return modified objects from here
             // This includes matching the `children` how you want in nested data sets
