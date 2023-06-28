@@ -96,11 +96,12 @@ $status = $conn->query($status_sql);
                     <input name="price" value="" class="ltr border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
                     <p class="mt-2"></p>
                 </div>
+                
                 <div class="col-span-12 sm:col-span-4 mb-3">
                     <label for="cars">
                         خودرو های مرتبط
                     </label>
-                    <select type="cars" multiple class="p-2 border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="cars">
+                    <select id="cars" type="cars" multiple class="p-2 border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                         <?php
                         if (mysqli_num_rows($cars) > 0) {
                             while ($item = mysqli_fetch_assoc($cars)) {
@@ -131,6 +132,8 @@ $status = $conn->query($status_sql);
                         } ?>
                     </select>
                 </div>
+
+
         </div>
         <p id="form_success" class="px-3 tiny-text text-green-500 hidden">
             رابطه جدید اجناس موفقانه در پایگاه داده ثبت شد!
@@ -145,6 +148,7 @@ $status = $conn->query($status_sql);
             </button>
         </div>
         </form>
+        <div id="output"></div>
     </div>
 </div>
 </div>
@@ -202,7 +206,7 @@ $status = $conn->query($status_sql);
         selected_goods = selected_goods.filter((good) => {
             return good.id !== id;
         });
-        
+
         selected_goods.push({
             id: id,
             partNumber: partNumber
@@ -390,12 +394,80 @@ $status = $conn->query($status_sql);
 
     // This function helps to set the selected items from select elements when we load a predefined relationship
     function setSelectedItems(id, cars) {
+        console.log(cars);
         for (var option of document.getElementById(id).options) {
             if (cars.includes(option.value)) {
-                option.selected = true;
+                option.selected = 'true';
+                option.style.color = 'red';
             }
         }
     }
+
+    jQuery(function() {
+        jQuery('.multiSelect').each(function(e) {
+            var self = jQuery(this);
+            var field = self.find('.multiSelect_field');
+            var fieldOption = field.find('option');
+            var placeholder = field.attr('data-placeholder');
+
+            field.hide().after(`<div class="multiSelect_dropdown"></div>
+                        <span class="multiSelect_placeholder">` + placeholder + `</span>
+                        <ul class="multiSelect_list"></ul>
+                        <span class="multiSelect_arrow"></span>`);
+
+            fieldOption.each(function(e) {
+                jQuery('.multiSelect_list').append(`<li class="multiSelect_option" data-value="` + jQuery(this).val() + `">
+                                            <a class="multiSelect_text">` + jQuery(this).text() + `</a>
+                                          </li>`);
+            });
+
+            var dropdown = self.find('.multiSelect_dropdown');
+            var list = self.find('.multiSelect_list');
+            var option = self.find('.multiSelect_option');
+            var optionText = self.find('.multiSelect_text');
+
+            dropdown.attr('data-multiple', 'true');
+            list.css('top', dropdown.height() + 5);
+
+            option.click(function(e) {
+                var self = jQuery(this);
+                e.stopPropagation();
+                self.addClass('-selected');
+                field.find('option:contains(' + self.children().text() + ')').prop('selected', true);
+                dropdown.append(function(e) {
+                    return jQuery('<span class="multiSelect_choice">' + self.children().text() + '<svg class="multiSelect_deselect -iconX"><use href="#iconX"></use></svg></span>').click(function(e) {
+                        var self = jQuery(this);
+                        e.stopPropagation();
+                        self.remove();
+                        list.find('.multiSelect_option:contains(' + self.text() + ')').removeClass('-selected');
+                        list.css('top', dropdown.height() + 5).find('.multiSelect_noselections').remove();
+                        field.find('option:contains(' + self.text() + ')').prop('selected', false);
+                        if (dropdown.children(':visible').length === 0) {
+                            dropdown.removeClass('-hasValue');
+                        }
+                    });
+                }).addClass('-hasValue');
+                list.css('top', dropdown.height() + 5);
+                if (!option.not('.-selected').length) {
+                    list.append('<h5 class="multiSelect_noselections">No Selections</h5>');
+                }
+            });
+
+            dropdown.click(function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                dropdown.toggleClass('-open');
+                list.toggleClass('-open').scrollTop(0).css('top', dropdown.height() + 5);
+            });
+
+            jQuery(document).on('click touch', function(e) {
+                if (dropdown.hasClass('-open')) {
+                    dropdown.toggleClass('-open');
+                    list.removeClass('-open');
+                }
+            });
+        });
+    });
 </script>
 <?php
 require_once('./views/Layouts/footer.php');
