@@ -24,6 +24,9 @@ if ($isValidCustomer) {
                             نام خانوادگی
                         </th>
                         <th scope="col" class="px-3 py-3 text-white text-center">
+                            شماره تماس
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
                             ماشین
                         </th>
                         <th scope="col" class="px-3 py-3 text-white text-center">
@@ -35,7 +38,27 @@ if ($isValidCustomer) {
                     <tr class="relative">
                         <td class=" px-1">
                             <p class="text-center bold bg-gray-600 text-white px-2 py-3">
-                                <?php echo $goods['partnumber'] ?>
+                                <?php echo $customer_info['name'] ?>
+                            </p>
+                        </td>
+                        <td class=" px-1">
+                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                                <?php echo $customer_info['family'] ?>
+                            </p>
+                        </td>
+                        <td class=" px-1">
+                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                                <?php echo $customer_info['phone'] ?>
+                            </p>
+                        </td>
+                        <td class=" px-1">
+                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                                <?php echo $customer_info['car'] ?>
+                            </p>
+                        </td>
+                        <td class=" px-1">
+                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                                <?php echo $customer_info['address'] ?>
                             </p>
                         </td>
                     </tr>
