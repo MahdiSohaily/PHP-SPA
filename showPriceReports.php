@@ -13,6 +13,35 @@ if ($isValidCustomer) {
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
 ?>
+        <div>
+            <table class="min-w-full text-left text-sm font-light custom-table">
+                <thead class="font-medium bg-green-600">
+                    <tr>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            نام
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            نام خانوادگی
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            ماشین
+                        </th>
+                        <th scope="col" class="px-3 py-3 text-white text-center">
+                            آدرس
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="relative">
+                        <td class=" px-1">
+                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                                <?php echo $goods['partnumber'] ?>
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="accordion mt-12">
             <?php
             foreach ($explodedCodes as $code_index => $code) {

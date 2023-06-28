@@ -16,7 +16,6 @@ if (isset($_POST['givenPrice'], $_POST['user'])) {
         $isValidCustomer = true;
         $customer_info = $result->fetch_assoc();
         $completeCode = $code;
-        print_r($customer_info);
         $finalResult = (setup_loading($conn, $customer, $completeCode, $notification_id));
     }
 }
