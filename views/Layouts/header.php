@@ -37,7 +37,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
             border-radius: 5px;
             background-color: seagreen;
             width: 200px;
-            z-index: 100000;
+            z-index: 100000000;
         }
 
         .custom-table td {

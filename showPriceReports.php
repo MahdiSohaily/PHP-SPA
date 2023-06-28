@@ -154,7 +154,9 @@ if ($isValidCustomer) {
                                                                 <tr class="py-3">
                                                                     <?php
                                                                     foreach ($rates as $rate) {
-                                                                        $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
+                                                                        $price = doubleval($goods[$index]['price']);
+                                                                        $price = str_replace(",", "", $price);
+                                                                        $avgPrice = round(($price * 110) / 243.5);
                                                                         $finalPrice = round($avgPrice * $rate['amount'] * 1.2 * 1.2 * 1.3);
                                                                     ?>
                                                                         <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
@@ -166,7 +168,9 @@ if ($isValidCustomer) {
                                                                     <tr class="bg-neutral-400">
                                                                         <?php
                                                                         foreach ($rates as $rate) {
-                                                                            $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
+                                                                            $price = doubleval($goods[$index]['mobis']);
+                                                                            $price = str_replace(",", "", $price);
+                                                                            $avgPrice = round(($price * 110) / 243.5);
                                                                             $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
 
                                                                         ?>
@@ -181,7 +185,9 @@ if ($isValidCustomer) {
                                                                     <tr class="bg-amber-600" v-if="props.relation.goods[key].korea > 0">
                                                                         <?php
                                                                         foreach ($rates as $rate) {
-                                                                            $avgPrice = round(($goods[$index]['price'] * 110) / 243.5);
+                                                                            $price = doubleval($goods[$index]['korea']);
+                                                                            $price = str_replace(",", "", $price);
+                                                                            $avgPrice = round(($price * 110) / 243.5);
                                                                             $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
 
                                                                         ?>
