@@ -1,19 +1,22 @@
 <?php
 $isValidCustomer = false;
+$customer_info = null;
 $finalResult = null;
+
 
 if (isset($_POST['givenPrice'], $_POST['user'])) {
     $customer = $_POST['customer'];
     $code = $_POST['code'];
     $_SESSION["user_id"] = $_POST['user'];
     $notification_id = array_key_exists('notification', $_POST) ? $_POST['notification'] : null;
-
+    
     $customer_sql = "SELECT * FROM callcenter.customer WHERE id = '" . $customer . "%'";
     $result = mysqli_query($conn, $customer_sql);
     if (mysqli_num_rows($result) > 0) {
         $isValidCustomer = true;
-
+        $customer_info = $result->fetch_assoc();
         $completeCode = $code;
+        print_r($customer_info);
         $finalResult = (setup_loading($conn, $customer, $completeCode, $notification_id));
     }
 }
