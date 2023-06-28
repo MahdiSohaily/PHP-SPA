@@ -421,8 +421,7 @@ $status = $conn->query($status_sql);
                 setSelectedItems('cars', pattern_info_cars);
                 setSelectedItems('status', pattern_info.status_id);
 
-                select2.val(["سانتافه قدیم 2700 سی سی"]);
-                select2.trigger("change");
+                $('#cars').select2(pattern_info_cars);
 
             })
             .catch(function(error) {
