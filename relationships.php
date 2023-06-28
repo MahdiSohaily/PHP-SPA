@@ -199,6 +199,10 @@ $status = $conn->query($status_sql);
         duplicate_relation.classList.add('hidden');
         const id = element.getAttribute("data-id");
         const partNumber = element.getAttribute("data-partnumber");
+        selected_goods = selected_goods.filter((good) => {
+            return good.id !== id;
+        });
+        
         selected_goods.push({
             id: id,
             partNumber: partNumber
