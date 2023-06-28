@@ -32,7 +32,8 @@ $_SESSION["user_id"] = $_SESSION["id"];
         .custome-tooltip {
             position: absolute;
             display: none;
-            bottom: 100%;
+            top: 100%;
+            left: 0% !important;
             padding: 10px;
             border-radius: 5px;
             background-color: seagreen;
