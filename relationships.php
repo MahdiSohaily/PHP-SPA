@@ -96,7 +96,7 @@ $status = $conn->query($status_sql);
                     <input name="price" value="" class="ltr border-1 text-sm border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="price" type="text" />
                     <p class="mt-2"></p>
                 </div>
-                
+
                 <div class="col-span-12 sm:col-span-4 mb-3">
                     <label for="cars">
                         خودرو های مرتبط
@@ -114,6 +114,40 @@ $status = $conn->query($status_sql);
                         } ?>
                     </select>
                 </div>
+                <script>
+                    // In your Javascript (external .js resource or <script> tag)
+                    $(document).ready(function() {
+                        $('#cars').select2({
+                            matcher: matchCustom
+                        });
+                    });
+
+                    function matchCustom(params, data) {
+                        // If there are no search terms, return all of the data
+                        if ($.trim(params.term) === '') {
+                            return data;
+                        }
+
+                        // Do not display the item if there is no 'text' property
+                        if (typeof data.text === 'undefined') {
+                            return null;
+                        }
+
+                        // `params.term` should be the term that is used for searching
+                        // `data.text` is the text that is displayed for the data object
+                        if (data.text.indexOf(params.term) > -1) {
+                            var modifiedData = $.extend({}, data, true);
+                            modifiedData.text += ' (matched)';
+
+                            // You can return modified objects from here
+                            // This includes matching the `children` how you want in nested data sets
+                            return modifiedData;
+                        }
+
+                        // Return `null` if the term should not be displayed
+                        return null;
+                    }
+                </script>
                 <div class="col-span-12 sm:col-span-4 mb-3">
                     <label for="cars">
                         وضعیت
