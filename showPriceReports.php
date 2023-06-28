@@ -13,7 +13,7 @@ if ($isValidCustomer) {
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
 ?>
-        <div>
+        <div class="rtl col-md-6 mx-auto">
             <table class="min-w-full text-left text-sm font-light custom-table">
                 <thead class="font-medium bg-green-600">
                     <tr>
@@ -37,27 +37,27 @@ if ($isValidCustomer) {
                 <tbody>
                     <tr class="relative">
                         <td class=" px-1">
-                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                            <p class="text-center bold text-gray-700 px-2 py-3">
                                 <?php echo $customer_info['name'] ?>
                             </p>
                         </td>
                         <td class=" px-1">
-                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                            <p class="text-center bold text-gray-700 px-2 py-3">
                                 <?php echo $customer_info['family'] ?>
                             </p>
                         </td>
                         <td class=" px-1">
-                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                            <p class="text-center bold text-gray-700 px-2 py-3">
                                 <?php echo $customer_info['phone'] ?>
                             </p>
                         </td>
                         <td class=" px-1">
-                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                            <p class="text-center bold text-gray-700 px-2 py-3">
                                 <?php echo $customer_info['car'] ?>
                             </p>
                         </td>
                         <td class=" px-1">
-                            <p class="text-center bold bg-gray-600 text-white px-2 py-3">
+                            <p class="text-center bold text-gray-700 px-2 py-3">
                                 <?php echo $customer_info['address'] ?>
                             </p>
                         </td>
@@ -65,7 +65,7 @@ if ($isValidCustomer) {
                 </tbody>
             </table>
         </div>
-        <div class="accordion mt-12">
+        <div class="accordion">
             <?php
             foreach ($explodedCodes as $code_index => $code) {
             ?>
