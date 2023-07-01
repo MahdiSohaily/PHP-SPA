@@ -278,7 +278,7 @@ if ($isValidCustomer) {
                                             ?>
                                                 <?php foreach ($givenPrice as $price) { ?>
                                                     <?php if ($price['price'] !== null) { ?>
-                                                        <tr class="min-w-full mb-1  <?php echo array_key_exists("ordered", $price) ? 'bg-red-400 hover:cursor-pointer' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
+                                                        <tr onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>" class="min-w-full mb-1  <?php echo array_key_exists("ordered", $price) ? 'bg-red-400 hover:cursor-pointer' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
 
                                                             <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                                                                 <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
