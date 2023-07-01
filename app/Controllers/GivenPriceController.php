@@ -385,14 +385,22 @@ function exist($conn, $id)
     $amount = [];
     $stockInfo = [];
 
-    foreach ($result as $value) {
-        $out_data = out($conn, $value['id']);
-        $out =  $out_data;
-        $value['qty'] = (int)($value['qty']) - $out;
+    $modifiedResult = [];
 
+    foreach ($result as $value) {
+        $clone = $value;
+
+        $out_data = out($conn, $clone['id']);
+        $out =  $out_data;
+        $clone['qty'] = (int)($clone['qty']) - $out;
+        array_push($modifiedResult, $clone);
         array_push($brands, $value['name']);
     }
 
+    print_r(json_encode($result));
+    echo "<br><br>";
+    print_r(json_encode($modifiedResult));
+    echo "<br><br>";
 
 
     $brands = array_unique($brands);
@@ -400,7 +408,7 @@ function exist($conn, $id)
     foreach ($brands as $key => $value) {
         $item = $value;
         $total = 0;
-        foreach ($result as $key => $value) {
+        foreach ($modifiedResult as $key => $value) {
             if ($item == $value['name']) {
                 $total += $value['qty'];
             }
