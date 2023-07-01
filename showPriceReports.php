@@ -12,6 +12,8 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
+
+        print_r(json_encode($finalResult));
 ?>
         <div class="rtl col-md-6 mx-auto">
             <table class="min-w-full text-left text-sm font-light custom-table">
@@ -520,8 +522,7 @@ if ($isValidCustomer) {
                             }, 2000)
                         }
                     })
-                    .catch(function(error) {
-                    });
+                    .catch(function(error) {});
             }
 
             // A function to create the relationship
