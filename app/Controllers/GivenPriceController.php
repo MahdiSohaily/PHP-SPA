@@ -9,7 +9,7 @@ if (isset($_POST['givenPrice'], $_POST['user'])) {
     $code = $_POST['code'];
     $_SESSION["user_id"] = $_POST['user'];
     $notification_id = array_key_exists('notification', $_POST) ? $_POST['notification'] : null;
-    
+
     $customer_sql = "SELECT * FROM callcenter.customer WHERE id = '" . $customer . "%'";
     $result = mysqli_query($conn, $customer_sql);
     if (mysqli_num_rows($result) > 0) {
@@ -225,8 +225,10 @@ function relations($conn, $id)
     $existing = [];
     $stockinfo = [];
     $sortedGoods = [];
+    $count = 1;
     foreach ($relations as $relation) {
-        $existing[$relation['partnumber']] =  exist($conn, $relation['id'])['final'];
+        echo $count . "<br>";
+        // $existing[$relation['partnumber']] =  exist($conn, $relation['id'])['final'];
         $stockinfo[$relation['partnumber']] =  exist($conn, $relation['id'])['stockInfo'];
         $sortedGoods[$relation['partnumber']] = $relation;
     }
@@ -380,7 +382,10 @@ function exist($conn, $id)
         while ($item = mysqli_fetch_assoc($data_result)) {
             array_push($result, $item);
         }
-    }
+    };
+
+    print_r(json_encode($result));
+    echo "<br/>";
 
     $brands = [];
     $amount = [];
@@ -388,6 +393,8 @@ function exist($conn, $id)
 
     foreach ($result as $key => $value) {
         $out_data = out($conn, $value['id']);
+
+        print_r($out_data);
         $out =  $out_data ? (int) $out_data['qty'] : 0;
         $value['qty'] = (int)($value['qty']) - $out;
 
