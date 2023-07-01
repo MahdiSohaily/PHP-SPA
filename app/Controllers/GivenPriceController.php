@@ -361,9 +361,9 @@ function stockInfo($conn, $id, $brand)
                 $total += $record['qty'];
             }
         }
-
         $final_result[$customer] = $total;
     }
+
 
     return $final_result;
 }
