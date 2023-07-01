@@ -224,10 +224,8 @@ function relations($conn, $id)
     $existing = [];
     $stockinfo = [];
     $sortedGoods = [];
-    $count = 1;
     foreach ($relations as $relation) {
-        echo $count . "<br>";
-        // $existing[$relation['partnumber']] =  exist($conn, $relation['id'])['final'];
+        $existing[$relation['partnumber']] =  exist($conn, $relation['id'])['final'];
         $stockinfo[$relation['partnumber']] =  exist($conn, $relation['id'])['stockInfo'];
         $sortedGoods[$relation['partnumber']] = $relation;
     }
