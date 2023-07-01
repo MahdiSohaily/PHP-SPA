@@ -12,8 +12,6 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
-
-        print_r(json_encode($finalResult));
 ?>
         <div class="rtl col-md-6 mx-auto">
             <table class="min-w-full text-left text-sm font-light custom-table">
@@ -153,38 +151,42 @@ if ($isValidCustomer) {
                                                             <thead class="font-medium">
                                                                 <tr>
                                                                     <?php foreach ($exist[$index] as $brand => $amount) {
+                                                                        if ($amount > 0) {
                                                                     ?>
-                                                                        <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
-                                                                            <?php echo $brand ?>
-                                                                            <div class="custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
-                                                                                <?php
-                                                                                foreach ($stockInfo[$index][$brand] as $iterator => $item) {
-                                                                                ?>
-                                                                                    <div>
-                                                                                        <?php if ($item !== 0) { ?>
-                                                                                            <p><?php echo $iterator . ' : ' . $item ?></p>
-                                                                                        <?php } ?>
-                                                                                    </div>
-                                                                                <?php
-                                                                                }
-                                                                                ?>
-                                                                            </div>
-                                                                        </th>
-                                                                    <?php } ?>
+                                                                            <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
+                                                                                <?php echo $brand ?>
+                                                                                <div class="custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
+                                                                                    <?php
+                                                                                    foreach ($stockInfo[$index][$brand] as $iterator => $item) {
+                                                                                    ?>
+                                                                                        <div>
+                                                                                            <?php if ($item !== 0) { ?>
+                                                                                                <p><?php echo $iterator . ' : ' . $item ?></p>
+                                                                                            <?php } ?>
+                                                                                        </div>
+                                                                                    <?php
+                                                                                    }
+                                                                                    ?>
+                                                                                </div>
+                                                                            </th>
+                                                                    <?php }
+                                                                    } ?>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr class="py-3">
                                                                     <?php foreach ($exist[$index] as $brand => $amount) {
-                                                                        $total = 0;
-                                                                        foreach ($stockInfo[$index][$brand] as $iterator => $item) {
-                                                                            $total += $item;
-                                                                        } ?>
-                                                                        <td class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> whitespace-nowrap text-white px-3 py-2 text-center">
-                                                                            <?php echo $total;
-                                                                            ?>
-                                                                        </td>
-                                                                    <?php } ?>
+                                                                        if ($amount > 0) {
+                                                                            $total = 0;
+                                                                            foreach ($stockInfo[$index][$brand] as $iterator => $item) {
+                                                                                $total += $item;
+                                                                            } ?>
+                                                                            <td class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> whitespace-nowrap text-white px-3 py-2 text-center">
+                                                                                <?php echo $total;
+                                                                                ?>
+                                                                            </td>
+                                                                    <?php }
+                                                                    } ?>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
