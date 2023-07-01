@@ -116,7 +116,6 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
         'rates' => getSelectedRates($conn)
     ]);
 
-    // return Inertia::render('Price/Partials/Load', );
 }
 
 function getSelectedRates($conn)
@@ -312,7 +311,9 @@ function out($conn, $id)
 
     $result = null;
     if (mysqli_num_rows($out_result) > 0) {
-        $result = mysqli_fetch_assoc($out_result);
+        while ($row = mysqli_fetch_assoc($out_result)) {
+            $result += $row['qty'];
+        }
     }
     return $result;
 }
@@ -344,7 +345,7 @@ function stockInfo($conn, $id, $brand)
     foreach ($result as $key => $item) {
 
         $out_data = out($conn, $item['id']);
-        $out =  $out_data ? (int) $out_data['qty'] : 0;
+        $out =  $out_data ? (int) $out_data : 0;
 
         $item['qty'] = (int)($item['qty']) - $out;
 
@@ -384,9 +385,6 @@ function exist($conn, $id)
         }
     };
 
-    print_r(json_encode($result));
-    echo "<br/>";
-
     $brands = [];
     $amount = [];
     $stockInfo = [];
@@ -394,16 +392,15 @@ function exist($conn, $id)
     foreach ($result as $value) {
         $out_data = out($conn, $value['id']);
 
-        echo $value['name']. ": ". $out_data['qty'];
-        print_r($out_data);
-        $out =  $out_data ? (int) $out_data['qty'] : 0;
+        echo $value['name'] . ": " . ($out_data ? (int) $out_data : 0) . "<br/>";
+        $out =  $out_data ? (int) $out_data : 0;
         $value['qty'] = (int)($value['qty']) - $out;
 
         array_push($brands, $value['name']);
     }
 
 
-    
+
     $brands = array_unique($brands);
 
     foreach ($brands as $key => $value) {
