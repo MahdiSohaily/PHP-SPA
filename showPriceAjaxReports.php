@@ -65,6 +65,9 @@ if ($isValidCustomer) {
             </table>
         </div>
         <div class="accordion">
+            <p class="text-center bold text-gray-700 px-2 py-3">
+                <?php echo $customer_info['name'] ?>
+            </p>
             <?php
             foreach ($explodedCodes as $code_index => $code) {
             ?>
@@ -139,7 +142,7 @@ if ($isValidCustomer) {
                                             <?php
                                             foreach ($sorted as $index => $element) {
                                             ?>
-                                                <tr class="relative">
+                                                <tr style="position: relative;" class="relative">
                                                     <td class=" px-1">
                                                         <p class="text-center bold bg-gray-600 text-white px-2 py-3">
                                                             <?php echo $goods[$index]['partnumber'] ?>
@@ -582,4 +585,3 @@ if ($isValidCustomer) {
 } else {
     echo "<p class='rtl col-6 mx-auto flex items-center justify-center h-full'>کاربر درخواست دهنده و یا مشتری مشخص شده معتبر نمی باشد</p>";
 }
-
