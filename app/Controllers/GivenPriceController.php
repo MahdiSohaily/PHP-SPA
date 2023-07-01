@@ -346,7 +346,6 @@ function stockInfo($conn, $id, $brand)
 
         $item['qty'] = (int)($item['qty']) - $out;
 
-       
         array_push($existing_record, $item);
         array_push($customers, $item['name']);
     }
@@ -375,18 +374,12 @@ function exist($conn, $id)
     $data_sql = "SELECT yadakshop1402.qtybank.id, codeid, brand.name, qty FROM yadakshop1402.qtybank INNER JOIN yadakshop1402.brand ON brand.id = qtybank.brand WHERE codeid = '445096' ";
     $data_result = mysqli_query($conn, $data_sql);
 
-    echo $data_result->num_rows;
-
     $result = [];
     if (mysqli_num_rows($data_result) > 0) {
         while ($item = mysqli_fetch_assoc($data_result)) {
-            print_r($item);
-            echo "<br/>";
             array_push($result, $item);
         }
     };
-
-    print_r(json_encode($result));
 
     $brands = [];
     $amount = [];
@@ -394,9 +387,7 @@ function exist($conn, $id)
 
     foreach ($result as $value) {
         $out_data = out($conn, $value['id']);
-
-        echo  $value['name'] . ": " . $value['qty'] . "<br/>";
-        $out =  $out_data ? (int) $out_data : 0;
+        $out =  $out_data;
         $value['qty'] = (int)($value['qty']) - $out;
 
         array_push($brands, $value['name']);
