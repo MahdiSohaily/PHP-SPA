@@ -39,8 +39,7 @@ function index($conn, $id)
             array_push($hasNotification, $row);
         }
     }
-
-    return count([...$hasNotification, ...$adminNotification]);
+    return count($hasNotification) + count($adminNotification);
 }
 
 if (isset($_POST['weDontHave'])) {
