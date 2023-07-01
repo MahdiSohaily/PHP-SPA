@@ -391,15 +391,19 @@ function exist($conn, $id)
     $amount = [];
     $stockInfo = [];
 
-    foreach ($result as $key => $value) {
+    foreach ($result as $value) {
         $out_data = out($conn, $value['id']);
 
+        echo $value['name']. ": ". $out_data['qty'];
         print_r($out_data);
         $out =  $out_data ? (int) $out_data['qty'] : 0;
         $value['qty'] = (int)($value['qty']) - $out;
 
         array_push($brands, $value['name']);
     }
+
+
+    
     $brands = array_unique($brands);
 
     foreach ($brands as $key => $value) {
