@@ -12,7 +12,7 @@ if ($isValidCustomer) {
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
 ?>
-        <div class="rtl col-md-6 mx-auto">
+        <div class="rtl col-6 mx-auto">
             <table class="min-w-full text-left text-sm font-light custom-table">
                 <thead class="font-medium bg-green-600">
                     <tr>
@@ -65,9 +65,6 @@ if ($isValidCustomer) {
             </table>
         </div>
         <div class="accordion">
-            <p class="text-center bold text-gray-700 px-2 py-3">
-                <?php echo $customer_info['name'] ?>
-            </p>
             <?php
             foreach ($explodedCodes as $code_index => $code) {
             ?>
