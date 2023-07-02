@@ -13,7 +13,7 @@ if ($isValidCustomer) {
         $rates = $finalResult['rates'];
 ?>
         <div class="rtl col-6 mx-auto">
-            <table class="min-w-full text-left text-sm font-light custom-table">
+            <table class="min-w-full text-left text-sm font-light custom-table mb-2">
                 <thead class="font-medium bg-green-600">
                     <tr>
                         <th scope="col" class="px-3 py-3 text-white text-center">
@@ -33,7 +33,7 @@ if ($isValidCustomer) {
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     <tr class="relative">
                         <td class=" px-1">
                             <p class="text-center bold text-gray-700 px-2 py-3">
