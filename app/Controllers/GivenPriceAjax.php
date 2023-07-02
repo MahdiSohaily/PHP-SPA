@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../../database/connect.php');
 if (isset($_POST['store_price'])) {
     $partnumber = $_POST['partNumber'];
@@ -143,8 +144,8 @@ function store($conn, $partnumber, $price, $customer_id, $notification_id)
 {
     date_default_timezone_set("Asia/Tehran");
     $created_at = date("Y-m-d H:i:s");
-    $pattern_sql = "INSERT INTO prices (partnumber, price, customer_id, created_at, updated_at)
-            VALUES ('" . $partnumber . "', '" . $price . "', '" . $customer_id . "', '" . $created_at . "', '" . $created_at . "')";
+    $pattern_sql = "INSERT INTO prices (partnumber, price, user_id, customer_id, created_at, updated_at)
+            VALUES ('" . $partnumber . "', '" . $price . "','" . $_SESSION["id"] . "' ,'" . $customer_id . "', '" . $created_at . "', '" . $created_at . "')";
     $conn->query($pattern_sql);
     if ($notification_id) {
         $sql = "UPDATE ask_price SET status= 'done' , notify = 'received', price = '$price' WHERE id = '$notification_id'";
