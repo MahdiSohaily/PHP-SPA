@@ -66,15 +66,17 @@ if ($isValidCustomer) {
         </div>
         <div class="accordion">
             <?php
+
             foreach ($explodedCodes as $code_index => $code) {
+                if (array_key_exists($code, $existing)) {
+
             ?>
-                <input type="checkbox" checked="true" name="panel" id="<?php echo $code ?>" class="hidden">
-                <label for="<?php echo $code ?>" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
-                    <?php echo $code ?>
-                </label>
-                <div class="accordion__content overflow-hidden bg-grey-lighter">
-                    <?php
-                    if (array_key_exists($code, $existing)) {
+                    <input type="checkbox" checked="true" name="panel" id="<?php echo $code ?>" class="hidden">
+                    <label for="<?php echo $code ?>" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
+                        <?php echo $code ?>
+                    </label>
+                    <div class="accordion__content overflow-hidden bg-grey-lighter">
+                        <?php
                         foreach ($existing[$code] as $index => $item) {
                             $partNumber = $index;
                             $information = $item['information'];
@@ -87,7 +89,7 @@ if ($isValidCustomer) {
                             $estelam = $item['estelam'];
                             $customer = $customer;
                             $completeCode = $completeCode;
-                    ?>
+                        ?>
                             <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2 overflow-auto">
 
                                 <!-- Start the code info section -->
@@ -466,14 +468,19 @@ if ($isValidCustomer) {
                                     </div>
                                 </div>
                             </div>
-                    <?php }
-                    } else {?>
-                    <div>
-                        <p>کد مد نظر در سیستم موجود نیست</p>
+                        <?php } ?>
                     </div>
-                    <?php } ?>
-                </div>
+                <?php
+                } else {
+                ?>
+                    <div>
+                        <p>کد
+                            <?php echo $code ?>
+                            در سیستم موجود نیست
+                        </p>
+                    </div>
             <?php
+                }
             }
             ?>
             <p id="form_success" class="custome-alert success px-3 tiny-text">
