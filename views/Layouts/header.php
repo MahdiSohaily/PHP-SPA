@@ -35,7 +35,8 @@ $_SESSION["user_id"] = $_SESSION["id"];
             position: absolute;
             display: none;
             top: 100%;
-            left: 0% !important;
+            left: 50%;
+            transform: translateX(-50%);
             padding: 10px;
             border-radius: 5px;
             background-color: seagreen;
@@ -52,7 +53,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
             position: fixed;
             bottom: -100px;
             right: 50%;
-            transform: translateX(50%);
+            transform: translateX(-50%);
             transition: all 1s ease;
             padding: 10px;
         }
