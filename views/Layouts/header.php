@@ -88,6 +88,12 @@ $_SESSION["user_id"] = $_SESSION["id"];
             }
 
         }
+
+        .userImage {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
     </style>
     <script>
         const seekExist = (e) => {
