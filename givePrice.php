@@ -8,10 +8,7 @@ require_once('./views/Layouts/header.php');
         <input type="text" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
         <div class="">
             <div class="col-span-6 sm:col-span-4">
-                <label for="customer" class="block font-medium text-sm text-gray-700">
-                    مشتری
-                </label>
-                <input name="customer" class="border-1 border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 p-3
+                <input name="customer" hidden value="1" class="border-1 border-gray-300 mt-1 block w-full border-gray-300 focus:border-indigo-500 p-3
                 focus:ring-indigo-500 rounded-md shadow-sm px-3" required id="customer" type="number" />
                 <p class="mt-2"></p>
             </div>
