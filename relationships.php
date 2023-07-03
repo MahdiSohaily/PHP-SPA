@@ -382,6 +382,7 @@ $status = $conn->query($status_sql);
         const price = document.getElementById('price');
         const cars = getSelectedItems('cars');
         const status = document.getElementById('status');
+        const description = document.getElementById('description');
 
         const params = new URLSearchParams();
         params.append('load_pattern_ifo', 'load_pattern_ifo');
@@ -395,6 +396,7 @@ $status = $conn->query($status_sql);
                 relation_name.value = pattern_info.name;
                 mode.value = 'update';
                 price.value = pattern_info.price;
+                description.value = pattern_info.description;
 
                 setSelectedItems('cars', pattern_info_cars);
                 setSelectedItems('status', pattern_info.status_id);
