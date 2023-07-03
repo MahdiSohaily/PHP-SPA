@@ -75,7 +75,7 @@ if ($isValidCustomer) {
                 <label for="<?php echo $code ?>" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
                     <?php echo $code ?>
                 </label>
-                <div class="accordion__content overflow-hidden bg-grey-lighter">
+                <div class="accordion__content overflow-hidden ">
                     <?php
                     if (array_key_exists($code, $existing)) {
                         foreach ($existing[$code] as $index => $item) {
