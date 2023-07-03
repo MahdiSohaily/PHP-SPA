@@ -62,8 +62,8 @@ function clearNotification($conn, $id, $code, $customer)
 
     if ($customer) {
         $created_at = date("Y-m-d H:i:s");
-        $pattern_sql = "INSERT INTO prices (partnumber, price, customer_id, created_at, updated_at)
-            VALUES ('" . $code . "', 'نداریم', '" .  $customer . "','" . $created_at . "','" . $created_at . "')";
+        $pattern_sql = "INSERT INTO prices (partnumber, price, user_id, customer_id, created_at, updated_at)
+            VALUES ('" . $code . "', 'نداریم', '" . $_SESSION['id'] . "','" .  $customer . "','" . $created_at . "','" . $created_at . "')";
 
         if ($conn->query($pattern_sql) === TRUE) {
             return 'true';
