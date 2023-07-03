@@ -24,6 +24,12 @@ if (isset($_POST['store_price'])) {
                         }
                         ?>
                     </td>
+                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                        <?php if (!array_key_exists("ordered", $price)) {
+                            echo $price['username'];
+                        }
+                        ?>
+                    </td>
                 </tr>
                 <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
                     <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
@@ -100,7 +106,11 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
+    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.family ,users.username, prices.created_at
+    FROM ((prices 
+    INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
+    INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
+    WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
     $result = mysqli_query($conn, $sql);
 
 
