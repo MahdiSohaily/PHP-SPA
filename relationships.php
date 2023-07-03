@@ -137,7 +137,10 @@ $status = $conn->query($status_sql);
                         توضیحات رابطه
                     </label>
                     <textarea class="border-1 p-2 text-sm border-gray-300 mt-1 block w-full border-gray-300 
-                                     focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="description"></textarea>
+                                     focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" 
+                                     id="description"
+                                     rows="5"
+                                     ></textarea>
                 </div>
 
 
@@ -293,6 +296,7 @@ $status = $conn->query($status_sql);
         const price = document.getElementById('price').value;
         const cars = getSelectedItems('cars');
         const status = document.getElementById('status').value;
+        const description = document.getElementById('description').value;
 
         // Defining a params instance to be attached to the axios request
         const params = new URLSearchParams();
@@ -301,6 +305,7 @@ $status = $conn->query($status_sql);
         params.append('price', price);
         params.append('cars', JSON.stringify(cars));
         params.append('status', status);
+        params.append('description', description);
 
         // Side effects data
         params.append('mode', mode);

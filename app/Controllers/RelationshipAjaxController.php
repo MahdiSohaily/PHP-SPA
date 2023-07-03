@@ -84,6 +84,7 @@ if (isset($_POST['store_relation'])) {
     $price = $_POST['price'];
     $cars = json_decode($_POST['cars']);
     $status = $_POST['status'];
+    $description = $_POST['description'];
     $mode = $_POST['mode'];
     $pattern_id = $_POST['pattern_id'];
     $selected_goods = json_decode($_POST['selected_goods']);
@@ -95,8 +96,8 @@ if (isset($_POST['store_relation'])) {
         $selectedCars = $cars;
         $created_at = date('Y-m-d H:i:s');
         // create the pattern record
-        $pattern_sql = "INSERT INTO patterns (name, price, serial, status_id, created_at)
-            VALUES ('" . $relation_name . "', '" . $price . "', '" . $serial . "', '" . $status . "', '" . $created_at . "')";
+        $pattern_sql = "INSERT INTO patterns (name, price, serial, status_id, created_at, description)
+            VALUES ('" . $relation_name . "', '" . $price . "', '" . $serial . "', '" . $status . "', '" . $created_at . "','" . $description . "')";
 
         if ($conn->query($pattern_sql) === TRUE) {
             $last_id = $conn->insert_id;
