@@ -13,8 +13,6 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
-
-        print_r(json_encode($finalResult));
 ?>
         <div class="rtl col-6 mx-auto">
             <table class="min-w-full text-left text-sm font-light custom-table mb-2">
@@ -280,6 +278,7 @@ if ($isValidCustomer) {
                                                 <tr class="min-w-full bg-green-600">
                                                     <td class="text-white bold py-2 px-2 w-28">قیمت</td>
                                                     <td class="text-white bold py-2 px-2 rtl">مشتری</td>
+                                                    <td class="text-white bold py-2 px-2 rtl">کاربر</td>
                                                 </tr>
                                             </thead>
                                             <tbody id="price-<?php echo $partNumber ?>">
@@ -300,6 +299,12 @@ if ($isValidCustomer) {
                                                                         echo 'قیمت دستوری';
                                                                     } else {
                                                                         echo $price['name'] . ' ' . $price['family'];
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                                                                    <?php if (!array_key_exists("ordered", $price)) {
+                                                                        echo $price['username'];
                                                                     }
                                                                     ?>
                                                                 </td>
