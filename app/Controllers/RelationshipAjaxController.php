@@ -155,7 +155,7 @@ if (isset($_POST['store_relation'])) {
             $created_at = $created_at = date('Y-m-d H:i:s');
 
             $update_pattern_sql = "UPDATE patterns SET name= '" . $relation_name . "', price = '" . $price . "',
-                serial = '" . $serial . "' , status_id =  '" . $status . "', created_at = '" . $created_at . "' WHERE id = '$pattern_id'";
+                serial = '" . $serial . "' , status_id =  '" . $status . "', created_at = '" . $created_at . "', description = '" . $description . "'   WHERE id = '$pattern_id'";
             $conn->query($update_pattern_sql);
 
             if (count($toAdd) > 0) {
