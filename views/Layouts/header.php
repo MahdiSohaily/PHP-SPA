@@ -170,7 +170,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
                         <a id="deactive" class="" href="./notification.php">
                             <i class="material-icons hover:cursor-pointer text-indigo-500">notifications</i>
                         </a>
-                        <p class="px-2"> <?php echo $_SESSION['username'] ?></p>
+                        <img class="userImage mx-2" src="../../userimg/<?php echo $_SESSION['id'] ?>.jpg" alt="userimage">
                     </div>
                 </div>
                 <script>
