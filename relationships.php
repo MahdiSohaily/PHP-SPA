@@ -132,6 +132,13 @@ $status = $conn->query($status_sql);
                         } ?>
                     </select>
                 </div>
+                <div class="col-span-12 sm:col-span-4 mb-3">
+                    <label for="description">
+                        توضیحات رابطه
+                    </label>
+                    <textarea class="border-1 p-2 text-sm border-gray-300 mt-1 block w-full border-gray-300 
+                                     focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="description"></textarea>
+                </div>
 
 
         </div>
@@ -418,6 +425,7 @@ $status = $conn->query($status_sql);
 
     });
 
+    // This function helps to display only the matching results when user types a keyword (Slecte 2 plugin)
     function matchCustom(params, data) {
         // If there are no search terms, return all of the data
         if ($.trim(params.term) === '') {
