@@ -85,6 +85,7 @@ if (isset($_POST['store_relation'])) {
     $cars = json_decode($_POST['cars']);
     $status = $_POST['status'];
     $description = $_POST['description'];
+    echo $description;
     $mode = $_POST['mode'];
     $pattern_id = $_POST['pattern_id'];
     $selected_goods = json_decode($_POST['selected_goods']);
