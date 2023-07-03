@@ -26,7 +26,9 @@ if (isset($_POST['store_price'])) {
                     </td>
                     <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
                         <?php if (!array_key_exists("ordered", $price)) {
-                            echo $price['username'];
+                        ?>
+                            <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
+                        <?php
                         }
                         ?>
                     </td>
@@ -106,7 +108,7 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.family ,users.username, prices.created_at
+    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.family ,users.id as userID, prices.created_at
     FROM ((prices 
     INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
     INNER JOIN yadakshop1402.users ON users.id = prices.user_id)

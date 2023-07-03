@@ -304,7 +304,9 @@ if ($isValidCustomer) {
                                                                 </td>
                                                                 <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
                                                                     <?php if (!array_key_exists("ordered", $price)) {
-                                                                        echo $price['username'];
+                                                                    ?>
+                                                                        <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
+                                                                    <?php
                                                                     }
                                                                     ?>
                                                                 </td>
