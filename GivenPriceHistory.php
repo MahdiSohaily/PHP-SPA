@@ -105,13 +105,13 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
         </table>
     </div>
 </div>
-<script>
+<script >
     const resultBox = document.getElementById('resultBox');
     setInterval(() => {
         var params = new URLSearchParams();
         params.append('historyAjax', 'historyAjax');
         resultBox.innerHTML = `
-                            <div class='full-page'>
+                            <div style="height: 90vh; display: flex; justify-content: center; align-items: center;" class='full-page'>
                                 <div>
                                 <img class=' block w-10 mx-auto h-auto' src='./public/img/loading.png' alt='google'>
                                 <p class="pt-2 text-gray-500">لطفا صبور باشید</p>
