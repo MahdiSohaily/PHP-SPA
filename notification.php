@@ -45,7 +45,6 @@ require_once('./app/Controllers/notificationController.php');
                                 <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
                                     <?php echo $notification['status'] === 'pending' ? 'در حال انتظار' : 'بررسی شده' ?>
                                 </td>
-
                                 <td class="whitespace-nowrap w-24">
                                     <div class="flex justify-center gap-1 items-center px-2">
                                         <form action="./showPriceReports.php" method="post">
@@ -153,7 +152,8 @@ require_once('./app/Controllers/notificationController.php');
                         کاربر
                     </th>
                     <th scope="col" class="px-3 py-3 text-white text-center">
-                        قیمت داده شده </th>
+                        قیمت داده شده 
+                    </th>
                 </tr>
             </thead>
             <tbody id="results">
@@ -171,7 +171,6 @@ require_once('./app/Controllers/notificationController.php');
                             </td>
                             <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
                                 <?php echo $notification['price'] ?>
-
                             </td>
                         </tr>
                     <?php }
@@ -211,7 +210,6 @@ require_once('./app/Controllers/notificationController.php');
             .catch(function(error) {
 
             });
-
     }
 
     function markUsRead(element) {
