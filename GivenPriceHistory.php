@@ -107,7 +107,21 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
 </div>
 <script>
     setInterval(() => {
-        location.reload();
+        var params = new URLSearchParams();
+        params.append('search_goods_for_relation', 'search_goods_for_relation');
+        params.append('pattern', pattern);
+
+        if (pattern.length > 6) {
+            axios.post("./app/Controllers/RelationshipAjaxController.php", params)
+                .then(function(response) {
+                    resultBox.innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        } else {
+            resultBox.innerHTML = "کد فنی وارد شده فاقد اعتبار است";
+        }
     }, 5000);
 </script>
 
