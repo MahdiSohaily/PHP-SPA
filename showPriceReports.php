@@ -312,9 +312,10 @@ if ($isValidCustomer) {
                                                                 </td>
                                                                 </tr>
                                                                 <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
-                                                                    <td class="<?php array_key_exists("ordered", $price) || $price['customerID'] ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
+                                                                    <td></td>
+                                                                    <td class="<?php array_key_exists("ordered", $price) || $price['customerID'] ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="2" scope="col">
                                                                         <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) || $price['customerID'] ? 'text-white' : 'text-gray-800' ?>">
-                                                                            <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price)|| $price['customerID']? 'text-white' : 'text-gray-800' ?>">access_time</i>
+                                                                            <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) || $price['customerID'] ? 'text-white' : 'text-gray-800' ?>">access_time</i>
                                                                             <?php
                                                                             $create = date($price['created_at']);
 
