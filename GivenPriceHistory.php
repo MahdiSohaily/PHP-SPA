@@ -10,6 +10,9 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
             <thead class="font-medium bg-green-600">
                 <tr>
                     <th scope="col" class="px-2 py-2 text-white text-right">
+                        مشتری
+                    </th>
+                    <th scope="col" class="px-2 py-2 text-white text-right">
                         قیمت
                     </th>
                     <th scope="col" class="px-2 py-2 text-white text-right">
@@ -32,6 +35,11 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
                         ?>
                             <tr class="tiny-text min-w-full mb-1 ?>">
                             <?php  } ?>
+                            <td class="">
+                                <p class="text-right bold text-gray-700 px-2 py-1">
+                                    <?php echo $price['name'] . ' ' . $price['family'] ?>
+                                </p>
+                            </td>
                             <td class="">
                                 <p class="text-right bold text-gray-700 px-2 py-1">
                                     <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
