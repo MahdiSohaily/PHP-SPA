@@ -45,8 +45,7 @@ if (isset($_POST['search_goods_for_relation'])) {
 
         if (count($final_result) > 0) {
             foreach ($final_result as $item) {
-                if ($item['pattern']) {
-?>
+                if ($item['pattern']) {?>
                     <div class="w-full flex justify-between items-center shadow-md hover:shadow-lg 
                         rounded-md px-4 py-3 mb-2 border-1 border-gray-300" id="search-<?php echo  $item['id'] ?>">
                         <p class=' text-sm font-semibold text-gray-600'><?php echo $item['partNumber'] ?></p>
