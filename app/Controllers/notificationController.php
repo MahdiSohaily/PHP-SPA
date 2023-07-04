@@ -82,5 +82,5 @@ function getNotification($conn, $id)
         'adminNotification' => $adminNotification,
         'previousNotifications' => $previousNotifications,
         'admin' => $data['name'] === 'مریم' ? true : false,
-    ];
+    ]; 
 }

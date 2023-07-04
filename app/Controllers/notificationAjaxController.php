@@ -29,7 +29,7 @@ function index($conn, $id)
             }
         }
     }
-
+ 
     $hasNotification = [];
 
     $similar_sql = "SELECT * FROM ask_price WHERE user_id = '" . $id . "'  AND notify='received'";

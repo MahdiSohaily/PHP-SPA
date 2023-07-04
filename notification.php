@@ -37,10 +37,10 @@ require_once('./app/Controllers/notificationController.php');
                                     <?php echo $notification['code'] ?>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                                    <?php echo $notification['customer_name'].' '. $notification['customer_family'] ?>
+                                    <?php echo $notification['customer_name'] . ' ' . $notification['customer_family'] ?>
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
-                                    <?php echo $notification['user_name'] ?>
+                                    <img class="userImage mx-2" src="../../userimg/<?php echo $notification['user_id'] ?>.jpg" alt="userimage">
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
                                     <?php echo $notification['status'] === 'pending' ? 'در حال انتظار' : 'بررسی شده' ?>
