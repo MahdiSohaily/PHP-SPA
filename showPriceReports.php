@@ -37,7 +37,7 @@ if ($isValidCustomer) {
                 </thead>
                 <tbody class="bg-white">
                     <tr class="relative">
-                        <td class=" px-1">
+                        <td class="px-1">
                             <p class="text-center bold text-gray-700 px-2 py-3">
                                 <?php echo $customer_info['name'] ?>
                             </p>

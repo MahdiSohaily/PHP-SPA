@@ -9,19 +9,19 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
         <table class="min-w-full text-left text-sm bg-white custom-table mb-2 p-3">
             <thead class="font-medium bg-green-600">
                 <tr>
-                    <th scope="col" class="px-2 py-2 text-white text-right">
+                    <th scope="col" class="px-3 py-2 text-white text-right">
                         مشتری
                     </th>
-                    <th scope="col" class="px-2 py-2 text-white text-right">
+                    <th scope="col" class="px-3 py-2 text-white text-right">
                         قیمت
                     </th>
-                    <th scope="col" class="px-2 py-2 text-white text-right">
+                    <th scope="col" class="px-3 py-2 text-white text-right">
                         کد فنی
                     </th>
-                    <th scope="col" class="px-2 py-2 text-white text-right">
+                    <th scope="col" class="px-3 py-2 text-white text-center">
                         قیمت دهنده
                     </th>
-                    <th scope="col" class="px-2 py-2 text-white text-right">
+                    <th scope="col" class="px-3 py-2 text-white text-right">
                         زمان
                     </th>
                 </tr>
@@ -33,26 +33,26 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
                     <?php foreach ($givenPrice as $price) { ?>
                         <?php if ($price['price'] !== null) {
                         ?>
-                            <tr class="tiny-text min-w-full mb-1 ?>">
+                            <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
                             <?php  } ?>
-                            <td class="">
+                            <td class="px-1">
                                 <p class="text-right bold text-gray-700 px-2 py-1">
                                     <?php echo $price['name'] . ' ' . $price['family'] ?>
                                 </p>
                             </td>
-                            <td class="">
+                            <td class="px-1">
                                 <p class="text-right bold text-gray-700 px-2 py-1">
                                     <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                                 </p>
                             </td>
-                            <td class="">
+                            <td class="px-1">
                                 <p class="text-right bold text-gray-700 px-2 py-1">
                                     <?php echo $price['partnumber']; ?>
                                 </p>
                             </td>
-                            <td style="width:100px;">
-                                <p class="text-right bold text-gray-700 px-2 py-1">
-                                    <img title="<?php echo $price['username'] ?>" class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
+                            <td style="width:120px;">
+                                <p class="text-center bold text-gray-700 px-2 py-1">
+                                    <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
                                 </p>
                             </td>
                             <td class="time">
