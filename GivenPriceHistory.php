@@ -26,7 +26,7 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="resultBox">
                 <?php
                 if (count($givenPrice) > 0) {
                 ?>
@@ -106,22 +106,17 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
     </div>
 </div>
 <script>
+    const resultBox = document.getElementById('resultBox');
     setInterval(() => {
         var params = new URLSearchParams();
-        params.append('search_goods_for_relation', 'search_goods_for_relation');
-        params.append('pattern', pattern);
-
-        if (pattern.length > 6) {
-            axios.post("./app/Controllers/RelationshipAjaxController.php", params)
-                .then(function(response) {
-                    resultBox.innerHTML = response.data;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        } else {
-            resultBox.innerHTML = "کد فنی وارد شده فاقد اعتبار است";
-        }
+        params.append('historyAjax', 'historyAjax');
+        axios.post("./app/Controllers/GivenPriceAjaxHistoryController.php", params)
+            .then(function(response) {
+                resultBox.innerHTML = response.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
     }, 5000);
 </script>
 

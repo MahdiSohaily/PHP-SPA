@@ -1,6 +1,5 @@
 <?php
-
-$givenPrice = givenPrice($conn);
+    $givenPrice = givenPrice($conn);
 function givenPrice($conn)
 {
     $sql = "SELECT 
