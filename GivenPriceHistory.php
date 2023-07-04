@@ -5,8 +5,6 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
 ?>
 <!-- START NEWLY ADDED SECTION BY MAHDI REZAEI -->
 <div id="child_three">
-    <h2 class="title">قیمت های داده شده</h2>
-
     <div class="rtl col-8 mx-auto">
         <table class="min-w-full text-left text-sm bg-white custom-table mb-2 p-3">
             <thead class="font-medium bg-green-600">
