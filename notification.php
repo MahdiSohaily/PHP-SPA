@@ -28,7 +28,7 @@ require_once('./app/Controllers/notificationController.php');
                     </tr>
                 </thead>
                 <tbody id="results">
-                    <?php if (count($notifications['adminNotification']) > 0) {
+                    <?php if (count($notifications['adminNotification']) > 0) { 
 
                         foreach ($notifications['adminNotification'] as $notification) {
                     ?>
