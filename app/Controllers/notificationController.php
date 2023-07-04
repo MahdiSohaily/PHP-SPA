@@ -14,7 +14,7 @@ function getNotification($conn, $id)
 
     $adminNotification = [];
 
-    if ($data['name'] === 'مریم') {
+    if ($data['name'] === 'نیایش') {
         $sql = "SELECT ask_price.*, yadakshop1402.users.id AS user_id, callcenter.customer.id AS customer_id, 
         callcenter.customer.family AS customer_family, 
         callcenter.customer.name AS customer_name, 
@@ -81,6 +81,6 @@ function getNotification($conn, $id)
         'answeredNotifications' => $answeredNotifications,
         'adminNotification' => $adminNotification,
         'previousNotifications' => $previousNotifications,
-        'admin' => $data['name'] === 'مریم' ? true : false,
-    ]; 
+        'admin' => $data['name'] === 'نیایش' ? true : false,
+    ];
 }
