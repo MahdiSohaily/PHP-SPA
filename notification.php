@@ -26,7 +26,7 @@ require_once('./app/Controllers/notificationController.php');
                             عملیات
                         </th>
                     </tr>
-                </thead>
+                </thead> 
                 <tbody id="results">
                     <?php if (count($notifications['adminNotification']) > 0) { 
 
@@ -44,19 +44,16 @@ require_once('./app/Controllers/notificationController.php');
                                 </td>
                                 <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
                                     <?php echo $notification['status'] === 'pending' ? 'در حال انتظار' : 'بررسی شده' ?>
-
                                 </td>
 
                                 <td class="whitespace-nowrap w-24">
                                     <div class="flex justify-center gap-1 items-center px-2">
-
                                         <form action="./showPriceReports.php" method="post">
                                             <input name="givenPrice" type="text" value="givenPrice" id="form" hidden>
                                             <input name="user" type="text" value="<?php echo $_SESSION['user_id'] ?>" id="form" hidden>
                                             <input name="customer" value="<?php echo $notification['customer_id'] ?>" type="number" hidden />
                                             <input name="code" value="<?php echo $notification['code'] ?>" type="text" hidden />
                                             <input name="notification" value="<?php echo $notification['id'] ?>" type="text" hidden />
-
                                             <button type="submit">
                                                 <i class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">archive</i>
                                             </button>
@@ -118,15 +115,12 @@ require_once('./app/Controllers/notificationController.php');
                             </td>
                             <td class="whitespace-nowrap px-3 py-3 text-center font-bold">
                                 <?php echo $notification['price'] ?>
-
                             </td>
-
                             <td class="whitespace-nowrap w-24">
                                 <div class="flex justify-center gap-1 items-center px-2">
                                     <a>
                                         <i onclick="markUsRead(this)" data-id="<?php echo $notification['id'] ?>" class="material-icons text-blue-500 hover:text-blue-700 hover:cursor-pointer">remove_red_eye</i>
                                     </a>
-
                                 </div>
                             </td>
                         </tr>
