@@ -75,7 +75,7 @@ if ($isValidCustomer) {
                 <label for="<?php echo $code ?>" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
                     <?php echo $code ?>
                 </label>
-                <div class="accordion__content overflow-hidden bg-grey-lighter">
+                <div class="accordion__content overflow-hidden ">
                     <?php
                     if (array_key_exists($code, $existing)) {
                         foreach ($existing[$code] as $index => $item) {
@@ -92,7 +92,7 @@ if ($isValidCustomer) {
                             $completeCode = $completeCode;
                     ?>
                             <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2 overflow-auto">
-
+                                <div></div>
                                 <!-- Start the code info section -->
                                 <div class="bg-white rounded-lg overflow-auto">
                                     <div id="search_result" class="rtl p-3">
@@ -402,83 +402,7 @@ if ($isValidCustomer) {
                                 </div>
 
                                 <!-- END GIVEN PRICE SECTION -->
-                                <div class="bg-white rounded-lg shadow-md col-span-2">
-                                    <div class="p-3">
-                                        <table class=" min-w-full text-sm font-light">
-                                            <thead>
-                                                <tr class="min-w-full bg-green-600">
-                                                    <td class="text-white bold py-2 px-2 w-28">قیمت</td>
-                                                    <td class="text-white bold py-2 px-2 rtl">مشتری</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if (count($estelam) > 0) {
-
-                                                    foreach ($estelam as $price) {
-                                                        if ($price['price']) { ?>
-                                                            <tr class="min-w-full mb-1 hover:cursor-pointer bg-indigo-200" data-price="<?php echo $price['price'] ?>">
-
-                                                                <td scope="col" class="text-gray-800 px-2 py-1">
-                                                                    <?php echo $price['price'] === null ? 'ندارد' : $price['price'] ?>
-                                                                </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl">
-                                                                    <?php echo $price['name']  ?>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 bg-indigo-300" data-price="<?php echo $price['price'] ?>">
-                                                                <td colspan="3" scope="col" class="text-gray-800 px-2 tiny-text ">
-                                                                    <div class="rtl flex items-center w-full">
-                                                                        <i class="px-1 material-icons tiny-text ">access_time</i>
-                                                                        <?php
-                                                                        $create = date($price['time']);
-
-                                                                        $now = new DateTime(); // current date time
-                                                                        $date_time = new DateTime($create); // date time from string
-                                                                        $interval = $now->diff($date_time); // difference between two date times
-                                                                        $days = $interval->format('%a'); // difference in days
-                                                                        $hours = $interval->format('%h'); // difference in hours
-                                                                        $minutes = $interval->format('%i'); // difference in minutes
-                                                                        $seconds = $interval->format('%s'); // difference in seconds
-
-                                                                        $text = '';
-
-                                                                        if ($days) {
-                                                                            $text .= " $days روز و ";
-                                                                        }
-
-                                                                        if ($hours) {
-                                                                            $text .= "$hours ساعت ";
-                                                                        }
-
-                                                                        if ($minutes) {
-                                                                            $text .= "$minutes دقیقه ";
-                                                                        }
-
-                                                                        if ($seconds) {
-                                                                            $text .= "$seconds ثانیه ";
-                                                                        }
-
-                                                                        echo "$text قبل";
-                                                                        ?>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                    <?php }
-                                                    }
-                                                } else { ?>
-                                                    <tr class="min-w-full mb-4 border-b-2 border-white">
-                                                        <td colspan="3" scope="col" class="text-white py-2 text-center bg-indigo-300">
-                                                            !! موردی برای نمایش وجود ندارد
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-
+                                <div></div>
                             </div>
                         <?php }
                     } else { ?>

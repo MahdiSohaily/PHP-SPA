@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../../database/connect.php');
 if (isset($_POST['store_price'])) {
     $partnumber = $_POST['partNumber'];
@@ -20,6 +21,14 @@ if (isset($_POST['store_price'])) {
                             echo 'قیمت دستوری';
                         } else {
                             echo $price['name'] . ' ' . $price['family'];
+                        }
+                        ?>
+                    </td>
+                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                        <?php if (!array_key_exists("ordered", $price)) {
+                        ?>
+                            <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
+                        <?php
                         }
                         ?>
                     </td>
@@ -99,7 +108,11 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
+    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.family ,users.id as userID, prices.created_at
+    FROM ((prices 
+    INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
+    INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
+    WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
     $result = mysqli_query($conn, $sql);
 
 
@@ -143,8 +156,8 @@ function store($conn, $partnumber, $price, $customer_id, $notification_id)
 {
     date_default_timezone_set("Asia/Tehran");
     $created_at = date("Y-m-d H:i:s");
-    $pattern_sql = "INSERT INTO prices (partnumber, price, customer_id, created_at, updated_at)
-            VALUES ('" . $partnumber . "', '" . $price . "', '" . $customer_id . "', '" . $created_at . "', '" . $created_at . "')";
+    $pattern_sql = "INSERT INTO prices (partnumber, price, user_id, customer_id, created_at, updated_at)
+            VALUES ('" . $partnumber . "', '" . $price . "','" . $_SESSION["id"] . "' ,'" . $customer_id . "', '" . $created_at . "', '" . $created_at . "')";
     $conn->query($pattern_sql);
     if ($notification_id) {
         $sql = "UPDATE ask_price SET status= 'done' , notify = 'received', price = '$price' WHERE id = '$notification_id'";

@@ -132,6 +132,13 @@ $status = $conn->query($status_sql);
                         } ?>
                     </select>
                 </div>
+                <div class="col-span-12 sm:col-span-4 mb-3">
+                    <label for="description">
+                        توضیحات رابطه
+                    </label>
+                    <textarea class="border-1 p-2 text-sm border-gray-300 mt-1 block w-full border-gray-300 
+                                     focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="description" rows="5"></textarea>
+                </div>
 
 
         </div>
@@ -286,6 +293,7 @@ $status = $conn->query($status_sql);
         const price = document.getElementById('price').value;
         const cars = getSelectedItems('cars');
         const status = document.getElementById('status').value;
+        const description = document.getElementById('description').value;
 
         // Defining a params instance to be attached to the axios request
         const params = new URLSearchParams();
@@ -294,6 +302,7 @@ $status = $conn->query($status_sql);
         params.append('price', price);
         params.append('cars', JSON.stringify(cars));
         params.append('status', status);
+        params.append('description', description);
 
         // Side effects data
         params.append('mode', mode);
@@ -375,6 +384,7 @@ $status = $conn->query($status_sql);
         const price = document.getElementById('price');
         const cars = getSelectedItems('cars');
         const status = document.getElementById('status');
+        const description = document.getElementById('description');
 
         const params = new URLSearchParams();
         params.append('load_pattern_ifo', 'load_pattern_ifo');
@@ -388,6 +398,7 @@ $status = $conn->query($status_sql);
                 relation_name.value = pattern_info.name;
                 mode.value = 'update';
                 price.value = pattern_info.price;
+                description.value = pattern_info.description;
 
                 setSelectedItems('cars', pattern_info_cars);
                 setSelectedItems('status', pattern_info.status_id);
@@ -418,6 +429,7 @@ $status = $conn->query($status_sql);
 
     });
 
+    // This function helps to display only the matching results when user types a keyword (Slecte 2 plugin)
     function matchCustom(params, data) {
         // If there are no search terms, return all of the data
         if ($.trim(params.term) === '') {
@@ -443,72 +455,6 @@ $status = $conn->query($status_sql);
         // Return `null` if the term should not be displayed
         return null;
     }
-
-    // jQuery(function() {
-    //     jQuery('.multiSelect').each(function(e) {
-    //         var self = jQuery(this);
-    //         var field = self.find('.multiSelect_field');
-    //         var fieldOption = field.find('option');
-    //         var placeholder = field.attr('data-placeholder');
-
-    //         field.hide().after(`<div class="multiSelect_dropdown"></div>
-    //                     <span class="multiSelect_placeholder">` + placeholder + `</span>
-    //                     <ul class="multiSelect_list"></ul>
-    //                     <span class="multiSelect_arrow"></span>`);
-
-    //         fieldOption.each(function(e) {
-    //             jQuery('.multiSelect_list').append(`<li class="multiSelect_option" data-value="` + jQuery(this).val() + `">
-    //                                         <a class="multiSelect_text">` + jQuery(this).text() + `</a>
-    //                                       </li>`);
-    //         });
-
-    //         var dropdown = self.find('.multiSelect_dropdown');
-    //         var list = self.find('.multiSelect_list');
-    //         var option = self.find('.multiSelect_option');
-    //         var optionText = self.find('.multiSelect_text');
-
-    //         dropdown.attr('data-multiple', 'true');
-    //         list.css('top', dropdown.height() + 5);
-
-    //         option.click(function(e) {
-    //             var self = jQuery(this);
-    //             e.stopPropagation();
-    //             self.addClass('-selected');
-    //             field.find('option:contains(' + self.children().text() + ')').prop('selected', true);
-    //             dropdown.append(function(e) {
-    //                 return jQuery('<span class="multiSelect_choice">' + self.children().text() + '<svg class="multiSelect_deselect -iconX"><use href="#iconX"></use></svg></span>').click(function(e) {
-    //                     var self = jQuery(this);
-    //                     e.stopPropagation();
-    //                     self.remove();
-    //                     list.find('.multiSelect_option:contains(' + self.text() + ')').removeClass('-selected');
-    //                     list.css('top', dropdown.height() + 5).find('.multiSelect_noselections').remove();
-    //                     field.find('option:contains(' + self.text() + ')').prop('selected', false);
-    //                     if (dropdown.children(':visible').length === 0) {
-    //                         dropdown.removeClass('-hasValue');
-    //                     }
-    //                 });
-    //             }).addClass('-hasValue');
-    //             list.css('top', dropdown.height() + 5);
-    //             if (!option.not('.-selected').length) {
-    //                 list.append('<h5 class="multiSelect_noselections">No Selections</h5>');
-    //             }
-    //         });
-
-    //         dropdown.click(function(e) {
-    //             e.stopPropagation();
-    //             e.preventDefault();
-    //             dropdown.toggleClass('-open');
-    //             list.toggleClass('-open').scrollTop(0).css('top', dropdown.height() + 5);
-    //         });
-
-    //         jQuery(document).on('click touch', function(e) {
-    //             if (dropdown.hasClass('-open')) {
-    //                 dropdown.toggleClass('-open');
-    //                 list.removeClass('-open');
-    //             }
-    //         });
-    //     });
-    // });
 </script>
 <?php
 require_once('./views/Layouts/footer.php');

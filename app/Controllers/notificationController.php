@@ -14,8 +14,11 @@ function getNotification($conn, $id)
 
     $adminNotification = [];
 
-    if ($data['name'] === 'نیایش') {
-        $sql = "SELECT ask_price.*, yadakshop1402.users.id AS user_id, callcenter.customer.id AS customer_id, callcenter.customer.name AS customer_name, yadakshop1402.users.name AS user_name 
+    if ($data['name'] === 'مریم') {
+        $sql = "SELECT ask_price.*, yadakshop1402.users.id AS user_id, callcenter.customer.id AS customer_id, 
+        callcenter.customer.family AS customer_family, 
+        callcenter.customer.name AS customer_name, 
+        yadakshop1402.users.name AS user_name 
         FROM ((ask_price 
         INNER JOIN yadakshop1402.users ON users.id = ask_price.user_id)
         INNER JOIN callcenter.customer ON customer.id = ask_price.customer_id )
@@ -34,6 +37,7 @@ function getNotification($conn, $id)
                     'price' => $row['price'],
                     'created_at' => $row['created_at'],
                     'customer_name' => $row['customer_name'],
+                    'customer_family' => $row['customer_family'],
                     'user_name' => $row['user_name'],
                 ]);
             }
@@ -77,6 +81,6 @@ function getNotification($conn, $id)
         'answeredNotifications' => $answeredNotifications,
         'adminNotification' => $adminNotification,
         'previousNotifications' => $previousNotifications,
-        'admin' => $data['name'] === 'نیایش' ? true : false,
+        'admin' => $data['name'] === 'مریم' ? true : false,
     ];
 }

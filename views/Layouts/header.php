@@ -35,7 +35,8 @@ $_SESSION["user_id"] = $_SESSION["id"];
             position: absolute;
             display: none;
             top: 100%;
-            left: 0% !important;
+            left: 50%;
+            transform: translateX(-50%);
             padding: 10px;
             border-radius: 5px;
             background-color: seagreen;
@@ -52,7 +53,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
             position: fixed;
             bottom: -100px;
             right: 50%;
-            transform: translateX(50%);
+            transform: translateX(-50%);
             transition: all 1s ease;
             padding: 10px;
         }
@@ -86,6 +87,12 @@ $_SESSION["user_id"] = $_SESSION["id"];
                 transform: rotate(-20deg);
             }
 
+        }
+
+        .userImage {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
         }
     </style>
     <script>
@@ -138,7 +145,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
                     </a>
                     <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./givePrice.php">
                         <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
-                        قیمت دهی
+                        قیمت دهی دستوری
                     </a>
                     <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../main.php">
                         <i class="px-2 material-icons hover:cursor-pointer">call</i>
@@ -163,7 +170,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
                         <a id="deactive" class="" href="./notification.php">
                             <i class="material-icons hover:cursor-pointer text-indigo-500">notifications</i>
                         </a>
-                        <p class="px-2"> <?php echo $_SESSION['username'] ?></p>
+                        <img class="userImage mx-2" src="../../userimg/<?php echo $_SESSION['id'] ?>.jpg" alt="userimage">
                     </div>
                 </div>
                 <script>

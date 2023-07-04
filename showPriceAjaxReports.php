@@ -1,8 +1,6 @@
 <?php
 require_once './database/connect.php';
-require_once('./views/Layouts/header.php');
 require_once('./app/Controllers/GivenPriceController.php');
-
 
 if ($isValidCustomer) {
     if ($finalResult) {
@@ -14,58 +12,6 @@ if ($isValidCustomer) {
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
 ?>
-        <div class="rtl col-6 mx-auto">
-            <table class="min-w-full text-left text-sm font-light custom-table mb-2">
-                <thead class="font-medium bg-green-600">
-                    <tr>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            نام
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            نام خانوادگی
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            شماره تماس
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            ماشین
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            آدرس
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white">
-                    <tr class="relative">
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['name'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['family'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['phone'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['car'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['address'] ?>
-                            </p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
         <div class="accordion">
             <?php
 
@@ -91,8 +37,8 @@ if ($isValidCustomer) {
                             $customer = $customer;
                             $completeCode = $completeCode;
                     ?>
-                            <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2 overflow-auto">
-
+                            <div class="grid grid-cols-1 md:grid-cols-8 gap-6 lg:gap-2 lg:p-2 overflow-auto">
+                                <div></div>
                                 <!-- Start the code info section -->
                                 <div class="bg-white rounded-lg overflow-auto">
                                     <div id="search_result" class="rtl p-3">
@@ -123,7 +69,7 @@ if ($isValidCustomer) {
                                 </div>
 
                                 <!-- ENd the code info section -->
-                                <div class="bg-white rounded-lg col-span-5 overflow-auto">
+                                <div class="bg-white rounded-lg md:col-span-5 overflow-auto">
                                     <div class="p-3">
                                         <table class="min-w-full text-left text-sm font-light custom-table">
                                             <thead class="font-medium bg-green-600">
@@ -269,233 +215,26 @@ if ($isValidCustomer) {
                                         </table>
                                     </div>
                                 </div>
-
-                                <!-- Given Price section -->
-                                <div class="bg-white rounded-lg shadow-md col-span-2 overflow-auto">
-                                    <div id="search_result" class="p-3">
-                                        <table class=" min-w-full text-sm font-light">
-                                            <thead>
-                                                <tr class="min-w-full bg-green-600">
-                                                    <td class="text-white bold py-2 px-2 w-28">قیمت</td>
-                                                    <td class="text-white bold py-2 px-2 rtl">مشتری</td>
-                                                    <td class="text-white bold py-2 px-2 rtl">کاربر</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="price-<?php echo $partNumber ?>">
-                                                <?php if ($givenPrice !== null) {
-                                                ?>
-                                                    <?php foreach ($givenPrice as $price) { ?>
-                                                        <?php if ($price['price'] !== null) {
-                                                            if (array_key_exists("ordered", $price)) { ?>
-                                                                <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
-                                                                <?php } else { ?>
-                                                                <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
-                                                                <?php  } ?>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
-                                                                    <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
-                                                                </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
-                                                                    <?php if (array_key_exists("ordered", $price)) {
-                                                                        echo 'قیمت دستوری';
-                                                                    } else {
-                                                                        echo $price['name'] . ' ' . $price['family'];
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
-                                                                    <?php if (!array_key_exists("ordered", $price)) {
-                                                                    ?>
-                                                                        <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                </tr>
-                                                                <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
-                                                                    <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
-                                                                        <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
-                                                                            <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
-                                                                            <?php
-                                                                            $create = date($price['created_at']);
-
-
-                                                                            $now = new DateTime(); // current date time
-                                                                            $date_time = new DateTime($create); // date time from string
-                                                                            $interval = $now->diff($date_time); // difference between two date times
-                                                                            $days = $interval->format('%a'); // difference in days
-                                                                            $hours = $interval->format('%h'); // difference in hours
-                                                                            $minutes = $interval->format('%i'); // difference in minutes
-                                                                            $seconds = $interval->format('%s'); // difference in seconds
-
-                                                                            $text = '';
-
-                                                                            if ($days) {
-                                                                                $text .= " $days روز و ";
-                                                                            }
-
-                                                                            if ($hours) {
-                                                                                $text .= "$hours ساعت ";
-                                                                            }
-
-                                                                            if ($minutes) {
-                                                                                $text .= "$minutes دقیقه ";
-                                                                            }
-
-                                                                            if ($seconds) {
-                                                                                $text .= "$seconds ثانیه ";
-                                                                            }
-
-                                                                            echo "$text قبل";
-                                                                            ?>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-
-                                                            <?php } else { ?>
-                                                                <tr class="min-w-full mb-4 border-b-2 border-white">
-                                                                    <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                                                        !! موردی برای نمایش وجود ندارد
-                                                                    </td>
-                                                                </tr>
-                                                        <?php }
-                                                    } ?>
-                                                    <?php } else { ?>
-                                                        <tr class="min-w-full mb-4 border-b-2 border-white">
-                                                            <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                                                !! موردی برای نمایش وجود ندارد
-                                                            </td>
-                                                        </tr>
-                                                    <?php } ?>
-                                            </tbody>
-                                        </table>
-                                        <br>
-                                        <form action="" method="post" onsubmit="event.preventDefault()">
-
-                                            <?php
-                                            date_default_timezone_set("Asia/Tehran"); ?>
-                                            <input type="text" hidden name="store_price" value="store_price">
-                                            <input type="text" hidden name="partNumber" value="<?php echo $partNumber ?>">
-                                            <input type="text" hidden id="customer_id" name="customer_id" value="<?php echo $customer ?>">
-                                            <input type="text" hidden id="notification_id" name="notification_id" value="<?php echo $notification_id ?>">
-                                            <div class="rtl col-span-6 sm:col-span-4">
-                                                <label class="block font-medium text-sm text-gray-700">
-                                                    قیمت
-                                                </label>
-                                                <input onkeyup="update_price(this)" name="price" class="ltr price-input-custome mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="<?php echo $partNumber ?>-price" type="text" />
-                                                <p class="mt-2"></p>
-                                            </div>
-
-
-                                            <div class="rtl">
-                                                <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
-                                                    ثبت
-                                                </button>
-                                                <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
-                                                    نداریم !!!
-                                                </button>
-                                                <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
-                                                    ارسال به نیایش
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <!-- END GIVEN PRICE SECTION -->
-                                <div class="bg-white rounded-lg shadow-md col-span-2">
-                                    <div class="p-3">
-                                        <table class=" min-w-full text-sm font-light">
-                                            <thead>
-                                                <tr class="min-w-full bg-green-600">
-                                                    <td class="text-white bold py-2 px-2 w-28">قیمت</td>
-                                                    <td class="text-white bold py-2 px-2 rtl">مشتری</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if (count($estelam) > 0) {
-
-                                                    foreach ($estelam as $price) {
-                                                        if ($price['price']) { ?>
-                                                            <tr class="min-w-full mb-1 hover:cursor-pointer bg-indigo-200" data-price="<?php echo $price['price'] ?>">
-
-                                                                <td scope="col" class="text-gray-800 px-2 py-1">
-                                                                    <?php echo $price['price'] === null ? 'ندارد' : $price['price'] ?>
-                                                                </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl">
-                                                                    <?php echo $price['name']  ?>
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="min-w-full mb-1 hover:cursor-pointer border-b-2 bg-indigo-300" data-price="<?php echo $price['price'] ?>">
-                                                                <td colspan="3" scope="col" class="text-gray-800 px-2 tiny-text ">
-                                                                    <div class="rtl flex items-center w-full">
-                                                                        <i class="px-1 material-icons tiny-text ">access_time</i>
-                                                                        <?php
-                                                                        $create = date($price['time']);
-
-                                                                        $now = new DateTime(); // current date time
-                                                                        $date_time = new DateTime($create); // date time from string
-                                                                        $interval = $now->diff($date_time); // difference between two date times
-                                                                        $days = $interval->format('%a'); // difference in days
-                                                                        $hours = $interval->format('%h'); // difference in hours
-                                                                        $minutes = $interval->format('%i'); // difference in minutes
-                                                                        $seconds = $interval->format('%s'); // difference in seconds
-
-                                                                        $text = '';
-
-                                                                        if ($days) {
-                                                                            $text .= " $days روز و ";
-                                                                        }
-
-                                                                        if ($hours) {
-                                                                            $text .= "$hours ساعت ";
-                                                                        }
-
-                                                                        if ($minutes) {
-                                                                            $text .= "$minutes دقیقه ";
-                                                                        }
-
-                                                                        if ($seconds) {
-                                                                            $text .= "$seconds ثانیه ";
-                                                                        }
-
-                                                                        echo "$text قبل";
-                                                                        ?>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                    <?php }
-                                                    }
-                                                } else { ?>
-                                                    <tr class="min-w-full mb-4 border-b-2 border-white">
-                                                        <td colspan="3" scope="col" class="text-white py-2 text-center bg-indigo-300">
-                                                            !! موردی برای نمایش وجود ندارد
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-
-
+                                <div></div>
                             </div>
-                        <?php }
-                    } else { ?>
-                        <div class="bg-white rounded-lg overflow-auto mb-3 py-4">
-                            <p class="text-center">کد مد نظر در سیستم موجود نیست</p>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
                 </div>
             <?php
-            }
+                    } else {
             ?>
-            <p id="form_success" class="custome-alert success px-3 tiny-text">
-                ! موفقانه در پایگاه داده ثبت شد
-            </p>
-            <p id="form_error" class=" custome-alert error px-3 tiny-text">
-                ! ذخیره سازی اطلاعات ناموفق بود
-            </p>
+                <div class="bg-white rounded-lg overflow-auto mb-3 py-4">
+                    <p class="text-center">کد مد نظر در سیستم موجود نیست</p>
+                </div>
+        <?php
+                    }
+                }
+        ?>
+        <p id="form_success" class="custome-alert success px-3 tiny-text">
+            ! موفقانه در پایگاه داده ثبت شد
+        </p>
+        <p id="form_error" class=" custome-alert error px-3 tiny-text">
+            ! ذخیره سازی اطلاعات ناموفق بود
+        </p>
         </div>
         <script>
             // Global controllers for operations messages
@@ -556,7 +295,6 @@ if ($isValidCustomer) {
                 const customer_id = document.getElementById('customer_id').value;
                 const notification_id = document.getElementById('notification_id').value;
 
-                const goodPrice = document.getElementById(partNumber + '-price').value;
                 const resultBox = document.getElementById('price-' + partNumber);
 
                 // Defining a params instance to be attached to the axios request
@@ -565,7 +303,7 @@ if ($isValidCustomer) {
                 params.append('partNumber', partNumber);
                 params.append('customer_id', customer_id);
                 params.append('notification_id', notification_id);
-                params.append('price', goodPrice);
+                params.append('price', price);
 
                 axios.post("./app/Controllers/GivenPriceAjax.php", params)
                     .then(function(response) {
@@ -603,5 +341,3 @@ if ($isValidCustomer) {
 } else {
     echo "<p class='rtl col-6 mx-auto flex items-center justify-center h-full'>کاربر درخواست دهنده و یا مشتری مشخص شده معتبر نمی باشد</p>";
 }
-
-require_once('./views/Layouts/footer.php');

@@ -36,7 +36,7 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
     }, $explodedCodes);
 
     $explodedCodes = array_filter($explodedCodes, function ($code) {
-        if (strlen($code) > 0) {
+        if (strlen($code) > 5) {
             return  $code;
         }
     });
@@ -256,7 +256,11 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT * FROM prices INNER JOIN callcenter.customer ON customer.id = prices.customer_id WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
+    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.family ,users.id as userID, prices.created_at
+    FROM ((prices 
+    INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
+    INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
+    WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
     $result = mysqli_query($conn, $sql);
 
 
