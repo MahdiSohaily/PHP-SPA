@@ -97,6 +97,11 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
         </table>
     </div>
 </div>
+<script>
+    setInterval(() => {
+        location.reload();
+    }, 5000);
+</script>
 
 <?php
 require_once('./views/Layouts/footer.php');
