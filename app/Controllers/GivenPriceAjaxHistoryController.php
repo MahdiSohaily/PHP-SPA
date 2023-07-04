@@ -84,7 +84,7 @@ if (isset($_POST['historyAjax'])) {
 function givenPrice($conn)
 {
     $sql = "SELECT 
-    prices.price, prices.partnumber, users.username, users.id as userID, prices.created_at, customer.name, customer.family
+    prices.price, prices.partnumber, users.username,customer.is AS customerID, users.id as userID, prices.created_at, customer.name, customer.family
     FROM ((shop.prices 
     INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
     INNER JOIN yadakshop1402.users ON users.id = prices.user_id)

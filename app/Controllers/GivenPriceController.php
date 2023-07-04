@@ -256,7 +256,7 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.family ,users.id as userID, prices.created_at
+    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.is AS customerID, customer.family ,users.id as userID, prices.created_at
     FROM ((prices 
     INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
     INNER JOIN yadakshop1402.users ON users.id = prices.user_id)

@@ -286,7 +286,7 @@ if ($isValidCustomer) {
                                                 ?>
                                                     <?php foreach ($givenPrice as $price) { ?>
                                                         <?php if ($price['price'] !== null) {
-                                                            if (array_key_exists("ordered", $price)) { ?>
+                                                            if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
                                                                 <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
                                                                 <?php } else { ?>
                                                                 <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
