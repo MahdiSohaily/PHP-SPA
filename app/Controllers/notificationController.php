@@ -13,6 +13,8 @@ function getNotification($conn, $id)
     }
 
     $adminNotification = [];
+    // $data['name'] = 'نیایش';
+
     if ($data['name'] === 'نیایش') {
         $sql = "SELECT ask_price.*, yadakshop1402.users.id AS user_id, callcenter.customer.id AS customer_id, 
         callcenter.customer.family AS customer_family, 
