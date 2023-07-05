@@ -4,8 +4,6 @@ if (!isset($_SESSION["id"])) {
     // Redirect to a new URL
     header("Location: ../../index.php");
     exit();
-} else {
-    echo 'we are here';
 }
 require_once './config/config.php';
 require_once './database/connect.php';
