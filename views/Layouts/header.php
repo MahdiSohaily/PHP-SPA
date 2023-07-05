@@ -49,6 +49,18 @@ $_SESSION["user_id"] = $_SESSION["id"];
             width: 200px;
             z-index: 100000000;
         }
+        .custome-tooltip-2 {
+            position: absolute;
+            display: none;
+            top: 15%;
+            left: 90%;
+            transform: translateX(-50%);
+            padding: 10px;
+            border-radius: 5px;
+            background-color: transparent;
+            width: 100px;
+            z-index: 100000000;
+        }
 
         .custom-table td {
             vertical-align: super;
@@ -124,6 +136,21 @@ $_SESSION["user_id"] = $_SESSION["id"];
             }
 
         }
+        function showToolTip(element) {
+                partnumber = element.getAttribute('data-part');
+                targetElement = document.getElementById(partnumber + '-google');
+
+                targetElement.style.display = 'flex';
+                targetElement.style.gap = '5px';
+            }
+
+            function hideToolTip(element) {
+                partnumber = element.getAttribute('data-part');
+                targetElement = document.getElementById(partnumber + '-google');
+
+                targetElement.style.display = 'none';
+                targetElement.style.gap = '5px';
+            }
     </script>
 </head>
 

@@ -143,11 +143,19 @@ if ($isValidCustomer) {
                                                 <?php
                                                 foreach ($sorted as $index => $element) {
                                                 ?>
-                                                    <tr style="position: relative;" class="relative">
-                                                        <td class=" px-1">
+                                                    <tr>
+                                                        <td class="relative px-1 hover:cursor-pointer" data-part="<?php echo $partNumber ?>" onmouseleave="hideToolTip(this)" onmouseover="showToolTip(this)">
                                                             <p class="text-center bold bg-gray-600 text-white px-2 py-3">
                                                                 <?php echo $goods[$index]['partnumber'] ?>
                                                             </p>
+                                                            <div class="custome-tooltip-2" id="<?php echo $partNumber . '-google' ?>">
+                                                                <a target='_blank' href='https://www.google.com/search?tbm=isch&q=<?php echo $partNumber ?>'>
+                                                                    <img class="w-5 h-auto" src="./public/img/google.png" alt="google">
+                                                                </a>
+                                                                <a target='_blank' href='https://partsouq.com/en/search/all?q=<?php echo $partNumber ?>'>
+                                                                    <img class="w-5 h-auto" src="./public/img/part.png" alt="part">
+                                                                </a>
+                                                            </div>
                                                         </td>
                                                         <td class="px-1 pt-2">
                                                             <table class="min-w-full text-sm font-light p-2">
@@ -194,8 +202,6 @@ if ($isValidCustomer) {
                                                                 </tbody>
                                                             </table>
                                                         </td>
-
-
                                                         <td class="px-1 pt-2">
                                                             <table class="min-w-full text-left text-sm font-light">
                                                                 <thead class="font-medium">
@@ -260,8 +266,6 @@ if ($isValidCustomer) {
                                                                 </tbody>
                                                             </table>
                                                         </td>
-
-
                                                     </tr>
                                                 <?php }
                                                 ?>
