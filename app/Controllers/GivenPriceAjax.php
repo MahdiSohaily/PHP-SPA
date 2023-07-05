@@ -7,7 +7,15 @@ if (isset($_POST['store_price'])) {
     $customer_id = $_POST['customer_id'];
     $notification_id = $_POST['notification_id'];
     store($conn, $partnumber, $price, $customer_id, $notification_id);
-    $givenPrice = (givenPrice($conn, $partnumber));
+
+    $sql = "SELECT id, partnumber FROM yadakshop1402.nisha WHERE partnumber = '$partnumber'";
+    $result = mysqli_query($conn, $sql);
+    $good = $result->fetch_assoc();
+
+    $relation_exist = isInRelation($conn, $good['id']);
+
+    $givenPrice = givenPrice($conn, $partnumber, $relation_exist);
+
     if ($givenPrice !== null) {
         foreach ($givenPrice as $price) {
             if ($price['price'] !== null) { ?>
@@ -90,6 +98,18 @@ if (isset($_POST['store_price'])) {
     <?php } ?>
 <?php
 
+}
+function isInRelation($conn, $id)
+{
+    $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '$id'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while ($item = mysqli_fetch_assoc($result)) {
+            return $item['pattern_id'];
+        }
+    }
+    return false;
 }
 
 function givenPrice($conn, $code, $relation_exist = null)

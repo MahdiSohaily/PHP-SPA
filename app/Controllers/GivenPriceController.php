@@ -132,7 +132,7 @@ function getSelectedRates($conn)
 
     return $rates;
 }
-
+ 
 function isInRelation($conn, $id)
 {
     $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '$id'";
