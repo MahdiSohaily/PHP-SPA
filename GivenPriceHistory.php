@@ -108,14 +108,6 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
     setInterval(() => {
         var params = new URLSearchParams();
         params.append('historyAjax', 'historyAjax');
-        resultBox.innerHTML = `
-                            <tr class='full-page'>
-                                <td colspan='5' style="height: 90vh; display: flex; justify-content: center; align-items: center;">
-                                    <img class=' block w-10 mx-auto h-auto' src='./public/img/loading.png' alt='google'>
-                                </td>
-                            </tr>
-                                    `;
-
         axios.post("./app/Controllers/GivenPriceAjaxHistoryController.php", params)
             .then(function(response) {
                 resultBox.innerHTML = response.data;
