@@ -108,6 +108,7 @@ require_once('./app/Controllers/GivenPriceHistoryController.php');
     setInterval(() => {
         var params = new URLSearchParams();
         params.append('historyAjax', 'historyAjax');
+
         axios.post("./app/Controllers/GivenPriceAjaxHistoryController.php", params)
             .then(function(response) {
                 resultBox.innerHTML = response.data;

@@ -286,15 +286,15 @@ if ($isValidCustomer) {
                                                 ?>
                                                     <?php foreach ($givenPrice as $price) { ?>
                                                         <?php if ($price['price'] !== null) {
-                                                            if (array_key_exists("ordered", $price)) { ?>
+                                                            if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
                                                                 <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
                                                                 <?php } else { ?>
                                                                 <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
                                                                 <?php  } ?>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                                                                     <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                                                                 </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                                                                     <?php if (array_key_exists("ordered", $price)) {
                                                                         echo 'قیمت دستوری';
                                                                     } else {
@@ -302,7 +302,7 @@ if ($isValidCustomer) {
                                                                     }
                                                                     ?>
                                                                 </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                                                                     <?php if (!array_key_exists("ordered", $price)) {
                                                                     ?>
                                                                         <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
@@ -311,10 +311,11 @@ if ($isValidCustomer) {
                                                                     ?>
                                                                 </td>
                                                                 </tr>
-                                                                <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
-                                                                    <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
-                                                                        <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
-                                                                            <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
+                                                                <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
+                                                                    <td></td>
+                                                                    <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="2" scope="col">
+                                                                        <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : 'text-gray-800' ?>">
+                                                                            <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : 'text-gray-800' ?>">access_time</i>
                                                                             <?php
                                                                             $create = date($price['created_at']);
 
