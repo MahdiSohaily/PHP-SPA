@@ -2,6 +2,7 @@
 session_start();
 require_once './config/config.php';
 require_once './database/connect.php';
+
 date_default_timezone_set("Asia/Tehran");
 $_SESSION["user_id"] = $_SESSION["id"];
 ?>
