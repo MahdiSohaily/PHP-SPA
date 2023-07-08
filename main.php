@@ -533,19 +533,7 @@
                         ?>
                  </script>
              </div>
-
-
-
-
-
-
-
-
-
          </div>
-
-
-
 
          <div class="cartable-form-1">
              <select name="cartable-pos" id="cartable-pos">
@@ -590,8 +578,8 @@
                             $user = $row2['user'];
                     ?>
                          <tr>
-                             <td class="record-info"><?php echo nl2br($callinfo) ?></td>
-                             <td class="record-user">
+                             <td class="tiny-text record-info"><?php echo nl2br($callinfo) ?></td>
+                             <td class="tiny-text record-user">
                                  <?php
 
                                     $con2 = mysqli_connect('localhost', 'root', '', 'yadakshop1401');
@@ -685,7 +673,7 @@
 
                     ?>
                          <tr>
-                             <td class="record-info">
+                             <td class=" tiny-text record-info">
                                  <?php
                                     if ($status == 0) {
                                         echo ("<div class='answer-x'>X</div>");
@@ -694,7 +682,7 @@
                                     }
                                     ?>
                              </td>
-                             <td class="record-time"><?php echo format_interval($interval1); ?></td>
+                             <td class=" tiny-text record-time"><?php echo format_interval($interval1); ?></td>
                          </tr>
                  <?php
                         }
@@ -758,11 +746,11 @@
                                                 $text .= "$hours ساعت ";
                                             }
 
-                                            if ($minutes) {
+                                            if (!$days && $minutes) {
                                                 $text .= "$minutes دقیقه ";
                                             }
 
-                                            if ($seconds) {
+                                            if (!$days && !$hours && $seconds) {
                                                 $text .= "$seconds ثانیه ";
                                             }
 
