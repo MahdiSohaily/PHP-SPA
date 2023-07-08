@@ -94,17 +94,17 @@
              </form>
          </div>
          <!-- The main bloack for the search codes for giving price and displaying the already given prices to the specidied client -->
-         <div class="">
-             <form method="post" target="_blank" class="" action="./report/showPriceReports.php">
+         <div class="	">
+             <form method="post" target="_blank" class="bg-cyan-200" action="./report/showPriceReports.php">
                  <?php if (isset($id)) { ?>
                      <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
                      <input type="text" id="givenUser" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
                      <input hidden name="customer" required id="givenCustomer" type="number" value="<?php echo $id ?>" />
                      <div>
-                         <p class="_label">
+                         <h2 class="title text-lg">
                              کد های مد نظر برای جستجو
-                         </p>
-                         <textarea id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید"></textarea>
+                         </h2>
+                         <textarea class="border p-2 w-full" id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید"></textarea>
 
                      </div>
                      <button type="submit" class="give-search-button"> جستجو</button>
