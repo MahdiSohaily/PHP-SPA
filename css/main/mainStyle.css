@@ -1,3 +1,7 @@
 .customer_info {
   min-height: 76vh;
 }
+
+.ltr {
+  direction: ltr !important;
+}

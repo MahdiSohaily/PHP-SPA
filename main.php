@@ -75,10 +75,10 @@
                          <p> درج اطلاعات استعلام</p>
                          <textarea class="callinfo" name="callinfo"></textarea>
                          <div class="callinfobox-option">
-                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> 
-                                درخواست بارنامه 
-                            </div>
-                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> درخواست شماره کارت 
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white">
+                                 درخواست بارنامه
+                             </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> درخواست شماره کارت
 
                              </div>
                              <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> پیگیری پیک </div>
@@ -108,7 +108,7 @@
                      <input hidden name="customer" required id="givenCustomer" type="number" value="<?php echo $id ?>" />
                      <div class="bg-gray-200  p-3">
 
-                         <textarea class="border p-2 w-full" id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مورد نظر خود را در خط های مجزا قرار دهید"></textarea>
+                         <textarea class="border p-2 w-full ltr" id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مورد نظر خود را در خط های مجزا قرار دهید"></textarea>
                          <button type="submit" class="give-search-button"> جستجو</button>
                      </div>
 
