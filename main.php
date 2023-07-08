@@ -94,20 +94,20 @@
              </form>
          </div>
          <!-- The main bloack for the search codes for giving price and displaying the already given prices to the specidied client -->
-         <div class="	">
-             <form method="post" target="_blank" class="bg-cyan-200 p-3" action="./report/showPriceReports.php">
+         <div class="">
+             <h2 class="title text-lg "> کد های مد نظر برای جستجو
+             </h2>
+             <form method="post" target="_blank" class="" action="./report/showPriceReports.php">
                  <?php if (isset($id)) { ?>
                      <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
                      <input type="text" id="givenUser" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
                      <input hidden name="customer" required id="givenCustomer" type="number" value="<?php echo $id ?>" />
-                     <div>
-                         <h2 class="title text-lg">
-                             کد های مد نظر برای جستجو
-                         </h2>
-                         <textarea class="border p-2 w-full" id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید"></textarea>
+                     <div class="bg-gray-200  p-3">
 
+                         <textarea class="border p-2 w-full" id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید"></textarea>
+                         <button type="submit" class="give-search-button"> جستجو</button>
                      </div>
-                     <button type="submit" class="give-search-button"> جستجو</button>
+
                      <!-- <button type="button" class="give-search-button" onclick="SearchGivenPrice()"> بررسی</button> -->
                  <?php } else {
                         echo '<div class="phone-status no-save">شماره <span>' . $phone . '</span> در سیستم ثبت نمی باشد .</div>';
