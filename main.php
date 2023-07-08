@@ -73,16 +73,20 @@
                      <input name="isold" id="isold" type="hidden" value="<?php echo ($isold) ?>">
                      <div class="col-span-3 bg-gray-200	p-3">
                          <p> درج اطلاعات استعلام</p>
-                         <textarea class="" name="callinfo"></textarea>
+                         <textarea class="callinfo" name="callinfo"></textarea>
                          <div class="callinfobox-option">
-                             <div>درخواست بارنامه</div>
-                             <div>درخواست شماره کارت</div>
-                             <div>پیگیری پیک</div>
-                             <div>پیگیری روند فاکتور</div>
-                             <div>درخواست ثبت فاکتور</div>
-                             <div>ارجاع به واتساپ</div>
-                             <div>درخواست شماره واتساپ</div>
-                             <div>اطلاعات واریز وجه</div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> 
+                                درخواست بارنامه 
+                            </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> درخواست شماره کارت 
+
+                             </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> پیگیری پیک </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> پیگیری روند فاکتور </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> درخواست ثبت فاکتور </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> ارجاع به واتساپ </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> درخواست شماره واتساپ </div>
+                             <div class="hover:cursor-pointer hover:bg-gray-400 hover:text-white"> اطلاعات واریز وجه </div>
                          </div>
                      </div>
                  </div>
