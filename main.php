@@ -29,11 +29,11 @@
     }
     ?>
 
- <div class="box">
+ <div class="customer_info px-5">
      <div>
-         <h2 class="title">مشخصات مشتری</h2>
+         <h2 class="title text-lg">مشخصات مشتری</h2>
          <form class="save-contact form" action="php/save.php" method="get" autocomplete="off">
-             <div class="form-keeper">
+             <div class="">
                  <div>
                      <p>
                          شماره تماس
@@ -53,12 +53,10 @@
 
                      <input name="vin" type="text" value="<?php echo !empty($vin) && $vin ?>">
                  </div>
-
                  <div>
                      <p>ماشین</p>
                      <input name="car" type="text" value="<?php echo !empty($car) && $car ?>">
                  </div>
-
                  <div style="display: none;">
                      <p>نوع</p>
                      <input name="kind" type="text" value="null">
@@ -67,7 +65,6 @@
                      <p>آدرس</p>
                      <textarea name="address"><?php echo !empty($address) && $address ?></textarea>
                  </div>
-
                  <div>
                      <p>توضیحات مشتری</p>
                      <textarea name="des"><?php echo !empty($des) && $des ?></textarea>
