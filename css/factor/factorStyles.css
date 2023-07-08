@@ -1,0 +1,58 @@
+@media print {
+  .shomare-faktor-box,
+  .top-bar {
+    display: none;
+  }
+
+  .shomare-faktor-list-show table.customer-list.jadval-shomare {
+    width: 90%;
+    margin: auto;
+    float: none;
+  }
+
+  table.customer-list.jadval-shomare tr th:nth-child(4n),
+  table.customer-list.jadval-shomare tr td:nth-child(4n) {
+    display: none;
+  }
+
+  .jadval-shomare-blue {
+    background: white;
+    color: black;
+    border: none;
+    box-shadow: none;
+    font-size: 12px;
+    padding: 0;
+  }
+
+  .jadval-shomare-kharidar {
+    font-size: 13px;
+  }
+
+  img.user-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  table.customer-list td {
+    padding: 0;
+  }
+
+  .shomare-faktor-date {
+    font-size: 11px;
+
+    background: none;
+    padding: 4px;
+  }
+
+  html {
+    margin: 0;
+  }
+
+  table.customer-list th {
+    height: auto;
+  }
+
+  .today-faktor-statistics {
+    display: none;
+  }
+}
