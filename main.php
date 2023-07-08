@@ -599,10 +599,10 @@
                                         }
                                     }
                                     date_default_timezone_set("Asia/Tehran");
-                                    $create = date($price['created_at']);
+                                    $create = date($time);
 
                                     $now = new DateTime(); // current date time
-                                    $date_time = new DateTime($time); // date time from string
+                                    $date_time = new DateTime($create); // date time from string
                                     $interval = $now->diff($date_time); // difference between two date times
                                     $days = $interval->format('%a'); // difference in days
                                     $hours = $interval->format('%h'); // difference in hours
@@ -627,14 +627,11 @@
                                         $text .= "$seconds ثانیه ";
                                     }
 
-                                    echo "$text قبل";
+                                    $text = "$text قبل";
                                     ?>
+                             </td>
 
-
-
-                                 ?></td>
-
-                             <td class="tiny-text record-time"><?php echo format_interval($interval); ?></td>
+                             <td class="tiny-text record-time"><?php echo $text; ?></td>
                          </tr>
                  <?php
 
@@ -645,11 +642,7 @@
                     else {
                         echo '<td colspan="4">هیچ اطلاعاتی موجود نیست</td>';
                     }
-
                     ?>
-
-
-
              </table>
          </div>
      </div>
@@ -704,7 +697,39 @@
                                     }
                                     ?>
                              </td>
-                             <td class=" tiny-text record-time"><?php echo format_interval($interval1); ?></td>
+                             <td class=" tiny-text record-time">
+                                 <?php
+                                    date_default_timezone_set("Asia/Tehran");
+                                    $create = date($time);
+
+                                    $now = new DateTime(); // current date time
+                                    $date_time = new DateTime($create); // date time from string
+                                    $interval = $now->diff($date_time); // difference between two date times
+                                    $days = $interval->format('%a'); // difference in days
+                                    $hours = $interval->format('%h'); // difference in hours
+                                    $minutes = $interval->format('%i'); // difference in minutes
+                                    $seconds = $interval->format('%s'); // difference in seconds
+
+                                    $text = '';
+
+                                    if ($days) {
+                                        $text .= " $days روز و ";
+                                    }
+
+                                    if ($hours) {
+                                        $text .= "$hours ساعت ";
+                                    }
+
+                                    if (!$days && $minutes) {
+                                        $text .= "$minutes دقیقه ";
+                                    }
+
+                                    if (!$days && !$hours && $seconds) {
+                                        $text .= "$seconds ثانیه ";
+                                    }
+
+                                    echo "$text قبل";
+                                    ?></td>
                          </tr>
                  <?php
                         }
