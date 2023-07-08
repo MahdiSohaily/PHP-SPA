@@ -95,7 +95,7 @@
          </div>
          <!-- The main bloack for the search codes for giving price and displaying the already given prices to the specidied client -->
          <div class="	">
-             <form method="post" target="_blank" class="bg-cyan-200" action="./report/showPriceReports.php">
+             <form method="post" target="_blank" class="bg-cyan-200 p-3" action="./report/showPriceReports.php">
                  <?php if (isset($id)) { ?>
                      <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
                      <input type="text" id="givenUser" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
