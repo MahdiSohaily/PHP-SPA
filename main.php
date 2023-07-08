@@ -27,7 +27,6 @@
         echo '<div class="phone-status no-save">شماره <span>' . $phone . '</span> در سیستم ثبت نمی باشد .</div>';
         $isold = 0;
     }
-
     ?>
 
  <div class="box">
@@ -37,81 +36,46 @@
              <div class="form-keeper">
                  <div>
                      <p>
-
                          شماره تماس
-
-
-
                      </p>
-
                      <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" readonly>
                  </div>
-
-
                  <div>
-                     <p>نام</p> <input id="name" name="name" type="text" value="<?php if (!empty($name)) {
-                                                                                    echo $name;
-                                                                                } ?>">
+                     <p>نام</p> <input id="name" name="name" type="text" value="<?php echo !empty($name) &&  $name;  ?>">
                  </div>
-
                  <div>
-
                      <p>نام خانوادگی</p>
-                     <input id="last_name" name="family" type="text" value="<?php if (!empty($family)) {
-                                                                                echo $family;
-                                                                            } ?>">
+                     <input id="last_name" name="family" type="text" value="<?php echo !empty($family) && $family; ?>">
                  </div>
                  <div>
                      <p>شماره شاسی</p>
 
 
-                     <input name="vin" type="text" value="<?php if (!empty($vin)) {
-                                                                echo $vin;
-                                                            } ?>">
+                     <input name="vin" type="text" value="<?php echo !empty($vin) && $vin ?>">
                  </div>
 
                  <div>
                      <p>ماشین</p>
-
-
-                     <input name="car" type="text" value="<?php if (!empty($car)) {
-                                                                echo $car;
-                                                            } ?>">
+                     <input name="car" type="text" value="<?php echo !empty($car) && $car ?>">
                  </div>
 
                  <div style="display: none;">
                      <p>نوع</p>
-
-
                      <input name="kind" type="text" value="null">
                  </div>
                  <div>
                      <p>آدرس</p>
-
-
-                     <textarea name="address"><?php if (!empty($address)) {
-                                                    echo $address;
-                                                } ?></textarea>
+                     <textarea name="address"><?php echo !empty($address) && $address ?></textarea>
                  </div>
 
                  <div>
                      <p>توضیحات مشتری</p>
-
-
-
-                     <textarea name="des"><?php if (!empty($des)) {
-                                                echo $des;
-                                            } ?></textarea>
+                     <textarea name="des"><?php echo !empty($des) && $des ?></textarea>
                  </div>
                  <input name="isold" id="isold" type="hidden" value="<?php echo ($isold) ?>">
-
-
-
                  <div class="callinfobox">
-
                      <p> درج اطلاعات استعلام</p>
                      <textarea class="callinfo" name="callinfo"></textarea>
-
                      <div class="callinfobox-option">
                          <div>درخواست بارنامه</div>
                          <div>درخواست شماره کارت</div>
@@ -121,12 +85,9 @@
                          <div>ارجاع به واتساپ</div>
                          <div>درخواست شماره واتساپ</div>
                          <div>اطلاعات واریز وجه</div>
-
                      </div>
                  </div>
-
              </div>
-
              <div class="bottom-bar">
                  <input class="customer-info-save" type="submit" value="ذخیره" id="sabt">
                  <div class="error">
