@@ -1,7 +1,13 @@
 <?php
 session_start();
+if (!isset($_SESSION["id"])) {
+    // Redirect to a new URL
+    header("Location: ../../index.php");
+    exit();
+}
 require_once './config/config.php';
 require_once './database/connect.php';
+
 date_default_timezone_set("Asia/Tehran");
 $_SESSION["user_id"] = $_SESSION["id"];
 ?>
@@ -41,6 +47,19 @@ $_SESSION["user_id"] = $_SESSION["id"];
             border-radius: 5px;
             background-color: seagreen;
             width: 200px;
+            z-index: 100000000;
+        }
+
+        .custome-tooltip-2 {
+            position: absolute;
+            display: none;
+            top: 15%;
+            left: 90%;
+            transform: translateX(-50%);
+            padding: 10px;
+            border-radius: 5px;
+            background-color: transparent;
+            width: 100px;
             z-index: 100000000;
         }
 
@@ -118,6 +137,22 @@ $_SESSION["user_id"] = $_SESSION["id"];
             }
 
         }
+
+        function showToolTip(element) {
+            partnumber = element.getAttribute('data-part');
+            targetElement = document.getElementById(partnumber + '-google');
+
+            targetElement.style.display = 'flex';
+            targetElement.style.gap = '5px';
+        }
+
+        function hideToolTip(element) {
+            partnumber = element.getAttribute('data-part');
+            targetElement = document.getElementById(partnumber + '-google');
+
+            targetElement.style.display = 'none';
+            targetElement.style.gap = '5px';
+        }
     </script>
 </head>
 
@@ -147,7 +182,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
                         <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
                         قیمت دهی دستوری
                     </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../main.php">
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../index.php">
                         <i class="px-2 material-icons hover:cursor-pointer">call</i>
                         مرکز تماس
                     </a>
@@ -164,13 +199,13 @@ $_SESSION["user_id"] = $_SESSION["id"];
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
 
                     <div class=" flex items-top p-2">
+                        <img class="userImage mx-2" src="../../userimg/<?php echo $_SESSION['id'] ?>.jpg" alt="userimage">
                         <a id="active" class="hidden" href="./notification.php">
                             <i class="material-icons hover:cursor-pointer notify ">notifications_active</i>
                         </a>
                         <a id="deactive" class="" href="./notification.php">
                             <i class="material-icons hover:cursor-pointer text-indigo-500">notifications</i>
                         </a>
-                        <img class="userImage mx-2" src="../../userimg/<?php echo $_SESSION['id'] ?>.jpg" alt="userimage">
                     </div>
                 </div>
                 <script>

@@ -37,7 +37,7 @@ if ($isValidCustomer) {
                 </thead>
                 <tbody class="bg-white">
                     <tr class="relative">
-                        <td class=" px-1">
+                        <td class="px-1">
                             <p class="text-center bold text-gray-700 px-2 py-3">
                                 <?php echo $customer_info['name'] ?>
                             </p>
@@ -143,11 +143,19 @@ if ($isValidCustomer) {
                                                 <?php
                                                 foreach ($sorted as $index => $element) {
                                                 ?>
-                                                    <tr style="position: relative;" class="relative">
-                                                        <td class=" px-1">
+                                                    <tr>
+                                                        <td class="relative px-1 hover:cursor-pointer" data-part="<?php echo $partNumber ?>" onmouseleave="hideToolTip(this)" onmouseover="showToolTip(this)">
                                                             <p class="text-center bold bg-gray-600 text-white px-2 py-3">
                                                                 <?php echo $goods[$index]['partnumber'] ?>
                                                             </p>
+                                                            <div class="custome-tooltip-2" id="<?php echo $partNumber . '-google' ?>">
+                                                                <a target='_blank' href='https://www.google.com/search?tbm=isch&q=<?php echo $partNumber ?>'>
+                                                                    <img class="w-5 h-auto" src="./public/img/google.png" alt="google">
+                                                                </a>
+                                                                <a target='_blank' href='https://partsouq.com/en/search/all?q=<?php echo $partNumber ?>'>
+                                                                    <img class="w-5 h-auto" src="./public/img/part.png" alt="part">
+                                                                </a>
+                                                            </div>
                                                         </td>
                                                         <td class="px-1 pt-2">
                                                             <table class="min-w-full text-sm font-light p-2">
@@ -194,8 +202,6 @@ if ($isValidCustomer) {
                                                                 </tbody>
                                                             </table>
                                                         </td>
-
-
                                                         <td class="px-1 pt-2">
                                                             <table class="min-w-full text-left text-sm font-light">
                                                                 <thead class="font-medium">
@@ -260,8 +266,6 @@ if ($isValidCustomer) {
                                                                 </tbody>
                                                             </table>
                                                         </td>
-
-
                                                     </tr>
                                                 <?php }
                                                 ?>
@@ -286,7 +290,7 @@ if ($isValidCustomer) {
                                                 ?>
                                                     <?php foreach ($givenPrice as $price) { ?>
                                                         <?php if ($price['price'] !== null) {
-                                                            if (array_key_exists("ordered", $price)) { ?>
+                                                            if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
                                                                 <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
                                                                 <?php } else { ?>
                                                                 <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
@@ -294,7 +298,7 @@ if ($isValidCustomer) {
                                                                 <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                                                                     <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                                                                 </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                                                                     <?php if (array_key_exists("ordered", $price)) {
                                                                         echo 'قیمت دستوری';
                                                                     } else {
@@ -302,7 +306,7 @@ if ($isValidCustomer) {
                                                                     }
                                                                     ?>
                                                                 </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                                                                     <?php if (!array_key_exists("ordered", $price)) {
                                                                     ?>
                                                                         <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
@@ -311,8 +315,9 @@ if ($isValidCustomer) {
                                                                     ?>
                                                                 </td>
                                                                 </tr>
-                                                                <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
-                                                                    <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
+                                                                <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
+                                                                    <td></td>
+                                                                    <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="2" scope="col">
                                                                         <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
                                                                             <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
                                                                             <?php

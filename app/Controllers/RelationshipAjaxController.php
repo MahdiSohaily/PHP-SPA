@@ -45,8 +45,7 @@ if (isset($_POST['search_goods_for_relation'])) {
 
         if (count($final_result) > 0) {
             foreach ($final_result as $item) {
-                if ($item['pattern']) {
-?>
+                if ($item['pattern']) { ?>
                     <div class="w-full flex justify-between items-center shadow-md hover:shadow-lg 
                         rounded-md px-4 py-3 mb-2 border-1 border-gray-300" id="search-<?php echo  $item['id'] ?>">
                         <p class=' text-sm font-semibold text-gray-600'><?php echo $item['partNumber'] ?></p>
@@ -85,7 +84,6 @@ if (isset($_POST['store_relation'])) {
     $cars = json_decode($_POST['cars']);
     $status = $_POST['status'];
     $description = $_POST['description'];
-    echo $description;
     $mode = $_POST['mode'];
     $pattern_id = $_POST['pattern_id'];
     $selected_goods = json_decode($_POST['selected_goods']);
@@ -95,7 +93,8 @@ if (isset($_POST['store_relation'])) {
         $selected_index = extract_id($selected_goods);
 
         $selectedCars = $cars;
-        $created_at = date('Y-m-d H:i:s');
+        date_default_timezone_set("Asia/Tehran");
+        $created_at = date("Y-m-d H:i:s");
         // create the pattern record
         $pattern_sql = "INSERT INTO patterns (name, price, serial, status_id, created_at, description)
             VALUES ('" . $relation_name . "', '" . $price . "', '" . $serial . "', '" . $status . "', '" . $created_at . "','" . $description . "')";
@@ -152,7 +151,8 @@ if (isset($_POST['store_relation'])) {
             $selectedCars =  $cars;
             $carsToAdd = toBeAdded($current_cars, $selectedCars);
             $carsToDelete = toBeDeleted($current_cars, $selectedCars);
-            $created_at = $created_at = date('Y-m-d H:i:s');
+            date_default_timezone_set("Asia/Tehran");
+            $created_at = date("Y-m-d H:i:s");
 
             $update_pattern_sql = "UPDATE patterns SET name= '" . $relation_name . "', price = '" . $price . "',
                 serial = '" . $serial . "' , status_id =  '" . $status . "', created_at = '" . $created_at . "', description = '" . $description . "'   WHERE id = '$pattern_id'";
