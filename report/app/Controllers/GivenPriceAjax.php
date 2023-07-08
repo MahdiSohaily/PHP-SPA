@@ -18,13 +18,16 @@ if (isset($_POST['store_price'])) {
 
     if ($givenPrice !== null) {
         foreach ($givenPrice as $price) {
-            if ($price['price'] !== null) { ?>
-                <tr class="min-w-full mb-1  <?php echo array_key_exists("ordered", $price) ? 'bg-red-400 hover:cursor-pointer' : 'bg-indigo-200' ?>" data-price='<?php echo $price['price'] ?>' onclick="price.ordered && $emit('setPrice', price.price)">
-
+            if ($price['price'] !== null) {
+                if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
+                    <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
+                    <?php } else { ?>
+                    <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
+                    <?php  } ?>
                     <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                         <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                     </td>
-                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                         <?php if (array_key_exists("ordered", $price)) {
                             echo 'قیمت دستوری';
                         } else {
@@ -32,7 +35,7 @@ if (isset($_POST['store_price'])) {
                         }
                         ?>
                     </td>
-                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) && 'text-white' ? 'text-white' : '' ?>">
+                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
                         <?php if (!array_key_exists("ordered", $price)) {
                         ?>
                             <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
@@ -40,63 +43,64 @@ if (isset($_POST['store_price'])) {
                         }
                         ?>
                     </td>
-                </tr>
-                <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
-                    <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
-                        <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
-                            <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
-                            <?php
-                            $create = date($price['created_at']);
+                    </tr>
+                    <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
+                        <td></td>
+                        <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="2" scope="col">
+                            <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
+                                <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
+                                <?php
+                                $create = date($price['created_at']);
 
 
-                            $now = new DateTime(); // current date time
-                            $date_time = new DateTime($create); // date time from string
-                            $interval = $now->diff($date_time); // difference between two date times
-                            $days = $interval->format('%a'); // difference in days
-                            $hours = $interval->format('%h'); // difference in hours
-                            $minutes = $interval->format('%i'); // difference in minutes
-                            $seconds = $interval->format('%s'); // difference in seconds
+                                $now = new DateTime(); // current date time
+                                $date_time = new DateTime($create); // date time from string
+                                $interval = $now->diff($date_time); // difference between two date times
+                                $days = $interval->format('%a'); // difference in days
+                                $hours = $interval->format('%h'); // difference in hours
+                                $minutes = $interval->format('%i'); // difference in minutes
+                                $seconds = $interval->format('%s'); // difference in seconds
 
-                            $text = '';
+                                $text = '';
 
-                            if ($days) {
-                                $text .= " $days روز و ";
-                            }
+                                if ($days) {
+                                    $text .= " $days روز و ";
+                                }
 
-                            if ($hours) {
-                                $text .= "$hours ساعت ";
-                            }
+                                if ($hours) {
+                                    $text .= "$hours ساعت ";
+                                }
 
-                            if ($minutes) {
-                                $text .= "$minutes دقیقه ";
-                            }
+                                if ($minutes) {
+                                    $text .= "$minutes دقیقه ";
+                                }
 
-                            if ($seconds) {
-                                $text .= "$seconds ثانیه ";
-                            }
+                                if ($seconds) {
+                                    $text .= "$seconds ثانیه ";
+                                }
 
-                            echo "$text قبل";
-                            ?>
-                        </div>
-                    </td>
-                </tr>
+                                echo "$text قبل";
+                                ?>
+                            </div>
+                        </td>
+                    </tr>
 
-            <?php } else { ?>
-                <tr class="min-w-full mb-4 border-b-2 border-white">
-                    <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                        !! موردی برای نمایش وجود ندارد
-                    </td>
-                </tr>
-        <?php }
+                <?php } else { ?>
+                    <tr class="min-w-full mb-4 border-b-2 border-white">
+                        <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
+                            !! موردی برای نمایش وجود ندارد
+                        </td>
+                    </tr>
+            <?php }
         } ?>
-    <?php } else { ?>
-        <tr class="min-w-full mb-4 border-b-2 border-white">
-            <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                !! موردی برای نمایش وجود ندارد
-            </td>
-        </tr>
-    <?php } ?>
-<?php
+        <?php } else { ?>
+            <tr class="min-w-full mb-4 border-b-2 border-white">
+                <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
+                    !! موردی برای نمایش وجود ندارد
+                </td>
+            </tr>
+        <?php } ?>
+    <?php
 
 }
 function isInRelation($conn, $id)
@@ -128,7 +132,7 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.family ,users.id as userID, prices.created_at
+    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.id AS customerID, customer.family ,users.id as userID, prices.created_at
     FROM ((prices 
     INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
     INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
