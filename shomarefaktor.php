@@ -148,6 +148,7 @@ if (!empty($_GET['date'])) {
 
             ?>
         </div>
+
         <div class="">
             <p class="today-faktor-plus">+</p>
             <?php
@@ -157,27 +158,27 @@ if (!empty($_GET['date'])) {
                 $n = 1;
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
-                    <div class="ltr flex justify-between">
+                    <div class="ranking">
                         <img src="../userimg/<?php echo $row['user']; ?>.jpg" />
                         <?php if ($n == 1) {
                         ?>
-                            <i class="fas fa-star gold-star"></i>
+                            <i class="fas fa-star"></i>
                         <?php
                         }
                         $n = $n + 1; ?>
                         <?php if ($n == 2) {
                         ?>
-                            <i class="fas fa-star silver-star"></i>
+                            <i class="fas fa-star"></i>
                         <?php
                         }
                         $n = $n + 1; ?>
                         <?php if ($n == 3) {
                         ?>
-                            <i class="fas fa-thumbs-up shast-star"></i>
+                            <i class="fas fa-thumbs-up"></i>
                         <?php
                         }
                         $n = $n + 1; ?>
-                        <span><?php echo $row['count_shomare']; ?></span>
+                        <span class="counter"><?php echo $row['count_shomare']; ?></span>
                     </div>
             <?php
                 }

@@ -28,7 +28,8 @@ $title = '';
             break;
         case 'shomarefaktor.php':
             $title = "شماره فاکتور";
-            echo "<link rel='stylesheet' href='./css/factor/factorStyles.css' type='text/css' media='all' />";
+            $rand = rand();
+            echo "<link rel='stylesheet' href='./css/factor/factorStyles.css?v=$rand' type='text/css' media='all' />";
             break;
         case 'main.php':
             $title = "اطلاعات مشتری";
@@ -253,7 +254,7 @@ $title = '';
             </script>
             <!-- Page Content -->
             <main class="pt-12">
-                <div class="flex justify-between bg-gray-200 fixed w-full shadow-lg" style="top: 0;">
+                <div class="flex justify-between bg-gray-200 fixed w-full shadow-lg" style="top: 0; z-index:10000">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
                     <ul class="flex mr-20 py-3">
                         <li>

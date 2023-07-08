@@ -1,6 +1,7 @@
 @media print {
   .shomare-faktor-box,
-  .top-bar {
+  .top-bar,
+  nav {
     display: none;
   }
 
@@ -55,4 +56,28 @@
   .today-faktor-statistics {
     display: none;
   }
+}
+
+.ranking {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background: #44ad73;
+  border-radius: 30px;
+  box-shadow: 0px 1px 3px 0px #b9b9b9;
+}
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #18894a;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #74d9a1;
+  width: 45px;
+  height: 45px;
+  font-size: 19px;
 }
