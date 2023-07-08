@@ -251,8 +251,8 @@ $title = '';
                 };
             </script>
             <!-- Page Content -->
-            <main>
-                <div class="flex justify-between">
+            <main class="pt-12">
+                <div class="flex justify-between bg-gray-200 fixed w-full" style="top: 0;">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
                     <ul class="flex mr-20 py-3">
                         <li>
