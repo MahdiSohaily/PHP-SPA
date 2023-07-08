@@ -71,7 +71,7 @@
                          <textarea name="des"><?php echo !empty($des) ? $des : '' ?></textarea>
                      </div>
                      <input name="isold" id="isold" type="hidden" value="<?php echo ($isold) ?>">
-                     <div class="col-span-3 bg-cyan-200	p-3">
+                     <div class="col-span-3 bg-gray-200	p-3">
                          <p> درج اطلاعات استعلام</p>
                          <textarea class="" name="callinfo"></textarea>
                          <div class="callinfobox-option">
