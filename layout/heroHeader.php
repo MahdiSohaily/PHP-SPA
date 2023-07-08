@@ -28,6 +28,7 @@ $title = '';
             break;
         case 'shomarefaktor.php':
             $title = "شماره فاکتور";
+            echo "<link rel='stylesheet' href='./css/factor/factorStyles.css' type='text/css' media='all' />";
             break;
         case 'main.php':
             $title = "اطلاعات مشتری";
