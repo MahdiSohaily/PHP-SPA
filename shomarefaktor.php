@@ -162,19 +162,19 @@ if (!empty($_GET['date'])) {
                         <img src="../userimg/<?php echo $row['user']; ?>.jpg" />
                         <?php if ($n == 1) {
                         ?>
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star golden"></i>
                         <?php
                         }
                         $n = $n + 1; ?>
                         <?php if ($n == 2) {
                         ?>
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star silver"></i>
                         <?php
                         }
                         $n = $n + 1; ?>
                         <?php if ($n == 3) {
                         ?>
-                            <i class="fas fa-thumbs-up"></i>
+                            <i class="fas fa-thumbs-up lucky"></i>
                         <?php
                         }
                         $n = $n + 1; ?>
