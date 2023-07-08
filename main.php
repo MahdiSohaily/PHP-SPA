@@ -30,7 +30,7 @@
     ?>
 
  <div class="customer_info px-5">
-     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-2 lg:p-2 overflow-auto">
+     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-6 lg:p-2 overflow-auto">
          <div class="col-span-3">
              <h2 class="title text-lg">مشخصات مشتری</h2>
              <form class="save-contact form" action="php/save.php" method="get" autocomplete="off">
@@ -98,8 +98,8 @@
              </form>
          </div>
          <!-- The main bloack for the search codes for giving price and displaying the already given prices to the specidied client -->
-         <div class="">
-             <h2 class="title text-lg "> کد های مد نظر برای جستجو
+         <div class="bg-gray-200">
+             <h2 class="title text-lg bg-white"> کد های مد نظر برای جستجو
              </h2>
              <form method="post" target="_blank" class="" action="./report/showPriceReports.php">
                  <?php if (isset($id)) { ?>
