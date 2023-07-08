@@ -2419,13 +2419,13 @@ button {
     flex-direction: row !important;
   }
   #child_one {
-    width: 40%;
+    width: 35%;
   }
   #child_two {
     width: 35%;
   }
   #child_three {
-    width: 25%;
+    width: 30%;
   }
 }
 
