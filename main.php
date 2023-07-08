@@ -118,12 +118,6 @@
      </div>
  </div>
 
-
-
-
-
-
-
  <!-- WRITTEN BY MAHDI REZAEI -->
  <script src="./report/public/js/index.js"></script>
  <?php
@@ -356,31 +350,7 @@
 
  <!-- THE END ( WRITTEN BY MAHDI REZAEI) -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  <div id="mySizeChartModal" class="ebcf_modal">
-
      <div class="ebcf_modal-content">
          <span class="ebcf_close">&times;</span>
          <div class="message_container">
@@ -523,46 +493,21 @@
 &type=phone_number&app_absent=0">ارسال واتساپ</a>
 
      <form class="cartable-save-form " action="php/cartable-save.php" method="get" autocomplete="off">
-
-
-
-
-
-
-
-
          <div class="cartable-form-2 qmain">
              <div class="qtagselect isw360">
                  <select class="qtagselect__select" name="label[]" id="label" multiple>
 
-
                      <?php taglabellist() ?>
 
                  </select>
-
-
-
-
-
                  <script>
                      <?php
-
-
-
                         $myString =     substr($label, 0, -1);
-
-
                         $myArray = explode(',', $myString);
-
-
-
-
                         foreach ($myArray as $ttt) {
                             $ttt = $ttt - 1;
                             echo "$('#label option:eq($ttt)').attr('selected', 'selected');";
                         }
-
-
                         ?>
                  </script>
 
@@ -571,47 +516,22 @@
          </div>
          <div class="cartable-form-3 qmain2">
              <input name="phone" type="text" value="<?php echo $phone ?>" hidden>
-
-
-
-
              <div class="quserselect isw360">
                  <select class="quserselect__select" name="userselector[]" id="userselector" multiple>
-
-
                      <?php userlabellist() ?>
-
                  </select>
-
-
-
 
                  <script>
                      <?php
 
-
-
                         $myString =     substr($userselect, 0, -1);
-
-
                         $myArray = explode(',', $myString);
-
-
-
-
                         foreach ($myArray as $ttt) {
                             $ttt = $ttt - 1;
                             echo "$('#userselector option:eq($ttt)').attr('selected', 'selected');";
                         }
-
-
                         ?>
                  </script>
-
-
-
-
-
              </div>
 
 
@@ -647,13 +567,9 @@
  </div>
 
 
-
-
- <!-- START MODIFIED SECTION (2023/07/03) -->
  <div class="clearfix"></div>
 
  <div class="actionsHistory">
-     <!-- START PRE EXISTING CODE BY COMPANY -->
      <div id="child_one">
          <h2 class="title">استعلام های قبلی</h2>
 
@@ -664,13 +580,8 @@
                      <th>اطلاعات</th>
                      <th>کاربر ثبت کننده</th>
                      <th>زمان</th>
-                     <th>تاریخ</th>
-
                  </tr>
-
-
                  <?php
-
                     $sql2 = "SELECT * FROM record WHERE phone LIKE '" . $phone . "%' ORDER BY  time DESC LIMIT 300";
                     $result2 = mysqli_query($con, $sql2);
                     if (mysqli_num_rows($result2) > 0) {
@@ -680,56 +591,42 @@
                             $user = $row2['user'];
                     ?>
                          <tr>
-
-
                              <td class="record-info"><?php echo nl2br($callinfo) ?></td>
-                             <td class="record-user"><?php
+                             <td class="record-user">
+                                 <?php
+
+                                    $con2 = mysqli_connect('localhost', 'root', '', 'yadakshop1401');
+
+                                    if (!$con2) {
+                                        die('Could not connect: ' . mysqli_error($con2));
+                                    }
+                                    mysqli_set_charset($con2, "utf8");
+                                    $sql3 = "SELECT * FROM users WHERE id=$user";
+                                    $result3 = mysqli_query($con2, $sql3);
+                                    if (mysqli_num_rows($result3) > 0) {
+                                        while ($row3 = mysqli_fetch_assoc($result3)) {
+                                            $id = $row3['id'];
+                                            $name = $row3['name'];
+                                            $family = $row3['family'];
+                                            echo "<img title='$name $family' class='userImage' src='../userimg/$id.jpg' alt='userimage'>";
+                                        }
+                                    }
+
+
+                                    date_default_timezone_set('Asia/Tehran');
+
+                                    $datetime1 = new DateTime();
+                                    $datetime2 = new DateTime($time);
+                                    $interval = $datetime1->diff($datetime2);
 
 
 
 
 
-                                                        $con2 = mysqli_connect('localhost', 'root', '', 'yadakshop1401');
-
-                                                        if (!$con2) {
-                                                            die('Could not connect: ' . mysqli_error($con2));
-                                                        }
-                                                        mysqli_set_charset($con2, "utf8");
-                                                        $sql3 = "SELECT * FROM users WHERE id=$user";
-                                                        $result3 = mysqli_query($con2, $sql3);
-                                                        if (mysqli_num_rows($result3) > 0) {
-                                                            while ($row3 = mysqli_fetch_assoc($result3)) {
-                                                                $id = $row3['id'];
-                                                                $name = $row3['name'];
-                                                                $family = $row3['family'];
-                                                                echo "<img title='$name $family' class='userImage' src='../userimg/$id.jpg' alt='userimage'>";
-                                                            }
-                                                        }
-
-
-                                                        date_default_timezone_set('Asia/Tehran');
-
-                                                        $datetime1 = new DateTime();
-                                                        $datetime2 = new DateTime($time);
-                                                        $interval = $datetime1->diff($datetime2);
-
-
-
-
-
-                                                        ?></td>
+                                    ?></td>
 
                              <td class="record-time"><?php echo format_interval($interval); ?></td>
-                             <td class="record-date"><?php echo $time ?></td>
-
-
                          </tr>
-
-
-
-
-
-
                  <?php
 
                         }
@@ -749,24 +646,13 @@
      </div>
      <div id="child_two">
          <h2 class="title">تماس های قبلی</h2>
-
          <div class="box-keeper">
-
-
-
              <table class="customer-list">
                  <tr>
-
                      <th>پاسخ دهنده</th>
                      <th>زمان</th>
-                     <th>تاریخ</th>
-
                  </tr>
-
-
                  <?php
-
-
                     $pretime = "";
 
                     $sql30 = "SELECT * FROM incoming WHERE phone LIKE '" . $phone . "%' ORDER BY  time DESC  LIMIT 200";
@@ -800,53 +686,27 @@
 
                     ?>
                          <tr>
-
-
-                             <td class="record-info"><?php
-
-                                                        if ($status == 0) {
-                                                            echo ("<div class='answer-x'>X</div>");
-                                                        } else {
-                                                            echo (getnamebyinternal($user) . "<div class='answer-tik'>&#10004;</div><div class='call-duration'>" . format_calling_time($interval2) . "</div>");
-                                                        }
-
-
-                                                        ?></td>
-
-
+                             <td class="record-info">
+                                 <?php
+                                    if ($status == 0) {
+                                        echo ("<div class='answer-x'>X</div>");
+                                    } else {
+                                        echo (getnamebyinternal($user) . "<div class='answer-tik'>&#10004;</div><div class='call-duration'>" . format_calling_time($interval2) . "</div>");
+                                    }
+                                    ?>
+                             </td>
                              <td class="record-time"><?php echo format_interval($interval1); ?></td>
-                             <td class="record-date"><?php echo $time ?></td>
-
-
                          </tr>
-
-
-
-
-
-
                  <?php
-
                         }
                     } // end while
-
-
                     else {
                         echo '<td colspan="4">هیچ اطلاعاتی موجود نیست</td>';
                     }
-
                     ?>
-
-
-
              </table>
-
-
          </div>
      </div>
-     <!-- END PRE EXISTING CODE BY COMPANY -->
-
-     <!-- START NEWLY ADDED SECTION BY MAHDI REZAEI -->
      <div id="child_three">
          <h2 class="title">قیمت های داده شده</h2>
          <?php if (isset($id)) { ?>
@@ -928,20 +788,8 @@
              </div>
          <?php } ?>
      </div>
-     <!-- END NEWLY ADDED SECTION BY MAHDI REZAEI -->
  </div>
-
- <!-- END MODIFIED SECTION (2023/07/03) -->
-
-
-
-
-
-
  <div class="space"></div>
-
-
-
  <script>
      $('.qtagselect__select').tagselect();
      $('.quserselect__select').userselect();
