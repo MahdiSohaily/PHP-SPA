@@ -30,67 +30,91 @@
     ?>
 
  <div class="customer_info px-5">
-     <div>
-         <h2 class="title text-lg">مشخصات مشتری</h2>
-         <form class="save-contact form" action="php/save.php" method="get" autocomplete="off">
-             <div class="">
-                 <div>
-                     <p>
-                         شماره تماس
-                     </p>
-                     <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" readonly>
-                 </div>
-                 <div>
-                     <p>نام</p> <input id="name" name="name" type="text" value="<?php echo !empty($name) &&  $name;  ?>">
-                 </div>
-                 <div>
-                     <p>نام خانوادگی</p>
-                     <input id="last_name" name="family" type="text" value="<?php echo !empty($family) && $family; ?>">
-                 </div>
-                 <div>
-                     <p>شماره شاسی</p>
+     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-2 lg:p-2 overflow-auto">
+         <div class="col-span-3">
+             <h2 class="title text-lg">مشخصات مشتری</h2>
+             <form class="save-contact form" action="php/save.php" method="get" autocomplete="off">
+                 <div class="grid grid-cols-1 md:grid-cols-5  gap-6">
+                     <div class="bg-gray-200 p-3">
+                         <p>
+                             شماره تماس
+                         </p>
+                         <input id="phone" name="phone" type="text" value="<?php echo $phone ?>" readonly>
+                     </div>
+                     <div class="bg-gray-200 p-3">
+                         <p>نام</p> <input id="name" name="name" type="text" value="<?php echo  !empty($name) ?  $name :  '';  ?>">
+                     </div>
+                     <div class="bg-gray-200 p-3">
+                         <p>نام خانوادگی</p>
+                         <input id="last_name" name="family" type="text" value="<?php echo !empty($family) ? $family : ''; ?>">
+                     </div>
+                     <div class="bg-gray-200 p-3">
+                         <p>شماره شاسی</p>
 
 
-                     <input name="vin" type="text" value="<?php echo !empty($vin) && $vin ?>">
-                 </div>
-                 <div>
-                     <p>ماشین</p>
-                     <input name="car" type="text" value="<?php echo !empty($car) && $car ?>">
-                 </div>
-                 <div style="display: none;">
-                     <p>نوع</p>
-                     <input name="kind" type="text" value="null">
-                 </div>
-                 <div>
-                     <p>آدرس</p>
-                     <textarea name="address"><?php echo !empty($address) && $address ?></textarea>
-                 </div>
-                 <div>
-                     <p>توضیحات مشتری</p>
-                     <textarea name="des"><?php echo !empty($des) && $des ?></textarea>
-                 </div>
-                 <input name="isold" id="isold" type="hidden" value="<?php echo ($isold) ?>">
-                 <div class="callinfobox">
-                     <p> درج اطلاعات استعلام</p>
-                     <textarea class="callinfo" name="callinfo"></textarea>
-                     <div class="callinfobox-option">
-                         <div>درخواست بارنامه</div>
-                         <div>درخواست شماره کارت</div>
-                         <div>پیگیری پیک</div>
-                         <div>پیگیری روند فاکتور</div>
-                         <div>درخواست ثبت فاکتور</div>
-                         <div>ارجاع به واتساپ</div>
-                         <div>درخواست شماره واتساپ</div>
-                         <div>اطلاعات واریز وجه</div>
+                         <input name="vin" type="text" value="<?php echo !empty($vin) ? $vin : '' ?>">
+                     </div>
+                     <div class="bg-gray-200 p-3">
+                         <p>ماشین</p>
+                         <input name="car" type="text" value="<?php echo !empty($car) ? $car : '' ?>">
+                     </div>
+                     <div class="bg-gray-200 p-3" style="display: none;">
+                         <p>نوع</p>
+                         <input name="kind" type="text" value="null">
+                     </div>
+                     <div class="bg-gray-200 p-3">
+                         <p>آدرس</p>
+                         <textarea name="address"><?php echo !empty($address) ? $address : '' ?></textarea>
+                     </div>
+                     <div class="bg-gray-200 p-3">
+                         <p>توضیحات مشتری</p>
+                         <textarea name="des"><?php echo !empty($des) ? $des : '' ?></textarea>
+                     </div>
+                     <input name="isold" id="isold" type="hidden" value="<?php echo ($isold) ?>">
+                     <div class="col-span-3 bg-cyan-200	p-3">
+                         <p> درج اطلاعات استعلام</p>
+                         <textarea class="" name="callinfo"></textarea>
+                         <div class="callinfobox-option">
+                             <div>درخواست بارنامه</div>
+                             <div>درخواست شماره کارت</div>
+                             <div>پیگیری پیک</div>
+                             <div>پیگیری روند فاکتور</div>
+                             <div>درخواست ثبت فاکتور</div>
+                             <div>ارجاع به واتساپ</div>
+                             <div>درخواست شماره واتساپ</div>
+                             <div>اطلاعات واریز وجه</div>
+                         </div>
                      </div>
                  </div>
-             </div>
-             <div class="bottom-bar">
-                 <input class="customer-info-save" type="submit" value="ذخیره" id="sabt">
-                 <div class="error">
+                 <div class="bottom-bar">
+                     <input class="customer-info-save" type="submit" value="ذخیره" id="sabt">
+                     <div class="error">
+                     </div>
                  </div>
-             </div>
-         </form>
+             </form>
+         </div>
+         <!-- The main bloack for the search codes for giving price and displaying the already given prices to the specidied client -->
+         <div class="">
+             <form method="post" target="_blank" class="" action="./report/showPriceReports.php">
+                 <?php if (isset($id)) { ?>
+                     <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
+                     <input type="text" id="givenUser" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
+                     <input hidden name="customer" required id="givenCustomer" type="number" value="<?php echo $id ?>" />
+                     <div>
+                         <p class="_label">
+                             کد های مد نظر برای جستجو
+                         </p>
+                         <textarea id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید"></textarea>
+
+                     </div>
+                     <button type="submit" class="give-search-button"> جستجو</button>
+                     <!-- <button type="button" class="give-search-button" onclick="SearchGivenPrice()"> بررسی</button> -->
+                 <?php } else {
+                        echo '<div class="phone-status no-save">شماره <span>' . $phone . '</span> در سیستم ثبت نمی باشد .</div>';
+                        $isold = 0;
+                    } ?>
+             </form>
+         </div>
      </div>
  </div>
 
@@ -129,28 +153,7 @@
  <!-- Empty div with clear fix purpose to floating style which have been applied early -->
  <div class="clearfix"></div>
 
- <!-- The main bloack for the search codes for giving price and displaying the already given prices to the specidied client -->
- <div class="givenPriceContainer">
-     <form method="post" target="_blank" class="given_price_form" action="./report/showPriceReports.php">
-         <?php if (isset($id)) { ?>
-             <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
-             <input type="text" id="givenUser" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
-             <input hidden name="customer" required id="givenCustomer" type="number" value="<?php echo $id ?>" />
-             <div>
-                 <p class="given_price_form_label">
-                     کد های مد نظر برای جستجو
-                 </p>
-                 <textarea id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید"></textarea>
 
-             </div>
-             <button type="submit" class="give-search-button"> جستجو</button>
-             <!-- <button type="button" class="give-search-button" onclick="SearchGivenPrice()"> بررسی</button> -->
-         <?php } else {
-                echo '<div class="phone-status no-save">شماره <span>' . $phone . '</span> در سیستم ثبت نمی باشد .</div>';
-                $isold = 0;
-            } ?>
-     </form>
- </div>
  <!-- END OF THE MAIN BLOCK FOR CODE SEARCHING -->
 
 
