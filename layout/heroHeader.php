@@ -233,10 +233,6 @@ $title = '';
                         <i class="px-2 material-icons hover:cursor-pointer">sync</i>
                         تعریف رابطه اجناس
                     </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./report/givePrice.php">
-                        <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
-                        قیمت دهی دستوری
-                    </a>
                 </ul>
                 <!-- Authentication -->
                 <a class="rtl cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../1402/logout.php">
@@ -284,6 +280,12 @@ $title = '';
                         <li>
                             <a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="shomarefaktor.php">
                                 شماره فاکتور <i class="fas fa-feather-alt"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="./report/givePrice.php">
+                                قیمت دهی دستوری
+                                <i class="fas fa-feather-alt"></i>
                             </a>
                         </li>
                         <li>
