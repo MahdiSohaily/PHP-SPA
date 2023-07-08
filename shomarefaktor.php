@@ -127,27 +127,18 @@ if (!empty($_GET['date'])) {
 
 
     <div class="today-faktor-statistics">
-
         <div class="today-faktor">
-
             <?php
-
             $sql = "SELECT COUNT(*) as count_shomare FROM shomarefaktor WHERE time >= CURDATE()";
             $result = mysqli_query(dbconnect(), $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-
             ?>
-
                     <div>
                         <p class="today-faktor-total">تعداد کل</p>
-
                         <span>
                             <?php
-
                             echo $row['count_shomare'];
-
-
                             ?>
                         </span>
                     </div>
@@ -155,45 +146,38 @@ if (!empty($_GET['date'])) {
                 }
             }
 
-
-
-
-
             ?>
         </div>
-        <div class="today-faktor">
-
-
+        <div class="">
             <p class="today-faktor-plus">+</p>
-
-
             <?php
-
-
-
-
             $sql = "SELECT COUNT(shomare) as count_shomare,user FROM shomarefaktor WHERE time >= CURDATE() GROUP BY user ORDER BY count_shomare DESC ";
             $result = mysqli_query(dbconnect(), $sql);
             if (mysqli_num_rows($result) > 0) {
                 $n = 1;
                 while ($row = mysqli_fetch_assoc($result)) {
-
             ?>
-                    <div>
-                        <span><?php echo $row['count_shomare']; ?></span>
+                    <div class="ltr flex justify-between">
                         <img src="../userimg/<?php echo $row['user']; ?>.jpg" />
                         <?php if ($n == 1) {
-                            echo '<i class="fas fa-star gold-star"></i>';
+                        ?>
+                            <i class="fas fa-star gold-star"></i>
+                        <?php
                         }
                         $n = $n + 1; ?>
                         <?php if ($n == 2) {
-                            echo '<i class="fas fa-star silver-star"></i>';
+                        ?>
+                            <i class="fas fa-star silver-star"></i>
+                        <?php
                         }
                         $n = $n + 1; ?>
                         <?php if ($n == 3) {
-                            echo '<i class="fas fa-thumbs-up shast-star"></i>';
+                        ?>
+                            <i class="fas fa-thumbs-up shast-star"></i>
+                        <?php
                         }
                         $n = $n + 1; ?>
+                        <span><?php echo $row['count_shomare']; ?></span>
                     </div>
             <?php
                 }
