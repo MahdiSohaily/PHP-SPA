@@ -312,7 +312,7 @@ $title = '';
                         const params = new URLSearchParams();
                         params.append('check_notification', 'check_notification');
                         axios
-                            .post("./app/Controllers/notificationAjaxController.php", params)
+                            .post("./report/app/Controllers/notificationAjaxController.php", params)
                             .then(function(response) {
                                 console.log(response.data);
                                 if (response.data > 0) {
