@@ -104,7 +104,7 @@
                      <input hidden name="customer" required id="givenCustomer" type="number" value="<?php echo $id ?>" />
                      <div class="bg-gray-200  p-3">
 
-                         <textarea class="border p-2 w-full" id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مود نظر خود را در خط های مجزا قرار دهید"></textarea>
+                         <textarea class="border p-2 w-full" id="givenCode" rows="7" name="code" required placeholder="لطفا کد های مورد نظر خود را در خط های مجزا قرار دهید"></textarea>
                          <button type="submit" class="give-search-button"> جستجو</button>
                      </div>
 
