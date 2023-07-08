@@ -598,21 +598,43 @@
                                             echo "<img title='$name $family' class='userImage' src='../userimg/$id.jpg' alt='userimage'>";
                                         }
                                     }
+                                    date_default_timezone_set("Asia/Tehran");
+                                    $create = date($price['created_at']);
+
+                                    $now = new DateTime(); // current date time
+                                    $date_time = new DateTime($time); // date time from string
+                                    $interval = $now->diff($date_time); // difference between two date times
+                                    $days = $interval->format('%a'); // difference in days
+                                    $hours = $interval->format('%h'); // difference in hours
+                                    $minutes = $interval->format('%i'); // difference in minutes
+                                    $seconds = $interval->format('%s'); // difference in seconds
+
+                                    $text = '';
+
+                                    if ($days) {
+                                        $text .= " $days روز و ";
+                                    }
+
+                                    if ($hours) {
+                                        $text .= "$hours ساعت ";
+                                    }
+
+                                    if (!$days && $minutes) {
+                                        $text .= "$minutes دقیقه ";
+                                    }
+
+                                    if (!$days && !$hours && $seconds) {
+                                        $text .= "$seconds ثانیه ";
+                                    }
+
+                                    echo "$text قبل";
+                                    ?>
 
 
-                                    date_default_timezone_set('Asia/Tehran');
 
-                                    $datetime1 = new DateTime();
-                                    $datetime2 = new DateTime($time);
-                                    $interval = $datetime1->diff($datetime2);
+                                 ?></td>
 
-
-
-
-
-                                    ?></td>
-
-                             <td class="record-time"><?php echo format_interval($interval); ?></td>
+                             <td class="tiny-text record-time"><?php echo format_interval($interval); ?></td>
                          </tr>
                  <?php
 
