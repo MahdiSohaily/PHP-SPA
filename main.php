@@ -566,7 +566,6 @@
      </form>
  </div>
 
-
  <div class="clearfix"></div>
 
  <div class="actionsHistory">
