@@ -1,99 +1,142 @@
-<?php
-require_once './config/config.php';
-require_once './database/connect.php';
-require_once('./views/Layouts/header.php');
-$sql = "SELECT * FROM rates ORDER BY amount ASC";
-$rates = $conn->query($sql);
-?>
-<div class="py-12">
-    <div class="max-w-full mx-auto sm:px-6 lg:px-8">
-        <div>
-            <div class="p-6 lg:p-8 flex justify-center">
-                <input type="text" name="serial" id="serial" class="rounded-md p-3 text-center w-96 border-2 bg-gray-100" min="0" max="30" onkeyup="search(this.value)" placeholder="... کد فنی قطعه را وارد کنید" />
-            </div>
-            <div class="flex justify-center items-center pb-6">
-                <label for="mode" class="px-2">جستجوی پیشرفته</label>
-                <input type="checkbox" name="super" id="mode" class="rounded-md " />
-            </div>
-            <div class="bg-gray-100 bg-opacity-25">
-                <div class="max-w-7xl overflow-x-auto mx-auto">
-                    <table class="min-w-full text-left text-sm font-light">
-                        <thead class="font-medium dark:border-neutral-500">
-                            <tr class="bg-green-700">
-                                <th scope="col" class="px-3 py-3 bg-black text-white w-52 text-center">
-                                    شماره فنی
-                                </th>
-                                <th scope="col" class="px-3 py-3 text-white w-20">
-                                    دلار پایه
-                                </th>
-                                <th scope="col" class="px-3 py-3 text-white border-black border-r-2">
-                                    +10%
-                                </th>
-                                <?php
-                                if ($rates->num_rows > 0) {
-                                    // output data of each row
-                                    while ($rate = $rates->fetch_assoc()) {
-                                        echo "<th class='" . $rate['status'] . " px-3 py-3 text-white text-center ' scope='col'>" . $rate['amount'] . "</th>";
-                                    }
-                                }
-                                ?>
-                                <th scope="col" class="px-3 py-3 text-white w-32 text-center">
-                                    عملیات
-                                </th>
-                                <th scope="col" class="px-3 py-3 text-white">
-                                    وزن
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="results">
+ <?php require_once './layout/heroHeader.php'; ?>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    let result = null;
+ <div class="box user-table">
 
-    const search = (val) => {
-        let pattern = val;
-        let superMode = 0;
-        const resultBox = document.getElementById("results");
+     <h2 class="title">لیست داخلی کاربران</h2>
+     <table class="customer-list user-inter-table">
+         <tr>
+             <th>کاربر</th>
+             <th>داخلی</th>
+             <th>آی پی</th>
+         </tr>
+         <?php
+            $sql = "SELECT * FROM users ORDER BY internal";
+            $result = mysqli_query(dbconnect2(), $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row['id'];
+                    $name = $row['name'];
+                    $family = $row['family'];
+                    $internal = $row['internal'];
+                    $ip = $row['ip'];
 
-        if (document.getElementById("mode").checked) {
-            superMode = 1;
+                    if (!$internal) {
+
+                        continue;
+                    }
+            ?>
+                 <tr>
+                     <td><?php echo $name ?> <?php echo $family ?><img class="user-img" src="../userimg/<?php echo $id ?>.jpg" /></td>
+                     <td class="user-table-internal"><span><?php echo $internal ?></span></td>
+                     <td class="user-table-ip"><span><?php echo $ip ?></span></td>
+                 </tr>
+         <?php
+
+                }
+            }
+
+            ?>
+     </table>
+ </div>
+
+
+ <div class="box user-table">
+     <h2 class="title">مدت زمان مکالمه</h2>
+     <?php
+        $datetime101 = new DateTime('2019-09-30 00:00:00');
+        $datetime102 = new DateTime('2019-09-30 00:00:00');
+        $datetime103 = new DateTime('2019-09-30 00:00:00');
+        $datetime104 = new DateTime('2019-09-30 00:00:00');
+        $datetime106 = new DateTime('2019-09-30 00:00:00');
+        $datetime107 = new DateTime('2019-09-30 00:00:00');
+        $datetimeMarjae = new DateTime('2019-09-30 00:00:00');
+
+        $sql = "SELECT * FROM incoming WHERE starttime IS NOT NULL AND time >= CURDATE() ";
+        $result = mysqli_query($con, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $user = $row['user'];
+                $phone = $row['phone'];
+                $starttime = $row['starttime'];
+                $endtime = $row['endtime'];
+                $xxx =   nishatimedef($starttime, $endtime);
+
+                if ($user == 101) {
+                    $datetime101->add($xxx);
+                }
+                if ($user == 102) {
+                    $datetime102->add($xxx);
+                }
+                if ($user == 103) {
+                    $datetime103->add($xxx);
+                }
+                if ($user == 104) {
+                    $datetime104->add($xxx);
+                }
+                if ($user == 106) {
+                    $datetime106->add($xxx);
+                }
+                if ($user == 107) {
+                    $datetime107->add($xxx);
+                }
+            }
         }
+        $total101 = $datetimeMarjae->diff($datetime101);
+        $total102 = $datetimeMarjae->diff($datetime102);
+        $total103 = $datetimeMarjae->diff($datetime103);
+        $total104 = $datetimeMarjae->diff($datetime104);
+        $total106 = $datetimeMarjae->diff($datetime106);
+        $total107 = $datetimeMarjae->diff($datetime107);
 
-        if (
-            (pattern.length > 4 && superMode == 1) ||
-            (pattern.length > 6 && superMode == 0)
-        ) {
-            pattern = pattern.replace(/\s/g, "");
-            pattern = pattern.replace(/-/g, "");
-            pattern = pattern.replace(/_/g, "");
 
-            resultBox.innerHTML = `<tr class=''>
-                <td colspan='14' class='py-10 text-center'> 
-                    <img class=' block w-10 mx-auto h-auto' src='./public/img/loading.png' alt='loading'>
-                    </td>
-            </tr>`;
-            var params = new URLSearchParams();
-            params.append('pattern', pattern);
-            params.append('superMode', superMode);
+        ?>
+     <table class="customer-list user-time-dur-table">
+         <tr>
+             <th>کاربر</th>
+             <th>مدت زمان مکالمه</th>
 
-            axios.post("./app/Controllers/SearchController.php", params)
-                .then(function(response) {
-                    resultBox.innerHTML = response.data;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        } else {
-            resultBox.innerHTML = "";
-        }
-    };
-</script>
-<?php
-require_once('./views/Layouts/footer.php');
+
+         </tr>
+
+         <tr>
+             <td> <img class="user-img" src="../userimg/<?php echo getidbyinternal(101) ?>.jpg" /></td>
+
+             <td><?php echo format_calling_time($total101) ?></td>
+
+         </tr>
+         <tr>
+             <td> <img class="user-img" src="../userimg/<?php echo getidbyinternal(102) ?>.jpg" /></td>
+
+             <td><?php echo format_calling_time($total102) ?></td>
+
+         </tr>
+         <tr>
+             <td> <img class="user-img" src="../userimg/<?php echo getidbyinternal(103) ?>.jpg" /></td>
+             <td><?php echo format_calling_time($total103) ?></td>
+
+         </tr>
+         <tr>
+             <td> <img class="user-img" src="../userimg/<?php echo getidbyinternal(104) ?>.jpg" /></td>
+             <td><?php echo format_calling_time($total104) ?></td>
+
+         </tr>
+         <tr>
+             <td> <img class="user-img" src="../userimg/<?php echo getidbyinternal(106) ?>.jpg" /></td>
+             <td><?php echo format_calling_time($total106) ?></td>
+
+         </tr>
+         <tr>
+             <td> <img class="user-img" src="../userimg/<?php echo getidbyinternal(107) ?>.jpg" /></td>
+             <td><?php echo format_calling_time($total107) ?></td>
+
+         </tr>
+
+     </table>
+
+
+
+ </div>
+
+ <?php
+
+    require_once './layout/heroFooter.php';
