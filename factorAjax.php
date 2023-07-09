@@ -12,9 +12,7 @@ if (isset($_POST['getFactor'])) {
     $end = date_format($startDate, "Y-m-d h:i:s");
 
     // $sql = "SELECT * FROM shomarefaktor WHERE time < '$start' AND time >= '$end' ORDER BY shomare DESC";
-    $sql = "SELECT * FROM shomarefaktor WHERE time < '$start' AND time >= '2023-05-09 12:00:00' ORDER BY shomare DESC";
-
-    echo $sql;
+    $sql = "SELECT * FROM shomarefaktor WHERE time < '2023-05-10 12:00:00' AND time >= '2023-05-09 12:00:00' ORDER BY shomare DESC";
     $result = mysqli_query($con, $sql);
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
