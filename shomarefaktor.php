@@ -20,22 +20,7 @@ if (!empty($_GET['date'])) {
         <input data-gdate="<?php echo date('Y/m/d') ?>" value="<?php echo (jdate("Y/m/d", time(), "", "Asia/Tehran", "en")) ?>" type="text" name="invoice_time" id="invoice_time">
         <span id="span_invoice_time"></span>
     </form>
-    <script type="text/javascript">
-        $(function() {
-            $("#invoice_time, #span_invoice_time").persianDatepicker({
-                cellWidth: 50,
-                cellHeight: 20,
-                fontSize: 14,
-                formatDate: "YYYY/0M/0D"
 
-            });
-        });
-        const element = document.getElementById('invoice_time');
-
-        element.addEventListener('blur', () => {
-            const date = element.getAttribute('data-gdate');
-        })
-    </script>
 
     <form class="shomare-faktor-form" action="php/shomare-faktor-form-save.php" method="get" autocomplete="off">
 
@@ -114,7 +99,7 @@ if (!empty($_GET['date'])) {
             <th>کاربر</th>
             <th>ویرایش</th>
         </tr>
-        <tbody>
+        <tbody id="resultBox">
             <?php
             $sql = "SELECT * FROM shomarefaktor WHERE $date ORDER BY shomare DESC";
             $result = mysqli_query(dbconnect(), $sql);
@@ -155,6 +140,34 @@ if (!empty($_GET['date'])) {
         </p>
     </div>
 </div>
+<script type="text/javascript">
+    $(function() {
+        $("#invoice_time, #span_invoice_time").persianDatepicker({
+            cellWidth: 50,
+            cellHeight: 20,
+            fontSize: 14,
+            formatDate: "YYYY/0M/0D"
+
+        });
+    });
+    const element = document.getElementById('invoice_time');
+
+    element.addEventListener('blur', () => {
+        const date = element.getAttribute('data-gdate');
+        const resultBox = document.getElementById('resultBox');
+        var params = new URLSearchParams();
+        params.append('getFactor', 'getFactor');
+        params.append('date', date);
+
+        axios.post("./factorAjax.php", params)
+            .then(function(response) {
+                resultBox.innerHTML = response.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    })
+</script>
 
 
 
