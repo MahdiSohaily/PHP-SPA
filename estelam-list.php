@@ -64,5 +64,8 @@ require_once './layout/heroHeader.php';
                 }
             }
             ?>
-            <?php
-            require_once './layout/heroFooter.php';
+        </table>
+    </div>
+</div>
+<?php
+require_once './layout/heroFooter.php';

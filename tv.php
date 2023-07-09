@@ -1,5 +1,5 @@
  <?php
- require_once './layout/heroHeader.php';
+    require_once './layout/heroHeader.php';
     require_once './php/function.php';
     require_once './php/jdf.php';
     require_once './config/database.php';
@@ -118,7 +118,7 @@
                          <tbody>
                              <tr class="hover:bg-gray-200 hover:cursor-pointer">
                                  <td class="py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                 <td class="w-30"><span class="tiny-text">این شماره ذخیره نشده است.</span></td>
+                                 <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
                                  <td class="p-2">
                                      <?php
                                         $gphone = substr($phone, 1);
@@ -398,11 +398,67 @@
              </table>
          </div>
      </div>
- </div>
+     <div class="">
+         <h2 class="title">آخرین قیمت های گرفته شده از بازار</h2>
+         <div class="">
 
- <script>
-     setTimeout(function() {
-         window.location.reload();
-     }, 7000);
- </script>
+             <table class="border">
+                 <thead>
+                     <tr class="tiny-text bg-violet-800 text-white">
+                         <th class="p-2">کد فنی</th>
+                         <th class="p-2">فروشنده</th>
+                         <th class="p-2">قیمت</th>
+                         <th class="p-2">کاربر</th>
+                         <th class="p-2">زمان</th>
+                     </tr>
+                 </thead>
+                 <?php
+                    $sql2 = "SELECT * FROM estelam ORDER BY  time DESC LIMIT 250  ";
+                    $result2 = mysqli_query($con, $sql2);
+                    if (mysqli_num_rows($result2) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($result2)) {
 
+                            $code = $row2['codename'];
+                            $seller = $row2['seller'];
+                            $price = $row2['price'];
+                            $user = $row2['user'];
+                            $time = $row2['time'];
+                            $sql = "SELECT * FROM users WHERE id=$user";
+                            $result = mysqli_query(dbconnect2(), $sql);
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $id = $row['id'];
+                                    $name = $row['name'];
+                                    $family = $row['family'];
+                                    $sql3 = "SELECT * FROM seller WHERE id=$seller";
+                                    $result3 = mysqli_query(dbconnect2(), $sql3);
+                                    if (mysqli_num_rows($result3) > 0) {
+                                        while ($row3 = mysqli_fetch_assoc($result3)) {
+                                            $sellername = $row3['name'];
+                    ?>
+                                         <tbody>
+                                             <tr class="tiny-text">
+                                                 <td class="p-2"><?php echo $code ?></td>
+                                                 <td class="p-2"><?php echo $sellername ?></td>
+                                                 <td class="p-2"><?php echo $price ?></td>
+                                                 <td style="width: 50px;" class="tiny-text p-2"><img class="userImage mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
+                                                 <td class="p-2"><?php echo date('Y-m-d', strtotime($time)) ?></td>
+                                             </tr>
+                                         </tbody>
+                 <?php
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ?>
+             </table>
+         </div>
+     </div>
+
+     <script>
+         setTimeout(function() {
+             window.location.reload();
+         }, 7000);
+     </script>
