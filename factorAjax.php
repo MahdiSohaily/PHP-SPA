@@ -7,11 +7,20 @@ if (isset($_POST['getFactor'])) {
 
     $date = date_create($_POST['date']);
     $date->modify('+1 day');
+    $date->setTime(24, 0, 0);;
+    $startDate->setTime(1, 0, 0);
 
     $start = date_format($date, "Y-m-d h:i:s");
+
     $end = date_format($startDate, "Y-m-d h:i:s");
 
+    echo ($start);
+    echo "</br>";
+    echo ($end);
+
     $sql = "SELECT * FROM shomarefaktor WHERE time < '$start' AND time >= '$end' ORDER BY shomare DESC";
+
+    echo "<p style='direction=ltr'>$sql</p>";
     // $sql = "SELECT * FROM shomarefaktor WHERE time < '2023-05-10 12:00:00' AND time >= '2023-05-09 12:00:00' ORDER BY shomare DESC";
     $result = mysqli_query($con, $sql);
 

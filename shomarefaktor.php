@@ -172,7 +172,7 @@ if (!empty($_GET['date'])) {
             onShow: function() {},
             onHide: function() {},
             onSelect: function() {
-                const date = ($("#invoice_time").attr("data-jdate"));
+                const date = ($("#invoice_time").attr("data-gdate"));
 
                 console.log(date);
 
