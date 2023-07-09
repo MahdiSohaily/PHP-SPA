@@ -49,7 +49,8 @@ $title = '';
             break;
         case 'tv.php':
             $title = "تلویزیون";
-            echo "<link rel='stylesheet' href='./ss/tv.css?v=543' type='text/css' media='all' />";
+            $rand = rand();
+            echo "<link rel='stylesheet' href='./css/tv.css?v=$rand' type='text/css' media='all' />";
             break;
 
         default:

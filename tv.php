@@ -1,5 +1,8 @@
  <?php
-    require_once './layout/heroHeader.php';
+ require_once './layout/heroHeader.php';
+    require_once './php/function.php';
+    require_once './php/jdf.php';
+    require_once './config/database.php';
     if (isset($_GET['user'])) {
         $user = $_GET['user'];
     } else {
@@ -53,7 +56,7 @@
                                 $family = $row2['family'];
                 ?>
                              <tbody>
-                                 <tr class="hover:bg-gray-200 hover:cursor-pointer">
+                                 <tr class="odd:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer">
                                      <td class="py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                      <td class="p-2"><?php echo $name ?> <?php echo $family ?></td>
                                      <td class="p-2">
@@ -194,7 +197,7 @@
                          کد فنی
                      </th>
                      <th scope="col" class="px-3 py-2 text-white text-center">
-                        کاربر
+                         کاربر
                      </th>
                      <th style="width: 300px;" scope="col" class="px-3 py-2 text-white text-right">
                          زمان
@@ -352,36 +355,36 @@
                                          </td>
 
                                          <td style="width: 100px;" class="tiny-text p-2"><?php
-                                         $create = date($time);
+                                                                                            $create = date($time);
 
-                                         $now = new DateTime(); // current date time
-                                         $date_time = new DateTime($create); // date time from string
-                                         $interval = $now->diff($date_time); // difference between two date times
-                                         $days = $interval->format('%a'); // difference in days
-                                         $hours = $interval->format('%h'); // difference in hours
-                                         $minutes = $interval->format('%i'); // difference in minutes
-                                         $seconds = $interval->format('%s'); // difference in seconds
- 
-                                         $text = '';
- 
-                                         if ($days) {
-                                             $text .= " $days روز و ";
-                                         }
- 
-                                         if ($hours) {
-                                             $text .= "$hours ساعت ";
-                                         }
- 
-                                         if (!$days && $minutes) {
-                                             $text .= "$minutes دقیقه ";
-                                         }
- 
-                                         if (!$days && !$hours && $seconds) {
-                                             $text .= "$seconds ثانیه ";
-                                         }
-                                         echo "$text قبل";
-                                         ?>
-                                          </td>
+                                                                                            $now = new DateTime(); // current date time
+                                                                                            $date_time = new DateTime($create); // date time from string
+                                                                                            $interval = $now->diff($date_time); // difference between two date times
+                                                                                            $days = $interval->format('%a'); // difference in days
+                                                                                            $hours = $interval->format('%h'); // difference in hours
+                                                                                            $minutes = $interval->format('%i'); // difference in minutes
+                                                                                            $seconds = $interval->format('%s'); // difference in seconds
+
+                                                                                            $text = '';
+
+                                                                                            if ($days) {
+                                                                                                $text .= " $days روز و ";
+                                                                                            }
+
+                                                                                            if ($hours) {
+                                                                                                $text .= "$hours ساعت ";
+                                                                                            }
+
+                                                                                            if (!$days && $minutes) {
+                                                                                                $text .= "$minutes دقیقه ";
+                                                                                            }
+
+                                                                                            if (!$days && !$hours && $seconds) {
+                                                                                                $text .= "$seconds ثانیه ";
+                                                                                            }
+                                                                                            echo "$text قبل";
+                                                                                            ?>
+                                         </td>
                                          <!-- <td class="record-date"><?php echo $time ?></td> -->
                                      </tr>
                                  </tbody>
@@ -397,11 +400,9 @@
      </div>
  </div>
 
- <!-- <script>
+ <script>
      setTimeout(function() {
          window.location.reload();
      }, 7000);
- </script> -->
+ </script>
 
- <?php
-    require_once './layout/heroFooter.php';
