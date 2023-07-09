@@ -188,21 +188,13 @@ if (isset($_POST['user'])) {
         </div>
         <div class="div2">
             <h2 class="title">آخرین قیمت های داده شده</h2>
-            <table class="border text-sm bg-white custom-table mb-2 p-3">
-                <thead class="font-medium bg-green-600">
+            <table>
+                <thead>
                     <tr>
-                        <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
-                            مشتری
-                        </th>
-                        <th style="width: 80px !important" scope="col" class="px-3 py-2 tiny-text text-white text-right">
-                            قیمت
-                        </th>
-                        <th scope="col" class="px-3 py-2 tiny-text text-white text-right">
-                            کد فنی
-                        </th>
-                        <th scope="col" class="px-3 py-2 tiny-text text-white text-center">
-                            کاربر
-                        </th>
+                        <th> مشتری</th>
+                        <th> قیمت</th>
+                        <th> کد فنی </th>
+                        <th>کاربر</th>
                     </tr>
                 </thead>
                 <tbody>
