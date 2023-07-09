@@ -27,15 +27,15 @@ if (isset($_POST['user'])) {
     <div class="d-grid">
         <div class="div1">
             <h2 class="title">تماس های ورودی</h2>
-            <table class="">
+            <table class="border text-sm bg-white custom-table mb-2 p-3">
                 <thead>
                     <tr>
-                        <th class="bg-violet-800 text-white text-sm px-5 py-2">شماره</th>
-                        <th class="bg-violet-800 text-white text-sm px-2 py-2">مشخصات</th>
-                        <th class="bg-violet-800 text-white text-sm px-2 py-2">نیایش</th>
-                        <th class="bg-violet-800 text-white text-sm px-2 py-2">محک</th>
-                        <th class="bg-violet-800 text-white text-sm px-2 py-2">داخلی</th>
-                        <th class="bg-violet-800 text-white text-sm px-2 py-2">زمان</th>
+                        <th class="bg-violet-800 text-white tiny-text px-5 py-2">شماره</th>
+                        <th class="bg-violet-800 text-white tiny-text px-2 py-2">مشخصات</th>
+                        <th class="bg-violet-800 text-white tiny-text px-2 py-2">نیایش</th>
+                        <th class="bg-violet-800 text-white tiny-text px-2 py-2">محک</th>
+                        <th class="bg-violet-800 text-white tiny-text px-2 py-2">داخلی</th>
+                        <th class="bg-violet-800 text-white tiny-text px-2 py-2">زمان</th>
                         <!-- <th>تاریخ</th> -->
                     </tr>
                 </thead>
@@ -195,19 +195,19 @@ if (isset($_POST['user'])) {
             <table class="border text-sm bg-white custom-table mb-2 p-3">
                 <thead class="font-medium bg-green-600">
                     <tr>
-                        <th style="width: 300px;" scope="col" class="px-3 py-2 text-white text-right">
+                        <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
                             مشتری
                         </th>
-                        <th style="width: 80px !important" scope="col" class="px-3 py-2 text-white text-right">
+                        <th style="width: 80px !important" scope="col" class="px-3 py-2 tiny-text text-white text-right">
                             قیمت
                         </th>
-                        <th scope="col" class="px-3 py-2 text-white text-right">
+                        <th scope="col" class="px-3 py-2 tiny-text text-white text-right">
                             کد فنی
                         </th>
-                        <th scope="col" class="px-3 py-2 text-white text-center">
+                        <th scope="col" class="px-3 py-2 tiny-text text-white text-center">
                             کاربر
                         </th>
-                        <th style="width: 300px;" scope="col" class="px-3 py-2 text-white text-right">
+                        <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
                             زمان
                         </th>
                     </tr>
