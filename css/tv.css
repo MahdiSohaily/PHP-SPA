@@ -1,62 +1,44 @@
-html {
-  margin: 10px;
+@font-face {
+  font-family: "Vazir";
+  src: url("../report/public/fonts/ad3cd4cbda94aee8578c1b622b9002f9dfe345c05870eb375a02da853d08f072.woff2")
+    format("woff2");
+  font-weight: 100;
+  font-style: normal;
 }
-
-.box-incoming {
-  width: 55%;
+@font-face {
+  font-family: "Vazir";
+  src: url("../report/public/fonts/046a76746039189feb148c360dfb82d07a1e3464d31a2078363587af6f5a1cfb.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
 }
-
-.your-interval {
-  display: none;
+@font-face {
+  font-family: "Vazir";
+  src: url("../report/public/fonts/d783603a0dd07db6896ecd8a3460e2256a48dca62373a0478706a05490c1a2d8.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
 }
-
-.your-interval-select {
-  display: none;
+@font-face {
+  font-family: "Vazir";
+  src: url("../report/public/fonts/fc6648da06acebfe96ad5a8f077f569c5c4dd75b77122951723ddfbfeb191728.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
 }
-
-.box-mother {
-  width: 100%;
+@font-face {
+  font-family: "Vazir";
+  src: url("../report/public/fonts/3b2277e82a583c9f91de41aa9e198a14d7ef7f4ccd04828abdd623acd116a88b.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
 }
-
-.box-mother > div {
-  float: right;
-  margin-right: 0;
-}
-
-.tv-inquery {
-  width: 45%;
-}
-
-.tv-inquery .customer-list tr td:nth-child(2),
-.customer-list tr td:nth-child(5),
-.customer-list tr td:nth-child(6),
-.customer-list tr td:nth-child(7) {
-  display: none;
-}
-
-.tv-inquery .customer-list tr th:nth-child(2),
-.customer-list tr th:nth-child(5),
-.customer-list tr th:nth-child(6),
-.customer-list tr th:nth-child(7) {
-  display: none;
-}
-
-.box-keeper {
-  margin: 0;
-  padding: 0;
-}
-
-.mirror-tv {
-  background: #cdcdcd;
-  position: fixed;
-  right: 2px;
-  bottom: 2px;
-  line-height: 28px;
-  padding: 4px 10px;
-}
-
-.call-capsol-name {
-  width: 16%;
+@font-face {
+  font-family: "Vazir";
+  src: url("../report/public/fonts/71671477a4b62305fbd3ed4976a31c3c08520cf914656ece6b79543524a49132.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
 }
 
 img.user-img {
@@ -66,9 +48,9 @@ img.user-img {
   margin: auto;
 }
 
-td {
+/* td {
   padding: 5px 5px;
-}
+} */
 
 .labeled {
   background-color: red;
@@ -86,14 +68,14 @@ td {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  /* grid-column-gap: 10px;
+  grid-row-gap: 10px; */
 }
 
 table {
-  width: 100% !important;
+  /* width: 100% !important; */
   border: 1px solid gray;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 thead {
@@ -102,5 +84,5 @@ thead {
 
 th {
   color: white;
-  padding: 10px;
+  /* padding: 10px; */
 }

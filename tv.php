@@ -1,38 +1,48 @@
- <?php
-    require_once './header.php';
-    require_once './php/function.php';
-    require_once './php/jdf.php';
-    require_once './config/database.php';
-    if (isset($_GET['user'])) {
-        $user = $_GET['user'];
-    } else {
-        $user  = getinternal($_SESSION["id"]);
-    }
-    ?>
- <div id="fullpage" class="bg-white" data-user='<?php echo $user ?>'>
-     <i style="cursor: pointer;" onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
-     <div class="your-user">
-         <div class="your-interval">داخلی شما</div>
-         <div class="your-interval-select">
-             <a href="?user=<?php echo $user ?>"><?php echo $user ?></a>
-             <a href="?user=1 or 1=1">همه</a>
-         </div>
-     </div>
-     <div class="d-grid">
-         <div class="div1">
-             <h2 class="title">تماس های ورودی</h2>
-             <table class="border text-sm bg-white custom-table mb-2 p-3">
-                 <thead>
-                     <tr>
-                         <th class="bg-violet-800 text-white tiny-text px-5 py-2">شماره</th>
-                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">مشخصات</th>
-                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">نیایش</th>
-                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">محک</th>
-                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">زمان</th>
-                         <!-- <th>تاریخ</th> -->
-                     </tr>
-                 </thead>
-                 <?php
+<?php
+require_once './php/function.php';
+require_once './php/jdf.php';
+require_once './config/database.php';
+if (isset($_GET['user'])) {
+    $user = $_GET['user'];
+} else {
+    $user  = getinternal($_SESSION["id"]);
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/tv.css">
+</head>
+
+<body>
+    <div id="fullpage" class="bg-white" data-user='<?php echo $user ?>'>
+        <i style="cursor: pointer;" onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
+        <div class="your-user">
+            <div class="your-interval">داخلی شما</div>
+            <div class="your-interval-select">
+                <a href="?user=<?php echo $user ?>"><?php echo $user ?></a>
+                <a href="?user=1 or 1=1">همه</a>
+            </div>
+        </div>
+        <div class="d-grid">
+            <div class="div1">
+                <h2 class="title">تماس های ورودی</h2>
+                <table class="border text-sm bg-white custom-table mb-2 p-3">
+                    <thead>
+                        <tr>
+                            <th class="bg-violet-800 text-white tiny-text px-5 py-2">شماره</th>
+                            <th class="bg-violet-800 text-white tiny-text px-2 py-2">مشخصات</th>
+                            <th class="bg-violet-800 text-white tiny-text px-2 py-2">نیایش</th>
+                            <th class="bg-violet-800 text-white tiny-text px-2 py-2">محک</th>
+                            <th class="bg-violet-800 text-white tiny-text px-2 py-2">زمان</th>
+                            <!-- <th>تاریخ</th> -->
+                        </tr>
+                    </thead>
+                    <?php
                     global  $repeat;
                     $sql = "SELECT * FROM incoming WHERE user = $user ORDER BY  time DESC LIMIT 20";
                     $result = mysqli_query($con, $sql);
@@ -56,12 +66,12 @@
                                     $name = $row2['name'];
                                     $family = $row2['family'];
                     ?>
-                                 <tbody>
-                                     <tr class="odd:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer">
-                                         <td class="py-2 px-5 tiny-text"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                         <td class="p-2 tiny-text"><?php echo $name ?> <?php echo $family ?></td>
-                                         <td class="p-2 tiny-text">
-                                             <?php
+                                    <tbody>
+                                        <tr class="odd:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer">
+                                            <td class="py-2 px-5 tiny-text"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                            <td class="p-2 tiny-text"><?php echo $name ?> <?php echo $family ?></td>
+                                            <td class="p-2 tiny-text">
+                                                <?php
                                                 $gphone = substr($phone, 1);
                                                 $sql3 = "SELECT * FROM google WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%' OR mob3 LIKE '%" . $gphone . "%'  ";
                                                 $result3 = mysqli_query($con, $sql3);
@@ -82,9 +92,9 @@
                                                     }
                                                 }
                                                 ?>
-                                         </td>
-                                         <td class="p-2 tiny-text">
-                                             <?php
+                                            </td>
+                                            <td class="p-2 tiny-text">
+                                                <?php
                                                 $gphone = substr($phone, 1);
                                                 $sql4 = "SELECT * FROM mahak WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%'   ";
                                                 $result4 = mysqli_query($con, $sql4);
@@ -106,21 +116,21 @@
                                                     }
                                                 }
                                                 ?></td>
-                                         <td class="p-2 tiny-text"><?php echo $jalali_time ?></td>
-                                         <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
-                                     </tr>
-                                 </tbody>
-                             <?php
+                                            <td class="p-2 tiny-text"><?php echo $jalali_time ?></td>
+                                            <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
+                                        </tr>
+                                    </tbody>
+                                <?php
 
                                 }
                             } else {
                                 ?>
-                             <tbody>
-                                 <tr class="hover:bg-gray-200 hover:cursor-pointer">
-                                     <td class="py-2 px-5"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                     <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
-                                     <td class="p-2">
-                                         <?php
+                                <tbody>
+                                    <tr class="hover:bg-gray-200 hover:cursor-pointer">
+                                        <td class="py-2 px-5"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                        <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
+                                        <td class="p-2">
+                                            <?php
                                             $gphone = substr($phone, 1);
                                             $sql3 = "SELECT * FROM google WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%' OR mob3 LIKE '%" . $gphone . "%'  ";
                                             $result3 = mysqli_query($con, $sql3);
@@ -141,9 +151,9 @@
                                                 }
                                             }
                                             ?>
-                                     </td>
-                                     <td class="p-2">
-                                         <?php
+                                        </td>
+                                        <td class="p-2">
+                                            <?php
                                             $gphone = substr($phone, 1);
                                             $sql4 = "SELECT * FROM mahak WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%'   ";
                                             $result4 = mysqli_query($con, $sql4);
@@ -165,12 +175,12 @@
                                                 }
                                             }
                                             ?>
-                                     </td>
-                                     <td class="p-2 tiny-text"><?php echo $jalali_time ?></td>
-                                     <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
-                                 </tr>
-                             </tbody>
-                 <?php
+                                        </td>
+                                        <td class="p-2 tiny-text"><?php echo $jalali_time ?></td>
+                                        <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
+                                    </tr>
+                                </tbody>
+                    <?php
                             }
                         }
                     } // end while
@@ -178,29 +188,29 @@
                         echo 'هیچ اطلاعاتی موجود نیست';
                     }
                     ?>
-             </table>
-         </div>
-         <div class="div2">
-             <h2 class="title">آخرین قیمت های داده شده</h2>
-             <table class="border text-sm bg-white custom-table mb-2 p-3">
-                 <thead class="font-medium bg-green-600">
-                     <tr>
-                         <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
-                             مشتری
-                         </th>
-                         <th style="width: 80px !important" scope="col" class="px-3 py-2 tiny-text text-white text-right">
-                             قیمت
-                         </th>
-                         <th scope="col" class="px-3 py-2 tiny-text text-white text-right">
-                             کد فنی
-                         </th>
-                         <th scope="col" class="px-3 py-2 tiny-text text-white text-center">
-                             کاربر
-                         </th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     <?php
+                </table>
+            </div>
+            <div class="div2">
+                <h2 class="title">آخرین قیمت های داده شده</h2>
+                <table class="border text-sm bg-white custom-table mb-2 p-3">
+                    <thead class="font-medium bg-green-600">
+                        <tr>
+                            <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
+                                مشتری
+                            </th>
+                            <th style="width: 80px !important" scope="col" class="px-3 py-2 tiny-text text-white text-right">
+                                قیمت
+                            </th>
+                            <th scope="col" class="px-3 py-2 tiny-text text-white text-right">
+                                کد فنی
+                            </th>
+                            <th scope="col" class="px-3 py-2 tiny-text text-white text-center">
+                                کاربر
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
                         $givenPrice = givenPrice($con);
                         function givenPrice($con)
                         {
@@ -224,59 +234,59 @@
 
                         if (count($givenPrice) > 0) {
                         ?>
-                         <?php foreach ($givenPrice as $price) { ?>
-                             <?php if ($price['price'] !== null) {
+                            <?php foreach ($givenPrice as $price) { ?>
+                                <?php if ($price['price'] !== null) {
                                 ?>
-                                 <tr class="mb-1 ?> odd:bg-gray-200">
-                                 <?php  } ?>
-                                 <td class="tiny-text bold px-1">
-                                     <p class="text-right bold text-gray-700 px-2 py-1">
-                                         <?php echo $price['name'] . ' ' . $price['family'] ?>
-                                     </p>
-                                 </td>
-                                 <td style="width: 100px;" class="tiny-text bold px-1">
-                                     <p class="text-right bold text-gray-700 px-2 py-1">
-                                         <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
-                                     </p>
-                                 </td>
-                                 <td class="tiny-text bold px-1">
-                                     <p class="text-right bold text-gray-700 px-2 py-1">
-                                         <?php echo $price['partnumber']; ?>
-                                     </p>
-                                 </td>
-                                 <td style="width:120px;">
-                                     <p class="text-center bold text-gray-700 px-2 py-1">
-                                         <img title="<?php echo $price['username'] ?>" class="user-img mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="user-img">
-                                     </p>
-                                 </td>
-                                 </tr>
-                             <?php
+                                    <tr class="mb-1 ?> odd:bg-gray-200">
+                                    <?php  } ?>
+                                    <td class="tiny-text bold px-1">
+                                        <p class="text-right bold text-gray-700 px-2 py-1">
+                                            <?php echo $price['name'] . ' ' . $price['family'] ?>
+                                        </p>
+                                    </td>
+                                    <td style="width: 100px;" class="tiny-text bold px-1">
+                                        <p class="text-right bold text-gray-700 px-2 py-1">
+                                            <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
+                                        </p>
+                                    </td>
+                                    <td class="tiny-text bold px-1">
+                                        <p class="text-right bold text-gray-700 px-2 py-1">
+                                            <?php echo $price['partnumber']; ?>
+                                        </p>
+                                    </td>
+                                    <td style="width:120px;">
+                                        <p class="text-center bold text-gray-700 px-2 py-1">
+                                            <img title="<?php echo $price['username'] ?>" class="user-img mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="user-img">
+                                        </p>
+                                    </td>
+                                    </tr>
+                                <?php
                             } ?>
-                         <?php } else { ?>
-                             <tr class="">
-                                 <td colspan="4" scope="col" class="not-exist">
-                                     موردی برای نمایش وجود ندارد !!
-                                 </td>
-                             </tr>
-                         <?php } ?>
-                 </tbody>
-             </table>
-         </div>
-         <div class="div3">
-             <h2 class="title">آخرین استعلام ها</h2>
-             <div class="">
+                            <?php } else { ?>
+                                <tr class="">
+                                    <td colspan="4" scope="col" class="not-exist">
+                                        موردی برای نمایش وجود ندارد !!
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="div3">
+                <h2 class="title">آخرین استعلام ها</h2>
+                <div class="">
 
-                 <table class="border text-sm bg-white custom-table mb-2 p-3 ">
-                     <thead>
-                         <tr class="tiny-text bg-violet-800 text-white">
-                             <th class="p-2">مشتری</th>
-                             <th class="p-2">تلفن</th>
-                             <th class="p-2">اطلاعات استعلام</th>
-                             <th class="p-2">کاربر</th>
-                         </tr>
-                     </thead>
+                    <table class="border text-sm bg-white custom-table mb-2 p-3 ">
+                        <thead>
+                            <tr class="tiny-text bg-violet-800 text-white">
+                                <th class="p-2">مشتری</th>
+                                <th class="p-2">تلفن</th>
+                                <th class="p-2">اطلاعات استعلام</th>
+                                <th class="p-2">کاربر</th>
+                            </tr>
+                        </thead>
 
-                     <?php
+                        <?php
                         $sql2 = "SELECT * FROM record ORDER BY  time DESC LIMIT 350  ";
                         $result2 = mysqli_query($con, $sql2);
                         if (mysqli_num_rows($result2) > 0) {
@@ -293,13 +303,13 @@
                                         $name = $row['name'];
                                         $family = $row['family'];
                         ?>
-                                     <tbody>
-                                         <tr>
-                                             <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
-                                             <td class="tiny-text p-2"><a target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                             <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
-                                             <td style="width: 50px;" class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
-                                         <?php
+                                        <tbody>
+                                            <tr>
+                                                <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
+                                                <td class="tiny-text p-2"><a target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                                <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
+                                                <td style="width: 50px;" class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
+                                            <?php
                                         }
                                     }
 
@@ -309,34 +319,34 @@
                                     $datetime2 = new DateTime($time);
                                     $interval = $datetime1->diff($datetime2);
                                             ?>
-                                             </td>
-                                             <!-- <td class="record-date"><?php echo $time ?></td> -->
-                                         </tr>
-                                     </tbody>
-                             <?php
+                                                </td>
+                                                <!-- <td class="record-date"><?php echo $time ?></td> -->
+                                            </tr>
+                                        </tbody>
+                                <?php
 
                             }
                         } else {
                             echo '<td colspan="4">هیچ اطلاعاتی موجود نیست</td>';
                         }
                                 ?>
-                 </table>
-             </div>
-         </div>
-         <div class="div4">
-             <h2 class="title">آخرین قیمت های گرفته شده از بازار</h2>
-             <div class="">
+                    </table>
+                </div>
+            </div>
+            <div class="div4">
+                <h2 class="title">آخرین قیمت های گرفته شده از بازار</h2>
+                <div class="">
 
-                 <table class="border text-sm bg-white custom-table mb-2 p-3">
-                     <thead>
-                         <tr class="tiny-text bg-violet-800 text-white">
-                             <th class="p-2">کد فنی</th>
-                             <th class="p-2">فروشنده</th>
-                             <th class="p-2">قیمت</th>
-                             <th style="width: 70px;" class="p-2">زمان</th>
-                         </tr>
-                     </thead>
-                     <?php
+                    <table class="border text-sm bg-white custom-table mb-2 p-3">
+                        <thead>
+                            <tr class="tiny-text bg-violet-800 text-white">
+                                <th class="p-2">کد فنی</th>
+                                <th class="p-2">فروشنده</th>
+                                <th class="p-2">قیمت</th>
+                                <th style="width: 70px;" class="p-2">زمان</th>
+                            </tr>
+                        </thead>
+                        <?php
                         $sql2 = "SELECT * FROM estelam ORDER BY  time DESC LIMIT 250  ";
                         $result2 = mysqli_query($con, $sql2);
                         if (mysqli_num_rows($result2) > 0) {
@@ -360,15 +370,15 @@
                                             while ($row3 = mysqli_fetch_assoc($result3)) {
                                                 $sellername = $row3['name'];
                         ?>
-                                             <tbody>
-                                                 <tr class="tiny-text">
-                                                     <td class="p-2"><?php echo $code ?></td>
-                                                     <td class="p-2"><?php echo $sellername ?></td>
-                                                     <td class="p-2"><?php echo $price ?></td>
-                                                     <td class="p-2"><?php echo date('Y-m-d', strtotime($time)) ?></td>
-                                                 </tr>
-                                             </tbody>
-                     <?php
+                                                <tbody>
+                                                    <tr class="tiny-text">
+                                                        <td class="p-2"><?php echo $code ?></td>
+                                                        <td class="p-2"><?php echo $sellername ?></td>
+                                                        <td class="p-2"><?php echo $price ?></td>
+                                                        <td class="p-2"><?php echo date('Y-m-d', strtotime($time)) ?></td>
+                                                    </tr>
+                                                </tbody>
+                        <?php
                                             }
                                         }
                                     }
@@ -376,52 +386,55 @@
                             }
                         }
                         ?>
-                 </table>
-             </div>
-         </div>
-     </div>
- </div>
- <script>
-     /* Get the element you want displayed in fullscreen mode (a video in this example): */
-     var elem = document.getElementById("fullpage");
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        /* Get the element you want displayed in fullscreen mode (a video in this example): */
+        var elem = document.getElementById("fullpage");
 
-     /* When the openFullscreen() function is executed, open the video in fullscreen.
-     Note that we must include prefixes for different browsers, as they don't support the requestFullscreen method yet */
-     function openFullscreen() {
-         if (elem.requestFullscreen) {
-             elem.requestFullscreen();
-         } else if (elem.webkitRequestFullscreen) {
-             /* Safari */
-             elem.webkitRequestFullscreen();
-         } else if (elem.msRequestFullscreen) {
-             /* IE11 */
-             elem.msRequestFullscreen();
-         }
-     }
+        /* When the openFullscreen() function is executed, open the video in fullscreen.
+        Note that we must include prefixes for different browsers, as they don't support the requestFullscreen method yet */
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+                /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        }
 
-     function closeFullscreen() {
-         if (document.exitFullscreen) {
-             document.exitFullscreen();
-         } else if (document.webkitExitFullscreen) {
-             /* Safari */
-             document.webkitExitFullscreen();
-         } else if (document.msExitFullscreen) {
-             /* IE11 */
-             document.msExitFullscreen();
-         }
-     }
+        function closeFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                /* Safari */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                /* IE11 */
+                document.msExitFullscreen();
+            }
+        }
 
-     setInterval(() => {
-         var params = new URLSearchParams();
-         params.append('historyAjax', 'historyAjax');
-         params.append('user', elem.getAttribute('data-user'));
+        setInterval(() => {
+            var params = new URLSearchParams();
+            params.append('historyAjax', 'historyAjax');
+            params.append('user', elem.getAttribute('data-user'));
 
-         axios.post("./tvAjax.php", params)
-             .then(function(response) {
-                 elem.innerHTML = response.data;
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     }, 7000);
- </script>
+            axios.post("./tvAjax.php", params)
+                .then(function(response) {
+                    elem.innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }, 7000);
+    </script>
+</body>
+
+</html>
