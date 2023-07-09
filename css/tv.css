@@ -60,7 +60,8 @@ html {
 }
 
 img.user-img {
-  margin: 5px;
+  width: 20px;
+  height: 20px;
 }
 
 .test-error {

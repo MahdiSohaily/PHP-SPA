@@ -246,7 +246,7 @@
                                  </td>
                                  <td style="width:120px;">
                                      <p class="text-center bold text-gray-700 px-2 py-1">
-                                         <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
+                                         <img title="<?php echo $price['username'] ?>" class="user-img mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="user-img">
                                      </p>
                                  </td>
                                  </tr>
@@ -298,7 +298,7 @@
                                              <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
                                              <td class="tiny-text p-2"><a target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                              <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
-                                             <td style="width: 50px;" class="tiny-text p-2"><img class="userImage mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
+                                             <td style="width: 50px;" class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
                                          <?php
                                         }
                                     }
