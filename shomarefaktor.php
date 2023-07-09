@@ -127,16 +127,16 @@ if (!empty($_GET['date'])) {
 
 
     <div class="today-faktor-statistics">
-        <div class="today-faktor">
+        <div class="">
             <?php
             $sql = "SELECT COUNT(*) as count_shomare FROM shomarefaktor WHERE time >= CURDATE()";
             $result = mysqli_query(dbconnect(), $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
-                    <div>
-                        <p class="today-faktor-total">تعداد کل</p>
-                        <span>
+                    <div class="ranking mb-2">
+                        <p class="text-white px-2">تعداد کل</p>
+                        <span class="counter">
                             <?php
                             echo $row['count_shomare'];
                             ?>
@@ -158,28 +158,23 @@ if (!empty($_GET['date'])) {
                 $n = 1;
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
-                    <div class="ranking">
+                    <div class="ranking mb-2">
                         <img src="../userimg/<?php echo $row['user']; ?>.jpg" />
                         <?php if ($n == 1) {
-                        ?>
-                            <i class="fas fa-star golden"></i>
-                        <?php
+                            echo '<i class="fas ranking-icon fa-star golden"></i>';
                         }
-                        $n = $n + 1; ?>
-                        <?php if ($n == 2) {
-                        ?>
-                            <i class="fas fa-star silver"></i>
-                        <?php
+
+                        if ($n == 2) {
+                            echo '<i class="fas ranking-icon fa-star silver"></i>';
                         }
-                        $n = $n + 1; ?>
-                        <?php if ($n == 3) {
-                        ?>
-                            <i class="fas fa-thumbs-up lucky"></i>
-                        <?php
+
+                        if ($n == 3) {
+                            echo '<i class="fas ranking-icon fa-thumbs-up lucky"></i>';
                         }
                         $n = $n + 1; ?>
                         <span class="counter"><?php echo $row['count_shomare']; ?></span>
                     </div>
+
             <?php
                 }
             }
