@@ -10,6 +10,7 @@ if (isset($_GET['user'])) {
 ?>
 <div class="bg-white">
     <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
+    <i onclick="closeFullscreen()" class="large material-icons">border_clear</i>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-2 lg:gap-2 lg:p-2 overflow-auto bg-white">
         <div class="bg-white">
             <h2 class="title">تماس های ورودی</h2>
@@ -468,6 +469,18 @@ if (isset($_GET['user'])) {
         } else if (elem.msRequestFullscreen) {
             /* IE11 */
             elem.msRequestFullscreen();
+        }
+    }
+
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            /* IE11 */
+            document.msExitFullscreen();
         }
     }
 </script>
