@@ -9,9 +9,8 @@
         $user  = getinternal($_SESSION["id"]);
     }
     ?>
- <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
-
- <div id="fullpage">
+ <div id="fullpage" class=" bg-white">
+     <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
      <div class="your-user">
          <div class="your-interval">داخلی شما</div>
          <div class="your-interval-select">
@@ -486,7 +485,7 @@
 
          axios.post("./tvAjax.php", params)
              .then(function(response) {
-                console.log(response);
+                 console.log(response);
                  elem.innerHTML = response.data;
              })
              .catch(function(error) {
