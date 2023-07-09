@@ -16,7 +16,7 @@
  <div class="grid grid-cols-1 md:grid-cols-4 gap-2 lg:gap-2 lg:p-2 overflow-auto">
      <div class="">
          <h2 class="title">تماس های ورودی</h2>
-         <table class=text-sm bg-white custom-table mb-2 p-3">
+         <table class="border text-sm bg-white custom-table mb-2 p-3">
              <thead>
                  <tr>
                      <th class="bg-violet-800 text-white text-sm px-5 py-2">شماره</th>
@@ -181,7 +181,7 @@
      </div>
      <div class="">
          <h2 class="title">آخرین قیمت های داده شده</h2>
-         <table class="text-sm bg-white custom-table mb-2 p-3">
+         <table class="border text-sm bg-white custom-table mb-2 p-3">
              <thead class="font-medium bg-green-600">
                  <tr>
                      <th style="width: 300px;" scope="col" class="px-3 py-2 text-white text-right">
@@ -304,7 +304,7 @@
          <h2 class="title">آخرین استعلام ها</h2>
          <div class="">
 
-             <table class="">
+             <table class="border ">
                  <thead>
                      <tr class="tiny-text bg-violet-800 text-white">
                          <th class="p-2">مشتری</th>
