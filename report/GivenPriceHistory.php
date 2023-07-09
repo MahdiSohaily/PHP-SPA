@@ -173,10 +173,10 @@ function format_interval(DateInterval $interval)
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $name = $row['name'];
-                                $family = $row['family'];?>
+                                $family = $row['family']; ?>
                                 <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
-                                    <td class="tiny-text bold"><?php echo ($name . " " . $family) ?></td>
-                                    <td><a target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                    <td class="tiny-text bold"><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo ($name . " " . $family) ?></a></td>
+                                    <td><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                     <td class="tiny-text bold record-info"><?php echo nl2br($callinfo) ?></td>
                                     <td class="tiny-text bold record-user"><img class="userImage" src="../../userimg/<?php echo $user ?>.jpg" />
                                 <?php
@@ -190,7 +190,7 @@ function format_interval(DateInterval $interval)
                         $interval = $datetime1->diff($datetime2);
 
                                 ?>
-                                </td>
+                                    </td>
 
                                     <td class="tiny-text bold record-time"><?php echo format_interval($interval); ?></td>
                                     <td class="tiny-text bold record-date"><?php echo $time ?></td>
