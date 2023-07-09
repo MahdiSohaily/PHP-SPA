@@ -7,8 +7,6 @@ if (isset($_POST['user'])) {
 } else {
     $user  = getinternal($_SESSION["id"]);
 }
-
-echo $_POST['user'];
 ?>
 <script>
     function closeFullscreen() {

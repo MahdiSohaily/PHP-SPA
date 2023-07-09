@@ -418,7 +418,6 @@
 
          axios.post("./tvAjax.php", params)
              .then(function(response) {
-                 console.log(response);
                  elem.innerHTML = response.data;
              })
              .catch(function(error) {
