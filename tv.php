@@ -58,9 +58,9 @@
                     ?>
                                  <tbody>
                                      <tr class="odd:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer">
-                                         <td class="py-2 px-5"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                         <td class="py-2 px-5 tiny-text"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                          <td class="p-2 tiny-text"><?php echo $name ?> <?php echo $family ?></td>
-                                         <td class="p-2">
+                                         <td class="p-2 tiny-text">
                                              <?php
                                                 $gphone = substr($phone, 1);
                                                 $sql3 = "SELECT * FROM google WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%' OR mob3 LIKE '%" . $gphone . "%'  ";
@@ -83,7 +83,7 @@
                                                 }
                                                 ?>
                                          </td>
-                                         <td class="p-2">
+                                         <td class="p-2 tiny-text">
                                              <?php
                                                 $gphone = substr($phone, 1);
                                                 $sql4 = "SELECT * FROM mahak WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%'   ";
@@ -424,5 +424,5 @@
              .catch(function(error) {
                  console.log(error);
              });
-     }, 7000);
+     }, 700);
  </script>
