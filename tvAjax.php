@@ -34,7 +34,6 @@ if (isset($_POST['user'])) {
                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">مشخصات</th>
                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">نیایش</th>
                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">محک</th>
-                        <th class="bg-violet-800 text-white tiny-text px-2 py-2">داخلی</th>
                         <th class="bg-violet-800 text-white tiny-text px-2 py-2">زمان</th>
                         <!-- <th>تاریخ</th> -->
                     </tr>
@@ -113,7 +112,6 @@ if (isset($_POST['user'])) {
                                                 }
                                             }
                                             ?></td>
-                                        <td class="p-2"><?php echo $user ?></td>
                                         <td class="p-2"><?php echo $jalali_time ?></td>
                                         <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
                                     </tr>
@@ -174,8 +172,6 @@ if (isset($_POST['user'])) {
                                         }
                                         ?>
                                     </td>
-
-                                    <td class="p-2"><?php echo $user ?></td>
                                     <td class="p-2"><?php echo $jalali_time ?></td>
                                     <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
                                 </tr>
@@ -206,9 +202,6 @@ if (isset($_POST['user'])) {
                         </th>
                         <th scope="col" class="px-3 py-2 tiny-text text-white text-center">
                             کاربر
-                        </th>
-                        <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
-                            زمان
                         </th>
                     </tr>
                 </thead>
@@ -262,42 +255,6 @@ if (isset($_POST['user'])) {
                                         <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
                                     </p>
                                 </td>
-                                <td class="tiny-text bold time">
-                                    <p class="text-right bold text-gray-700 px-2 py-1">
-                                        <?php
-                                        date_default_timezone_set("Asia/Tehran");
-                                        $create = date($price['created_at']);
-
-                                        $now = new DateTime(); // current date time
-                                        $date_time = new DateTime($create); // date time from string
-                                        $interval = $now->diff($date_time); // difference between two date times
-                                        $days = $interval->format('%a'); // difference in days
-                                        $hours = $interval->format('%h'); // difference in hours
-                                        $minutes = $interval->format('%i'); // difference in minutes
-                                        $seconds = $interval->format('%s'); // difference in seconds
-
-                                        $text = '';
-
-                                        if ($days) {
-                                            $text .= " $days روز و ";
-                                        }
-
-                                        if ($hours) {
-                                            $text .= "$hours ساعت ";
-                                        }
-
-                                        if (!$days && $minutes) {
-                                            $text .= "$minutes دقیقه ";
-                                        }
-
-                                        if (!$days && !$hours && $seconds) {
-                                            $text .= "$seconds ثانیه ";
-                                        }
-
-                                        echo "$text قبل";
-                                        ?>
-                                    </p>
-                                </td>
                                 </tr>
                             <?php
                         } ?>
@@ -322,8 +279,6 @@ if (isset($_POST['user'])) {
                             <th class="p-2">تلفن</th>
                             <th class="p-2">اطلاعات استعلام</th>
                             <th class="p-2">کاربر</th>
-                            <th class="p-2">زمان</th>
-                            <!-- <th class="p-2">تاریخ</th> -->
                         </tr>
                     </thead>
 
@@ -361,39 +316,6 @@ if (isset($_POST['user'])) {
                                 $interval = $datetime1->diff($datetime2);
                                         ?>
                                             </td>
-
-                                            <td style="width: 100px;" class="tiny-text p-2">
-                                                <?php
-                                                $create = date($time);
-
-                                                $now = new DateTime(); // current date time
-                                                $date_time = new DateTime($create); // date time from string
-                                                $interval = $now->diff($date_time); // difference between two date times
-                                                $days = $interval->format('%a'); // difference in days
-                                                $hours = $interval->format('%h'); // difference in hours
-                                                $minutes = $interval->format('%i'); // difference in minutes
-                                                $seconds = $interval->format('%s'); // difference in seconds
-
-                                                $text = '';
-
-                                                if ($days) {
-                                                    $text .= " $days روز و ";
-                                                }
-
-                                                if ($hours) {
-                                                    $text .= "$hours ساعت ";
-                                                }
-
-                                                if (!$days && $minutes) {
-                                                    $text .= "$minutes دقیقه ";
-                                                }
-
-                                                if (!$days && !$hours && $seconds) {
-                                                    $text .= "$seconds ثانیه ";
-                                                }
-                                                echo "$text قبل";
-                                                ?>
-                                            </td>
                                             <!-- <td class="record-date"><?php echo $time ?></td> -->
                                         </tr>
                                     </tbody>
@@ -417,7 +339,6 @@ if (isset($_POST['user'])) {
                             <th class="p-2">کد فنی</th>
                             <th class="p-2">فروشنده</th>
                             <th class="p-2">قیمت</th>
-                            <th class="p-2">کاربر</th>
                             <th class="p-2">زمان</th>
                         </tr>
                     </thead>
@@ -450,7 +371,6 @@ if (isset($_POST['user'])) {
                                                     <td class="p-2"><?php echo $code ?></td>
                                                     <td class="p-2"><?php echo $sellername ?></td>
                                                     <td class="p-2"><?php echo $price ?></td>
-                                                    <td style="width: 50px;" class="tiny-text p-2"><img class="userImage mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
                                                     <td class="p-2"><?php echo date('Y-m-d', strtotime($time)) ?></td>
                                                 </tr>
                                             </tbody>
