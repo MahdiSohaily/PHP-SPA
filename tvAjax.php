@@ -22,8 +22,8 @@ if (isset($_POST['user'])) {
     }
 </script>
 <div class="bg-white">
-    <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
-    <i onclick="closeFullscreen()" class="large material-icons">border_clear</i>
+    <i style="cursor: pointer;" onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
+    <i style="cursor: pointer;" onclick="closeFullscreen()" class="large material-icons">border_clear</i>
     <div class="d-grid">
         <div class="div1">
             <h2 class="title">تماس های ورودی</h2>
@@ -64,8 +64,8 @@ if (isset($_POST['user'])) {
                 ?>
                                 <tbody>
                                     <tr class="odd:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer">
-                                        <td class="py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                        <td class="p-2"><?php echo $name ?> <?php echo $family ?></td>
+                                        <td class="py-2 px-5"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                        <td class="p-2 tiny-text"><?php echo $name ?> <?php echo $family ?></td>
                                         <td class="p-2">
                                             <?php
                                             $gphone = substr($phone, 1);
@@ -112,7 +112,7 @@ if (isset($_POST['user'])) {
                                                 }
                                             }
                                             ?></td>
-                                        <td class="p-2"><?php echo $jalali_time ?></td>
+                                        <td class="p-2 tiny-text"><?php echo $jalali_time ?></td>
                                         <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
                                     </tr>
                                 </tbody>
@@ -123,7 +123,7 @@ if (isset($_POST['user'])) {
                             ?>
                             <tbody>
                                 <tr class="hover:bg-gray-200 hover:cursor-pointer">
-                                    <td class="py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                    <td class="py-2 px-5"><a class="labeled" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                     <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
                                     <td class="p-2">
                                         <?php
@@ -172,7 +172,7 @@ if (isset($_POST['user'])) {
                                         }
                                         ?>
                                     </td>
-                                    <td class="p-2"><?php echo $jalali_time ?></td>
+                                    <td class="p-2 tiny-text"><?php echo $jalali_time ?></td>
                                     <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
                                 </tr>
                             </tbody>
@@ -252,7 +252,7 @@ if (isset($_POST['user'])) {
                                 </td>
                                 <td style="width:120px;">
                                     <p class="text-center bold text-gray-700 px-2 py-1">
-                                        <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
+                                        <img title="<?php echo $price['username'] ?>" class="user-img mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="user-img">
                                     </p>
                                 </td>
                                 </tr>
@@ -304,7 +304,7 @@ if (isset($_POST['user'])) {
                                             <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
                                             <td class="tiny-text p-2"><a target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                             <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
-                                            <td style="width: 50px;" class="tiny-text p-2"><img class="userImage mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
+                                            <td style="width: 50px;" class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
                                         <?php
                                     }
                                 }

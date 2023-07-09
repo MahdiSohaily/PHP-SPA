@@ -60,18 +60,32 @@ html {
 }
 
 img.user-img {
-  margin: 5px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: auto;
 }
 
-.test-error {
-  color: orange;
-  font-size: 40px;
-  text-align: center;
+td {
+  padding: 3px 5px;
 }
 
-/* tbody tr:nth-child(odd) {
-  background-color: red !important;
-} */
+.py-2 {
+  padding-block: 5px;
+}
+
+.p-2 {
+  padding: 10px;
+}
+
+.labeled {
+  background-color: red;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  padding-inline: 5px;
+  font-size: 14px;
+}
 
 .bg-white {
   background-color: white !important;
@@ -97,4 +111,8 @@ thead {
 th {
   color: white;
   padding: 10px;
+}
+
+#fullpage {
+  position: relative;
 }
