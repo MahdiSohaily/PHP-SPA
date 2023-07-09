@@ -191,7 +191,7 @@
                          <th style="width: 300px;" scope="col" class="px-3 py-2 text-white text-right">
                              مشتری
                          </th>
-                         <th scope="col" class="px-3 py-2 text-white text-right">
+                         <th style="width: 80px !important" scope="col" class="px-3 py-2 text-white text-right">
                              قیمت
                          </th>
                          <th scope="col" class="px-3 py-2 text-white text-right">
@@ -240,7 +240,7 @@
                                          <?php echo $price['name'] . ' ' . $price['family'] ?>
                                      </p>
                                  </td>
-                                 <td class="tiny-text bold px-1">
+                                 <td style="width: 100px;" class="tiny-text bold px-1">
                                      <p class="text-right bold text-gray-700 px-2 py-1">
                                          <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                                      </p>
@@ -279,11 +279,11 @@
                                                 $text .= "$hours ساعت ";
                                             }
 
-                                            if ($minutes) {
+                                            if (!$days && $minutes) {
                                                 $text .= "$minutes دقیقه ";
                                             }
 
-                                            if ($seconds) {
+                                            if (!$days && !$hours && $seconds) {
                                                 $text .= "$seconds ثانیه ";
                                             }
 
