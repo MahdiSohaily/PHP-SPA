@@ -24,10 +24,10 @@ if (isset($_GET['user'])) {
 <div class="bg-white">
     <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
     <i onclick="closeFullscreen()" class="large material-icons">border_clear</i>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-2 lg:gap-2 lg:p-2 overflow-auto bg-white">
-        <div class="bg-white">
+    <div class="d-grid">
+        <div class="div1">
             <h2 class="title">تماس های ورودی</h2>
-            <table class="border text-sm bg-white custom-table mb-2 p-3">
+            <table class="">
                 <thead>
                     <tr>
                         <th class="bg-violet-800 text-white text-sm px-5 py-2">شماره</th>
@@ -190,7 +190,7 @@ if (isset($_GET['user'])) {
                 ?>
             </table>
         </div>
-        <div class="">
+        <div class="div2">
             <h2 class="title">آخرین قیمت های داده شده</h2>
             <table class="border text-sm bg-white custom-table mb-2 p-3">
                 <thead class="font-medium bg-green-600">
@@ -311,11 +311,11 @@ if (isset($_GET['user'])) {
                 </tbody>
             </table>
         </div>
-        <div class="">
+        <div class="div3">
             <h2 class="title">آخرین استعلام ها</h2>
             <div class="">
 
-                <table class="border text-sm bg-white custom-table mb-2 p-3">
+                <table class="border text-sm bg-white custom-table mb-2 p-3 ">
                     <thead>
                         <tr class="tiny-text bg-violet-800 text-white">
                             <th class="p-2">مشتری</th>
@@ -407,7 +407,7 @@ if (isset($_GET['user'])) {
                 </table>
             </div>
         </div>
-        <div class="">
+        <div class="div4">
             <h2 class="title">آخرین قیمت های گرفته شده از بازار</h2>
             <div class="">
 

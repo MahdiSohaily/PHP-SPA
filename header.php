@@ -130,12 +130,9 @@ echo "<title>$title</title>";
     </style>
     <?php
 
-    if ($_SESSION["username"] == 'tv') {
 
-        $var = rand();
+    echo   "<link rel='stylesheet' href='css/tv.css?v=543' type='text/css' media='all' /> ";
 
-        echo   "<link rel='stylesheet' href='css/tv.css?v=543' type='text/css' media='all' /> ";
-    }
     ?>
 </head>
 
