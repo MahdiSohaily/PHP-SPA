@@ -8,6 +8,19 @@ if (isset($_GET['user'])) {
     $user  = getinternal($_SESSION["id"]);
 }
 ?>
+<script>
+    function closeFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            /* IE11 */
+            document.msExitFullscreen();
+        }
+    }
+</script>
 <div class="bg-white">
     <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
     <i onclick="closeFullscreen()" class="large material-icons">border_clear</i>
@@ -469,18 +482,6 @@ if (isset($_GET['user'])) {
         } else if (elem.msRequestFullscreen) {
             /* IE11 */
             elem.msRequestFullscreen();
-        }
-    }
-
-    function closeFullscreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            /* Safari */
-            document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-            /* IE11 */
-            document.msExitFullscreen();
         }
     }
 </script>

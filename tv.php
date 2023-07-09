@@ -479,6 +479,18 @@
          }
      }
 
+     function closeFullscreen() {
+         if (document.exitFullscreen) {
+             document.exitFullscreen();
+         } else if (document.webkitExitFullscreen) {
+             /* Safari */
+             document.webkitExitFullscreen();
+         } else if (document.msExitFullscreen) {
+             /* IE11 */
+             document.msExitFullscreen();
+         }
+     }
+
      setInterval(() => {
          var params = new URLSearchParams();
          params.append('historyAjax', 'historyAjax');
