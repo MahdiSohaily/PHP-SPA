@@ -2,8 +2,8 @@
 require_once './php/function.php';
 require_once './php/jdf.php';
 require_once './config/database.php';
-if (isset($_GET['user'])) {
-    $user = $_GET['user'];
+if (isset($_POST['user'])) {
+    $user = $_POST['user'];
 } else {
     $user  = getinternal($_SESSION["id"]);
 }

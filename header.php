@@ -49,6 +49,8 @@ echo "<title>$title</title>";
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="css/jquery.tagselect.css?v=<?php echo (rand()) ?>" type="text/css" media="all" />
     <link rel="stylesheet" href="css/jquery.tagselect2.css?v=<?php echo (rand()) ?>" type="text/css" media="all" />

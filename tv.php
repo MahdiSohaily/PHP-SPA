@@ -9,7 +9,7 @@
         $user  = getinternal($_SESSION["id"]);
     }
     ?>
- <div id="fullpage" class="bg-white">
+ <div id="fullpage" class="bg-white" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
      <div class="your-user">
          <div class="your-interval">داخلی شما</div>
@@ -189,19 +189,19 @@
              <table class="border text-sm bg-white custom-table mb-2 p-3">
                  <thead class="font-medium bg-green-600">
                      <tr>
-                         <th style="width: 300px;" scope="col" class="px-3 py-2 text-white text-right">
+                         <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
                              مشتری
                          </th>
-                         <th style="width: 80px !important" scope="col" class="px-3 py-2 text-white text-right">
+                         <th style="width: 80px !important" scope="col" class="px-3 py-2 tiny-text text-white text-right">
                              قیمت
                          </th>
-                         <th scope="col" class="px-3 py-2 text-white text-right">
+                         <th scope="col" class="px-3 py-2 tiny-text text-white text-right">
                              کد فنی
                          </th>
-                         <th scope="col" class="px-3 py-2 text-white text-center">
+                         <th scope="col" class="px-3 py-2 tiny-text text-white text-center">
                              کاربر
                          </th>
-                         <th style="width: 300px;" scope="col" class="px-3 py-2 text-white text-right">
+                         <th style="width: 300px;" scope="col" class="px-3 py-2 tiny-text text-white text-right">
                              زمان
                          </th>
                      </tr>
@@ -494,6 +494,7 @@
      setInterval(() => {
          var params = new URLSearchParams();
          params.append('historyAjax', 'historyAjax');
+         params.append('user', elem.getAttribute('data-user'));
 
          axios.post("./tvAjax.php", params)
              .then(function(response) {
