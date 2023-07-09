@@ -333,7 +333,7 @@
                              <th class="p-2">کد فنی</th>
                              <th class="p-2">فروشنده</th>
                              <th class="p-2">قیمت</th>
-                             <th class="p-2">زمان</th>
+                             <th style="width: 70px;" class="p-2">زمان</th>
                          </tr>
                      </thead>
                      <?php
@@ -423,5 +423,5 @@
              .catch(function(error) {
                  console.log(error);
              });
-     }, 700);
+     }, 7000);
  </script>
