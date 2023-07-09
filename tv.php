@@ -58,9 +58,9 @@
                     ?>
                                  <tbody>
                                      <tr class="odd:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer">
-                                         <td class="py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                         <td class="p-2"><?php echo $name ?> <?php echo $family ?></td>
-                                         <td class="p-2">
+                                         <td class=" tiny-text py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                         <td class=" tiny-text p-2"><?php echo $name ?> <?php echo $family ?></td>
+                                         <td class=" tiny-text p-2">
                                              <?php
                                                 $gphone = substr($phone, 1);
                                                 $sql3 = "SELECT * FROM google WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%' OR mob3 LIKE '%" . $gphone . "%'  ";
@@ -83,7 +83,7 @@
                                                 }
                                                 ?>
                                          </td>
-                                         <td class="p-2">
+                                         <td class=" tiny-text p-2">
                                              <?php
                                                 $gphone = substr($phone, 1);
                                                 $sql4 = "SELECT * FROM mahak WHERE mob1 LIKE '%" . $gphone . "%' OR mob2 LIKE '%" . $gphone . "%'   ";
@@ -106,7 +106,7 @@
                                                     }
                                                 }
                                                 ?></td>
-                                         <td class="p-2"><?php echo $jalali_time ?></td>
+                                         <td class=" tiny-text p-2"><?php echo $jalali_time ?></td>
                                          <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
                                      </tr>
                                  </tbody>
