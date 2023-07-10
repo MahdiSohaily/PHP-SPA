@@ -68,7 +68,6 @@ if ($isValidCustomer) {
         </div>
         <div class="accordion">
             <?php
-
             foreach ($explodedCodes as $code_index => $code) {
             ?>
                 <input type="checkbox" checked="true" name="panel" id="<?php echo $code ?>" class="hidden">
@@ -111,6 +110,9 @@ if ($isValidCustomer) {
                                                         </li>
                                                     <?php } ?>
                                                 </ul>
+                                                <p>
+                                                    <?php echo $information['relationInfo']['description'] ?>
+                                                </p>
                                             </div>
                                         <?php } else {
                                         ?>
