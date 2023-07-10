@@ -129,95 +129,95 @@ function format_interval(DateInterval $interval)
     </div>
     <div class="rtl col-7  mb-5">
         <h2 class="text-xl py-2">آخرین استعلام ها</h2>
-            <table class="min-w-full text-sm bg-white custom-table mb-2 p-3">
-                <thead class=" bg-green-600">
-                    <tr>
-                        <th scope="col" class="px-3 py-2 text-white text-right">
-                            مشتری
-                        </th>
-                        <th scope="col" class="px-3 py-2 text-white text-right">
-                            تلفن
-                        </th>
-                        <th scope="col" class="px-3 py-2 text-white text-right">
-                            اطلاعات استعلام
-                        </th>
-                        <th scope="col" class="px-3 py-2 text-white text-center">
-                            کاربر
-                        </th>
-                        <th scope="col" class="px-3 py-2 text-white text-right">
-                            زمان
-                        </th>
-                    </tr>
-                </thead>
+        <table class="min-w-full text-sm bg-white custom-table mb-2 p-3">
+            <thead class=" bg-green-600">
+                <tr>
+                    <th scope="col" class="px-3 py-2 text-white text-right">
+                        مشتری
+                    </th>
+                    <th scope="col" class="px-3 py-2 text-white text-right">
+                        تلفن
+                    </th>
+                    <th scope="col" class="px-3 py-2 text-white text-right">
+                        اطلاعات استعلام
+                    </th>
+                    <th scope="col" class="px-3 py-2 text-white text-center">
+                        کاربر
+                    </th>
+                    <th scope="col" class="px-3 py-2 text-white text-right">
+                        زمان
+                    </th>
+                </tr>
+            </thead>
 
-                <?php
+            <?php
 
-                $sql2 = "SELECT * FROM callcenter.record ORDER BY  time DESC LIMIT 350  ";
-                $result2 = mysqli_query($conn, $sql2);
-                if (mysqli_num_rows($result2) > 0) {
-                    while ($row2 = mysqli_fetch_assoc($result2)) {
-                        $time = $row2['time'];
-                        $callinfo = $row2['callinfo'];
-                        $user = $row2['user'];
-                        $phone = $row2['phone'];
+            $sql2 = "SELECT * FROM callcenter.record ORDER BY  time DESC LIMIT 350  ";
+            $result2 = mysqli_query($conn, $sql2);
+            if (mysqli_num_rows($result2) > 0) {
+                while ($row2 = mysqli_fetch_assoc($result2)) {
+                    $time = $row2['time'];
+                    $callinfo = $row2['callinfo'];
+                    $user = $row2['user'];
+                    $phone = $row2['phone'];
 
-                        $sql = "SELECT * FROM callcenter.customer WHERE phone LIKE '" . $phone . "%'";
-                        $result = mysqli_query($conn, $sql);
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $name = $row['name'];
-                                $family = $row['family']; ?>
-                                <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
-                                    <td class="px-2 py-2"><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo ($name . " " . $family) ?></a></td>
-                                    <td><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                    <td class="px-2 py-2"><?php echo nl2br($callinfo) ?></td>
-                                    <td class="px-2 py-2"><img class="userImage mt-1" src="../../userimg/<?php echo $user ?>.jpg" />
-                                <?php
-                            }
+                    $sql = "SELECT * FROM callcenter.customer WHERE phone LIKE '" . $phone . "%'";
+                    $result = mysqli_query($conn, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $name = $row['name'];
+                            $family = $row['family']; ?>
+                            <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
+                                <td class="px-2 py-2"><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo ($name . " " . $family) ?></a></td>
+                                <td><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                <td class="px-2 py-2"><?php echo nl2br($callinfo) ?></td>
+                                <td class="px-2 py-2"><img class="userImage mt-1" src="../../userimg/<?php echo $user ?>.jpg" />
+                            <?php
                         }
-
-                        date_default_timezone_set('Asia/Tehran');
-                        $now = new DateTime(); // current date time
-                        $date_time = new DateTime($time); // date time from string
-                        $interval = $now->diff($date_time); // difference between two date times
-                        $days = $interval->format('%a'); // difference in days
-                        $hours = $interval->format('%h'); // difference in hours
-                        $minutes = $interval->format('%i'); // difference in minutes
-                        $seconds = $interval->format('%s'); // difference in seconds
-
-                        $text = '';
-
-                        if ($days) {
-                            $text .= " $days روز و ";
-                        }
-
-                        if ($hours) {
-                            $text .= "$hours ساعت ";
-                        }
-
-                        if (!$days && $minutes) {
-                            $text .= "$minutes دقیقه ";
-                        }
-
-                        if (!$days && !$hours && $seconds) {
-                            $text .= "$seconds ثانیه ";
-                        }
-
-                        $text = "$text قبل";
-
-                                ?>
-                                    </td>
-
-                                    <td class=" record-time"><?php echo $text; ?></td>
-                                </tr>
-                        <?php
-
                     }
-                } else {
-                    echo '<td colspan="4">هیچ اطلاعاتی موجود نیست</td>';
+
+                    date_default_timezone_set('Asia/Tehran');
+                    $now = new DateTime(); // current date time
+                    $date_time = new DateTime($time); // date time from string
+                    $interval = $now->diff($date_time); // difference between two date times
+                    $days = $interval->format('%a'); // difference in days
+                    $hours = $interval->format('%h'); // difference in hours
+                    $minutes = $interval->format('%i'); // difference in minutes
+                    $seconds = $interval->format('%s'); // difference in seconds
+
+                    $text = '';
+
+                    if ($days) {
+                        $text .= " $days روز و ";
+                    }
+
+                    if ($hours) {
+                        $text .= "$hours ساعت ";
+                    }
+
+                    if (!$days && $minutes) {
+                        $text .= "$minutes دقیقه ";
+                    }
+
+                    if (!$days && !$hours && $seconds) {
+                        $text .= "$seconds ثانیه ";
+                    }
+
+                    $text = "$text قبل";
+
+                            ?>
+                                </td>
+
+                                <td class="px-2 py-2"><?php echo $text; ?></td>
+                            </tr>
+                    <?php
+
                 }
-                        ?>
-            </table>
+            } else {
+                echo '<td colspan="4">هیچ اطلاعاتی موجود نیست</td>';
+            }
+                    ?>
+        </table>
     </div>
 </div>
 <script>
