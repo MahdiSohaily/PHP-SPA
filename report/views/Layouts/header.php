@@ -194,13 +194,57 @@ $_SESSION["user_id"] = $_SESSION["id"];
                 </a>
             </nav>
             <!-- Page Content -->
-            <main>
-                <div class="flex">
+            <main class="pt-12">
+                <div class="rtl flex justify-between bg-gray-200 fixed w-full shadow-lg" style="top: 0; z-index:100">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
+                    <ul class="flex mr-20 py-3">
+                        <li>
+                            <a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="../cartable.php">
+                                <i class="fas fa-layer-group"></i>
+                                کارتابل
+                            </a>
+                        </li>
+                        <li>
+                            <a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="../bazar.php">
+                                <i class="fas fa-phone-volume"></i>
+                                تماس عمومی
+                            </a>
+                        </li>
+                        <li><a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="../bazar2.php">
+                                <i class="fas fa-phone-volume"></i>
+                                تماس با بازار
+                            </a>
+                        </li>
+                        <li>
+                            <a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="../estelam-list.php">
+                                <i class="fas fa-arrow-down"></i>
+                                <i class="fas fa-dollar-sign"></i>
+                                قیمت های گرفته شده
+                            </a>
+                        </li>
+                        <li>
+                            <a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="../shomarefaktor.php">
+                                <i class="fas fa-feather-alt"></i>
+                                شماره فاکتور
+                            </a>
+                        </li>
+                        <li>
+                            <a target="_blank" class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" href="./givePrice.php">
+                                <i class="fas fa-feather-alt"></i>
+                                قیمت دهی دستوری
+                            </a>
+                        </li>
+                        <li>
+                            <a class="px-4 py-2 bg-violet-600 ml-2 rounded-md text-white text-xs" target="_blank" href="./GivenPriceHistory.php">
+                                <i class="fas fa-history"></i>
+                                تاریخچه
+                            </a>
+                        </li>
+                    </ul>
 
                     <div class=" flex items-top p-2">
                         <img class="userImage mx-2" src="../../userimg/<?php echo $_SESSION['id'] ?>.jpg" alt="userimage">
-                        <a id="active" class="hidden" href="./notification.php">
+                        <a id="active" class="hidden" href="./report/notification.php">
                             <i class="material-icons hover:cursor-pointer notify ">notifications_active</i>
                         </a>
                         <a id="deactive" class="" href="./notification.php">
