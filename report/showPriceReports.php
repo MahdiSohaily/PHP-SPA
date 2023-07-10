@@ -110,9 +110,12 @@ if ($isValidCustomer) {
                                                         </li>
                                                     <?php } ?>
                                                 </ul>
-                                                <p class="bg-red-500 text-white">
-                                                    <?php echo $information['relationInfo']['description'] ?>
-                                                </p>
+                                                <?php if ($information['relationInfo']['description'] !== '') { ?>
+                                                    <p>توضیحات:</p>
+                                                    <p class="bg-red-500 text-white rounded-md p-2 shake">
+                                                        <?php echo $information['relationInfo']['description'] ?>
+                                                    </p>
+                                                <?php } ?>
                                             </div>
                                         <?php } else {
                                         ?>
