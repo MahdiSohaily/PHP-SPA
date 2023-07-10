@@ -208,7 +208,7 @@ function format_interval(DateInterval $interval)
                             ?>
                                 </td>
 
-                                <td class="px-2 py-2"><?php echo $text; ?></td>
+                                <td style=" width: 150px;" class="px-2 py-2"><?php echo $text; ?></td>
                             </tr>
                     <?php
 
