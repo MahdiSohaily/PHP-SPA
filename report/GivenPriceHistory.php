@@ -30,7 +30,7 @@ function format_interval(DateInterval $interval)
 <!-- START NEWLY ADDED SECTION BY MAHDI REZAEI -->
 <div class="row px-2">
     <div class="rtl col-5  mb-5">
-        <h2 class="text-xl py-2 bold">آخرین قیمت های داده شده</h2>
+        <h2 class="text-xl py-2">آخرین قیمت های داده شده</h2>
         <table class="min-w-full text-left text-sm bg-white custom-table mb-2 p-3">
             <thead class="font-medium bg-green-600">
                 <tr>
@@ -60,26 +60,26 @@ function format_interval(DateInterval $interval)
                         ?>
                             <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
                             <?php  } ?>
-                            <td class="tiny-text bold px-1">
-                                <p class="text-right bold text-gray-700 px-2 py-1">
+                            <td class=" px-1">
+                                <p class="text-right text-gray-700 px-2 py-1">
                                     <?php echo $price['name'] . ' ' . $price['family'] ?>
                                 </p>
                             </td>
-                            <td class="tiny-text bold px-1">
-                                <p class="text-right bold text-gray-700 px-2 py-1">
+                            <td class=" px-1">
+                                <p class="text-right text-gray-700 px-2 py-1">
                                     <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                                 </p>
                             </td>
-                            <td class="tiny-text bold px-1">
-                                <p class="text-right bold text-gray-700 px-2 py-1">
+                            <td class=" px-1">
+                                <p class="text-right text-gray-700 px-2 py-1">
                                     <?php echo $price['partnumber']; ?>
                                 </p>
                             </td>
-                            <td class="tiny-text bold record-user">
+                            <td class=" record-user">
                                 <img title="<?php echo $price['username'] ?>" class="userImage mx-auto mt-1" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage" />
                             </td>
-                            <td class="tiny-text bold time">
-                                <p class="text-right bold text-gray-700 px-2 py-1">
+                            <td class=" time">
+                                <p class="text-right text-gray-700 px-2 py-1">
                                     <?php
                                     date_default_timezone_set("Asia/Tehran");
                                     $create = date($price['created_at']);
@@ -128,11 +128,9 @@ function format_interval(DateInterval $interval)
         </table>
     </div>
     <div class="rtl col-7  mb-5">
-        <h2 class="text-xl py-2 bold">آخرین استعلام ها</h2>
-        <div class="box-keeper">
-
-            <table class="min-w-full bg-white">
-                <thead class=" font-medium bg-green-600">
+        <h2 class="text-xl py-2">آخرین استعلام ها</h2>
+            <table class="min-w-full text-sm bg-white custom-table mb-2 p-3">
+                <thead class=" bg-green-600">
                     <tr>
                         <th scope="col" class="px-3 py-2 text-white text-right">
                             مشتری
@@ -170,10 +168,10 @@ function format_interval(DateInterval $interval)
                                 $name = $row['name'];
                                 $family = $row['family']; ?>
                                 <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
-                                    <td class="tiny-text bold"><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo ($name . " " . $family) ?></a></td>
+                                    <td class="px-2 py-2"><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo ($name . " " . $family) ?></a></td>
                                     <td><a target="_blank" href="../main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
-                                    <td class="tiny-text bold record-info"><?php echo nl2br($callinfo) ?></td>
-                                    <td class="tiny-text bold record-user"><img class="userImage" src="../../userimg/<?php echo $user ?>.jpg" />
+                                    <td class="px-2 py-2"><?php echo nl2br($callinfo) ?></td>
+                                    <td class="px-2 py-2"><img class="userImage mt-1" src="../../userimg/<?php echo $user ?>.jpg" />
                                 <?php
                             }
                         }
@@ -210,7 +208,7 @@ function format_interval(DateInterval $interval)
                                 ?>
                                     </td>
 
-                                    <td class="tiny-text bold record-time"><?php echo $text; ?></td>
+                                    <td class=" record-time"><?php echo $text; ?></td>
                                 </tr>
                         <?php
 
@@ -220,7 +218,6 @@ function format_interval(DateInterval $interval)
                 }
                         ?>
             </table>
-        </div>
     </div>
 </div>
 <script>

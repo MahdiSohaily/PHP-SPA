@@ -11,28 +11,28 @@ if (isset($_POST['historyAjax'])) {
             ?>
                 <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
                 <?php  } ?>
-                <td class="tiny-text bold px-1">
-                    <p class="text-right bold text-gray-700 px-2 py-1">
+                <td class=" px-1">
+                    <p class="text-right text-gray-700 px-2 py-1">
                         <?php echo $price['name'] . ' ' . $price['family'] ?>
                     </p>
                 </td>
-                <td class="tiny-text bold px-1">
-                    <p class="text-right bold text-gray-700 px-2 py-1">
+                <td class=" px-1">
+                    <p class="text-right text-gray-700 px-2 py-1">
                         <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                     </p>
                 </td>
-                <td class="tiny-text bold px-1">
-                    <p class="text-right bold text-gray-700 px-2 py-1">
+                <td class=" px-1">
+                    <p class="text-right text-gray-700 px-2 py-1">
                         <?php echo $price['partnumber']; ?>
                     </p>
                 </td>
                 <td style="width:120px;">
-                    <p class="text-center bold text-gray-700 px-2 py-1">
+                    <p class="text-center text-gray-700 px-2 py-1">
                         <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
                     </p>
                 </td>
-                <td class="tiny-text bold time">
-                    <p class="text-right bold text-gray-700 px-2 py-1">
+                <td class=" time">
+                    <p class="text-right text-gray-700 px-2 py-1">
                         <?php
                         date_default_timezone_set("Asia/Tehran");
                         $create = date($price['created_at']);
