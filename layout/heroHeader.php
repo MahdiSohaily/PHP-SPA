@@ -254,7 +254,7 @@ $title = '';
                 };
             </script>
             <!-- Page Content -->
-            <main class="pt-12">
+            <main class="pt-14">
                 <div id="topNav" class="flex justify-between bg-gray-200 fixed w-full shadow-lg" style="top: 0; z-index:100">
                     <i class="p-2 right-0 material-icons hover:cursor-pointer fixed" onclick="toggleNav()">menu</i>
                     <ul class="flex mr-20 py-3">
