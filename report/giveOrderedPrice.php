@@ -168,18 +168,32 @@ if ($isValidCustomer) {
                                                                         ?>
                                                                                 <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
                                                                                     <?php echo $brand ?>
-                                                                                    <div class="custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
-                                                                                        <?php
-                                                                                        foreach ($stockInfo[$index][$brand] as $iterator => $item) {
-                                                                                        ?>
-                                                                                            <div>
-                                                                                                <?php if ($item !== 0) { ?>
-                                                                                                    <p><?php echo $iterator . ' : ' . $item ?></p>
-                                                                                                <?php } ?>
-                                                                                            </div>
-                                                                                        <?php
-                                                                                        }
-                                                                                        ?>
+                                                                                    <div class="rtl custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
+                                                                                        <table class="min-w-full text-sm font-light p-2">
+                                                                                            <thead class="font-medium bg-violet-800">
+                                                                                                <tr>
+                                                                                                    <th class="text-right px-3 py-2">فروشنده</th>
+                                                                                                    <th class="text-right px-3 py-2">مقدار موجود</th>
+                                                                                                    <th class="text-right px-3 py-2">تاریخ</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <?php
+                                                                                                foreach ($stockInfo[$index][$brand] as $iterator => $item) {
+                                                                                                ?>
+                                                                                                    <?php if ($item !== 0) { ?>
+                                                                                                        <tr class="odd:bg-gray-500 bg-gray-600">
+                                                                                                            <td class="px-3 py-2"><?php echo $iterator ?></td>
+                                                                                                            <td class="px-3 py-2"><?php echo $item ?></td>
+                                                                                                            <td class="px-3 py-2"><?php echo $item ?></td>
+                                                                                                        </tr>
+                                                                                                    <?php } ?>
+                                                                                                <?php
+                                                                                                }
+                                                                                                ?>
+                                                                                            </tbody>
+
+                                                                                        </table>
                                                                                     </div>
                                                                                 </th>
                                                                         <?php }
@@ -339,15 +353,15 @@ if ($isValidCustomer) {
                                                                             if ($days) {
                                                                                 $text .= " $days روز و ";
                                                                             }
-                                                        
+
                                                                             if ($hours) {
                                                                                 $text .= "$hours ساعت ";
                                                                             }
-                                                        
+
                                                                             if (!$days && $minutes) {
                                                                                 $text .= "$minutes دقیقه ";
                                                                             }
-                                                        
+
                                                                             if (!$days && !$hours && $seconds) {
                                                                                 $text .= "$seconds ثانیه ";
                                                                             }
@@ -358,7 +372,7 @@ if ($isValidCustomer) {
                                                                     </td>
                                                                 </tr>
 
-                                                           
+
                                                         <?php }
                                                     } ?>
                                                     <?php } else { ?>

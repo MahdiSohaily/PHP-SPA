@@ -33,7 +33,10 @@ switch (basename($_SERVER['PHP_SELF'])) {
     case 'notification.php':
         $title = "نوتیفیکشن ها";
         break;
- 
+    case 'giveOrderedPrice.php':
+        $title = "قیمت دستوری";
+        break;
+
 
     default:
         $title = "سامانه یدک شاپ";
@@ -75,9 +78,21 @@ switch (basename($_SERVER['PHP_SELF'])) {
             transform: translateX(-50%);
             padding: 10px;
             border-radius: 5px;
-            background-color: seagreen;
-            width: 200px;
+            width: 300px;
             z-index: 100000000;
+            background-color: #9899ef;
+        }
+
+        .custome-tooltip::after {
+            content: " ";
+            position: absolute;
+            bottom: 100%;
+            /* At the top of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #9899ef transparent;
         }
 
         .custome-tooltip-2 {
