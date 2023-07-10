@@ -276,7 +276,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
 
                     <div class=" flex items-top p-2">
                         <img class="userImage mx-2" src="../../userimg/<?php echo $_SESSION['id'] ?>.jpg" alt="userimage">
-                        <a id="active" class="hidden" href="./report/notification.php">
+                        <a id="active" class="hidden" href="./notification.php">
                             <i class="material-icons hover:cursor-pointer notify ">notifications_active</i>
                         </a>
                         <a id="deactive" class="" href="./notification.php">
