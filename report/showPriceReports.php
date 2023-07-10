@@ -339,16 +339,16 @@ if ($isValidCustomer) {
                                                                             if ($days) {
                                                                                 $text .= " $days روز و ";
                                                                             }
-
+                                                        
                                                                             if ($hours) {
                                                                                 $text .= "$hours ساعت ";
                                                                             }
-
-                                                                            if ($minutes) {
+                                                        
+                                                                            if (!$days && $minutes) {
                                                                                 $text .= "$minutes دقیقه ";
                                                                             }
-
-                                                                            if ($seconds) {
+                                                        
+                                                                            if (!$days && !$hours && $seconds) {
                                                                                 $text .= "$seconds ثانیه ";
                                                                             }
 

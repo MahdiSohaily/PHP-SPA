@@ -10,6 +10,35 @@ require_once './database/connect.php';
 
 date_default_timezone_set("Asia/Tehran");
 $_SESSION["user_id"] = $_SESSION["id"];
+
+switch (basename($_SERVER['PHP_SELF'])) {
+    case 'index.php':
+        $title = "جستجوی اجناس";
+        break;
+    case 'GivenPriceHistory.php':
+        $title = "تاریخچه";
+        break;
+    case 'givePrice.php':
+        $title = "قیمت دهی دستوری";
+        break;
+    case 'showGoods.php':
+        $title = "لیست اجناس";
+        break;
+    case 'showRates.php':
+        $title = "لیست نرخ های ارز";
+        break;
+    case 'relationships.php':
+        $title = "تعریف رابطه اجناس";
+        break;
+    case 'notification.php':
+        $title = "نوتیفیکشن ها";
+        break;
+ 
+
+    default:
+        $title = "سامانه یدک شاپ";
+        break;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fe">
@@ -21,6 +50,7 @@ $_SESSION["user_id"] = $_SESSION["id"];
     <meta name="description" content="This is a simple CMS for tracing goods based on thier serail or part number.">
     <meta name="author" content="Mahdi Rezaei">
 
+    <title><?php echo $title ?></title>
     <title inertia>Yadak Shop</title>
 
     <!-- Fonts -->

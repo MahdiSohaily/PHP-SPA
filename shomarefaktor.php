@@ -14,7 +14,7 @@ if (!empty($_GET['date'])) {
 </div>
 
 <div class="shomare-faktor-box">
-    <a class="print-button" onClick="window.print()">چاپ <i class="fas fa-print"></i></a>
+    <a class="print-button hover:cursor-pointer" onClick="window.print()">چاپ <i class="fas fa-print"></i></a>
     <form>
         <label class="inline-block mr-3 pb-2 bold" for="invoice_time">زمان فاکتور</label>
         <br>
@@ -25,7 +25,7 @@ if (!empty($_GET['date'])) {
 
     <form class="shomare-faktor-form" action="php/shomare-faktor-form-save.php" method="get" autocomplete="off">
         <input class="kharidar" name="kharidar" type="text" placeholder="نام خریدار را وارد کنید ...">
-        <input class="save-shomare-faktor-form" type="submit" value=" گرفتن شماره فاکتور">
+        <input class="save-shomare-faktor-form hover:cursor-pointer" type="submit" value=" گرفتن شماره فاکتور">
     </form>
 
     <div class="shomare-faktor-result">
