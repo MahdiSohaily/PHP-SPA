@@ -161,30 +161,62 @@ $_SESSION["user_id"] = $_SESSION["id"];
         <div class="min-h-screen bg-gray-100">
             <nav id="nav" ref="nav" class="main-nav bg-white shadow-lg flex flex-col justify-between">
                 <i id="close" onclick="toggleNav()" class="material-icons absolute m-3 left-0 hover:cursor-pointer">close</i>
-                <ul class="rtl flex flex-col pt-5">
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./index.php">
+                <ul class="rtl flex flex-col pt-5 ">
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium 
+                    leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none
+                     transition duration-150 ease-in-out" href="../index.php">
+                        <i class="px-2 material-icons hover:cursor-pointer">account_balance</i>
+                        صفحه اصلی
+                    </a>
+                    <a class="cursor-pointer inline-flex 
+                    items-center py-3 pr-6 text-sm font-medium leading-5 
+                    text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none
+                     transition duration-150 ease-in-out" href="../../1402/">
+                        <i class="px-2 material-icons hover:cursor-pointer">attach_money</i>
+                        سامانه قیمت
+                    </a>
+                    <a class="cursor-pointer inline-flex items-center py-3 
+                    pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 
+                    hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../cartable-personal.php">
+                        <i class="px-2 material-icons hover:cursor-pointer">assignment_ind</i>
+                        کارتابل شخصی
+                    </a>
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm 
+                    font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white 
+                    focus:outline-none transition duration-150 ease-in-out" href="../customer-list.php">
+                        <i class="px-2 material-icons hover:cursor-pointer">assignment</i>
+                        لیست مشتریان
+                    </a>
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm 
+                    font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white 
+                    focus:outline-none transition duration-150 ease-in-out" href="../last-calling-time.php">
+                        <i class="px-2 material-icons hover:cursor-pointer">call_end</i>
+                        آخرین مکالمات
+                    </a>
+
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm 
+                    font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white 
+                    focus:outline-none transition duration-150 ease-in-out" href="./index.php">
                         <i class="px-2 material-icons hover:cursor-pointer">search</i>
                         جستجوی اجناس
                     </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./showGoods.php">
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm 
+                    font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white 
+                    focus:outline-none transition duration-150 ease-in-out" href="./showGoods.php">
                         <i class="px-2 material-icons hover:cursor-pointer">local_mall</i>
                         اجناس
                     </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./showRates.php">
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm
+                     font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white 
+                     focus:outline-none transition duration-150 ease-in-out" href="./showRates.php">
                         <i class="px-2 material-icons hover:cursor-pointer">show_chart</i>
                         نرخ های ارز
                     </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./relationships.php">
+                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm 
+                    font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white
+                     focus:outline-none transition duration-150 ease-in-out" href="./relationships.php">
                         <i class="px-2 material-icons hover:cursor-pointer">sync</i>
                         تعریف رابطه اجناس
-                    </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="./givePrice.php">
-                        <i class="px-2 material-icons hover:cursor-pointer">receipt</i>
-                        قیمت دهی دستوری
-                    </a>
-                    <a class="cursor-pointer inline-flex items-center py-3 pr-6 text-sm font-medium leading-5 text-gray-500 hover:bg-indigo-500 hover:text-white focus:outline-none transition duration-150 ease-in-out" href="../index.php">
-                        <i class="px-2 material-icons hover:cursor-pointer">call</i>
-                        مرکز تماس
                     </a>
                 </ul>
                 <!-- Authentication -->
