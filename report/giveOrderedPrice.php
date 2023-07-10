@@ -111,6 +111,8 @@ if ($isValidCustomer) {
                                                         </li>
                                                     <?php } ?>
                                                 </ul>
+                                                <p>توضیحات:</p>
+                                                <p><?php echo $information['relationInfo']['description'] ?></p>
                                             </div>
                                         <?php } else {
                                         ?>
@@ -289,7 +291,7 @@ if ($isValidCustomer) {
                                                 <?php if ($givenPrice !== null) {
                                                 ?>
                                                     <?php foreach ($givenPrice as $price) { ?>
-                                                        <?php if ($price['price'] !== null) {
+                                                        <?php if ($price['price'] !== null && $price['price'] !== '') {
                                                             if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
                                                                 <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
                                                                 <?php } else { ?>
@@ -356,12 +358,7 @@ if ($isValidCustomer) {
                                                                     </td>
                                                                 </tr>
 
-                                                            <?php } else { ?>
-                                                                <tr class="min-w-full mb-4 border-b-2 border-white">
-                                                                    <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                                                                        !! موردی برای نمایش وجود ندارد
-                                                                    </td>
-                                                                </tr>
+                                                           
                                                         <?php }
                                                     } ?>
                                                     <?php } else { ?>
