@@ -26,10 +26,8 @@ if (isset($_POST['historyAjax'])) {
                         <?php echo $price['partnumber']; ?>
                     </p>
                 </td>
-                <td style="width:120px;">
-                    <p class="text-center text-gray-700 px-2 py-1">
-                        <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
-                    </p>
+                <td class=" record-user">
+                    <img title="<?php echo $price['username'] ?>" class="userImage mx-auto mt-1" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage" />
                 </td>
                 <td class=" time">
                     <p class="text-right text-gray-700 px-2 py-1">
@@ -77,7 +75,6 @@ if (isset($_POST['historyAjax'])) {
                 </td>
             </tr>
         <?php } ?>
-
     <?php
 
 }

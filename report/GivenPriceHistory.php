@@ -28,8 +28,8 @@ function format_interval(DateInterval $interval)
 }
 ?>
 <!-- START NEWLY ADDED SECTION BY MAHDI REZAEI -->
-<div class="row px-3">
-    <div class="rtl col-5  mb-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-2">
+    <div class="rtl mb-5">
         <h2 class="text-xl py-2">آخرین قیمت های داده شده</h2>
         <table class="min-w-full text-left text-sm bg-white custom-table mb-2 p-3">
             <thead class="font-medium bg-green-600">
@@ -127,7 +127,7 @@ function format_interval(DateInterval $interval)
             </tbody>
         </table>
     </div>
-    <div class="rtl col-7  mb-5">
+    <div class="rtl mb-5">
         <h2 class="text-xl py-2">آخرین استعلام ها</h2>
         <table class="min-w-full text-sm bg-white custom-table mb-2 p-3">
             <thead class=" bg-green-600">
