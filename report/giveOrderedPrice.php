@@ -205,7 +205,7 @@ if ($isValidCustomer) {
                                                                         <?php }
                                                                             }
                                                                         } else {
-                                                                            echo '<p class="text-red-400 text-center bold">!!! عدم مجودیت</p>';
+                                                                            echo '<p class="text-red-400 text-center bold">!!! عدم موجودیت</p>';
                                                                         }  ?>
                                                                     </tr>
                                                                 </thead>
