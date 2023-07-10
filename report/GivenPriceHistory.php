@@ -75,10 +75,8 @@ function format_interval(DateInterval $interval)
                                     <?php echo $price['partnumber']; ?>
                                 </p>
                             </td>
-                            <td style="width:120px;">
-                                <p class="text-center bold text-gray-700 px-2 py-1">
-                                    <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
-                                </p>
+                            <td class="tiny-text bold record-user">
+                                <img title="<?php echo $price['username'] ?>" class="userImage mx-auto mt-1" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage" />
                             </td>
                             <td class="tiny-text bold time">
                                 <p class="text-right bold text-gray-700 px-2 py-1">
