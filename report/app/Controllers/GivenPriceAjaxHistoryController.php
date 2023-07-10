@@ -11,17 +11,17 @@ if (isset($_POST['historyAjax'])) {
             ?>
                 <tr class=" min-w-full mb-1 ?> odd:bg-gray-200">
                 <?php  } ?>
-                <td class="px-1">
+                <td class="tiny-text bold px-1">
                     <p class="text-right bold text-gray-700 px-2 py-1">
                         <?php echo $price['name'] . ' ' . $price['family'] ?>
                     </p>
                 </td>
-                <td class="px-1">
+                <td class="tiny-text bold px-1">
                     <p class="text-right bold text-gray-700 px-2 py-1">
                         <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                     </p>
                 </td>
-                <td class="px-1">
+                <td class="tiny-text bold px-1">
                     <p class="text-right bold text-gray-700 px-2 py-1">
                         <?php echo $price['partnumber']; ?>
                     </p>
@@ -31,7 +31,7 @@ if (isset($_POST['historyAjax'])) {
                         <img title="<?php echo $price['username'] ?>" class="userImage mx-auto" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
                     </p>
                 </td>
-                <td class="time">
+                <td class="tiny-text bold time">
                     <p class="text-right bold text-gray-700 px-2 py-1">
                         <?php
                         date_default_timezone_set("Asia/Tehran");
@@ -55,11 +55,11 @@ if (isset($_POST['historyAjax'])) {
                             $text .= "$hours ساعت ";
                         }
 
-                        if ($minutes) {
+                        if (!$days && $minutes) {
                             $text .= "$minutes دقیقه ";
                         }
 
-                        if ($seconds) {
+                        if (!$days && !$hours && $seconds) {
                             $text .= "$seconds ثانیه ";
                         }
 

@@ -29,7 +29,7 @@ function format_interval(DateInterval $interval)
 ?>
 <!-- START NEWLY ADDED SECTION BY MAHDI REZAEI -->
 <div class="row px-2">
-    <div class="rtl col-6  mb-5">
+    <div class="rtl col-5  mb-5">
         <h2 class="text-xl py-2 bold">آخرین قیمت های داده شده</h2>
         <table class="min-w-full text-left text-sm bg-white custom-table mb-2 p-3">
             <thead class="font-medium bg-green-600">
@@ -104,11 +104,11 @@ function format_interval(DateInterval $interval)
                                         $text .= "$hours ساعت ";
                                     }
 
-                                    if ($minutes) {
+                                    if (!$days && $minutes) {
                                         $text .= "$minutes دقیقه ";
                                     }
 
-                                    if ($seconds) {
+                                    if (!$days && !$hours && $seconds) {
                                         $text .= "$seconds ثانیه ";
                                     }
 
@@ -129,12 +129,12 @@ function format_interval(DateInterval $interval)
             </tbody>
         </table>
     </div>
-    <div class="rtl col-6  mb-5">
+    <div class="rtl col-7  mb-5">
         <h2 class="text-xl py-2 bold">آخرین استعلام ها</h2>
         <div class="box-keeper">
 
-            <table class="bg-white">
-                <thead class="font-medium bg-green-600">
+            <table class="min-w-full bg-white">
+                <thead class=" font-medium bg-green-600">
                     <tr>
                         <th scope="col" class="px-3 py-2 text-white text-right">
                             مشتری
@@ -150,9 +150,6 @@ function format_interval(DateInterval $interval)
                         </th>
                         <th scope="col" class="px-3 py-2 text-white text-right">
                             زمان
-                        </th>
-                        <th scope="col" class="px-3 py-2 text-white text-right">
-                            تاریخ
                         </th>
                     </tr>
                 </thead>
@@ -184,16 +181,38 @@ function format_interval(DateInterval $interval)
                         }
 
                         date_default_timezone_set('Asia/Tehran');
+                        $now = new DateTime(); // current date time
+                        $date_time = new DateTime($time); // date time from string
+                        $interval = $now->diff($date_time); // difference between two date times
+                        $days = $interval->format('%a'); // difference in days
+                        $hours = $interval->format('%h'); // difference in hours
+                        $minutes = $interval->format('%i'); // difference in minutes
+                        $seconds = $interval->format('%s'); // difference in seconds
 
-                        $datetime1 = new DateTime();
-                        $datetime2 = new DateTime($time);
-                        $interval = $datetime1->diff($datetime2);
+                        $text = '';
+
+                        if ($days) {
+                            $text .= " $days روز و ";
+                        }
+
+                        if ($hours) {
+                            $text .= "$hours ساعت ";
+                        }
+
+                        if (!$days && $minutes) {
+                            $text .= "$minutes دقیقه ";
+                        }
+
+                        if (!$days && !$hours && $seconds) {
+                            $text .= "$seconds ثانیه ";
+                        }
+
+                        $text = "$text قبل";
 
                                 ?>
                                     </td>
 
-                                    <td class="tiny-text bold record-time"><?php echo format_interval($interval); ?></td>
-                                    <td class="tiny-text bold record-date"><?php echo $time ?></td>
+                                    <td class="tiny-text bold record-time"><?php echo $text; ?></td>
                                 </tr>
                         <?php
 
