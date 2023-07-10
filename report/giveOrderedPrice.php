@@ -112,7 +112,9 @@ if ($isValidCustomer) {
                                                     <?php } ?>
                                                 </ul>
                                                 <p>توضیحات:</p>
-                                                <p><?php echo $information['relationInfo']['description'] ?></p>
+                                                <p class="bg-red-500 text-white rounded-md p-2">
+                                                    <?php echo $information['relationInfo']['description'] ?>
+                                                </p>
                                             </div>
                                         <?php } else {
                                         ?>
@@ -163,41 +165,46 @@ if ($isValidCustomer) {
                                                             <table class="min-w-full text-sm font-light p-2">
                                                                 <thead class="font-medium">
                                                                     <tr>
-                                                                        <?php foreach ($exist[$index] as $brand => $amount) {
-                                                                            if ($amount > 0) {
+                                                                        <?php
+                                                                        if ($exist[$index]) {
+                                                                            foreach ($exist[$index] as $brand => $amount) {
+                                                                                if ($amount > 0) {
                                                                         ?>
-                                                                                <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
-                                                                                    <?php echo $brand ?>
-                                                                                    <div class="rtl custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
-                                                                                        <table class="min-w-full text-sm font-light p-2">
-                                                                                            <thead class="font-medium bg-violet-800">
-                                                                                                <tr>
-                                                                                                    <th class="text-right px-3 py-2 tiny-text">فروشنده</th>
-                                                                                                    <th class="text-right px-3 py-2 tiny-text">مقدار موجود</th>
-                                                                                                    <th class="text-right px-3 py-2 tiny-text">تاریخ</th>
-                                                                                                </tr>
-                                                                                            </thead>
-                                                                                            <tbody>
-                                                                                                <?php
-                                                                                                foreach ($stockInfo[$index][$brand] as $iterator => $item) {
-                                                                                                ?>
-                                                                                                    <?php if ($item !== 0) { ?>
-                                                                                                        <tr class="odd:bg-gray-500 bg-gray-600">
-                                                                                                            <td class="px-3 py-2 tiny-text text-right"><?php echo $iterator ?></td>
-                                                                                                            <td class="px-3 py-2 tiny-text text-right"><?php echo $item ?></td>
-                                                                                                            <td class="px-3 py-2 tiny-text text-right"><?php echo date('Y-m-d') ?></td>
-                                                                                                        </tr>
-                                                                                                    <?php } ?>
-                                                                                                <?php
-                                                                                                }
-                                                                                                ?>
-                                                                                            </tbody>
+                                                                                    <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
+                                                                                        <?php echo $brand ?>
+                                                                                        <div class="rtl custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
+                                                                                            <table class="min-w-full text-sm font-light p-2">
+                                                                                                <thead class="font-medium bg-violet-800">
+                                                                                                    <tr>
+                                                                                                        <th class="text-right px-3 py-2 tiny-text">فروشنده</th>
+                                                                                                        <th class="text-right px-3 py-2 tiny-text">مقدار موجود</th>
+                                                                                                        <th class="text-right px-3 py-2 tiny-text">تاریخ</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <?php
+                                                                                                    foreach ($stockInfo[$index][$brand] as $iterator => $item) {
+                                                                                                    ?>
+                                                                                                        <?php if ($item !== 0) { ?>
+                                                                                                            <tr class="odd:bg-gray-500 bg-gray-600">
+                                                                                                                <td class="px-3 py-2 tiny-text text-right"><?php echo $iterator ?></td>
+                                                                                                                <td class="px-3 py-2 tiny-text text-right"><?php echo $item ?></td>
+                                                                                                                <td class="px-3 py-2 tiny-text text-right"><?php echo date('Y-m-d') ?></td>
+                                                                                                            </tr>
+                                                                                                        <?php } ?>
+                                                                                                    <?php
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </tbody>
 
-                                                                                        </table>
-                                                                                    </div>
-                                                                                </th>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </th>
                                                                         <?php }
-                                                                        } ?>
+                                                                            }
+                                                                        } else {
+                                                                            echo '<p class="text-red-400 text-center bold">!!! عدم مجودیت</p>';
+                                                                        }  ?>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
