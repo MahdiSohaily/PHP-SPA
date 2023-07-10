@@ -28,7 +28,7 @@ function format_interval(DateInterval $interval)
 }
 ?>
 <!-- START NEWLY ADDED SECTION BY MAHDI REZAEI -->
-<div class="row px-2">
+<div class="row px-3">
     <div class="rtl col-5  mb-5">
         <h2 class="text-xl py-2">آخرین قیمت های داده شده</h2>
         <table class="min-w-full text-left text-sm bg-white custom-table mb-2 p-3">
