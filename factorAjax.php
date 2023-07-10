@@ -14,7 +14,6 @@ if (isset($_POST['getFactor'])) {
 
     $sql = "SELECT * FROM shomarefaktor WHERE time < '$end' AND time >= '$start' ORDER BY shomare DESC";
 
-    echo $sql;
     $result = mysqli_query($con, $sql);
 
 
