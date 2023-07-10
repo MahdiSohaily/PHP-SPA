@@ -89,8 +89,8 @@ switch (basename($_SERVER['PHP_SELF'])) {
             bottom: 100%;
             /* At the top of the tooltip */
             left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
+            margin-left: -10px;
+            border-width: 10px;
             border-style: solid;
             border-color: transparent transparent #9899ef transparent;
         }

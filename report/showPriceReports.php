@@ -170,11 +170,11 @@ if ($isValidCustomer) {
                                                                                     <?php echo $brand ?>
                                                                                     <div class="custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
                                                                                         <table class="min-w-full text-sm font-light p-2">
-                                                                                            <thead class="font-medium">
+                                                                                            <thead class="font-medium bg-violet-800">
                                                                                                 <tr>
-                                                                                                    <th>فروشنده</th>
-                                                                                                    <th>مقدار موجود</th>
-                                                                                                    <th>تاریخ</th>
+                                                                                                    <th class="text-right px-3 py-2">فروشنده</th>
+                                                                                                    <th class="text-right px-3 py-2">مقدار موجود</th>
+                                                                                                    <th class="text-right px-3 py-2">تاریخ</th>
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
@@ -182,16 +182,16 @@ if ($isValidCustomer) {
                                                                                                 foreach ($stockInfo[$index][$brand] as $iterator => $item) {
                                                                                                 ?>
                                                                                                     <?php if ($item !== 0) { ?>
-                                                                                                        <tr>
-                                                                                                            <td><?php echo $iterator ?></td>
-                                                                                                            <td><?php echo $item ?></td>
+                                                                                                        <tr class="odd:bg-gray-500 bg-gray-600">
+                                                                                                            <td class="px-3 py-2"><?php echo $iterator ?></td>
+                                                                                                            <td class="px-3 py-2"><?php echo $item ?></td>
+                                                                                                            <td class="px-3 py-2"><?php echo $item ?></td>
                                                                                                         </tr>
                                                                                                     <?php } ?>
                                                                                                 <?php
                                                                                                 }
                                                                                                 ?>
                                                                                             </tbody>
-
                                                                                         </table>
                                                                                     </div>
                                                                                 </th>
