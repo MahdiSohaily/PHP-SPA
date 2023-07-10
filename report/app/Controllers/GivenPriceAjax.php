@@ -18,16 +18,16 @@ if (isset($_POST['store_price'])) {
 
     if ($givenPrice !== null) {
         foreach ($givenPrice as $price) {
-            if ($price['price'] !== null) {
+            if ($price['price'] !== null && $price['price'] !== '') {
                 if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
                     <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
                     <?php } else { ?>
                     <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
                     <?php  } ?>
-                    <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
+                    <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                         <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                     </td>
-                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
+                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                         <?php if (array_key_exists("ordered", $price)) {
                             echo 'قیمت دستوری';
                         } else {
@@ -35,7 +35,7 @@ if (isset($_POST['store_price'])) {
                         }
                         ?>
                     </td>
-                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
+                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                         <?php if (!array_key_exists("ordered", $price)) {
                         ?>
                             <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
@@ -46,9 +46,9 @@ if (isset($_POST['store_price'])) {
                     </tr>
                     <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
                         <td></td>
-                        <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="2" scope="col">
-                            <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">
-                                <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) ? 'text-white' : 'text-gray-800' ?>">access_time</i>
+                        <td class="<?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="2" scope="col">
+                            <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : 'text-gray-800' ?>">
+                                <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : 'text-gray-800' ?>">access_time</i>
                                 <?php
                                 $create = date($price['created_at']);
 
@@ -82,13 +82,6 @@ if (isset($_POST['store_price'])) {
                                 echo "$text قبل";
                                 ?>
                             </div>
-                        </td>
-                    </tr>
-
-                <?php } else { ?>
-                    <tr class="min-w-full mb-4 border-b-2 border-white">
-                        <td colspan="3" scope="col" class="text-gray-800 py-2 text-center bg-indigo-300">
-                            !! موردی برای نمایش وجود ندارد
                         </td>
                     </tr>
             <?php }

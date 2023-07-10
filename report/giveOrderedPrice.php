@@ -403,13 +403,15 @@ if ($isValidCustomer) {
 
 
                                             <div class="rtl">
-                                                <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                                <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="disabled:cursor-no-drop disabled:bg-gray-500 tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     ثبت
                                                 </button>
-                                                <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                                <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="disabled:cursor-no-drop disabled:bg-gray-500 tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     نداریم !!!
                                                 </button>
-                                                <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                                <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border
+                                                disabled:cursor-no-drop disabled:bg-gray-500
+                                                border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     ارسال به نیایش
                                                 </button>
                                             </div>
@@ -451,6 +453,8 @@ if ($isValidCustomer) {
 
             // A function to set the price to we don't have
             function donotHave(element) {
+                element.disabled = true;
+                element.innerHTML = 'ثبت شد!!!';
                 price = 'نداریم';
                 part = element.getAttribute('data-part');
                 const input = document.getElementById(part + '-price');
@@ -461,6 +465,9 @@ if ($isValidCustomer) {
 
             // A function to send a request in order to ask the price for specific code
             function askPrice(element) {
+
+                element.disabled = true;
+                element.innerHTML = 'ارسال شد!!!';
                 // Accessing the form fields to get thier value for an ajax store operation
                 const partNumber = element.getAttribute('data-part');
                 const user_id = element.getAttribute('data-user');
@@ -491,6 +498,8 @@ if ($isValidCustomer) {
 
             // A function to create the relationship
             function createRelation(e) {
+                e.disabled = true;
+                e.innerHTML = 'ثبت شد!!!';
                 // Accessing the form fields to get thier value for an ajax store operation
                 const partNumber = e.getAttribute('data-part');
                 const customer_id = document.getElementById('customer_id').value;
