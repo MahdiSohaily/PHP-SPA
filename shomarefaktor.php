@@ -16,14 +16,14 @@ if (!empty($_GET['date'])) {
 <div class="shomare-faktor-box">
     <a class="print-button" onClick="window.print()">چاپ <i class="fas fa-print"></i></a>
     <form>
-        <label for="invoice_time">زمان فاکتور</label>
-        <input data-gdate="<?php echo date('Y/m/d') ?>" value="<?php echo (jdate("Y/m/d", time(), "", "Asia/Tehran", "en")) ?>" type="text" name="invoice_time" id="invoice_time">
+        <label class="inline-block mr-3 pb-2 bold" for="invoice_time">زمان فاکتور</label>
+        <br>
+        <input class="p-2 mr-3" data-gdate="<?php echo date('Y/m/d') ?>" value="<?php echo (jdate("Y/m/d", time(), "", "Asia/Tehran", "en")) ?>" type="text" name="invoice_time" id="invoice_time">
         <span id="span_invoice_time"></span>
     </form>
 
 
     <form class="shomare-faktor-form" action="php/shomare-faktor-form-save.php" method="get" autocomplete="off">
-
         <input class="kharidar" name="kharidar" type="text" placeholder="نام خریدار را وارد کنید ...">
         <input class="save-shomare-faktor-form" type="submit" value=" گرفتن شماره فاکتور">
     </form>

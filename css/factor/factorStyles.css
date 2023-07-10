@@ -1,7 +1,7 @@
 @media print {
   .shomare-faktor-box,
   .top-bar,
-  nav {
+  #topNav {
     display: none;
   }
 
