@@ -41,6 +41,7 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
         }
     });
 
+    $explodedCodes = array_unique($explodedCodes);
 
     foreach ($explodedCodes as $code) {
         $sql = "SELECT id, partnumber FROM yadakshop1402.nisha WHERE partnumber LIKE '" . $code . "%'";
@@ -62,7 +63,6 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
 
     $existing_code = [];
     foreach ($explodedCodes as $code) {
-
         $sql = "SELECT id, partnumber FROM yadakshop1402.nisha WHERE partnumber LIKE '" . $code . "%'";
         $result = mysqli_query($conn, $sql);
 
@@ -132,7 +132,7 @@ function getSelectedRates($conn)
 
     return $rates;
 }
- 
+
 function isInRelation($conn, $id)
 {
     $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '$id'";
