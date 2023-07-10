@@ -152,7 +152,7 @@ function format_interval(DateInterval $interval)
 
             <?php
 
-            $sql2 = "SELECT * FROM callcenter.record ORDER BY  time DESC LIMIT 350  ";
+            $sql2 = "SELECT * FROM callcenter.record ORDER BY  time DESC LIMIT 200";
             $result2 = mysqli_query($conn, $sql2);
             if (mysqli_num_rows($result2) > 0) {
                 while ($row2 = mysqli_fetch_assoc($result2)) {
