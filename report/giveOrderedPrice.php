@@ -111,7 +111,7 @@ if ($isValidCustomer) {
                                                         </li>
                                                     <?php } ?>
                                                 </ul>
-                                                <?php if ($information['relationInfo']['description'] !== '') { ?>
+                                                <?php if ($information['relationInfo']['description'] !== '' && $information['relationInfo']['description'] !== null) { ?>
                                                     <p>توضیحات:</p>
                                                     <p class="bg-red-500 text-white rounded-md p-2 shake">
                                                         <?php echo $information['relationInfo']['description'] ?>
