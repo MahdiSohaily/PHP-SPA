@@ -4,16 +4,15 @@ require_once './config/database.php';
 
 if (isset($_POST['getFactor'])) {
     $startDate = date_create($_POST['date']);
+    $endDate = date_create($_POST['date']);
 
-    $date = date_create($_POST['date']);
-    $date->modify('+1 day');
-    $date->setTime(24, 0, 0);;
+    $endDate->setTime(24, 0, 0);
     $startDate->setTime(1, 0, 0);
 
-    $start = date_format($date, "Y-m-d h:i:s");
-    $end = date_format($startDate, "Y-m-d h:i:s");
+    $end = date_format($endDate, "Y-m-d h:i:s");
+    $start = date_format($startDate, "Y-m-d h:i:s");
 
-    $sql = "SELECT * FROM shomarefaktor WHERE time < '$start' AND time >= '$end' ORDER BY shomare DESC";
+    $sql = "SELECT * FROM shomarefaktor WHERE time < '$end' AND time >= '$start' ORDER BY shomare DESC";
     // $sql = "SELECT * FROM shomarefaktor WHERE time < '2023-05-10 12:00:00' AND time >= '2023-05-09 12:00:00' ORDER BY shomare DESC";
     $result = mysqli_query($con, $sql);
 
