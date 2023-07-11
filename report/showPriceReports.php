@@ -149,7 +149,7 @@ if ($isValidCustomer) {
                                                 foreach ($sorted as $index => $element) {
                                                 ?>
                                                     <tr>
-                                                        <td class="relative px-1 hover:cursor-pointer" data-part="<?php echo $partNumber ?>" onmouseleave="hideToolTip(this)" onmouseover="showToolTip(this)">
+                                                        <td class="relative px-1 hover:cursor-pointer" data-part="<?php echo $goods[$index]['partnumber'] ?>" onmouseleave="hideToolTip(this)" onmouseover="showToolTip(this)">
                                                             <p class="text-center bold bg-gray-600 text-white px-2 py-3">
                                                                 <?php echo $goods[$index]['partnumber'] ?>
                                                             </p>
