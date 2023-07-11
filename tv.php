@@ -18,7 +18,7 @@
          font-size: 7px !important;
      }
  </style>
- <div style="width: 854px; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
+ <div style="width: 854px;background-color: white !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
      <div class="your-user">
          <div class="your-interval">داخلی شما</div>
