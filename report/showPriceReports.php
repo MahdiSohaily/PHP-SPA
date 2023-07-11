@@ -13,6 +13,8 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
+
+        print_r(json_encode($finalResult));
 ?>
         <div class="grid grid-cols-6">
             <div class="m-2 p-3 bg-gray-500 relative">
@@ -341,7 +343,7 @@ if ($isValidCustomer) {
                                                     <?php foreach ($givenPrice as $price) { ?>
                                                         <?php if ($price['price'] !== null && $price['price'] !== '') {
                                                             if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
-                                                                <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
+                                                                <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
                                                                 <?php } else { ?>
                                                                 <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
                                                                 <?php  } ?>
@@ -437,10 +439,10 @@ if ($isValidCustomer) {
 
                                             <div class="rtl">
                                                 <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
-                                                    ثبت
+                                                    ثبت قیمت
                                                 </button>
                                                 <button onclick="donotHave(this)" data-code="<?php echo $code ?>" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
-                                                    نداریم !!!
+                                                    موجود نیست
                                                 </button>
                                                 <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     ارسال به نیایش
@@ -564,7 +566,7 @@ if ($isValidCustomer) {
 
             // A function to set the price to we don't have
             function donotHave(element) {
-                price = 'نداریم';
+                price = 'موجود نیست';
                 part = element.getAttribute('data-part');
                 const input = document.getElementById(part + '-price');
                 input.value = price;
