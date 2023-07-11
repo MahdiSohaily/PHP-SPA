@@ -14,57 +14,65 @@ if ($isValidCustomer) {
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
 ?>
-        <div class="rtl col-6 mx-auto">
-            <table class="min-w-full text-left text-sm font-light custom-table mb-2">
-                <thead class="font-medium bg-green-600">
-                    <tr>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            نام
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            نام خانوادگی
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            شماره تماس
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            ماشین
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            آدرس
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white">
-                    <tr class="relative">
-                        <td class="px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['name'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['family'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['phone'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['car'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['address'] ?>
-                            </p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="grid grid-cols-6">
+            <div class="m-3 p-3 bg-gray-300 relative">
+                <i class="absolute right-2 text-md material-icons hover:cursor-pointer text-gray-600 hover:text-gray-800">content_copy</i>
+                <?php
+                print_r($explodedCodes);
+                ?>
+            </div>
+            <div class="rtl col-span-5 flext justify-end">
+                <table class="mx-auto col-6 text-sm font-light custom-table mb-2">
+                    <thead class="font-medium bg-green-600">
+                        <tr>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                نام
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                نام خانوادگی
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                شماره تماس
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                ماشین
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                آدرس
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="relative">
+                            <td class="px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['name'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['family'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['phone'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['car'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['address'] ?>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="accordion">
             <?php
@@ -103,7 +111,7 @@ if ($isValidCustomer) {
                                                 <p class="my-2">قطعه: <?php echo $information['relationInfo']['name'] ?></p>
                                                 <?php if (array_key_exists("status_name", $information['relationInfo'])) { ?>
                                                     <p class="my-2">وضعیت: <?php echo  $information['relationInfo']['status_name'] ?></p>
-                                                <?php } ?> 
+                                                <?php } ?>
                                                 <ul>
                                                     <?php foreach ($information['cars'] as $item) {
                                                     ?>
