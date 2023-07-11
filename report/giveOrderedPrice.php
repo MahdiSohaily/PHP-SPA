@@ -150,15 +150,15 @@ if ($isValidCustomer) {
                                                 foreach ($sorted as $index => $element) {
                                                 ?>
                                                     <tr>
-                                                        <td class="relative px-1 hover:cursor-pointer" data-part="<?php echo $partNumber ?>" onmouseleave="hideToolTip(this)" onmouseover="showToolTip(this)">
+                                                        <td class="relative px-1 hover:cursor-pointer" data-part="<?php echo $goods[$index]['partnumber'] ?>" onmouseleave="hideToolTip(this)" onmouseover="showToolTip(this)">
                                                             <p class="text-center bold bg-gray-600 text-white px-2 py-3">
                                                                 <?php echo $goods[$index]['partnumber'] ?>
                                                             </p>
-                                                            <div class="custome-tooltip-2" id="<?php echo $partNumber . '-google' ?>">
-                                                                <a target='_blank' href='https://www.google.com/search?tbm=isch&q=<?php echo $partNumber ?>'>
+                                                            <div class="custome-tooltip-2" id="<?php echo $goods[$index]['partnumber'] . '-google' ?>">
+                                                                <a target='_blank' href='https://www.google.com/search?tbm=isch&q=<?php echo $goods[$index]['partnumber'] ?>'>
                                                                     <img class="w-5 h-auto" src="./public/img/google.png" alt="google">
                                                                 </a>
-                                                                <a target='_blank' href='https://partsouq.com/en/search/all?q=<?php echo $partNumber ?>'>
+                                                                <a target='_blank' href='https://partsouq.com/en/search/all?q=<?php echo $goods[$index]['partnumber'] ?>'>
                                                                     <img class="w-5 h-auto" src="./public/img/part.png" alt="part">
                                                                 </a>
                                                             </div>
