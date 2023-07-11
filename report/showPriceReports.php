@@ -22,11 +22,11 @@ if ($isValidCustomer) {
                             <th class="text-left px-3 py-2">کد فنی</th>
                             <th class="text-left px-3 py-2">قیمت</th>
                             <th class="text-right  py-2">
-                                <i title="کاپی کردن مقادیر" class="text-sm material-icons hover:cursor-pointer">content_copy</i>
+                                <i title="کاپی کردن مقادیر" onclick="copyToClipboard(this)" class="text-sm material-icons hover:cursor-pointer">content_copy</i>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="priceReport">
                         <?php
                         foreach ($explodedCodes as $code) { ?>
                             <tr class="odd:bg-gray-400">
@@ -656,6 +656,44 @@ if ($isValidCustomer) {
                 const target = document.getElementById(partNumber + '-append');
                 console.log(partNumber);
                 target.innerHTML = price;
+            }
+
+            // A function to copy content to cliboard
+            function copyToClipboard(elem) {
+                // Get the text field
+                let parentElement = document.getElementById("priceReport");
+
+                let tdElements = parentElement.getElementsByTagName('td');
+                let tdTextContent = [];
+
+                for (let i = 0; i < tdElements.length; i++) {
+
+                    let text = tdElements[i].textContent;
+                    tdTextContent.push(text);
+                }
+
+                const chunkSize = 2;
+
+                let finalResult = []
+                for (let i = 0; i < tdTextContent.length; i += chunkSize) {
+                    finalResult.push(tdTextContent.slice(i, i + chunkSize));
+                }
+
+                // Copy the text inside the text field
+
+                let text = '';
+                for (let item of finalResult) {
+                    text += item.join(' : ');
+                    text += '\n';
+                }
+                navigator.clipboard.writeText(text);
+
+                // Alert the copied text
+                elem.innerHTML = `done`;
+                setTimeout(() => {
+                    elem.innerHTML = `content_copy`;
+                }, 1500);
+
             }
         </script>
 <?php

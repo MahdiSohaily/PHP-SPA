@@ -22,7 +22,7 @@ if ($isValidCustomer) {
                             <th class="text-left px-3 py-2">کد فنی</th>
                             <th class="text-left px-3 py-2">قیمت</th>
                             <th class="text-right  py-2">
-                                <i title="کاپی کردن مقادیر" onclick="copyToClipboard()" class="text-sm material-icons hover:cursor-pointer">content_copy</i>
+                                <i title="کاپی کردن مقادیر" onclick="copyToClipboard(this)" class="text-sm material-icons hover:cursor-pointer">content_copy</i>
                             </th>
                         </tr>
                     </thead>
@@ -582,7 +582,7 @@ if ($isValidCustomer) {
 
 
             // A function to copy content to cliboard
-            function copyToClipboard() {
+            function copyToClipboard(elem) {
                 // Get the text field
                 let parentElement = document.getElementById("priceReport");
 
@@ -612,7 +612,11 @@ if ($isValidCustomer) {
                 navigator.clipboard.writeText(text);
 
                 // Alert the copied text
-                alert("Copied the text: " + text);
+                elem.innerHTML = `done`;
+                setTimeout(() => {
+                    elem.innerHTML = `content_copy`;
+                }, 1500);
+
             }
         </script>
 <?php
