@@ -526,8 +526,6 @@ if ($isValidCustomer) {
                                         </table>
                                     </div>
                                 </div>
-
-
                             </div>
                         <?php }
                     } else { ?>
