@@ -95,19 +95,6 @@ switch (basename($_SERVER['PHP_SELF'])) {
             border-color: transparent transparent #9899ef transparent;
         }
 
-        .custome-tooltip-2 {
-            position: absolute;
-            display: none;
-            top: 15%;
-            left: 90%;
-            transform: translateX(-50%);
-            padding: 10px;
-            border-radius: 5px;
-            background-color: transparent;
-            width: 100px;
-            z-index: 100000000;
-        }
-
         .custom-table td {
             vertical-align: super;
         }
@@ -209,6 +196,19 @@ switch (basename($_SERVER['PHP_SELF'])) {
             border-radius: 50%;
             width: 30px;
             height: 30px;
+        }
+
+        .custome-tooltip-2 {
+            position: absolute;
+            display: none;
+            top: 15%;
+            left: 90%;
+            transform: translateX(-50%);
+            padding: 10px;
+            border-radius: 5px;
+            background-color: transparent;
+            width: 100px;
+            z-index: 100000000;
         }
     </style>
     <script>
