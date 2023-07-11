@@ -9,7 +9,16 @@
         $user  = getinternal($_SESSION["id"]);
     }
     ?>
- <div id="fullpage" class="bg-white" data-user='<?php echo $user ?>'>
+ <style>
+     * {
+         font-size: 7px !important;
+     }
+
+     th {
+         font-size: 7px !important;
+     }
+ </style>
+ <div style="width: 854px; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
      <div class="your-user">
          <div class="your-interval">داخلی شما</div>
@@ -18,7 +27,7 @@
              <a href="?user=1 or 1=1">همه</a>
          </div>
      </div>
-     <div class="d-grid">
+     <div class="d-grid bg-green-400">
          <div class="div1">
              <h2 class="title">تماس های ورودی</h2>
              <table class="border text-sm bg-white custom-table mb-2 p-3">
@@ -185,10 +194,10 @@
              <table class="border text-sm bg-white custom-table mb-2 p-3">
                  <thead class="font-medium bg-green-600">
                      <tr>
-                         <th style="width: 300px;" scope="col" class=" py-2 tiny-text text-white text-right">
+                         <th scope="col" class=" py-2 tiny-text text-white text-right">
                              مشتری
                          </th>
-                         <th style="width: 80px !important" scope="col" class=" py-2 tiny-text text-white text-right">
+                         <th scope="col" class=" py-2 tiny-text text-white text-right">
                              قیمت
                          </th>
                          <th scope="col" class=" py-2 tiny-text text-white text-right">
@@ -234,7 +243,7 @@
                                          <?php echo $price['name'] . ' ' . $price['family'] ?>
                                      </p>
                                  </td>
-                                 <td style="width: 100px;" class="tiny-text bold px-1">
+                                 <td class="tiny-text bold px-1">
                                      <p class="text-right bold text-gray-700 px-2 py-1">
                                          <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                                      </p>
@@ -244,7 +253,7 @@
                                          <?php echo $price['partnumber']; ?>
                                      </p>
                                  </td>
-                                 <td style="width:120px;">
+                                 <td>
                                      <p class="text-center bold text-gray-700 px-2 py-1">
                                          <img title="<?php echo $price['username'] ?>" class="user-img mx-auto" src="../userimg/<?php echo $price['userID'] ?>.jpg" alt="user-img">
                                      </p>
@@ -298,7 +307,7 @@
                                              <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
                                              <td class="tiny-text p-2"><a target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                              <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
-                                             <td style="width: 50px;" class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
+                                             <td class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
                                          <?php
                                         }
                                     }
@@ -365,7 +374,7 @@
                                                      <td class="p-2"><?php echo $code ?></td>
                                                      <td class="p-2"><?php echo $sellername ?></td>
                                                      <td class="p-2"><?php echo $price ?></td>
-                                                     <td class="p-2"><?php echo date('Y-m-d', strtotime($time)) ?></td>
+                                                     <td class="p-2"><?php echo date('H-i-s', strtotime($time)) ?></td>
                                                  </tr>
                                              </tbody>
                      <?php
@@ -411,18 +420,18 @@
          }
      }
 
-     setInterval(() => {
-         var params = new URLSearchParams();
-         params.append('historyAjax', 'historyAjax');
-         params.append('user', elem.getAttribute('data-user'));
+     //  setInterval(() => {
+     //      var params = new URLSearchParams();
+     //      params.append('historyAjax', 'historyAjax');
+     //      params.append('user', elem.getAttribute('data-user'));
 
-         axios.post("./tvAjax.php", params)
-             .then(function(response) {
-                 console.log(response);
-                 elem.innerHTML = response.data;
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     }, 7000);
+     //      axios.post("./tvAjax.php", params)
+     //          .then(function(response) {
+     //              console.log(response);
+     //              elem.innerHTML = response.data;
+     //          })
+     //          .catch(function(error) {
+     //              console.log(error);
+     //          });
+     //  }, 7000);
  </script>

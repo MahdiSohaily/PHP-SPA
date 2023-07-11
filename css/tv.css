@@ -60,8 +60,8 @@ html {
 }
 
 img.user-img {
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
 }
 
 .test-error {
@@ -77,14 +77,13 @@ img.user-img {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  grid-column-gap: 3px;
+  grid-row-gap: 3px;
 }
 
 table {
   width: 100% !important;
   border: 1px solid gray;
-  padding: 10px;
 }
 
 thead {
@@ -93,5 +92,9 @@ thead {
 
 th {
   color: white;
-  padding: 10px;
+  padding-block: 5px;
+}
+
+td {
+  padding: 3px 2px;
 }

@@ -132,8 +132,8 @@ echo "<title>$title</title>";
     </style>
     <?php
 
-
-    echo   "<link rel='stylesheet' href='css/tv.css?v=543' type='text/css' media='all' /> ";
+    $rand = rand();
+    echo   "<link rel='stylesheet' href='css/tv.css?v=$rand' type='text/css' media='all' /> ";
 
     ?>
 </head>
