@@ -686,7 +686,7 @@ if ($isValidCustomer) {
                     text += item.join(' : ');
                     text += '\n';
                 }
-                navigator.clipboard.writeText(text);
+                document.execCommand(text);
 
                 // Alert the copied text
                 elem.innerHTML = `done`;

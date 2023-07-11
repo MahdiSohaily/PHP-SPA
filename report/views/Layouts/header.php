@@ -72,6 +72,7 @@ switch (basename($_SERVER['PHP_SELF'])) {
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./public/css/select2.css">
     <script src="./public/js/select2.js"></script>
+    <script src="./public/js/copy.js"></script>
     <style>
         .custome-tooltip {
             position: absolute;
