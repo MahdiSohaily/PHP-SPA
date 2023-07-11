@@ -105,8 +105,8 @@ if ($isValidCustomer) {
                                         <?php if ($information) { ?>
                                             <div>
                                                 <p class="my-2">قطعه: <?php echo $information['relationInfo']['name'] ?></p>
-                                                <?php if (array_key_exists("status_name", $information['relationInfo'])) { ?>
-                                                    <p class="my-2">وضعیت: <?php echo  $information['relationInfo']['status_name'] ?></p>
+                                                <?php if(array_key_exists("status_name", $information['relationInfo']) ){ ?>
+                                                <p class="my-2">وضعیت: <?php echo  $information['relationInfo']['status_name'] ?></p>
                                                 <?php } ?>
                                                 <ul>
                                                     <?php foreach ($information['cars'] as $item) {
@@ -173,7 +173,7 @@ if ($isValidCustomer) {
                                                                 <thead class="font-medium">
                                                                     <tr>
                                                                         <?php
-
+                                                                      
                                                                         if (array_sum($exist[$index]) > 0) {
 
                                                                             foreach ($exist[$index] as $brand => $amount) {

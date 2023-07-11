@@ -15,11 +15,29 @@ if ($isValidCustomer) {
         $rates = $finalResult['rates'];
 ?>
         <div class="grid grid-cols-6">
-            <div class="m-3 p-3 bg-gray-300 relative">
-                <i class="absolute right-2 text-md material-icons hover:cursor-pointer text-gray-600 hover:text-gray-800">content_copy</i>
-                <?php
-                print_r($explodedCodes);
-                ?>
+            <div class="m-2 p-3 bg-gray-500 relative">
+                <table class="min-w-full text-sm font-light p-2">
+                    <thead class="font-medium">
+                        <tr>
+                            <th class="text-left px-3 py-2">کد فنی</th>
+                            <th class="text-left px-3 py-2">قیمت</th>
+                            <th class="text-right  py-2">
+                                <i title="کاپی کردن مقادیر" class="text-sm material-icons hover:cursor-pointer">content_copy</i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($explodedCodes as $code) { ?>
+                            <tr class="odd:bg-gray-400">
+                                <td class="px-3 py-2 text-left text-white"><?php echo $code ?></td>
+                                <td class="px-3 py-2 text-left text-white" colspan="2" id="<?php echo $code . '-append' ?>"></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
             <div class="rtl col-span-5 flext justify-end">
                 <table class="mx-auto col-6 text-sm font-light custom-table mb-2">
@@ -43,7 +61,7 @@ if ($isValidCustomer) {
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        <tr class="relative">
+                        <tr class="odd:bg-gray-500relative">
                             <td class="px-1">
                                 <p class="text-center bold text-gray-700 px-2 py-3">
                                     <?php echo $customer_info['name'] ?>
@@ -412,7 +430,7 @@ if ($isValidCustomer) {
                                                 <label class="block font-medium text-sm text-gray-700">
                                                     قیمت
                                                 </label>
-                                                <input onkeyup="update_price(this)" name="price" class="ltr price-input-custome mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="<?php echo $partNumber ?>-price" type="text" />
+                                                <input onkeyup="update_price(this)" name="price" class="ltr price-input-custome mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="<?php echo $partNumber ?>-price" data-code="<?php echo $code ?>" type="text" />
                                                 <p class="mt-2"></p>
                                             </div>
 
@@ -538,6 +556,10 @@ if ($isValidCustomer) {
             // A function to update the global price while typing in the input feild
             function update_price(element) {
                 price = element.value;
+                const partNumber = element.getAttribute('data-code').split('-')[0];
+                const target = document.getElementById(partNumber + '-append');
+
+                target.innerHtml = price;
             }
 
             // A function to set the price to we don't have

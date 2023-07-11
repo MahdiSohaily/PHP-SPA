@@ -3,7 +3,7 @@ require_once('./views/Layouts/header.php');
 ?>
 <div class="rtl max-w-2xl mx-auto py-20 sm:px-6 lg:px-8 bg-white rounded-lg shadow-sm mt-11">
 
-    <form action="giveOrderedPrice.php" method="post">
+    <form target="_blank" action="giveOrderedPrice.php" method="post">
         <input type="text" name="givenPrice" value="givenPrice" id="form" hidden>
         <input type="text" name="user" value="<?php echo  $_SESSION["id"] ?>" hidden>
         <div class="">
