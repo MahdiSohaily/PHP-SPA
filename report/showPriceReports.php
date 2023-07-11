@@ -101,7 +101,9 @@ if ($isValidCustomer) {
                                         <?php if ($information) { ?>
                                             <div>
                                                 <p class="my-2">قطعه: <?php echo $information['relationInfo']['name'] ?></p>
-                                                <p class="my-2">وضعیت: <?php echo array_key_exists("status_name", $information['relationInfo']) ? $information['relationInfo']['status_name'] : '' ?></p>
+                                                <?php if (array_key_exists("status_name", $information['relationInfo'])) { ?>
+                                                    <p class="my-2">وضعیت: <?php echo  $information['relationInfo']['status_name'] ?></p>
+                                                <?php } ?> 
                                                 <ul>
                                                     <?php foreach ($information['cars'] as $item) {
                                                     ?>
@@ -202,7 +204,7 @@ if ($isValidCustomer) {
                                                                         <?php }
                                                                             }
                                                                         } else {
-                                                                            echo '<p class="text-red-400 text-center bold"> عدم موجودیت</p>';
+                                                                            echo '<p class="text-red-400 text-center bold"> در حال حاضر موجود نیست </p>';
                                                                         } ?>
                                                                     </tr>
                                                                 </thead>

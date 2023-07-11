@@ -36,6 +36,9 @@ switch (basename($_SERVER['PHP_SELF'])) {
     case 'giveOrderedPrice.php':
         $title = "قیمت دستوری";
         break;
+    case 'showPriceReports.php':
+        $title = "اطلاعات کد فنی";
+        break;
 
 
     default:
