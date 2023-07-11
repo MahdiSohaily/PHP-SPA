@@ -580,6 +580,7 @@ if ($isValidCustomer) {
                 const target = document.getElementById(partNumber + '-append');
                 target.innerHTML = price;
                 createRelation(element);
+                input.value = null;
             }
 
             // A function to send a request in order to ask the price for specific code
@@ -625,11 +626,9 @@ if ($isValidCustomer) {
             function createRelation(e) {
 
                 e.disabled = true;
-                e.innerHTML = 'ثبت شد';
 
                 setTimeout(() => {
                     e.disabled = false;
-                    e.innerHTML = 'ثبت قیمت';
                 }, 5000);
 
                 // Accessing the form fields to get thier value for an ajax store operation
@@ -652,6 +651,7 @@ if ($isValidCustomer) {
                     .then(function(response) {
                         if (response.data) {
                             form_success.style.bottom = '10px';
+                            goodPrice.value = null;
                             setTimeout(() => {
                                 form_success.style.bottom = '-300px';
                                 resultBox.innerHTML = (response.data);
