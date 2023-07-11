@@ -274,7 +274,7 @@ if ($isValidCustomer) {
                                                                             $avgPrice = round(($price * 110) / 243.5);
                                                                             $finalPrice = round($avgPrice * $rate['amount'] * 1.2 * 1.2 * 1.3);
                                                                         ?>
-                                                                            <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+                                                                            <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
                                                                                 <?php echo $finalPrice ?>
                                                                             </td>
                                                                         <?php } ?>
@@ -289,7 +289,7 @@ if ($isValidCustomer) {
                                                                                 $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
 
                                                                             ?>
-                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
 
                                                                                     <?php echo  $finalPrice ?>
                                                                                 </td>
@@ -306,7 +306,7 @@ if ($isValidCustomer) {
                                                                                 $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
 
                                                                             ?>
-                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
 
                                                                                     <?php echo  $finalPrice ?>
                                                                                 </td>
@@ -439,7 +439,7 @@ if ($isValidCustomer) {
                                                 <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     ثبت
                                                 </button>
-                                                <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                                <button onclick="donotHave(this)" data-code="<?php echo $code ?>" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     نداریم !!!
                                                 </button>
                                                 <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
@@ -559,7 +559,7 @@ if ($isValidCustomer) {
                 const partNumber = element.getAttribute('data-code').split('-')[0];
                 const target = document.getElementById(partNumber + '-append');
 
-                target.innerHtml = price;
+                target.innerHTML = price;
             }
 
             // A function to set the price to we don't have
@@ -568,7 +568,9 @@ if ($isValidCustomer) {
                 part = element.getAttribute('data-part');
                 const input = document.getElementById(part + '-price');
                 input.value = price;
-
+                const partNumber = element.getAttribute('data-code').split('-')[0];
+                const target = document.getElementById(partNumber + '-append');
+                target.innerHTML = price;
                 createRelation(element);
             }
 
@@ -647,8 +649,13 @@ if ($isValidCustomer) {
                 part = element.getAttribute('data-part');
                 const input = document.getElementById(part + '-price');
                 input.value = newPrice;
-
                 price = newPrice;
+
+
+                const partNumber = element.getAttribute('data-code').split('-')[0];
+                const target = document.getElementById(partNumber + '-append');
+                console.log(partNumber);
+                target.innerHTML = price;
             }
         </script>
 <?php

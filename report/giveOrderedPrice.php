@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\type;
-
 require_once './database/connect.php';
 require_once('./views/Layouts/header.php');
 require_once('./app/Controllers/GivenPriceController.php');
@@ -17,68 +14,93 @@ if ($isValidCustomer) {
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
 ?>
-        <div class="rtl col-6 mx-auto">
-            <table class="min-w-full text-left text-sm font-light custom-table mb-2">
-                <thead class="font-medium bg-green-600">
-                    <tr>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            نام
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            نام خانوادگی
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            شماره تماس
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            ماشین
-                        </th>
-                        <th scope="col" class="px-3 py-3 text-white text-center">
-                            آدرس
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white">
-                    <tr class="relative">
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['name'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['family'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['phone'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['car'] ?>
-                            </p>
-                        </td>
-                        <td class=" px-1">
-                            <p class="text-center bold text-gray-700 px-2 py-3">
-                                <?php echo $customer_info['address'] ?>
-                            </p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="grid grid-cols-6">
+            <div class="m-2 p-3 bg-gray-500 relative">
+                <table class="min-w-full text-sm font-light p-2">
+                    <thead class="font-medium">
+                        <tr>
+                            <th class="text-left px-3 py-2">کد فنی</th>
+                            <th class="text-left px-3 py-2">قیمت</th>
+                            <th class="text-right  py-2">
+                                <i title="کاپی کردن مقادیر" class="text-sm material-icons hover:cursor-pointer">content_copy</i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($explodedCodes as $code) { ?>
+                            <tr class="odd:bg-gray-400">
+                                <td class="px-3 py-2 text-left text-white"><?php echo $code ?></td>
+                                <td class="px-3 py-2 text-left text-white" colspan="2" id="<?php echo $code . '-append' ?>"></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="rtl col-span-5 flext justify-end">
+                <table class="mx-auto col-6 text-sm font-light custom-table mb-2">
+                    <thead class="font-medium bg-green-600">
+                        <tr>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                نام
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                نام خانوادگی
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                شماره تماس
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                ماشین
+                            </th>
+                            <th scope="col" class="px-3 py-3 text-white text-center">
+                                آدرس
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="odd:bg-gray-500relative">
+                            <td class="px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['name'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['family'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['phone'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['car'] ?>
+                                </p>
+                            </td>
+                            <td class=" px-1">
+                                <p class="text-center bold text-gray-700 px-2 py-3">
+                                    <?php echo $customer_info['address'] ?>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="accordion">
             <?php
-
             foreach ($explodedCodes as $code_index => $code) {
             ?>
                 <input type="checkbox" checked="true" name="panel" id="<?php echo $code ?>" class="hidden">
                 <label for="<?php echo $code ?>" class="relative flex items-center bg-gray-700 text-white p-4 shadow border-b border-grey hover:cursor-pointer">
                     <?php echo $code ?>
                 </label>
-                <div class="accordion__content overflow-hidden ">
+                <div class="accordion__content overflow-hidden bg-grey-lighter">
                     <?php
                     if (array_key_exists($code, $existing)) {
                         foreach ($existing[$code] as $index => $item) {
@@ -94,8 +116,8 @@ if ($isValidCustomer) {
                             $customer = $customer;
                             $completeCode = $completeCode;
                     ?>
-                            <div class="grid grid-cols-1 md:grid-cols-10 gap-6 lg:gap-2 lg:p-2 overflow-auto">
-                                <div></div>
+                            <div class="grid grid-cols-1 md:grid-cols-8 gap-6 lg:gap-2 lg:p-2 overflow-auto px-5">
+
                                 <!-- Start the code info section -->
                                 <div class="bg-white rounded-lg overflow-auto">
                                     <div id="search_result" class="rtl p-3">
@@ -105,8 +127,8 @@ if ($isValidCustomer) {
                                         <?php if ($information) { ?>
                                             <div>
                                                 <p class="my-2">قطعه: <?php echo $information['relationInfo']['name'] ?></p>
-                                                <?php if(array_key_exists("status_name", $information['relationInfo']) ){ ?>
-                                                <p class="my-2">وضعیت: <?php echo  $information['relationInfo']['status_name'] ?></p>
+                                                <?php if (array_key_exists("status_name", $information['relationInfo'])) { ?>
+                                                    <p class="my-2">وضعیت: <?php echo  $information['relationInfo']['status_name'] ?></p>
                                                 <?php } ?>
                                                 <ul>
                                                     <?php foreach ($information['cars'] as $item) {
@@ -173,15 +195,12 @@ if ($isValidCustomer) {
                                                                 <thead class="font-medium">
                                                                     <tr>
                                                                         <?php
-                                                                      
                                                                         if (array_sum($exist[$index]) > 0) {
-
                                                                             foreach ($exist[$index] as $brand => $amount) {
-                                                                                if ($amount > 0) {
-                                                                        ?>
+                                                                                if ($amount > 0) { ?>
                                                                                     <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
                                                                                         <?php echo $brand ?>
-                                                                                        <div class="rtl custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
+                                                                                        <div class="custome-tooltip" id="<?php echo $index . '-' . $brand ?>">
                                                                                             <table class="min-w-full text-sm font-light p-2">
                                                                                                 <thead class="font-medium bg-violet-800">
                                                                                                     <tr>
@@ -205,7 +224,6 @@ if ($isValidCustomer) {
                                                                                                     }
                                                                                                     ?>
                                                                                                 </tbody>
-
                                                                                             </table>
                                                                                         </div>
                                                                                     </th>
@@ -213,7 +231,7 @@ if ($isValidCustomer) {
                                                                             }
                                                                         } else {
                                                                             echo '<p class="text-red-400 text-center bold"> در حال حاضر موجود نیست </p>';
-                                                                        }  ?>
+                                                                        } ?>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -256,7 +274,7 @@ if ($isValidCustomer) {
                                                                             $avgPrice = round(($price * 110) / 243.5);
                                                                             $finalPrice = round($avgPrice * $rate['amount'] * 1.2 * 1.2 * 1.3);
                                                                         ?>
-                                                                            <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+                                                                            <td class="text-bold whitespace-nowrap px-3 py-2 text-center hover:cursor-pointer <?php echo $rate['status'] !== 'N' ? $rate['status'] : 'bg-gray-100' ?>" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
                                                                                 <?php echo $finalPrice ?>
                                                                             </td>
                                                                         <?php } ?>
@@ -271,7 +289,7 @@ if ($isValidCustomer) {
                                                                                 $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
 
                                                                             ?>
-                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
 
                                                                                     <?php echo  $finalPrice ?>
                                                                                 </td>
@@ -288,7 +306,7 @@ if ($isValidCustomer) {
                                                                                 $finalPrice = round($avgPrice * $rate['amount'] * 1.25 * 1.3)
 
                                                                             ?>
-                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
+                                                                                <td class="text-bold whitespace-nowrap px-3 text-center py-2 hover:cursor-pointer" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $finalPrice ?>" data-part="<?php echo $partNumber ?>">
 
                                                                                     <?php echo  $finalPrice ?>
                                                                                 </td>
@@ -338,7 +356,7 @@ if ($isValidCustomer) {
                                                                     }
                                                                     ?>
                                                                 </td>
-                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?>">
+                                                                <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                                                                     <?php if (!array_key_exists("ordered", $price)) {
                                                                     ?>
                                                                         <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
@@ -388,7 +406,6 @@ if ($isValidCustomer) {
                                                                     </td>
                                                                 </tr>
 
-
                                                         <?php }
                                                     } ?>
                                                     <?php } else { ?>
@@ -413,21 +430,19 @@ if ($isValidCustomer) {
                                                 <label class="block font-medium text-sm text-gray-700">
                                                     قیمت
                                                 </label>
-                                                <input onkeyup="update_price(this)" name="price" class="ltr price-input-custome mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="<?php echo $partNumber ?>-price" type="text" />
+                                                <input onkeyup="update_price(this)" name="price" class="ltr price-input-custome mt-1 block w-full border-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-3 py-2" id="<?php echo $partNumber ?>-price" data-code="<?php echo $code ?>" type="text" />
                                                 <p class="mt-2"></p>
                                             </div>
 
 
                                             <div class="rtl">
-                                                <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="disabled:cursor-no-drop disabled:bg-gray-500 tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                                <button onclick="createRelation(this)" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     ثبت
                                                 </button>
-                                                <button onclick="donotHave(this)" data-part="<?php echo $partNumber ?>" type="submit" class="disabled:cursor-no-drop disabled:bg-gray-500 tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                                <button onclick="donotHave(this)" data-code="<?php echo $code ?>" data-part="<?php echo $partNumber ?>" type="submit" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     نداریم !!!
                                                 </button>
-                                                <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border
-                                                disabled:cursor-no-drop disabled:bg-gray-500
-                                                border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
+                                                <button onclick="askPrice(this)" data-user="<?php echo $_SESSION['user_id'] ?>" data-part="<?php echo $partNumber ?>" type="button" class="tiny-txt inline-flex items-center bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 px-2 py-2">
                                                     ارسال به نیایش
                                                 </button>
                                             </div>
@@ -435,8 +450,6 @@ if ($isValidCustomer) {
                                     </div>
                                 </div>
 
-                                <!-- END GIVEN PRICE SECTION -->
-                                <div></div>
                             </div>
                         <?php }
                     } else { ?>
@@ -465,25 +478,26 @@ if ($isValidCustomer) {
             // A function to update the global price while typing in the input feild
             function update_price(element) {
                 price = element.value;
+                const partNumber = element.getAttribute('data-code').split('-')[0];
+                const target = document.getElementById(partNumber + '-append');
+
+                target.innerHTML = price;
             }
 
             // A function to set the price to we don't have
             function donotHave(element) {
-                element.disabled = true;
-                element.innerHTML = 'ثبت شد!!!';
                 price = 'نداریم';
                 part = element.getAttribute('data-part');
                 const input = document.getElementById(part + '-price');
                 input.value = price;
-
+                const partNumber = element.getAttribute('data-code').split('-')[0];
+                const target = document.getElementById(partNumber + '-append');
+                target.innerHTML = price;
                 createRelation(element);
             }
 
             // A function to send a request in order to ask the price for specific code
             function askPrice(element) {
-
-                element.disabled = true;
-                element.innerHTML = 'ارسال شد!!!';
                 // Accessing the form fields to get thier value for an ajax store operation
                 const partNumber = element.getAttribute('data-part');
                 const user_id = element.getAttribute('data-user');
@@ -514,8 +528,6 @@ if ($isValidCustomer) {
 
             // A function to create the relationship
             function createRelation(e) {
-                e.disabled = true;
-                e.innerHTML = 'ثبت شد!!!';
                 // Accessing the form fields to get thier value for an ajax store operation
                 const partNumber = e.getAttribute('data-part');
                 const customer_id = document.getElementById('customer_id').value;
@@ -559,8 +571,13 @@ if ($isValidCustomer) {
                 part = element.getAttribute('data-part');
                 const input = document.getElementById(part + '-price');
                 input.value = newPrice;
-
                 price = newPrice;
+
+
+                const partNumber = element.getAttribute('data-code').split('-')[0];
+                const target = document.getElementById(partNumber + '-append');
+                console.log(partNumber);
+                target.innerHTML = price;
             }
         </script>
 <?php
