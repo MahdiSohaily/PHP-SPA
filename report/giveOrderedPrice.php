@@ -576,7 +576,6 @@ if ($isValidCustomer) {
 
                 const partNumber = element.getAttribute('data-code').split('-')[0];
                 const target = document.getElementById(partNumber + '-append');
-                console.log(partNumber);
                 target.innerHTML = price;
             }
 
@@ -609,8 +608,6 @@ if ($isValidCustomer) {
                     text += item.join(' : ');
                     text += '\n';
                 }
-
-                console.log(text);
                 copyToClipboard(text);
 
                 // Alert the copied text
