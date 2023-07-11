@@ -17,7 +17,7 @@ if ($isValidCustomer) {
         print_r(json_encode($finalResult));
 ?>
         <div class="grid grid-cols-6">
-            <div class="m-2 p-3 bg-gray-500 relative">
+            <div class="m-2 p-3 col-span-2 bg-gray-500 relative">
                 <table class="min-w-full text-sm font-light p-2">
                     <thead class="font-medium">
                         <tr>
@@ -41,7 +41,7 @@ if ($isValidCustomer) {
                     </tbody>
                 </table>
             </div>
-            <div class="rtl col-span-5 flext justify-end">
+            <div class="rtl col-span-4 flext justify-end">
                 <table class="mx-auto col-6 text-sm font-light custom-table mb-2">
                     <thead class="font-medium bg-green-600">
                         <tr>
