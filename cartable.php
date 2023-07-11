@@ -74,7 +74,7 @@ if (mysqli_num_rows($result) > 0) {
                         <div class="call-capsol-if-reconnect"><?php ifreconnect($phone) ?></div>
                         <div class="call-capsol-time-info"><?php echo $jalali_time ?></div>
                         <div class="call-capsol-time-ago"><?php echo $jalali_time_ago ?></div>
-                        <div class="capsol-behind">آخرین استعلام نمایش داده می شود</div>
+                        <div class="capsol-behind min-w-full">آخرین استعلام نمایش داده می شود</div>
                     </a>
 
 
@@ -102,7 +102,7 @@ if (mysqli_num_rows($result) > 0) {
                     <div class="call-capsol-if-reconnect"><?php ifreconnect($phone) ?></div>
                     <div class="call-capsol-time-info"><?php echo $jalali_time ?></div>
                     <div class="call-capsol-time-ago"><?php echo $jalali_time_ago ?></div>
-                    <div class="capsol-behind">آخرین استعلام نمایش داده می شود</div>
+                    <div class="capsol-behind min-w-full">آخرین استعلام نمایش داده می شود</div>
                 </a>
 
 
