@@ -486,7 +486,7 @@ if ($isValidCustomer) {
 
             // A function to set the price to we don't have
             function donotHave(element) {
-                price = 'نداریم';
+                price = 'موجود نیست';
                 part = element.getAttribute('data-part');
                 const input = document.getElementById(part + '-price');
                 input.value = price;

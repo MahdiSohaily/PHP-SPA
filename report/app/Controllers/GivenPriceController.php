@@ -93,8 +93,7 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
                         array_push($relation_id, $relation_exist);
                         $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
                         $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
-                        echo "</br>";
-                        $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, array_keys($data[$code][$item['partnumber']]['relation']['goods']), $relation_exist);
+                        $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, $item['partnumber'], $relation_exist);
                         $data[$code][$item['partnumber']]['estelam'] =  estelam($conn, $item['partnumber']);
                     }
                 } else {
@@ -106,7 +105,6 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
             }
         }
     }
-
 
     return ([
         'explodedCodes' => $explodedCodes,
@@ -262,7 +260,7 @@ function givenPrice($conn, $code, $relation_exist = null)
     FROM ((prices 
     INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
     INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
-    WHERE partnumber IN (" . join(',', $code) . ") ORDER BY created_at DESC LIMIT 7";
+    WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
     $result = mysqli_query($conn, $sql);
 
 
