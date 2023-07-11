@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 require_once './database/connect.php';
 require_once('./views/Layouts/header.php');
 require_once('./app/Controllers/GivenPriceController.php');
@@ -168,7 +171,9 @@ if ($isValidCustomer) {
                                                                 <thead class="font-medium">
                                                                     <tr>
                                                                         <?php
-                                                                        if ($exist[$index]) {
+                                                                      
+                                                                        if ($exist[$index] !== null) {
+
                                                                             foreach ($exist[$index] as $brand => $amount) {
                                                                                 if ($amount > 0) {
                                                                         ?>

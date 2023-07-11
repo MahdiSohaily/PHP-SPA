@@ -167,9 +167,7 @@ if ($isValidCustomer) {
                                                                 <thead class="font-medium">
                                                                     <tr>
                                                                         <?php
-                                                                        if ($exist[$index]) {
-
-
+                                                                        if (array_sum($exist[$index]) > 0) {
                                                                             foreach ($exist[$index] as $brand => $amount) {
                                                                                 if ($amount > 0) { ?>
                                                                                     <th scope="col" class="<?php echo $brand == 'GEN' || $brand == 'MOB' ? $brand : 'brand-default' ?> text-white text-center py-2 relative hover:cursor-pointer" data-key="<?php echo $index ?>" data-brand="<?php echo $brand ?>" onmouseover="seekExist(this)" onmouseleave="closeSeekExist(this)">
