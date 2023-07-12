@@ -9,13 +9,14 @@
         $user  = getinternal($_SESSION["id"]);
     }
 
-    function getFirstLetters($string) {
+    function getFirstLetters($string)
+    {
         // Trim the string and remove special characters
         $string = trim(preg_replace('/[^a-zA-Z0-9\sآ-ی]/u', '', $string));
-        
+
         $words = preg_split('/\s+/u', $string);
         $firstLetters = '';
-    
+
         if (count($words) === 1) {
             $firstLetters = mb_substr($words[0], 0, 2);
         } else {
@@ -23,7 +24,7 @@
                 $firstLetters .= mb_substr($word, 0, 1) . ' ';
             }
         }
-    
+
         return trim($firstLetters);
     }
     ?>
@@ -42,7 +43,6 @@
              <table class="border text-sm bg-white custom-table mb-2 p-3">
                  <thead>
                      <tr>
-                         <th class="bg-violet-800 text-white tiny-text px-5 py-2">شماره</th>
                          <th class="bg-violet-800 text-white tiny-text px-2 py-2">مشخصات</th>
                          <th class="bg-violet-800 text-white tiny-text px-2 py-2">نیایش</th>
                          <th class="bg-violet-800 text-white tiny-text px-2 py-2">محک</th>
@@ -76,7 +76,6 @@
                     ?>
                                  <tbody>
                                      <tr class="">
-                                         <td class=""><a class="phone_number" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                          <td class=" tiny-text p-2"><?php echo $name ?> <?php echo $family ?></td>
                                          <td class=" tiny-text p-2">
                                              <?php
@@ -135,7 +134,6 @@
                                 ?>
                              <tbody>
                                  <tr class="hover:bg-gray-200 hover:cursor-pointer">
-                                     <td class="py-2 px-5"><a class="phone_number" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                      <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
                                      <td class="p-2">
                                          <?php
@@ -291,7 +289,6 @@
                      <thead>
                          <tr class="tiny-text bg-violet-800 text-white">
                              <th class="p-2">مشتری</th>
-                             <th class="p-2">تلفن</th>
                              <th class="p-2">اطلاعات استعلام</th>
                              <th class="p-2">کاربر</th>
                          </tr>
@@ -317,7 +314,6 @@
                                      <tbody>
                                          <tr>
                                              <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
-                                             <td class="tiny-text p-2"><a class="phone_number" target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                              <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
                                              <td class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
                                          <?php

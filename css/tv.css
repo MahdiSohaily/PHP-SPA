@@ -40,6 +40,11 @@ th {
 td {
   padding: 3px 2px;
 }
+
+tr:nth-child(even) {
+  background-color: rgb(188, 222, 236);
+}
+
 .phone_number {
   font-size: 5px !important;
   background-color: red;
