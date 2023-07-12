@@ -375,7 +375,7 @@
                             ?>
 
                                                  <tr class="tiny-text">
-                                                     <td  class="p-2"><?php echo $code ?></td>
+                                                     <td style="font-size: 8px !important;" class="p-2"><?php echo $code ?></td>
                                                      <td class="p-2"><?php echo getFirstLetters($sellername) ?></td>
                                                      <td class="ltr p-2"><?php echo $price ?></td>
                                                      <td class="p-2"><?php echo date('H:i', strtotime($time)) ?></td>
