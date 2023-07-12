@@ -13,21 +13,23 @@ if (isset($_POST['store_price'])) {
     $good = $result->fetch_assoc();
 
     $relation_exist = isInRelation($conn, $good['id']);
+    $relations = relations($conn, $good['id']);
+    $relations = array_keys($relations['goods']);
 
-    $givenPrice = givenPrice($conn, $partnumber, $relation_exist);
+    $givenPrice = givenPrice($conn, $relations, $relation_exist);
 
     if ($givenPrice !== null) {
         foreach ($givenPrice as $price) {
             if ($price['price'] !== null && $price['price'] !== '') {
                 if (array_key_exists("ordered", $price) || $price['customerID'] == 1) { ?>
-                    <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
+                    <tr class="min-w-full mb-1  bg-red-400 hover:cursor-pointer" onclick="setPrice(this)" data-code="<?php echo $code ?>" data-price="<?php echo $price['price'] ?>" data-part="<?php echo $partNumber ?>">
                     <?php } else { ?>
                     <tr class="min-w-full mb-1  bg-indigo-200 ?>" data-price="<?php echo $price['price'] ?>">
                     <?php  } ?>
-                    <td scope="col" class="text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
+                    <td scope="col" class="text-center text-gray-800 px-2 py-1 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                         <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
                     </td>
-                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
+                    <td scope="col" class="text-center text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                         <?php if (array_key_exists("ordered", $price)) {
                             echo 'قیمت دستوری';
                         } else {
@@ -35,7 +37,10 @@ if (isset($_POST['store_price'])) {
                         }
                         ?>
                     </td>
-                    <td scope="col" class="text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
+                    <td class="bold <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
+                        <?php echo array_key_exists("partnumber", $price) ? $price['partnumber'] : '' ?>
+                    </td>
+                    <td scope="col" class="text-center text-gray-800 px-2 py-1 rtl <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : '' ?>">
                         <?php if (!array_key_exists("ordered", $price)) {
                         ?>
                             <img class="userImage" src="../../userimg/<?php echo $price['userID'] ?>.jpg" alt="userimage">
@@ -46,7 +51,7 @@ if (isset($_POST['store_price'])) {
                     </tr>
                     <tr class="min-w-full mb-1 border-b-2 <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'bg-red-500' : 'bg-indigo-300' ?>" data-price='<?php echo $price['price'] ?>'>
                         <td></td>
-                        <td class="<?php echo array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="2" scope="col">
+                        <td class="<?php array_key_exists("ordered", $price) ? 'text-white' : '' ?> text-gray-800 px-2 tiny-text" colspan="3" scope="col">
                             <div class="rtl flex items-center w-full <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : 'text-gray-800' ?>">
                                 <i class="px-1 material-icons tiny-text <?php echo array_key_exists("ordered", $price) || $price['customerID'] == 1 ? 'text-white' : 'text-gray-800' ?>">access_time</i>
                                 <?php
@@ -71,11 +76,11 @@ if (isset($_POST['store_price'])) {
                                     $text .= "$hours ساعت ";
                                 }
 
-                                if ($minutes) {
+                                if (!$days && $minutes) {
                                     $text .= "$minutes دقیقه ";
                                 }
 
-                                if ($seconds) {
+                                if (!$days && !$hours && $seconds) {
                                     $text .= "$seconds ثانیه ";
                                 }
 
@@ -84,6 +89,7 @@ if (isset($_POST['store_price'])) {
                             </div>
                         </td>
                     </tr>
+
             <?php }
         } ?>
         <?php } else { ?>
@@ -96,6 +102,45 @@ if (isset($_POST['store_price'])) {
     <?php
 
 }
+
+function relations($conn, $id)
+{
+    $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '" . $id . "'";
+    $result = mysqli_query($conn, $sql);
+
+    $isInRelation = null;
+    if (mysqli_num_rows($result) > 0) {
+        $isInRelation = mysqli_fetch_assoc($result);
+    }
+
+    $relations = [];
+
+    if ($isInRelation) {
+
+        $sql = "SELECT yadakshop1402.nisha.* FROM yadakshop1402.nisha INNER JOIN similars ON similars.nisha_id = nisha.id WHERE similars.pattern_id = '" . $isInRelation['pattern_id'] . "'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            while ($info = mysqli_fetch_assoc($result)) {
+                array_push($relations, $info);
+            }
+        }
+    } else {
+        $sql = "SELECT * FROM yadakshop1402.nisha WHERE id = '" . $id . "'";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $relations[0] = mysqli_fetch_assoc($result);
+        }
+    }
+
+
+    $sortedGoods = [];
+    foreach ($relations as $relation) {
+        $sortedGoods[$relation['partnumber']] = $relation;
+    }
+
+    return ['goods' => $sortedGoods];
+}
+
 function isInRelation($conn, $id)
 {
     $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '$id'";
@@ -109,9 +154,11 @@ function isInRelation($conn, $id)
     return false;
 }
 
-function givenPrice($conn, $code, $relation_exist = null)
+function givenPrice($conn, $codes, $relation_exist = null)
 {
-    $code = strtolower($code);
+    $codes = array_filter($codes, function ($item) {
+        return strtolower($item);
+    });
     $ordared_price = [];
 
 
@@ -125,20 +172,24 @@ function givenPrice($conn, $code, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.id AS customerID, customer.family ,users.id as userID, prices.created_at
-    FROM ((prices 
-    INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
-    INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
-    WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
-    $result = mysqli_query($conn, $sql);
-
-
     $givenPrices = [];
-    if (mysqli_num_rows($result) > 0) {
-        while ($item = mysqli_fetch_assoc($result)) {
-            array_push($givenPrices, $item);
-        }
+    foreach ($codes as $code) {
+        $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.id AS customerID, customer.family ,users.id as userID, prices.created_at
+                FROM ((prices 
+                INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
+                INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
+                WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 1";
+
+        $result = mysqli_query($conn, $sql);
+        array_push($givenPrices, mysqli_fetch_assoc($result));
     }
+
+    $givenPrices = array_filter($givenPrices, function ($item) {
+
+        if ($item !== null && count($item) > 0) {
+            return $item;
+        }
+    });
 
     $unsortedData = [];
     foreach ($givenPrices as $item) {
@@ -156,8 +207,6 @@ function givenPrice($conn, $code, $relation_exist = null)
 
     return  $final_data;
 }
-
-
 
 if (isset($_POST['askPrice'])) {
     $partnumber = $_POST['partNumber'];
