@@ -93,13 +93,13 @@ function setup_loading($conn, $customer, $completeCode, $notification = null)
                         array_push($relation_id, $relation_exist);
                         $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
                         $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
-                        $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, $item['partnumber'], $relation_exist);
+                        $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, array_keys($data[$code][$item['partnumber']]['relation']['goods']), $relation_exist);
                         $data[$code][$item['partnumber']]['estelam'] =  estelam($conn, $item['partnumber']);
                     }
                 } else {
                     $data[$code][$item['partnumber']]['information'] = info($conn, $item['id']);
                     $data[$code][$item['partnumber']]['relation'] = relations($conn, $item['id']);
-                    $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, $item['partnumber']);
+                    $data[$code][$item['partnumber']]['givenPrice'] = givenPrice($conn, array_keys($data[$code][$item['partnumber']]['relation']['goods']));
                     $data[$code][$item['partnumber']]['estelam'] = estelam($conn, $item['partnumber']);
                 }
             }
@@ -240,9 +240,11 @@ function relations($conn, $id)
     return ['goods' => $sortedGoods, 'existing' => $existing, 'sorted' => $sorted, 'stockInfo' => $stockinfo];
 }
 
-function givenPrice($conn, $code, $relation_exist = null)
+function givenPrice($conn, $codes, $relation_exist = null)
 {
-    $code = strtolower($code);
+    $codes = array_filter($codes, function ($item) {
+        return strtolower($item);
+    });
     $ordared_price = [];
 
 
@@ -260,7 +262,7 @@ function givenPrice($conn, $code, $relation_exist = null)
     FROM ((prices 
     INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
     INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
-    WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 7";
+    WHERE partnumber LIKE '" . $codes . "' ORDER BY created_at DESC LIMIT 1";
     $result = mysqli_query($conn, $sql);
 
 

@@ -13,7 +13,6 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
-        print_r(json_encode($finalResult));
 
 ?>
         <div class="grid grid-cols-6">
