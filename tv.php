@@ -28,7 +28,7 @@
         return trim($firstLetters);
     }
     ?>
- <div style="width: 854px;background-color: red !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
+ <div style="width: 854px;background-color: white !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
      <div class="d-grid">
          <div class="div1">
@@ -46,7 +46,7 @@
                  <tbody>
                      <?php
                         global  $repeat;
-                        $sql = "SELECT * FROM incoming WHERE user = $user ORDER BY  time DESC LIMIT 20";
+                        $sql = "SELECT * FROM incoming WHERE user = $user ORDER BY  time DESC LIMIT 100";
                         $result = mysqli_query($con, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -125,8 +125,10 @@
                                     }
                                 } else {
                                     ?>
-                                 <tr class="hover:bg-gray-200 hover:cursor-pointer">
-                                     <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
+                                 <tr>
+                                     <td style="text-align: center;">
+                                         <i style="color: red" class="material-icons">cancel</i>
+                                     </td>
                                      <td class="p-2">
                                          <?php
                                             $gphone = substr($phone, 1);
@@ -218,7 +220,7 @@
                          FROM ((shop.prices 
                          INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
                          INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
-                         ORDER BY prices.created_at DESC LIMIT 200";
+                         ORDER BY prices.created_at DESC LIMIT 100";
                             $result = mysqli_query($con, $sql);
 
 
@@ -287,7 +289,7 @@
                      </thead>
                      <tbody>
                          <?php
-                            $sql2 = "SELECT * FROM record ORDER BY  time DESC LIMIT 350  ";
+                            $sql2 = "SELECT * FROM record ORDER BY  time DESC LIMIT 100  ";
                             $result2 = mysqli_query($con, $sql2);
                             if (mysqli_num_rows($result2) > 0) {
                                 while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -342,13 +344,13 @@
                          <tr class="tiny-text bg-violet-800 text-white">
                              <th class="p-2">کد فنی</th>
                              <th class="p-2">فروشنده</th>
-                             <th class="p-2">قیمت</th>
+                             <th style="text-align: center;" class="p-2">قیمت</th>
                              <th class="p-2">زمان</th>
                          </tr>
                      </thead>
                      <tbody>
                          <?php
-                            $sql2 = "SELECT * FROM estelam ORDER BY  time DESC LIMIT 250  ";
+                            $sql2 = "SELECT * FROM estelam ORDER BY  time DESC LIMIT 100  ";
                             $result2 = mysqli_query($con, $sql2);
                             if (mysqli_num_rows($result2) > 0) {
                                 while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -375,7 +377,7 @@
                                                  <tr class="tiny-text">
                                                      <td class="p-2"><?php echo $code ?></td>
                                                      <td class="p-2"><?php echo getFirstLetters($sellername) ?></td>
-                                                     <td class="p-2"><?php echo $price ?></td>
+                                                     <td class="ltr p-2"><?php echo $price ?></td>
                                                      <td class="p-2"><?php echo date('H:i', strtotime($time)) ?></td>
                                                  </tr>
 
