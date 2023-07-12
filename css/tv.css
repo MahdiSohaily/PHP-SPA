@@ -1,73 +1,15 @@
-html {
-  margin: 10px;
+* {
+  font-size: 7px !important;
 }
 
-.box-incoming {
-  width: 55%;
-}
-
-.your-interval {
-  display: none;
-}
-
-.your-interval-select {
-  display: none;
-}
-
-.box-mother {
-  width: 100%;
-}
-
-.box-mother > div {
-  float: right;
-  margin-right: 0;
-}
-
-.tv-inquery {
-  width: 45%;
-}
-
-.tv-inquery .customer-list tr td:nth-child(2),
-.customer-list tr td:nth-child(5),
-.customer-list tr td:nth-child(6),
-.customer-list tr td:nth-child(7) {
-  display: none;
-}
-
-.tv-inquery .customer-list tr th:nth-child(2),
-.customer-list tr th:nth-child(5),
-.customer-list tr th:nth-child(6),
-.customer-list tr th:nth-child(7) {
-  display: none;
-}
-
-.box-keeper {
-  margin: 0;
-  padding: 0;
-}
-
-.mirror-tv {
-  background: #cdcdcd;
-  position: fixed;
-  right: 2px;
-  bottom: 2px;
-  line-height: 28px;
-  padding: 4px 10px;
-}
-
-.call-capsol-name {
-  width: 16%;
+th {
+  font-size: 7px !important;
 }
 
 img.user-img {
   width: 10px;
   height: 10px;
-}
-
-.test-error {
-  color: orange;
-  font-size: 40px;
-  text-align: center;
+  border: none;
 }
 
 .bg-white {
@@ -83,7 +25,7 @@ img.user-img {
 
 table {
   width: 100% !important;
-  border: 1px solid gray;
+  background-color: white !important;
 }
 
 thead {
@@ -97,4 +39,16 @@ th {
 
 td {
   padding: 3px 2px;
+}
+.phone_number {
+  font-size: 5px !important;
+  background-color: red;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  padding: 0px 5px;
+}
+
+.phone_number:hover {
+  background-color: rgb(162, 1, 1);
 }

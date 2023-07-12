@@ -9,24 +9,15 @@
         $user  = getinternal($_SESSION["id"]);
     }
     ?>
- <style>
-     * {
-         font-size: 7px !important;
-     }
-
-     th {
-         font-size: 7px !important;
-     }
- </style>
  <div style="width: 854px;background-color: white !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
-     <div class="your-user">
+     <!-- <div class="your-user">
          <div class="your-interval">داخلی شما</div>
          <div class="your-interval-select">
              <a href="?user=<?php echo $user ?>"><?php echo $user ?></a>
              <a href="?user=1 or 1=1">همه</a>
          </div>
-     </div>
+     </div> -->
      <div class="d-grid bg-green-400">
          <div class="div1">
              <h2 class="title">تماس های ورودی</h2>
@@ -66,8 +57,8 @@
                                     $family = $row2['family'];
                     ?>
                                  <tbody>
-                                     <tr class="odd:bg-gray-200 hover:bg-gray-200 hover:cursor-pointer">
-                                         <td class=" tiny-text py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                     <tr class="">
+                                         <td class=""><a class="phone_number" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                          <td class=" tiny-text p-2"><?php echo $name ?> <?php echo $family ?></td>
                                          <td class=" tiny-text p-2">
                                              <?php
@@ -126,7 +117,7 @@
                                 ?>
                              <tbody>
                                  <tr class="hover:bg-gray-200 hover:cursor-pointer">
-                                     <td class="py-2 px-5"><a class="bg-red-600 text-white p-1 rounded-md hover:bg-red-700 hover:text-gray-100" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                     <td class="py-2 px-5"><a class="phone_number" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                      <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
                                      <td class="p-2">
                                          <?php
@@ -195,13 +186,14 @@
                  <thead class="font-medium bg-green-600">
                      <tr>
                          <th scope="col" class=" py-2 tiny-text text-white text-right">
-                             مشتری
+                             کد فنی
                          </th>
                          <th scope="col" class=" py-2 tiny-text text-white text-right">
                              قیمت
                          </th>
+
                          <th scope="col" class=" py-2 tiny-text text-white text-right">
-                             کد فنی
+                             مشتری
                          </th>
                          <th scope="col" class=" py-2 tiny-text text-white text-center">
                              کاربر
@@ -240,9 +232,11 @@
                                  <?php  } ?>
                                  <td class="tiny-text bold px-1">
                                      <p class="text-right bold text-gray-700 px-2 py-1">
-                                         <?php echo $price['name'] . ' ' . $price['family'] ?>
+                                         <?php echo $price['partnumber']; ?>
                                      </p>
                                  </td>
+
+
                                  <td class="tiny-text bold px-1">
                                      <p class="text-right bold text-gray-700 px-2 py-1">
                                          <?php echo $price['price'] === null ? 'ندارد' : $price['price']  ?>
@@ -250,7 +244,7 @@
                                  </td>
                                  <td class="tiny-text bold px-1">
                                      <p class="text-right bold text-gray-700 px-2 py-1">
-                                         <?php echo $price['partnumber']; ?>
+                                         <?php echo $price['name'] . ' ' . $price['family'] ?>
                                      </p>
                                  </td>
                                  <td>
@@ -305,7 +299,7 @@
                                      <tbody>
                                          <tr>
                                              <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
-                                             <td class="tiny-text p-2"><a target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
+                                             <td class="tiny-text p-2"><a class="phone_number" target="_blank" href="main.php?phone=<?php echo $phone ?>"><?php echo $phone ?></a></td>
                                              <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
                                              <td class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
                                          <?php
@@ -374,7 +368,7 @@
                                                      <td class="p-2"><?php echo $code ?></td>
                                                      <td class="p-2"><?php echo $sellername ?></td>
                                                      <td class="p-2"><?php echo $price ?></td>
-                                                     <td class="p-2"><?php echo date('H-i-s', strtotime($time)) ?></td>
+                                                     <td class="p-2"><?php echo date('H:i', strtotime($time)) ?></td>
                                                  </tr>
                                              </tbody>
                      <?php
@@ -420,18 +414,18 @@
          }
      }
 
-     //  setInterval(() => {
-     //      var params = new URLSearchParams();
-     //      params.append('historyAjax', 'historyAjax');
-     //      params.append('user', elem.getAttribute('data-user'));
+     setInterval(() => {
+         var params = new URLSearchParams();
+         params.append('historyAjax', 'historyAjax');
+         params.append('user', elem.getAttribute('data-user'));
 
-     //      axios.post("./tvAjax.php", params)
-     //          .then(function(response) {
-     //              console.log(response);
-     //              elem.innerHTML = response.data;
-     //          })
-     //          .catch(function(error) {
-     //              console.log(error);
-     //          });
-     //  }, 7000);
+         axios.post("./tvAjax.php", params)
+             .then(function(response) {
+                 console.log(response);
+                 elem.innerHTML = response.data;
+             })
+             .catch(function(error) {
+                 console.log(error);
+             });
+     }, 20000);
  </script>
