@@ -1,6 +1,6 @@
 <?php require_once './layout/heroHeader.php'; ?>
 <div class="estelam-table-top">
-    <input id="myInput" type="text" placeholder="سرچ کنید ...">
+    <input style="border: 2px solid gray;" id="myInput" type="text" placeholder="سرچ کنید ...">
 
     <a href="#" class="hyundaimobisshow">هیوندای موبیز</a>
     <a href="#" class="kiamobisshow">کیا موبیز</a>
@@ -43,21 +43,14 @@
                     <span></span>
                     <span></span>
                     <span></span>
-
                 </td>
                 <td class="sellername" tableid="<?php echo $sellerid ?>"><?php echo $sellername ?></td>
-
                 <td class="sellerphone"><?php echo $sellerphone ?></td>
                 <td class="sellerdes"><?php echo $sellerdes ?></td>
-
-
-
             </tr>
-
     <?php
         }
     }
-
     ?>
 
 </table>
@@ -66,8 +59,8 @@
 <div class="bazar-click-to-cancell" href="">قطع تماس جاری</div>
 <form class="estelam-form" action="php/estelam-form-save.php" method="get" autocomplete="off">
     <div class="input-keeper">
-        <input type="text" name="code[]" class="estelam-form-code" placeholder="کد فنی">
-        <input type="text" name="price[]" class="estelam-form-price" placeholder="قیمت">
+        <input type="text" name="code[]" class="text-gray-500 estelam-form-code" placeholder="کد فنی">
+        <input type="text" name="price[]" class="text-gray-500 estelam-form-price" placeholder="قیمت">
         <a class="remove-from-estelam-form" href="#">X</a>
     </div>
     <div class="estelam-form-box">
@@ -75,8 +68,10 @@
         <input type="text" name="sellerid" class="sellerid-input" hidden>
 
 
-        <input class="save-estelam-form" type="submit" value="ذخیره استعلام ها">
-        <a class="add-to-estelam-form" href="#">افزودن</a>
+        <div style="clear: both; direction: ltr;" class="flex gap-3 px-1 py-3">
+            <button class="bg-gray-600 rounded-md px-5 py-3 tiny-text" type="submit">ذخیره استعلام ها</button>
+            <a class="bg-gray-600 rounded-md px-5 py-3 tiny-text" href="#">افزودن</a>
+        </div>
 
     </div>
 </form>
