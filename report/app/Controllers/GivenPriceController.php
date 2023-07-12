@@ -258,20 +258,37 @@ function givenPrice($conn, $codes, $relation_exist = null)
         $ordared_price['ordered'] = true;
     }
 
-    $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.id AS customerID, customer.family ,users.id as userID, prices.created_at
-    FROM ((prices 
-    INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
-    INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
-    WHERE partnumber LIKE '" . $codes . "' ORDER BY created_at DESC LIMIT 1";
-    $result = mysqli_query($conn, $sql);
-
-
     $givenPrices = [];
-    if (mysqli_num_rows($result) > 0) {
-        while ($item = mysqli_fetch_assoc($result)) {
-            array_push($givenPrices, $item);
-        }
+    foreach ($codes as $code) {
+        $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.id AS customerID, customer.family ,users.id as userID, prices.created_at
+                FROM ((prices 
+                INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
+                INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
+                WHERE partnumber LIKE '" . $code . "' AND customer.id ='1' ORDER BY created_at DESC LIMIT 1";
+
+        $result = mysqli_query($conn, $sql);
+        array_push($givenPrices, mysqli_fetch_assoc($result));
     }
+
+    $givenPrices = array_filter($givenPrices, function ($item) {
+        echo "</br>";
+        echo "</br>";
+        echo "</br>";
+        echo "</br>";
+        print_r($item);
+        echo "</br>";
+        echo "</br>";
+        echo "</br>";
+        echo "</br>";
+        if ($item !== null && count($item) > 0) {
+            return $item;
+        }
+    });
+
+    echo "</br>";
+    echo "</br>";
+    echo "</br>";
+    echo "</br>";
 
     $unsortedData = [];
     foreach ($givenPrices as $item) {
