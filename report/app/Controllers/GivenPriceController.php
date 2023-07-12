@@ -4,11 +4,11 @@ $customer_info = null;
 $finalResult = null;
 
 
-if (isset($_POST['givenPrice'], $_POST['user'])) {
+if (filter_has_var(INPUT_POST, 'givenPrice') && filter_has_var(INPUT_POST, 'user')) {
     $customer = $_POST['customer'];
     $code = $_POST['code'];
     $_SESSION["user_id"] = $_POST['user'];
-    $notification_id = array_key_exists('notification', $_POST) ? $_POST['notification'] : null;
+    $notification_id = filter_has_var(INPUT_POST, 'notification') ? $_POST['notification'] : null;
 
     $customer_sql = "SELECT * FROM callcenter.customer WHERE id = '" . $customer . "%'";
     $result = mysqli_query($conn, $customer_sql);
