@@ -42,7 +42,7 @@ function getFirstLetters($string)
 <div class="bg-white">
     <i style="cursor: pointer;" onclick="openFullscreen()" class="material-icons">aspect_ratio</i>
     <i style="cursor: pointer;" onclick="closeFullscreen()" class="material-icons">border_clear</i>
-    <div class="d-grid bg-green-400">
+    <div class="d-grid">
         <div class="div1">
             <h2 class="title">تماس های ورودی</h2>
             <table class="border text-sm bg-white custom-table mb-2 p-3">
@@ -55,31 +55,32 @@ function getFirstLetters($string)
                         <!-- <th>تاریخ</th> -->
                     </tr>
                 </thead>
-                <?php
-                global  $repeat;
-                $sql = "SELECT * FROM incoming WHERE user = $user ORDER BY  time DESC LIMIT 20";
-                $result = mysqli_query($con, $sql);
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $phone = $row['phone'];
-                        $user = $row['user'];
-                        $status = $row['status'];
-                        $date = $row["time"];
-                        $array = explode(' ', $date);
-                        list($year, $month, $day) = explode('-', $array[0]);
-                        list($hour, $minute, $second) = explode(':', $array[1]);
-                        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
-                        $jalali_time = jdate("H:i", $timestamp, "", "Asia/Tehran", "en");
-                        $jalali_date = jdate("Y/m/d", $timestamp, "", "Asia/Tehran", "en");
+                <tbody>
+                    <?php
+                    global  $repeat;
+                    $sql = "SELECT * FROM incoming WHERE user = $user ORDER BY  time DESC LIMIT 20";
+                    $result = mysqli_query($con, $sql);
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $phone = $row['phone'];
+                            $user = $row['user'];
+                            $status = $row['status'];
+                            $date = $row["time"];
+                            $array = explode(' ', $date);
+                            list($year, $month, $day) = explode('-', $array[0]);
+                            list($hour, $minute, $second) = explode(':', $array[1]);
+                            $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+                            $jalali_time = jdate("H:i", $timestamp, "", "Asia/Tehran", "en");
+                            $jalali_date = jdate("Y/m/d", $timestamp, "", "Asia/Tehran", "en");
 
-                        $sql2 = "SELECT * FROM customer WHERE phone LIKE '" . $phone . "%'";
-                        $result2 = mysqli_query($con, $sql2);
-                        if (mysqli_num_rows($result2) > 0) {
-                            while ($row2 = mysqli_fetch_assoc($result2)) {
-                                $name = $row2['name'];
-                                $family = $row2['family'];
-                ?>
-                                <tbody>
+                            $sql2 = "SELECT * FROM customer WHERE phone LIKE '" . $phone . "%'";
+                            $result2 = mysqli_query($con, $sql2);
+                            if (mysqli_num_rows($result2) > 0) {
+                                while ($row2 = mysqli_fetch_assoc($result2)) {
+                                    $name = $row2['name'];
+                                    $family = $row2['family'];
+                    ?>
+
                                     <tr class="">
                                         <td class=" tiny-text p-2"><?php echo $name ?> <?php echo $family ?></td>
                                         <td class=" tiny-text p-2">
@@ -131,13 +132,11 @@ function getFirstLetters($string)
                                         <td class=" tiny-text p-2"><?php echo $jalali_time ?></td>
                                         <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
                                     </tr>
-                                </tbody>
-                            <?php
+                                <?php
 
-                            }
-                        } else {
-                            ?>
-                            <tbody>
+                                }
+                            } else {
+                                ?>
                                 <tr class="hover:bg-gray-200 hover:cursor-pointer">
                                     <td class="w-30"><span class="tiny-text text-red-500 bold">این شماره ذخیره نشده است.</span></td>
                                     <td class="p-2">
@@ -190,15 +189,15 @@ function getFirstLetters($string)
                                     <td class="p-2"><?php echo $jalali_time ?></td>
                                     <!-- <td class="date-info"><?php echo $jalali_date ?></td> -->
                                 </tr>
-                            </tbody>
-                <?php
+                    <?php
+                            }
                         }
+                    } // end while
+                    else {
+                        echo 'هیچ اطلاعاتی موجود نیست';
                     }
-                } // end while
-                else {
-                    echo 'هیچ اطلاعاتی موجود نیست';
-                }
-                ?>
+                    ?>
+                </tbody>
             </table>
         </div>
         <div class="div2">
@@ -298,25 +297,25 @@ function getFirstLetters($string)
                             <th class="p-2">کاربر</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php
+                        $sql2 = "SELECT * FROM record ORDER BY  time DESC LIMIT 350  ";
+                        $result2 = mysqli_query($con, $sql2);
+                        if (mysqli_num_rows($result2) > 0) {
+                            while ($row2 = mysqli_fetch_assoc($result2)) {
+                                $time = $row2['time'];
+                                $callinfo = $row2['callinfo'];
+                                $user = $row2['user'];
+                                $phone = $row2['phone'];
 
-                    <?php
-                    $sql2 = "SELECT * FROM record ORDER BY  time DESC LIMIT 350  ";
-                    $result2 = mysqli_query($con, $sql2);
-                    if (mysqli_num_rows($result2) > 0) {
-                        while ($row2 = mysqli_fetch_assoc($result2)) {
-                            $time = $row2['time'];
-                            $callinfo = $row2['callinfo'];
-                            $user = $row2['user'];
-                            $phone = $row2['phone'];
+                                $sql = "SELECT * FROM customer WHERE phone LIKE '" . $phone . "%'";
+                                $result = mysqli_query($con, $sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $name = $row['name'];
+                                        $family = $row['family'];
+                        ?>
 
-                            $sql = "SELECT * FROM customer WHERE phone LIKE '" . $phone . "%'";
-                            $result = mysqli_query($con, $sql);
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $name = $row['name'];
-                                    $family = $row['family'];
-                    ?>
-                                    <tbody>
                                         <tr>
                                             <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
                                             <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
@@ -334,14 +333,15 @@ function getFirstLetters($string)
                                             </td>
                                             <!-- <td class="record-date"><?php echo $time ?></td> -->
                                         </tr>
-                                    </tbody>
-                            <?php
 
+                                <?php
+
+                            }
+                        } else {
+                            echo '<td colspan="4">هیچ اطلاعاتی موجود نیست</td>';
                         }
-                    } else {
-                        echo '<td colspan="4">هیچ اطلاعاتی موجود نیست</td>';
-                    }
-                            ?>
+                                ?>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -358,46 +358,48 @@ function getFirstLetters($string)
                             <th class="p-2">زمان</th>
                         </tr>
                     </thead>
-                    <?php
-                    $sql2 = "SELECT * FROM estelam ORDER BY  time DESC LIMIT 250  ";
-                    $result2 = mysqli_query($con, $sql2);
-                    if (mysqli_num_rows($result2) > 0) {
-                        while ($row2 = mysqli_fetch_assoc($result2)) {
+                    <tbody>
+                        <?php
+                        $sql2 = "SELECT * FROM estelam ORDER BY  time DESC LIMIT 250  ";
+                        $result2 = mysqli_query($con, $sql2);
+                        if (mysqli_num_rows($result2) > 0) {
+                            while ($row2 = mysqli_fetch_assoc($result2)) {
 
-                            $code = $row2['codename'];
-                            $seller = $row2['seller'];
-                            $price = $row2['price'];
-                            $user = $row2['user'];
-                            $time = $row2['time'];
-                            $sql = "SELECT * FROM users WHERE id=$user";
-                            $result = mysqli_query(dbconnect2(), $sql);
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $id = $row['id'];
-                                    $name = $row['name'];
-                                    $family = $row['family'];
-                                    $sql3 = "SELECT * FROM seller WHERE id=$seller";
-                                    $result3 = mysqli_query(dbconnect2(), $sql3);
-                                    if (mysqli_num_rows($result3) > 0) {
-                                        while ($row3 = mysqli_fetch_assoc($result3)) {
-                                            $sellername = $row3['name'];
-                    ?>
-                                            <tbody>
+                                $code = $row2['codename'];
+                                $seller = $row2['seller'];
+                                $price = $row2['price'];
+                                $user = $row2['user'];
+                                $time = $row2['time'];
+                                $sql = "SELECT * FROM users WHERE id=$user";
+                                $result = mysqli_query(dbconnect2(), $sql);
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $id = $row['id'];
+                                        $name = $row['name'];
+                                        $family = $row['family'];
+                                        $sql3 = "SELECT * FROM seller WHERE id=$seller";
+                                        $result3 = mysqli_query(dbconnect2(), $sql3);
+                                        if (mysqli_num_rows($result3) > 0) {
+                                            while ($row3 = mysqli_fetch_assoc($result3)) {
+                                                $sellername = $row3['name'];
+                        ?>
+
                                                 <tr class="tiny-text">
                                                     <td class="p-2"><?php echo $code ?></td>
                                                     <td class="p-2"><?php echo getFirstLetters($sellername) ?></td>
                                                     <td class="p-2"><?php echo $price ?></td>
                                                     <td class="p-2"><?php echo date('H:i', strtotime($time)) ?></td>
                                                 </tr>
-                                            </tbody>
-                    <?php
+
+                        <?php
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-                    ?>
+                        ?>
+                    </tbody>
                 </table>
             </div>
         </div>
