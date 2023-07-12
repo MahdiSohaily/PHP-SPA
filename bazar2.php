@@ -64,8 +64,8 @@
         <a class="remove-from-estelam-form" href="#">X</a>
     </div>
     <div class="estelam-form-box">
-        <input type="text" class="sellername-input" placeholder="فروشنده">
-        <input type="text" name="sellerid" class="sellerid-input" hidden>
+        <input type="text" class="sellername-input tiny-text" placeholder="فروشنده">
+        <input type="text" name="sellerid" class="sellerid-input tiny-text" hidden>
 
 
         <div style="clear: both; direction: ltr;" class="flex gap-3 px-1 py-3">

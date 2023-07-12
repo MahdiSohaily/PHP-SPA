@@ -786,7 +786,7 @@ table.estelam-table tr:nth-child(even) {
 table.estelam-table .sellerkind span {
   margin: 2px;
   width: 24px;
-  height: 20px;
+  height: 24px;
   display: inline-block;
   border-radius: 50%;
   border: 2px solid #d3d3d3;
