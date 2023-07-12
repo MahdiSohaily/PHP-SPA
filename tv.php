@@ -28,7 +28,7 @@
         return trim($firstLetters);
     }
     ?>
- <div style="width: 854px;background-color: white !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
+ <div style="width: 854px;background-color: red !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
      <div class="d-grid">
          <div class="div1">
