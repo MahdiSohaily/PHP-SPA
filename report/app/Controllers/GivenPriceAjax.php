@@ -103,145 +103,146 @@ if (isset($_POST['store_price'])) {
 
 }
 
-?>
+    ?>
 
-<?php
+    <?php
 
-function relations($conn, $id)
-{
-    $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '" . $id . "'";
-    $result = mysqli_query($conn, $sql);
-
-    $isInRelation = null;
-    if (mysqli_num_rows($result) > 0) {
-        $isInRelation = mysqli_fetch_assoc($result);
-    }
-
-    $relations = [];
-
-    if ($isInRelation) {
-
-        $sql = "SELECT yadakshop1402.nisha.* FROM yadakshop1402.nisha INNER JOIN similars ON similars.nisha_id = nisha.id WHERE similars.pattern_id = '" . $isInRelation['pattern_id'] . "'";
+    function relations($conn, $id)
+    {
+        $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '" . $id . "'";
         $result = mysqli_query($conn, $sql);
+
+        $isInRelation = null;
         if (mysqli_num_rows($result) > 0) {
-            while ($info = mysqli_fetch_assoc($result)) {
-                array_push($relations, $info);
+            $isInRelation = mysqli_fetch_assoc($result);
+        }
+
+        $relations = [];
+
+        if ($isInRelation) {
+
+            $sql = "SELECT yadakshop1402.nisha.* FROM yadakshop1402.nisha INNER JOIN similars ON similars.nisha_id = nisha.id WHERE similars.pattern_id = '" . $isInRelation['pattern_id'] . "'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while ($info = mysqli_fetch_assoc($result)) {
+                    array_push($relations, $info);
+                }
+            }
+        } else {
+            $sql = "SELECT * FROM yadakshop1402.nisha WHERE id = '" . $id . "'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                $relations[0] = mysqli_fetch_assoc($result);
             }
         }
-    } else {
-        $sql = "SELECT * FROM yadakshop1402.nisha WHERE id = '" . $id . "'";
+
+
+        $sortedGoods = [];
+        foreach ($relations as $relation) {
+            $sortedGoods[$relation['partnumber']] = $relation;
+        }
+
+        return ['goods' => $sortedGoods];
+    }
+
+    function isInRelation($conn, $id)
+    {
+        $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '$id'";
         $result = mysqli_query($conn, $sql);
+
         if (mysqli_num_rows($result) > 0) {
-            $relations[0] = mysqli_fetch_assoc($result);
+            while ($item = mysqli_fetch_assoc($result)) {
+                return $item['pattern_id'];
+            }
         }
+        return false;
     }
 
+    function givenPrice($conn, $codes, $relation_exist = null)
+    {
+        $codes = array_filter($codes, function ($item) {
+            return strtolower($item);
+        });
+        $ordared_price = [];
 
-    $sortedGoods = [];
-    foreach ($relations as $relation) {
-        $sortedGoods[$relation['partnumber']] = $relation;
-    }
 
-    return ['goods' => $sortedGoods];
-}
+        if ($relation_exist) {
+            $out_sql = "SELECT patterns.price, patterns.created_at FROM patterns WHERE id = '" . $relation_exist . "'";
+            $out_result = mysqli_query($conn, $out_sql);
 
-function isInRelation($conn, $id)
-{
-    $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '$id'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        while ($item = mysqli_fetch_assoc($result)) {
-            return $item['pattern_id'];
+            if (mysqli_num_rows($out_result) > 0) {
+                $ordared_price = mysqli_fetch_assoc($out_result);
+            }
+            $ordared_price['ordered'] = true;
         }
-    }
-    return false;
-}
 
-function givenPrice($conn, $codes, $relation_exist = null)
-{
-    $codes = array_filter($codes, function ($item) {
-        return strtolower($item);
-    });
-    $ordared_price = [];
-
-
-    if ($relation_exist) {
-        $out_sql = "SELECT patterns.price, patterns.created_at FROM patterns WHERE id = '" . $relation_exist . "'";
-        $out_result = mysqli_query($conn, $out_sql);
-
-        if (mysqli_num_rows($out_result) > 0) {
-            $ordared_price = mysqli_fetch_assoc($out_result);
-        }
-        $ordared_price['ordered'] = true;
-    }
-
-    $givenPrices = [];
-    foreach ($codes as $code) {
-        $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.id AS customerID, customer.family ,users.id as userID, prices.created_at
+        $givenPrices = [];
+        foreach ($codes as $code) {
+            $sql = "SELECT prices.price, prices.partnumber, customer.name, customer.id AS customerID, customer.family ,users.id as userID, prices.created_at
                 FROM ((prices 
                 INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
                 INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
-                WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 1";
+                WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 2";
 
-        $result = mysqli_query($conn, $sql);
-        array_push($givenPrices, mysqli_fetch_assoc($result));
-    }
-
-    $givenPrices = array_filter($givenPrices, function ($item) {
-
-        if ($item !== null && count($item) > 0) {
-            return $item;
+            $result = mysqli_query($conn, $sql);
+            while ($item = mysqli_fetch_assoc($result))
+                array_push($givenPrices, $item);
         }
-    });
 
-    $unsortedData = [];
-    foreach ($givenPrices as $item) {
-        array_push($unsortedData, $item);
-    }
+        $givenPrices = array_filter($givenPrices, function ($item) {
 
-    array_push($unsortedData, $ordared_price);
-
-    if ($relation_exist) {
-        usort($unsortedData, function ($a, $b) {
-            return $a['created_at'] < $b['created_at'];
+            if ($item !== null && count($item) > 0) {
+                return $item;
+            }
         });
+
+        $unsortedData = [];
+        foreach ($givenPrices as $item) {
+            array_push($unsortedData, $item);
+        }
+
+        array_push($unsortedData, $ordared_price);
+
+        if ($relation_exist) {
+            usort($unsortedData, function ($a, $b) {
+                return $a['created_at'] < $b['created_at'];
+            });
+        }
+        $final_data = $relation_exist ? $unsortedData : $givenPrices;
+
+        return  $final_data;
     }
-    $final_data = $relation_exist ? $unsortedData : $givenPrices;
 
-    return  $final_data;
-}
+    if (isset($_POST['askPrice'])) {
+        $partnumber = $_POST['partNumber'];
+        $customer_id = $_POST['customer_id'];
+        $user_id = $_POST['user_id'];
+        date_default_timezone_set("Asia/Tehran");
+        $created_at = date("Y-m-d H:i:s");
 
-if (isset($_POST['askPrice'])) {
-    $partnumber = $_POST['partNumber'];
-    $customer_id = $_POST['customer_id'];
-    $user_id = $_POST['user_id'];
-    date_default_timezone_set("Asia/Tehran");
-    $created_at = date("Y-m-d H:i:s");
+        askPrice($conn, $partnumber, $customer_id, $user_id, $created_at);
+    }
 
-    askPrice($conn, $partnumber, $customer_id, $user_id, $created_at);
-}
-
-function store($conn, $partnumber, $price, $customer_id, $notification_id)
-{
-    date_default_timezone_set("Asia/Tehran");
-    $created_at = date("Y-m-d H:i:s");
-    $pattern_sql = "INSERT INTO prices (partnumber, price, user_id, customer_id, created_at, updated_at)
+    function store($conn, $partnumber, $price, $customer_id, $notification_id)
+    {
+        date_default_timezone_set("Asia/Tehran");
+        $created_at = date("Y-m-d H:i:s");
+        $pattern_sql = "INSERT INTO prices (partnumber, price, user_id, customer_id, created_at, updated_at)
             VALUES ('" . $partnumber . "', '" . $price . "','" . $_SESSION["id"] . "' ,'" . $customer_id . "', '" . $created_at . "', '" . $created_at . "')";
-    $conn->query($pattern_sql);
-    if ($notification_id) {
-        $sql = "UPDATE ask_price SET status= 'done' , notify = 'received', price = '$price' WHERE id = '$notification_id'";
-        $conn->query($sql);
+        $conn->query($pattern_sql);
+        if ($notification_id) {
+            $sql = "UPDATE ask_price SET status= 'done' , notify = 'received', price = '$price' WHERE id = '$notification_id'";
+            $conn->query($sql);
+        }
     }
-}
 
 
-function askPrice($conn, $partnumber, $customer_id, $user_id, $created_at)
-{
-    $pattern_sql = "INSERT INTO ask_price (customer_id, user_id, code, status, notify, created_at)
+    function askPrice($conn, $partnumber, $customer_id, $user_id, $created_at)
+    {
+        $pattern_sql = "INSERT INTO ask_price (customer_id, user_id, code, status, notify, created_at)
             VALUES ('" . $customer_id . "', '" . $user_id . "', '" . $partnumber . "', 'pending', 'send' , '" . $created_at . "')";
 
-    if ($conn->query($pattern_sql) === TRUE) {
-        echo 'true';
+        if ($conn->query($pattern_sql) === TRUE) {
+            echo 'true';
+        }
     }
-}

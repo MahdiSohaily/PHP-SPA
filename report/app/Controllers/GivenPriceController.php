@@ -264,14 +264,15 @@ function givenPrice($conn, $codes, $relation_exist = null)
                 FROM ((prices 
                 INNER JOIN callcenter.customer ON customer.id = prices.customer_id )
                 INNER JOIN yadakshop1402.users ON users.id = prices.user_id)
-                WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 1";
+                WHERE partnumber LIKE '" . $code . "' ORDER BY created_at DESC LIMIT 2";
 
         $result = mysqli_query($conn, $sql);
-        array_push($givenPrices, mysqli_fetch_assoc($result));
+        while ($item = mysqli_fetch_assoc($result))
+            array_push($givenPrices, $item);
     }
 
     $givenPrices = array_filter($givenPrices, function ($item) {
-    
+
         if ($item !== null && count($item) > 0) {
             return $item;
         }
