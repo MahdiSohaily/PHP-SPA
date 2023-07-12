@@ -103,6 +103,10 @@ if (isset($_POST['store_price'])) {
 
 }
 
+?>
+
+<?php
+
 function relations($conn, $id)
 {
     $sql = "SELECT pattern_id FROM similars WHERE nisha_id = '" . $id . "'";
