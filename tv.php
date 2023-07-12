@@ -30,13 +30,6 @@
     ?>
  <div style="width: 854px;background-color: white !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
-     <!-- <div class="your-user">
-         <div class="your-interval">داخلی شما</div>
-         <div class="your-interval-select">
-             <a href="?user=<?php echo $user ?>"><?php echo $user ?></a>
-             <a href="?user=1 or 1=1">همه</a>
-         </div>
-     </div> -->
      <div class="d-grid">
          <div class="div1">
              <h2 class="title">تماس های ورودی</h2>
