@@ -8,6 +8,24 @@
     } else {
         $user  = getinternal($_SESSION["id"]);
     }
+
+    function getFirstLetters($string) {
+        // Trim the string and remove special characters
+        $string = trim(preg_replace('/[^a-zA-Z0-9\sآ-ی]/u', '', $string));
+        
+        $words = preg_split('/\s+/u', $string);
+        $firstLetters = '';
+    
+        if (count($words) === 1) {
+            $firstLetters = mb_substr($words[0], 0, 2);
+        } else {
+            foreach ($words as $word) {
+                $firstLetters .= mb_substr($word, 0, 1) . ' ';
+            }
+        }
+    
+        return trim($firstLetters);
+    }
     ?>
  <div style="width: 854px;background-color: white !important; margin-inline:auto; font-size: 8px;" id="fullpage" data-user='<?php echo $user ?>'>
      <i onclick="openFullscreen()" class="large material-icons">aspect_ratio</i>
@@ -366,7 +384,7 @@
                                              <tbody>
                                                  <tr class="tiny-text">
                                                      <td class="p-2"><?php echo $code ?></td>
-                                                     <td class="p-2"><?php echo $sellername ?></td>
+                                                     <td class="p-2"><?php echo getFirstLetters($sellername) ?></td>
                                                      <td class="p-2"><?php echo $price ?></td>
                                                      <td class="p-2"><?php echo date('H:i', strtotime($time)) ?></td>
                                                  </tr>
