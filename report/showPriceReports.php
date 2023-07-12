@@ -13,6 +13,11 @@ if ($isValidCustomer) {
         $completeCode = $finalResult['completeCode'];
         $notification = $finalResult['notification'];
         $rates = $finalResult['rates'];
+        
+        $url = "http://www.w3schoolsÅÅ.com";
+
+        $url = filter_var($url, FILTER_FLAG_STRIP_HIGH);
+        echo $url;
 ?>
         <div class="grid grid-cols-6">
             <div class="m-2 p-3 col-span-2 bg-gray-500 relative">
