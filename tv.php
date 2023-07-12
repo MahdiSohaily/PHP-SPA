@@ -126,7 +126,7 @@
                                 } else {
                                     ?>
                                  <tr>
-                                     <td style="text-align: center;">
+                                     <td>
                                          <i style="color: red" class="material-icons">cancel</i>
                                      </td>
                                      <td class="p-2">
@@ -240,8 +240,8 @@
                                 ?>
                                  <tr class="mb-1 ?> odd:bg-gray-200">
                                  <?php  } ?>
-                                 <td class="tiny-text bold px-1">
-                                     <p class="text-right bold text-gray-700 px-2 py-1">
+                                 <td  class="tiny-text bold px-1">
+                                     <p style="font-size: 8px !important;" class="text-right bold text-gray-700 px-2 py-1">
                                          <?php echo $price['partnumber']; ?>
                                      </p>
                                  </td>
@@ -308,7 +308,7 @@
 
                                          <tr>
                                              <td class="tiny-text p-2"><?php echo ($name . " " . $family) ?></td>
-                                             <td class="tiny-text p-2"><?php echo nl2br($callinfo) ?></td>
+                                             <td style="font-size: 8px !important;" class="p-2"><?php echo nl2br($callinfo) ?></td>
                                              <td class="tiny-text p-2"><img class="user-img mx-auto" src="../userimg/<?php echo $user ?>.jpg" />
                                          <?php
                                         }
@@ -375,7 +375,7 @@
                             ?>
 
                                                  <tr class="tiny-text">
-                                                     <td class="p-2"><?php echo $code ?></td>
+                                                     <td  class="p-2"><?php echo $code ?></td>
                                                      <td class="p-2"><?php echo getFirstLetters($sellername) ?></td>
                                                      <td class="ltr p-2"><?php echo $price ?></td>
                                                      <td class="p-2"><?php echo date('H:i', strtotime($time)) ?></td>
